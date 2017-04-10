@@ -150,7 +150,7 @@ CivObj.prototype = {
     sum = sum * quantity;
 
     // More population -> less building time
-    sum = sum / Math.sqrt(livingPopulation);
+    sum = sum / livingPopulation;
 
     Logger.debug('sum', sum);
 
