@@ -197,3 +197,7 @@ html {
 .tab-pane {
   padding: 10px;
 }
+
+#upgrades tr td:first-child {
+  min-width: 100px;
+}

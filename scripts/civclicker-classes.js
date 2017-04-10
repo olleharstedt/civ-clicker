@@ -150,7 +150,7 @@ CivObj.prototype = {
     sum = sum * quantity;
 
     // More population -> less building time
-    sum = sum / livingPopulation;
+    sum = sum / Math.sqrt(livingPopulation);
 
     Logger.debug('sum', sum);
 
@@ -234,7 +234,16 @@ Building.prototype = new CivObj({
 	set vulnerable(value) { return this.vulnerable; }, // Only here for JSLint.
 	customQtyId: "buildingCustomQty",
   useProgressBar: true,
-  progressTimeLeft: 0
+  progressTimeLeft: 0,
+
+  /**
+   * Get the td cell where progress bar will be put.
+   * @return {object}
+   */
+  getProgressBarCell: function(id) {
+    return $('#' + id + 'Row .number');
+  },
+
 },true);
 
 function Upgrade(props) // props is an object containing the desired properties.
@@ -247,14 +256,71 @@ function Upgrade(props) // props is an object containing the desired properties.
 	if (this.subType == "pantheon") { this.prestige = true; } // Pantheon upgrades are not lost on reset.
 	return this;
 }
-// Common Properties: type="upgrade"
+
+/** Common Properties: type="upgrade"
+ * @property {boolean} useProgressBar If true, will display progress during building
+ * @property {number} progressTimeLeft Milliseconds of left building time. 0 means not building.
+ */
 Upgrade.prototype = new CivObj({
 	constructor: Upgrade,
 	type: "upgrade",
 	initOwned: false,
 	vulnerable: false,
 	get limit() { return 1; }, // Can't re-buy these.
-	set limit(value) { return this.limit; } // Only here for JSLint.
+	set limit(value) { return this.limit; }, // Only here for JSLint.
+  useProgressBar: true,
+  progressTimeLeft: 0,
+
+  /**
+   * Get the td cell where progress bar will be put.
+   * @return {object}
+   */
+  getProgressBarCell: function(id) {
+    return $('#' + id + 'Row td:first-child');
+  },
+
+  /**
+   * Calculate the time it takes to upgrade.
+   * Different calculation than for building.
+   * @todo Make more clerics -> faster research
+   * @param {number} quantity - Number of buildings
+   * @return {number}
+   */
+  calculateProgressTime: function(quantity) {
+    if (!this.useProgressBar) {
+      return 0;
+    }
+
+    if (this.require == {}) {
+      return 0;
+    }
+
+    // Assume at least one living person.
+    // But can't be 1, since log(1) = 0
+    var livingPopulation =
+      population.living > 1 ?  population.living : 1.1;
+
+    var sum = 0;
+
+    for (type in this.require) {
+      var resource = civData[type];
+      Logger.debug('resource', resource);
+      var resourceAmount = this.require[type];
+      Logger.debug('resourceAmount', resourceAmount);
+      sum += resourceAmount * resource.progressFactor;
+      Logger.debug('sum', sum);
+    }
+
+    sum = sum * quantity;
+
+    Logger.debug('sum', sum);
+
+    sum = sum * 50;
+
+    Logger.debug('sum', sum);
+    
+    return sum;
+  }
 },true);
 
 function Unit(props) // props is an object containing the desired properties.

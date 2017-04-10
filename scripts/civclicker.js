@@ -647,17 +647,28 @@ function addUITable(civObjs, groupElemName)
  */
 function getUpgradeRowText(upgradeObj, inTable)
 {
-	if (inTable === undefined) { inTable = true; }
+	if (inTable === undefined) {
+    inTable = true;
+  }
+
 	var cellTagName = inTable ? "td" : "span";
 	var rowTagName = inTable ? "tr" : "span";
 	// Make sure to update this if the number of columns changes.
-	if (!upgradeObj) { return inTable ? "<"+rowTagName+" class='purchaseRow'><td colspan='2'/>&nbsp;</"+rowTagName+">" : ""; }
+	if (!upgradeObj) {
+    return inTable ? 
+      "<"+rowTagName+" class='purchaseRow'><td colspan='2'/>&nbsp;</"+rowTagName+">" :
+      "";
+  }
 
 	var s=  "<"+rowTagName+" id='"+upgradeObj.id+"Row' class='purchaseRow'";
 	s +=    " data-target='"+upgradeObj.id+"'>";
 	s +=    getPurchaseCellText(upgradeObj, true, inTable);
 	s +=    "<"+cellTagName+">" + getCostNote(upgradeObj) + "</"+cellTagName+">";
-	if (!inTable) { s += "<br />"; }
+
+	if (!inTable) {
+    s += "<br />";
+  }
+
 	s +=    "</"+rowTagName+">";
 	return s;
 }
@@ -719,10 +730,18 @@ function addUpgradeRows()
 	});
 
 	// Altars
-	buildingData.forEach(function(elem) { if (elem.subType == "altar") { setPantheonUpgradeRowText(elem); } });
+	buildingData.forEach(function(elem) {
+    if (elem.subType == "altar") {
+      setPantheonUpgradeRowText(elem);
+    }
+  });
 
 	// Deity granted powers
-	powerData.forEach(function(elem) { if (elem.subType == "prayer") { setPantheonUpgradeRowText(elem); } });
+	powerData.forEach(function(elem) {
+    if (elem.subType == "prayer") {
+      setPantheonUpgradeRowText(elem);
+    }
+  });
 
 	// Dynamically create two lists for purchased upgrades.
 	// One for regular upgrades, one for pantheon upgrades.
@@ -978,7 +997,11 @@ function doPurchase(objId, num) {
     Logger.debug(purchaseObj);
 
     Logger.debug('progressTime', progressTime);
-    var cell = $('#' + objId + 'Row .number');
+    Logger.debug('objId', objId);
+    //var cell = $('#' + objId + 'Row .number');
+    //var cell = $('#' + objId + 'Row td:first-child');
+    var cell = purchaseObj.getProgressBarCell(objId);
+
     var cellHtml = $(cell).html();
     $(cell).html(
       Mustache.to_html(
@@ -3519,6 +3542,23 @@ $(function () {
   setup.templates();
 })
 
+/**
+ * Debug function to restock all resources.
+ */
+/*
+function restock() {
+  civData.wood.owned = 1000;
+  civData.food.owned = 1000;
+  civData.stone.owned = 1000;
+  civData.ore.owned = 1000;
+  civData.skins.owned = 1000;
+  civData.herbs.owned = 1000;
+  civData.gold.owned = 1000;
+  civData.leather.owned = 1000;
+  civData.piety.owned = 1000;
+  civData.metal.owned = 1000;
+}
+*/
 
 /*
  * If you're reading this, thanks for playing!
