@@ -25,10 +25,22 @@ Upgrade.prototype = new CivObj({
 
   /**
    * Get the td cell where progress bar will be put.
-   * @return {object}
+   * Upgrades can be both in upgrade tab and deity tab
+   * or trade tab.
+   * @return {object} The HTML jQuery object.
    */
   getProgressBarCell: function(id) {
-    return $('#' + id + 'Row td:first-child');
+    var td = $('#' + id + 'Row td:first-child');
+    if (td.length == 0) {
+      var span = $('#' + id + 'Row > span');
+      if (span.length > 1) {
+        return span[0];
+      } else {
+        return span;
+      }
+    } else {
+      return td;
+    }
   }
 
 },true);
