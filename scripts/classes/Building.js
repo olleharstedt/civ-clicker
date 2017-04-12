@@ -38,7 +38,18 @@ Building.prototype = new CivObj({
    * @return {object}
    */
   getProgressBarCell: function(id) {
-    return $('#' + id + 'Row .number');
+    var cell = $('#' + id + 'Row .number');
+    if (cell.length > 0) {
+      return cell[0];
+    }
+
+    // If this is an altar
+    cell = $('#' + id + 'Row .buildingtrue');
+    if (cell.length > 0) {
+      return cell[0];
+    }
+
+    throw 'Found no cell to put building progress bar in';
   },
 
 },true);
