@@ -452,7 +452,9 @@ function updateDevotion(){
 	// Process altars
 	buildingData.forEach(function(elem) { if (elem.subType == "altar") {
 		ui.show(("#" + elem.id + "Row"), meetsPrereqs(elem.prereqs));
-		document.getElementById(elem.id).disabled = (!(meetsPrereqs(elem.prereqs) && canAfford(elem.require)));
+    var disabled = !(meetsPrereqs(elem.prereqs) && canAfford(elem.require));
+    //Logger.debug(elem.id, disabled);
+		$('#' + elem.id).attr('disabled', disabled);
 	}});
 
 	// Process activated powers
