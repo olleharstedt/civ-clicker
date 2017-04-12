@@ -201,3 +201,7 @@ html {
 #upgrades tr td:first-child {
   min-width: 100px;
 }
+
+.deity-cost {
+  height: 40px;
+}
