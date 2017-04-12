@@ -8,16 +8,16 @@
 
   <div id="settings-naming" class="tab-pane active">
     <form class="row">
-      <div class="form-group col-sm-3">
-        <button class="btn btn-default btn-block" onmousedown="renameCiv()" title="Rename your civilisation">Rename civilisation</button><br />
+      <div class="form-group col-xs-3">
+        <button class="btn btn-default btn-block" data-toggle="tooltip" title="Rename your current civilization" onmousedown="renameCiv()" title="Rename your civilisation">Rename civilisation</button>
       </div>
-      <div class="clearfix"></div>
-      <div class="form-group col-sm-3">
-        <button class="btn btn-default btn-block" id="renameRuler" onmousedown="renameRuler()" title="Rename yourself">Rename yourself</button><br />
+      <div class="col-xs-9 empty-naming-div"></div>
+      <div class="form-group col-xs-3">
+        <button class="btn btn-default btn-block" id="renameRuler" onclick="renameRuler()" title="Rename yourself">Rename yourself</button>
       </div>
-      <div class="clearfix"></div>
-      <div class="form-group col-sm-3">
-        <button class="btn btn-default btn-block" id="renameDeity" onmousedown="renameDeity()" title="Rename your deity" disabled="disabled">Rename current deity</button>
+      <div class="col-xs-9 empty-naming-div"></div>
+      <div class="form-group col-xs-3">
+        <button class="btn btn-default btn-block" id="renameDeity" data-toggle="tooltip" title="Rename your current deity" onmousedown="renameDeity()" title="Rename deity" disabled="disabled">Rename current deity</button>
       </div>
     </form>
   </div>

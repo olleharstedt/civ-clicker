@@ -2349,6 +2349,10 @@ function deleteSave(){
 	}
 }
 
+/**
+ * @param {string} newName
+ * @return
+ */
 function renameCiv(newName){
 	//Prompts player, uses result as new civName
 	while (!newName) {
@@ -2360,19 +2364,16 @@ function renameCiv(newName){
 	ui.find("#civName").innerHTML = curCiv.civName;
 }
 
-// Note:  Returns the index (which could be 0), or 'false'.
-function haveDeity(name)
-{
-	var i;
-	for (i=0;i<curCiv.deities.length;++i) { 
-		if (curCiv.deities[i].name == name) { return i; } 
-	}
+/**
+ * @param {string} newName
+ * @return
+ */
+function renameRuler(newName) {
+	if (curCiv.rulerName == "Cheater") {
+    // Reputations suck, don't they?
+    return;
+  }
 
-	return false;
-}
-
-function renameRuler(newName){
-	if (curCiv.rulerName == "Cheater") { return; } // Reputations suck, don't they?
 	//Prompts player, uses result as rulerName
 	while (!newName || haveDeity(newName)!==false) {
 		newName = prompt("What is your name?",(newName || curCiv.rulerName || "Orteil"));
@@ -2386,6 +2387,17 @@ function renameRuler(newName){
 	curCiv.rulerName = newName;
 
 	ui.find("#rulerName").innerHTML = curCiv.rulerName;
+}
+
+// Note:  Returns the index (which could be 0), or 'false'.
+function haveDeity(name)
+{
+	var i;
+	for (i=0;i<curCiv.deities.length;++i) { 
+		if (curCiv.deities[i].name == name) { return i; } 
+	}
+
+	return false;
 }
 
 // Looks to see if the deity already exists.  If it does, that deity
@@ -3539,6 +3551,7 @@ $(function () {
   Logger.useDefaults();
   Logger.setLevel(Logger.ALL);
 
+  // Load templates
   setup.templates();
 })
 

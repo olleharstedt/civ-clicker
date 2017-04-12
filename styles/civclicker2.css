@@ -206,6 +206,10 @@ html {
   height: 40px;
 }
 
+.empty-naming-div {
+  height: 50px;
+}
+
 /* Altars */
 .buildingtrue {
   width: 100px;
