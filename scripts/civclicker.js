@@ -3253,13 +3253,6 @@ function setWorksafe(value){
 	if (value !== undefined) { settings.worksafe = value; }
 	$("#toggleWorksafe").attr('checked', settings.worksafe);
 
-	//xxx Should this be applied to the document instead of the body?
-	if (settings.worksafe){
-		ui.body.classList.remove("hasBackground");
-	} else {
-		ui.body.classList.add("hasBackground");
-	}
-
 	setIcons(); // Worksafe overrides icon settings.
 }
 function onToggleWorksafe(control){ 
@@ -3553,12 +3546,13 @@ $(function () {
 
   // Load templates
   setup.templates();
+
+	$("#wrapper").toggleClass("toggled");
 })
 
 /**
  * Debug function to restock all resources.
  */
-/*
 function restock() {
   civData.wood.owned = 1000;
   civData.food.owned = 1000;
@@ -3571,7 +3565,7 @@ function restock() {
   civData.piety.owned = 1000;
   civData.metal.owned = 1000;
 }
-*/
+
 
 /*
  * If you're reading this, thanks for playing!
