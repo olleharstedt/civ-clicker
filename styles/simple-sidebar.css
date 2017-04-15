@@ -130,8 +130,8 @@
 
 .nav-side-menu {
   overflow: auto;
-  font-family: verdana;
-  font-size: 12px;
+  /*font-family: verdana;*/
+  font-size: 16px;
   font-weight: 200;
   background-color: #2e353d;
   position: fixed;
@@ -145,7 +145,7 @@
   line-height: 50px;
   display: block;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 .nav-side-menu .toggle-btn {
   display: none;
@@ -199,7 +199,7 @@
   background-color: #181c20;
   border: none;
   line-height: 28px;
-  border-bottom: 1px solid #23282e;
+  /*border-bottom: 1px solid #23282e;*/
   margin-left: 0px;
 }
 .nav-side-menu ul .sub-menu li:hover,
@@ -218,7 +218,7 @@
 .nav-side-menu li {
   padding-left: 0px;
   border-left: 3px solid #2e353d;
-  border-bottom: 1px solid #23282e;
+  /*border-bottom: 1px solid #23282e;*/
 }
 .nav-side-menu li a {
   text-decoration: none;
@@ -272,4 +272,9 @@
 body {
   margin: 0px;
   padding: 0px;
+}
+
+.menu-content li a {
+  padding-left: 10px;
+  display: block;
 }

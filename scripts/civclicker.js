@@ -3552,9 +3552,12 @@ $(function () {
   $(".show-page").on("click", function(ev) {
     ev.preventDefault();
 
+    console.log('here');
     var targetPage = $(ev.target).data("page");
     $(".page").hide();
     $("#page-" + targetPage).show();
+    $(".show-page").parent().removeClass("active");
+    $(ev.target).parent().addClass("active");
   });
 })
 
