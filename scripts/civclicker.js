@@ -483,10 +483,13 @@ function sgn(x) { return (typeof x == "number") ? sgnnum(x)
 function abs(x) { return (typeof x == "number") ? Math.abs(x) : (typeof x == "string") ? absstr(x) : x; }
 
 
-// Pass this the item definition object.
-// Or pass nothing, to create a blank row.
-function getResourceRowText(purchaseObj)
-{
+/**
+ * Pass this the item definition object.
+ * Or pass nothing, to create a blank row.
+ * @param {object} purchaseObj
+ * @return string HTML
+ */
+function getResourceRowText(purchaseObj) {
 	// Make sure to update this if the number of columns changes.
 	if (!purchaseObj) { 
     return "<tr class='purchaseRow'><td colspan='6'/>&nbsp;</tr>";

@@ -114,14 +114,26 @@ function updateRequirements(buildingObj){
 	if (displayNode) { displayNode.innerHTML = getReqText(buildingObj.require); }
 }
 
+/**
+ * Update purchase row
+ * @param {object} purchaseObj
+ * @return
+ */
 function updatePurchaseRow (purchaseObj) {
-	if (!purchaseObj) { return; }
+	if (!purchaseObj) {
+    return;
+  }
 
 	var elem = ui.find("#" + purchaseObj.id + "Row");
-	if (!elem) { console.warn("Missing UI element for "+purchaseObj.id); return; }
+	if (!elem) {
+    console.warn("Missing UI element for "+purchaseObj.id);
+    return;
+  }
 
 	// If the item's cost is variable, update its requirements.
-	if (purchaseObj.hasVariableCost()) { updateRequirements(purchaseObj); }
+	if (purchaseObj.hasVariableCost()) {
+    updateRequirements(purchaseObj);
+  }
 
 	// Already having one reveals it as though we met the prereq.
 	var havePrereqs = (purchaseObj.owned > 0) || meetsPrereqs(purchaseObj.prereqs);
@@ -135,7 +147,7 @@ function updatePurchaseRow (purchaseObj) {
 
 	var buyElems = elem.querySelectorAll("[data-action='purchase']");
 
-	buyElems.forEach(function(elt){
+	buyElems.forEach(function(elt) {
 		var purchaseQty = dataset(elt, "quantity");
 		// Treat 'custom' or Infinity as +/-1.
 		//xxx Should we treat 'custom' as its appropriate value instead?
@@ -150,28 +162,44 @@ function updatePurchaseRow (purchaseObj) {
 	ui.show(elem, havePrereqs && !hideBoughtUpgrade);
 }
 
-
-// Only set up for the basic resources right now.
+/**
+ * Only set up for the basic resources right now.
+ */
 function updateResourceRows() { 
-	basicResources.forEach(function(elem) { updatePurchaseRow(elem); }); 
+	basicResources.forEach(function(elem) {
+    updatePurchaseRow(elem);
+  }); 
 }
-// Enables/disabled building buttons - calls each type of building in turn
-// Can't do altars; they're not in the proper format.
+
+/**
+ * Enables/disabled building buttons - calls each type of building in turn
+ * Can't do altars; they're not in the proper format.
+ */
 function updateBuildingButtons() { 
-	homeBuildings.forEach(function(elem) { updatePurchaseRow(elem); }); 
+	homeBuildings.forEach(function(elem) {
+    updatePurchaseRow(elem);
+  }); 
 }
-// Update the page with the latest worker distribution and stats
+
+/**
+ * Update the page with the latest worker distribution and stats
+ */
 function updateJobButtons(){ 
 	homeUnits.forEach(function(elem) { updatePurchaseRow(elem); }); 
 }
-// Updates the party (and enemies)
+
+/**
+ * Updates the party (and enemies)
+ */
 function updatePartyButtons(){ 
 	armyUnits.forEach(function(elem) { updatePurchaseRow(elem); }); 
 }
 
 
-//xxx Maybe add a function here to look in various locations for vars, so it
-//doesn't need multiple action types?
+/**
+ * Maybe add a function here to look in various locations for vars, so it
+ * doesn't need multiple action types?
+ */
 function updateResourceTotals(){
 	var i,displayElems,elem,val;
 	var landTotals = getLandTotals();
@@ -234,7 +262,10 @@ function updateResourceTotals(){
 	//ui.find("#renameRuler").disabled = (curCiv.rulerName == "Cheater");
 }
 
-//Update page with numbers
+/**
+ * Update page with numbers
+ * @return
+ */
 function updatePopulation (calc) {
 	var i, elem, elems, displayElems,
 		spawn1button = ui.find("#spawn1button"),
@@ -244,7 +275,9 @@ function updatePopulation (calc) {
 		spawn100button = ui.find("#spawn100button"),
 		spawn1000button = ui.find("#spawn1000button");
 
-	if (calc) { calculatePopulation(); }
+	if (calc) {
+    calculatePopulation();
+  }
 
 	// Scan the HTML document for elements with a "data-action" element of
 	// "display_pop".  The "data-target" of such elements is presumed to contain
@@ -354,6 +387,10 @@ function updatePopulation (calc) {
 	updateLandBar();
 }
 
+/**
+ * Update population bar
+ * @return
+ */
 function updatePopulationBar () {
 	var barElt = ui.find("#populationBar");
 	var h = '';

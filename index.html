@@ -71,10 +71,43 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
+						<li>
+								<a class="show-page" data-page="resources" href="#">Resources</a>
+						</li>
+						<li>
+								<a class="show-page" data-page="population" href="#">Population</a>
+						</li>
+						<li>
+								<a class="show-page" data-page="buildings" href="#">Buildings</a>
+						</li>
+						<li>
+								<a class="show-page" data-page="upgrades" href="#">Upgrades</a>
+						</li>
+						<li>
+								<a class="show-page" data-page="deities" href="#">Deities</a>
+						</li>
+						<li>
+								<a class="show-page" data-page="conquest" href="#">Conquest</a>
+						</li>
+						<li>
+								<a class="show-page" data-page="trade" href="#">Trade</a>
+						</li>
+						<li>
+								<a class="show-page" data-page="achievements" href="#">Achievements</a>
+						</li>
+						<li>&nbsp;</li>
+						<li>
+								<a href="#">FAQ</a>
+            </li>
+						<li>
+								<a href="#">Log</a>
+            </li>
+						<li>
+								<a href="#">Reddit</a>
+            </li>
+						<li>
+								<a href="#">Settings</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -82,7 +115,6 @@
       <div id="right" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
         <nav class="navbar navbar-default" id="stripInner">
-          <div class="container-fluid">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -92,27 +124,11 @@
               </button>
             </div>
             <div class="collapse navbar-collapse">
-              <ul class="nav navbar-nav">
-                <li>
-                  <a id="faq-modal" href="#">FAQ &amp; Instructions</a>
-                </li>
-                <li>
-                  <a id="updates-modal" href="#">Game updates log</a>
-                </li>
-                <li href="#">
-                  <a href="https://www.reddit.com/r/CivClicker/" target="_blank">Reddit</a>
-                </li>
-                <li>
-                  <a href="#" id="settings-modal">Settings</a>
-                </li>
-                <!--
-                <li href="#">
-                  <span id="versionAlert"> - <span id="newVersionText" onclick="location.reload()">New version available</span></span>
-                </li>
-                -->
-              </ul>
+              <span class="navbar-text">Population: <span id="navbar-population" data-action="display_pop" data-target="living"></span></span>
+              <span class="navbar-text">Food: <span id="navbar-population" data-action="display" data-target="food"></span></span>
+              <span class="navbar-text">Wood: <span id="navbar-population" data-action="display" data-target="wood"></span></span>
+              <span class="navbar-text">Stone: <span id="navbar-population" data-action="display" data-target="stone"></span></span>
             </div>
-          </div>
         </nav>
 
         <div id="pages">

@@ -130,10 +130,13 @@ function mergeObj(o1, o2)
 }
 
 
-// Workaround for IE's lack of support for the dataset property.
-// Also searches up the DOM tree on lookups, to mimic inheritance.
-// Pass 'value' to set the value, otherwise returns the value.
-// Returns "true" and "false" as actual booleans.
+/** 
+ * Workaround for IE's lack of support for the dataset property.
+ * Also searches up the DOM tree on lookups, to mimic inheritance.
+ * Pass 'value' to set the value, otherwise returns the value.
+ * Returns "true" and "false" as actual booleans.
+ * @return {boolean}
+ */
 function dataset(elem,attr,value)
 {
     if (value !== undefined) { return elem.setAttribute("data-"+attr,value); }
