@@ -371,14 +371,19 @@ function updatePopulation (calc) {
 	var canRaise = (getCurDeityDomain() == "underworld" && civData.devotion.owned >= 20);
 	var maxRaise = canRaise ? logSearchFn(calcZombieCost,civData.piety.owned) : 0;
 	ui.show("#raiseDeadRow", canRaise);
+  /*
 	ui.find("#raiseDead").disabled = (maxRaise < 1);
 	ui.find("#raiseDeadMax").disabled = (maxRaise < 1);
 	ui.find("#raiseDead100").disabled = (maxRaise < 100);
+  */
+	$("#raiseDead").attr('disabled', (maxRaise < 1));
+	$("#raiseDeadMax").attr('disabled', (maxRaise < 1));
+	$("#raiseDead100").attr('disabled', (maxRaise < 100));
 
 	//Calculates and displays the cost of buying workers at the current population
-	ui.find("#raiseDeadCost").innerHTML = prettify(Math.round(calcZombieCost(1)));
+	$("#raiseDeadCost").html(prettify(Math.round(calcZombieCost(1))));
 
-	ui.find("#workerNumMax").innerHTML = prettify(Math.round(maxSpawn));
+	$("#workerNumMax").html(prettify(Math.round(maxSpawn)));
 
 	spawn1button.title = "Cost: " + prettify(Math.round(calcWorkerCost(1))) + " food";
 	spawn10button.title = "Cost: " + prettify(Math.round(calcWorkerCost(10))) + " food";
@@ -386,7 +391,7 @@ function updatePopulation (calc) {
 	spawn1000button.title = "Cost: " + prettify(Math.round(calcWorkerCost(1000))) + " food";
 	spawnMaxbutton.title = "Cost: " + prettify(Math.round(calcWorkerCost(maxSpawn))) + " food";
 
-	ui.find("#workerCost").innerHTML = prettify(Math.round(calcWorkerCost(1)));
+	$("#workerCost").html(prettify(Math.round(calcWorkerCost(1))));
 
 	updateJobButtons(); //handles the display of units in the player's kingdom.
 	updatePartyButtons(); // handles the display of units out on raids.

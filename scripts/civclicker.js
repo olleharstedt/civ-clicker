@@ -3550,7 +3550,8 @@ setup.pages = function() {
     'resources',
     'population',
     'buildings',
-    'upgrades'
+    'upgrades',
+    'deities'
   ];
   var p = $.when(1);  // Empty promise
   pageNames.forEach(function(pageName) {

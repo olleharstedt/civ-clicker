@@ -91,7 +91,7 @@ function getCivData () {
 		set effectText(value) { return this.effectText; },
 		update: function() { 
 			// TODO: need better way to do this
-			document.getElementById(this.id+"Note").innerHTML = ": " + this.effectText; 
+			$(this.id+"Note").html(": " + this.effectText);
 		} 
 	}),
 	new Building({ 
