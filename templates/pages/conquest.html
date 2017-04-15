@@ -1,0 +1,37 @@
+<div class="notYet">
+  You cannot command an army yet because you don't own a battle standard.
+  <span class="tip">Try building a barracks first.</span>
+</div>
+<span id="standardRow">
+  <!--  -->
+</span>
+<div id="conquest">
+  <h3>Army</h3>
+
+  <div id="customPartyQuantity" class="form form-horizontal">
+    <label class="control-label col-xs-3">Custom quantity:</label>
+    <div class="col-xs-3">
+      <input class="form-control" id="partyCustomQty" type="number" min="1" step="1" value="1" />
+    </div>
+  </div>
+
+  <table class="table" id="party">
+    <!-- populated by javascript -->
+  </table>
+  <div id="raidNews">
+    <!-- -->
+  </div>
+  <div id="raidGroup">
+    <h3>To War!</h3>
+    <p id="gloryGroup">
+    Glory: <span id="gloryTimer">0</span> seconds remain
+    </p>
+  </div>
+  <div id="victoryGroup">
+    <h3>Victory!</h3>
+    <button class='btn btn-default' id="plunder" onmousedown="plunder()">Plunder Resources</button><br />
+  </div>
+</div>
+<div class="stats">
+  Total Enemies Slain: <span data-action="display" data-target="enemySlain">...</span>
+</div>

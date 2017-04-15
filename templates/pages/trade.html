@@ -1,0 +1,58 @@
+<div class="notYet">
+  You do not yet own a trading post. <span class="tip">Try trading with a trader when they (randomly) appear.</span>
+</div>
+<div id="tradeContainer">
+  Trader offers 1 gold for <span id="tradeRequested">...</span> <span id="tradeType">...</span>
+  for the next <span id="traderTimer">...</span>.
+  <br />
+  <button class='btn btn-default btn-block' id="tradeButton" onmousedown="trade()">Trade</button>
+  <br />
+</div>
+<div id="noTrader">
+  No trader visiting
+</div>
+<span id="tradeRow">
+  <!-- populated by javascript -->
+</span>
+<div id="tradeUpgradeContainer">
+  <span id="currencyRow"></span>
+  <span id="commerceRow"></span>
+  <h4>Buy Resources (1 gold)</h4>
+  <div class="row">
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('food')">Buy 5000 Food</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('wood')">Buy 5000 Wood</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('wood')">Buy 5000 Wood</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('stone')">Buy 5000 Stone</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('skins')">Buy 500 Skins</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('herbs')">Buy 500 Herbs</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('ore')">Buy 500 Ore</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('leather')">Buy 250 Leather</button>
+    </div>
+    <div class="col-xs-8 empty-trade-div"></div>
+    <div class="col-sm-4">
+      <button class="btn btn-default btn-block tradeResource" onmousedown="buy('metal')">Buy 250 Metal</button>
+    </div>
+  </div>
+</div>

@@ -718,8 +718,12 @@ function setPantheonUpgradeRowText(upgradeObj)
 // Dynamically create the upgrade purchase buttons.
 function addUpgradeRows()
 {
-	ui.find("#upgradesPane").innerHTML += 
-	   "<h3>Purchased Upgrades</h3>" + "<div id='purchasedUpgrades'></div>";
+  var upgradeHtml = $('#upgradesPane').html();
+	$("#upgradesPane").html(
+    upgradeHtml +
+	  "<h3>Purchased Upgrades</h3>" +
+    "<div id='purchasedUpgrades'></div>"
+   );
 
 	// Fill in any pre-existing stubs.
 	upgradeData.forEach( function(elem){ 
@@ -760,8 +764,9 @@ function addUpgradeRows()
 		else { standardUpgStr += text; }
 	});
 
-	ui.find("#purchasedUpgrades").innerHTML += standardUpgStr;
-	ui.find("#purchasedPantheon").innerHTML = pantheonUpgStr;
+  var purchasedUpgradesHtml = $('#purchasedUpgrades').html();
+	$("#purchasedUpgrades").html(purchasedUpgradesHtml + standardUpgStr);
+	$("#purchasedPantheon").html(pantheonUpgStr);
 }
 
 function getLandTotals () {
@@ -3062,9 +3067,9 @@ function doPestControl() {
 function tickGlory() {
 	//Handles the Glory bonus
 	if (civData.glory.timer > 0){
-		ui.find("#gloryTimer").innerHTML = civData.glory.timer--;
+		$("#gloryTimer").html(civData.glory.timer--);
 	} else {
-		ui.find("#gloryGroup").style.display = "none";
+		$("#gloryGroup").css('display', 'none');
 	}
 }
 function doThrone() {
@@ -3551,7 +3556,10 @@ setup.pages = function() {
     'population',
     'buildings',
     'upgrades',
-    'deities'
+    'deities',
+    'conquest',
+    'trade',
+    'achievements'
   ];
   var p = $.when(1);  // Empty promise
   pageNames.forEach(function(pageName) {

@@ -259,8 +259,12 @@ function updateResourceTotals() {
 	if (civData.gold.owned > 0) { ui.show("#tradeSelect",true); }
 
 	// Need to have enough resources to trade
-	ui.find("#tradeButton").disabled = !curCiv.trader || !curCiv.trader.timer ||
-		(civData[curCiv.trader.materialId].owned < curCiv.trader.requested);
+	$("#tradeButton").attr(
+    'disabled',
+    !curCiv.trader
+      || !curCiv.trader.timer
+      || (civData[curCiv.trader.materialId].owned < curCiv.trader.requested)
+  );
 
 	// Cheaters don't get names.
 	//ui.find("#renameRuler").disabled = (curCiv.rulerName == "Cheater");
