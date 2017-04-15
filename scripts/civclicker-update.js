@@ -126,7 +126,8 @@ function updatePurchaseRow (purchaseObj) {
 
 	var elem = ui.find("#" + purchaseObj.id + "Row");
 	if (!elem) {
-    console.warn("Missing UI element for "+purchaseObj.id);
+    // console.warn("Missing UI element for "+purchaseObj.id);
+    // Not yet initialised?
     return;
   }
 
@@ -274,6 +275,11 @@ function updatePopulation (calc) {
 		spawn10button = ui.find("#spawn10button"),
 		spawn100button = ui.find("#spawn100button"),
 		spawn1000button = ui.find("#spawn1000button");
+
+  if (spawn1button == null) {
+    // Not yet initialised?
+    return;
+  }
 
 	if (calc) {
     calculatePopulation();
@@ -578,6 +584,12 @@ function updateMorale(){
 	//updates the morale stat
 	var happinessRank; // Lower is better
 	var elt = ui.find("#morale");
+
+  if (elt == null) {
+    // Not yet initialised?
+    return;
+  }
+
 	//first check there's someone to be happy or unhappy, not including zombies
 	if (population.living < 1) { 
 		elt.className = "";

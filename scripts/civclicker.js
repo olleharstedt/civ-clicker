@@ -3547,7 +3547,8 @@ setup.templates = function() {
 setup.pages = function() {
   CivClicker.pages = {};
   var pageNames = [
-    'resources'
+    'resources',
+    'population'
   ];
   var p = $.when(1);  // Empty promise
   pageNames.forEach(function(pageName) {
@@ -3557,6 +3558,7 @@ setup.pages = function() {
         if (page.length == 0) {
           throw 'Invalid page name: ' + pageName;
         } else {
+          Logger.debug('Populating page html for page ' + pageName);
           page.html(pageHtml);
         }
       });
