@@ -3530,6 +3530,8 @@ setup.navigation = function() {
 /**
  * Get templates from server using Ajax, and store
  * them in CivClicker.templates object.
+ * These templates does not have to be completely loaded
+ * before game starts.
  * @return
  */
 setup.templates = function() {
