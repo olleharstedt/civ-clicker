@@ -1,0 +1,20 @@
+<div id="wondersContainer">
+  <h3>Wonders</h3>
+  <span id="startWonderLine"><button class="btn btn-default" id="startWonder" onmousedown="startWonder()">Start Building Wonder</button></span>
+  <div id="wonderInProgress">
+    <p>
+    <span class="wonderTitle">Progress on <span id="wonderNameP">Wonder</span> - <span id="progressNumber">0</span>%</span> - <button class='btn btn-default' id="renameWonder" onmousedown="renameWonder()">Rename</button>
+    </p>
+    <div id="wonderProgressContainer">
+      <div id="wonderProgressBar"></div>
+    </div>
+    <div id="lowResources">Limited<span id="limited"> by low resources</span></div>
+    <div id="speedWonderGroup"><br /><button class='btn btn-default' id="speedWonder" onmousedown="speedWonder()">Speed Wonder</button>
+      <span id="speedWonderCost" class="cost">100 gold</span><span class="note">: Increase wonder progress</span></div>
+  </div>
+  <div id="wonderCompleted">
+    <div class="wonderTitle"><span id="wonderNameC">Wonder</span> Completed! Choose Bonus:</div>
+  </div>
+  <table class="table" id="pastWonders"><tr><td></td></tr></table>
+</div>
+<table class="table" id="upgrades"></table>

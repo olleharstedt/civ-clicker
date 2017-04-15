@@ -73,7 +73,7 @@ function getCivData () {
 		set effectText(value) { return this.require; }, // Only here for JSLint.
 		update: function() { 
 			// TODO: need better way to do this
-			document.getElementById(this.id+"Note").innerHTML = ": " + this.effectText; 
+			$(this.id+"Note").html(": " + this.effectText);
 		} 
 	}),
 	new Building({ 

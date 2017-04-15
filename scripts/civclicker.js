@@ -3549,7 +3549,8 @@ setup.pages = function() {
   var pageNames = [
     'resources',
     'population',
-    'buildings'
+    'buildings',
+    'upgrades'
   ];
   var p = $.when(1);  // Empty promise
   pageNames.forEach(function(pageName) {

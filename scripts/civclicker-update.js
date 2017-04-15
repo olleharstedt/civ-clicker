@@ -637,7 +637,13 @@ function updateWonder () {
 	$("#upgrade-pane-alert").toggle(isLimited);
 
 	if (lowItem) { 
-		ui.find("#limited").innerHTML = " by low " + lowItem.getQtyName(); 
+		var el = ui.find("#limited");
+    if (el) {
+      el.innerHTML = " by low " + lowItem.getQtyName(); 
+    } else {
+      // HTML not yet initialised?
+      return;
+    }
 	}
 
 	if (curCiv.curWonder.progress >= 100) {
