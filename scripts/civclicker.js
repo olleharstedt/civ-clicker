@@ -630,8 +630,10 @@ function addUITable(civObjs, groupElemName)
 					: getPurchaseRowText(elem); 
 	});
 	var groupElem = document.getElementById(groupElemName);
-	groupElem.innerHTML += s;
-	groupElem.onmousedown = onBulkEvent;
+  if (groupElem) {
+    groupElem.innerHTML += s;
+    groupElem.onmousedown = onBulkEvent;
+  }
 	return groupElem;
 }
 
@@ -3523,6 +3525,7 @@ setup.navigation = function() {
 /**
  * Get templates from server using Ajax, and store
  * them in CivClicker.templates object.
+ * @return
  */
 setup.templates = function() {
   CivClicker.templates = {};
@@ -3533,6 +3536,34 @@ setup.templates = function() {
     $.get('templates/' + templateName, function(template) {
       CivClicker.templates[templateName] = template;
     });
+  });
+}
+
+/**
+ * As with templates above, load HTML and put them
+ * in place. Pages are shown using sidemenu.
+ * @return
+ */
+setup.pages = function() {
+  CivClicker.pages = {};
+  var pageNames = [
+    'resources'
+  ];
+  var p = $.when(1);  // Empty promise
+  pageNames.forEach(function(pageName) {
+    p = p.then(function() {
+      return $.get('templates/pages/' + pageName + '.html', function(pageHtml) {
+        var page = $('#page-' + pageName);
+        if (page.length == 0) {
+          throw 'Invalid page name: ' + pageName;
+        } else {
+          page.html(pageHtml);
+        }
+      });
+    });
+  });
+  p.then(function() {
+    setup.game();
   });
 }
 
@@ -3549,6 +3580,9 @@ $(function () {
 
   // Load templates
   setup.templates();
+
+  // Load pages
+  setup.pages();
 
 	$("#wrapper").toggleClass("toggled");
 

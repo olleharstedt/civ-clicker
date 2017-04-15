@@ -241,11 +241,11 @@ function updateResourceTotals(){
 	//}
 
 	//Update page with building numbers, also stockpile limits.
-	ui.find("#maxfood").innerHTML = prettify(civData.food.limit);
-	ui.find("#maxwood").innerHTML = prettify(civData.wood.limit);
-	ui.find("#maxstone").innerHTML = prettify(civData.stone.limit);
-	ui.find("#totalBuildings").innerHTML = prettify(landTotals.buildings);
-	ui.find("#totalLand"     ).innerHTML = prettify(landTotals.lands);
+	$("#maxfood").innerHTML = prettify(civData.food.limit);
+	$("#maxwood").innerHTML = prettify(civData.wood.limit);
+	$("#maxstone").innerHTML = prettify(civData.stone.limit);
+	$("#totalBuildings").innerHTML = prettify(landTotals.buildings);
+	$("#totalLand"     ).innerHTML = prettify(landTotals.lands);
 
 	// Unlock advanced control tabs as they become enabled (they never disable)
 	// Temples unlock Deity, barracks unlock Conquest, having gold unlocks Trade.

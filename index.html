@@ -60,244 +60,140 @@
 </head>
 <body>
 
-		<div id="main" class="row">
+  <div id="main" class="row">
 
-      <div id="sidebar" class="col-sm-3 col-md-2 sidebar navbar navbar-default">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">
-            CivClicker
-            <span class="version">1.4.0</span>
-          </a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav nav-sidebar">
-						<li>
-								<a class="show-page" data-page="resources" href="#">Resources</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="population" href="#">Population</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="buildings" href="#">Buildings</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="upgrades" href="#">Upgrades</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="deities" href="#">Deities</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="conquest" href="#">Conquest</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="trade" href="#">Trade</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="achievements" href="#">Achievements</a>
-						</li>
-						<li>&nbsp;</li>
-						<li>
-								<a href="#">FAQ</a>
-            </li>
-						<li>
-								<a href="#">Log</a>
-            </li>
-						<li>
-								<a href="#">Reddit</a>
-            </li>
-						<li>
-								<a href="#">Settings</a>
-            </li>
-          </ul>
-        </div>
+    <div id="sidebar" class="col-sm-3 col-md-2 sidebar navbar navbar-default">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          CivClicker
+          <span class="version">1.4.0</span>
+        </a>
       </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav nav-sidebar">
+          <li>
+              <a class="show-page" data-page="resources" href="#">Resources</a>
+          </li>
+          <li>
+              <a class="show-page" data-page="population" href="#">Population</a>
+          </li>
+          <li>
+              <a class="show-page" data-page="buildings" href="#">Buildings</a>
+          </li>
+          <li>
+              <a class="show-page" data-page="upgrades" href="#">Upgrades</a>
+          </li>
+          <li>
+              <a class="show-page" data-page="deities" href="#">Deities</a>
+          </li>
+          <li>
+              <a class="show-page" data-page="conquest" href="#">Conquest</a>
+          </li>
+          <li>
+              <a class="show-page" data-page="trade" href="#">Trade</a>
+          </li>
+          <li>
+              <a class="show-page" data-page="achievements" href="#">Achievements</a>
+          </li>
+          <li>&nbsp;</li>
+          <li>
+              <a href="#">FAQ</a>
+          </li>
+          <li>
+              <a href="#">Log</a>
+          </li>
+          <li>
+              <a href="#">Reddit</a>
+          </li>
+          <li>
+              <a href="#">Settings</a>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-      <div id="right" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div id="right" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-        <nav class="navbar navbar-default" id="stripInner">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-            </div>
-            <div class="collapse navbar-collapse">
-              <span class="navbar-text">Population: <span id="navbar-population" data-action="display_pop" data-target="living"></span></span>
-              <span class="navbar-text">Food: <span id="navbar-population" data-action="display" data-target="food"></span></span>
-              <span class="navbar-text">Wood: <span id="navbar-population" data-action="display" data-target="wood"></span></span>
-              <span class="navbar-text">Stone: <span id="navbar-population" data-action="display" data-target="stone"></span></span>
-            </div>
-        </nav>
-
-        <div id="pages">
-
-          <div id="strip">
-            <div id="header">
-              <h1>The <span id="civType">Thorp</span> of <span id="civName">Woodstock</span>
-                <small id="ruler">Ruled by the <span id="appellation">mighty</span> <span id="rulerName">Orteil</span></small>
-              </h1>
-            </div>
+      <nav class="navbar navbar-default" id="stripInner">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
           </div>
+          <div class="collapse navbar-collapse">
+            <span class="navbar-text">Population: <span id="navbar-population" data-action="display_pop" data-target="living"></span></span>
+            <span class="navbar-text">Food: <span id="navbar-food" data-action="display" data-target="food"></span></span>
+            <span class="navbar-text">Wood: <span id="navbar-wood" data-action="display" data-target="wood"></span></span>
+            <span class="navbar-text">Stone: <span id="navbar-stone" data-action="display" data-target="stone"></span></span>
+          </div>
+      </nav>
+
+      <div id="pages">
+
+        <div id="strip">
+          <div id="header">
+            <h1>The <span id="civType">Thorp</span> of <span id="civName">Woodstock</span>
+              <small id="ruler">Ruled by the <span id="appellation">mighty</span> <span id="rulerName">Orteil</span></small>
+            </h1>
+          </div>
+        </div>
 
         <div id="page-resources" class="page">
-
-          <!-- Primary resources -->
-          <div id="basicResourcesContainer" class="panel panel-default">
-            <div class="panel-heading">
-              Primary resources
-            </div>
-            <div class="panel-content">
-              <table id="basicResources" class="resources table">
-                <!-- populated by javascript -->
-              </table>
-            </div>
-          </div>
-
-          <!-- Secondary resources -->
-          <div id="specialResourcesContainer" class="panel panel-default">
-            <div class="panel-heading">Secondary resources</div>
-            <div class="panel-content">
-              <table class="table resources">
-                <tbody>
-                  <tr>
-                    <td>
-                      <img src="images/skins.png" class="icon icon-lg" alt="Skins"/>
-                      <label>Skins:</label>
-                    </td>
-                    <td>
-                      <span class="number" data-action="display" data-target="skins">0</span>
-                    </td>
-                    <td>
-                      <span class="number net" data-action="displayNet" data-target="skins">0</span><span class="perSecond">/s</span>
-                    </td>
-                    <td>
-                      <img src="images/leather.png" class="icon icon-lg" alt="Leather"/>
-                      <label>Leather:</label>
-                    </td>
-                    <td>
-                      <span class="number" data-action="display" data-target="leather">0</span>
-                    </td>
-                    <td>
-                      <span class="number net" data-action="displayNet" data-target="leather">0</span><span class="perSecond">/s</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/herbs.png" class="icon icon-lg" alt="Herbs"/>
-                      <label>Herbs:</label>
-                    </td>
-                    <td>
-                      <span class="number" data-action="display" data-target="herbs">0</span>
-                    </td>
-                    <td>
-                      <span class="number net" data-action="displayNet" data-target="herbs">0</span><span class="perSecond">/s</span>
-                    </td>
-                    <td>
-                      <img src="images/piety.png" class="icon icon-lg" alt="Piety"/>
-                      <label>Piety:</label>
-                    </td>
-                    <td>
-                      <span class="number" data-action="display" data-target="piety">0</span>
-                    </td>
-                    <td>
-                      <span class="number net" data-action="displayNet" data-target="piety">0</span><span class="perSecond">/s</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/ore.png" class="icon icon-lg" alt="Ore"/>
-                      <label>Ore:</label>
-                    </td>
-                    <td>
-                      <span class="number" data-action="display" data-target="ore">0</span>
-                    </td>
-                    <td>
-                      <span class="number net" data-action="displayNet" data-target="ore">0</span><span class="perSecond">/s</span>
-                    </td>
-                    <td>
-                      <img src="images/metal.png" class="icon icon-lg" alt="Metal"/>
-                      <label>Metal:</label>
-                    </td>
-                    <td>
-                      <span class="number" data-action="display" data-target="metal">0</span>
-                    </td>
-                    <td>
-                      <span class="number net" data-action="displayNet" data-target="metal">0</span><span class="perSecond">/s</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/gold.png" class="icon icon-lg" alt="Gold" />
-                      <label>Gold:</label>
-                    </td>
-                    <td colspan="2">
-                      <span class="number" data-action="display" data-target="gold">0</span>
-                    </td>
-                    <td>
-                      <img src="images/carrion.png" class="icon icon-lg" alt="Corpses">
-                      <label>Corpses:</label>
-                    </td>
-                    <td colspan="2">
-                      <span class="number" data-action="display" data-target="corpses">0</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <!-- Populated with Ajax at page load -->
         </div>
 
-      <div id="page-population" class="page">
-        <div id="populationContainer" class="civSection">
-          <div id="populationNumbers" class="panel panel-default">
-            <div class="panel-heading">Status</div>
-            <div class="panel-content">
-              <table class="resources table">
-                <tbody>
-                  <tr>
-                    <td>
-                      <img src="images/backup.png" class="icon icon-lg" alt="Population"/>
-                      <label>Population:</label>
-                    </td>
-                    <td class="number"><span data-action="display_pop" data-target="living">...</span></td>
-                    <td class="number maxNumber">
-                      / max: <span data-action="display_pop" data-target="limit">...</span>
-                    </td>
-                    <td class="note">
-                      Build more housing to grow your civilization
-                    </td>
-                  </tr>
-                  <tr id="zombieWorkers">
-                    <td>
-                      <img src="images/shambling-zombie.png" class="icon icon-lg" alt="Zombies"/>
-                      <label>Zombies:</label>
-                    </td>
-                    <td class="number"><span data-action="display" data-target="zombie">...</span></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="images/smitten.png" class="icon icon-lg" alt="Happiness"/>
-                      <label>Happiness:</label>
-                    </td>
-                    <td colspan="3" id="morale">
-                      <ol class="happinessRanks">
-                        <li>Blissful</li>
-                        <li>Happy</li>
-                        <li>Content</li>
-                        <li>Unhappy</li>
-                        <li>Angry</li>
-                      </ol>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+        <div id="page-population" class="page">
+          <div id="populationContainer" class="civSection">
+            <div id="populationNumbers" class="panel panel-default">
+              <div class="panel-heading">Status</div>
+              <div class="panel-content">
+                <table class="resources table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img src="images/backup.png" class="icon icon-lg" alt="Population"/>
+                        <label>Population:</label>
+                      </td>
+                      <td class="number"><span data-action="display_pop" data-target="living">...</span></td>
+                      <td class="number maxNumber">
+                        / max: <span data-action="display_pop" data-target="limit">...</span>
+                      </td>
+                      <td class="note">
+                        Build more housing to grow your civilization
+                      </td>
+                    </tr>
+                    <tr id="zombieWorkers">
+                      <td>
+                        <img src="images/shambling-zombie.png" class="icon icon-lg" alt="Zombies"/>
+                        <label>Zombies:</label>
+                      </td>
+                      <td class="number"><span data-action="display" data-target="zombie">...</span></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <img src="images/smitten.png" class="icon icon-lg" alt="Happiness"/>
+                        <label>Happiness:</label>
+                      </td>
+                      <td colspan="3" id="morale">
+                        <ol class="happinessRanks">
+                          <li>Blissful</li>
+                          <li>Happy</li>
+                          <li>Content</li>
+                          <li>Unhappy</li>
+                          <li>Angry</li>
+                        </ol>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
 
         <div id="jobsContainer" class="civSection">
           <div id="populationBar" class="bar" title="Population">
@@ -337,19 +233,48 @@
                   <input class="form-control" id="spawnCustomQty" type="number" min="1" step="1" value="1" />
                 </div>
             </div>
+            <div id="customJobQuantity" class="form form-horizontal">
+              <label class="control-label col-xs-3">Custom quantity:</label>
+              <div class="col-xs-3">
+                <input class="form-control" id="homeCustomQty" type="number" min="1" step="1" value="1" />
+              </div>
+            </div>
+            <table id="jobs" class="table">
+              <!-- populated by javascript -->
+            </table>
+          </div>
 
-          <div id="customJobQuantity" class="form form-horizontal">
-            <label class="control-label col-xs-3">Custom quantity:</label>
-            <div class="col-xs-3">
-              <input class="form-control" id="homeCustomQty" type="number" min="1" step="1" value="1" />
+        </div>  <!-- End page-population -->
+
+        <div id="page-buildings" class="page">
+          <div class="landCols cols">
+            <div class="col">
+              Total Buildings: <span id="totalBuildings">...</span><br />
+            </div>
+            <div class="col">
+              Total Land: <span id="totalLand">...</span><br />
             </div>
           </div>
-          <table id="jobs" class="table">
+          <div id="landBar" class="bar" title="Land usage">
+            <!-- populated by javascript -->
+          </div>
+          <div id="customBuildQuantity" class="form form-horizontal">
+            <label class="control-label col-xs-3">Custom quantity:</label>
+            <div class="col-xs-3">
+              <input class="form-control" id="buildingCustomQty" type="number" min="1" step="1" value="1" />
+            </div>
+          </div>
+          <table class="table" id="buildings">
             <!-- populated by javascript -->
           </table>
-        </div>
-      </div>
+          <div id="graveTotal">
+            Unfilled Graves: <span data-action="display" data-target="grave">...</span>
+          </div>
+        </div>  <!-- End page-buildings -->
 
+      </div>  <!-- End pages -->
+
+    </div>
 
   <div id="eventsContainer" class="civSection">
     <h3>Events</h3>
@@ -369,10 +294,9 @@
   </div>
 </div>
 
-<div id="rightColumn" class="col-sm-6">
-
 	<div id="panesSelectors" class="civSection">
 
+    <!--
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#buildingsPane" aria-controls="buildingsPane" role="tab" data-toggle="tab">Buildings</a></li>
       <li role="presentation">
@@ -391,33 +315,9 @@
         </li>
       <li role="presentation"><a href="#achievementsPane" aria-controls="achievementsPane" role="tab" data-toggle="tab">Achievements</a></li>
     </ul>
+    -->
 
     <div class="tab-content">
-      <div id="buildingsPane" class="tab-pane active">
-        <div class="landCols cols">
-          <div class="col">
-            Total Buildings: <span id="totalBuildings">...</span><br />
-          </div>
-          <div class="col">
-            Total Land: <span id="totalLand">...</span><br />
-          </div>
-        </div>
-        <div id="landBar" class="bar" title="Land usage">
-          <!-- populated by javascript -->
-        </div>
-        <div id="customBuildQuantity" class="form form-horizontal">
-          <label class="control-label col-xs-3">Custom quantity:</label>
-          <div class="col-xs-3">
-            <input class="form-control" id="buildingCustomQty" type="number" min="1" step="1" value="1" />
-          </div>
-        </div>
-        <table class="table" id="buildings">
-          <!-- populated by javascript -->
-        </table>
-        <div id="graveTotal">
-          Unfilled Graves: <span data-action="display" data-target="grave">...</span>
-        </div>
-      </div>
       
       <div id="upgradesPane" class="tab-pane">
         <div id="wondersContainer">
@@ -670,23 +570,9 @@
       </div>
     </div>
 
-          </div>
-        </div>
-
-      </div>
+    </div>
 
     </div> <!-- End main col -->
-
-    <footer>
-	<!--
-	<span class="title">CivClicker v1.2</span>
-	<a href="http://dhmstark.co.uk/games/civclicker/">Original 1.0 Game</a>
-	<a href="faq.html">FAQ</a>
-	<a href="updates.html">Updates</a>
-	<a href="https://github.com/deathraygames/civ-clicker/">Source</a>
-	<a href="https://www.reddit.com/r/CivClicker/">Reddit</a>
-	-->
-    </footer>
 
     <!-- Mustache templates below -->
 
