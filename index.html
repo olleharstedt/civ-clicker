@@ -35,11 +35,7 @@
 
   <script type="application/javascript" src="scripts/lib/jquery.bootstrapThemeSwitcher.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="styles/simple-sidebar.css" />
-
 	<link rel="stylesheet" type="text/css" href="styles/civclicker2.css" />
-
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<!-- JS utilities -->
 	<script type="application/javascript" src="scripts/lz-string.js"></script>
@@ -64,138 +60,27 @@
 </head>
 <body>
 
-  <div id="wrapper">
-
-
-		<div id="sidebar-wrapper">
-			<div class="nav-side-menu">
-          <div class="brand">CivClicker <span class="version text-muted">1.4.0</span></div>
-					<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-							<div class="menu-list">
-									<ul id="menu-content" class="menu-content collapse out">
-											<li class="">
-                        <a class="show-page" data-page="resources" href="#">Resources</a>
-											</li>
-                      <li>
-                          <a class="show-page" data-page="population" href="#">Population</a>
-                      </li>
-                      <li>
-                          <a class="show-page" data-page="buildings" href="#">Buildings</a>
-                      </li>
-                      <li>
-                          <a class="show-page" data-page="upgrades" href="#">Upgrades</a>
-                      </li>
-                      <li>
-                          <a class="show-page" data-page="deities" href="#">Deities</a>
-                      </li>
-                      <li>
-                          <a class="show-page" data-page="conquest" href="#">Conquest</a>
-                      </li>
-                      <li>
-                          <a class="show-page" data-page="trade" href="#">Trade</a>
-                      </li>
-                      <li>
-                          <a class="show-page" data-page="achievements" href="#">Achievements</a>
-                      </li>
-                      <li>&nbsp;</li>
-                      <li>
-                          <a href="#">FAQ</a>
-                      </li>
-                      <li>
-                          <a href="#">Log</a>
-                      </li>
-                      <li>
-                          <a href="#">Reddit</a>
-                      </li>
-                      <li>
-                          <a href="#">Settings</a>
-                      </li>
-
-                      <!--
-											<li  data-toggle="collapse" data-target="#products" class="collapsed">
-												<a href="#"><i class="fa fa-gift fa-lg"></i> UI Elements <span class="arrow"></span></a>
-											</li>
-											<ul class="sub-menu collapse" id="products">
-													<li class="active"><a href="#">CSS3 Animation</a></li>
-													<li><a href="#">General</a></li>
-													<li><a href="#">Buttons</a></li>
-													<li><a href="#">Tabs & Accordions</a></li>
-													<li><a href="#">Typography</a></li>
-													<li><a href="#">FontAwesome</a></li>
-													<li><a href="#">Slider</a></li>
-													<li><a href="#">Panels</a></li>
-													<li><a href="#">Widgets</a></li>
-													<li><a href="#">Bootstrap Model</a></li>
-											</ul>
-                      -->
-									</ul>
-					 </div>
-			</div>
-		</div>
-
-		<!-- Sidebar -->
-		<!--
-		<div id="sidebar-wrapper">
-				<ul class="sidebar-nav">
-						<li class="sidebar-brand">
-								<a href="#">
-                  CivClicker
-                  <span class="text-muted">1.4.0</span>
-								</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="resources" href="#">Resources</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="population" href="#">Population</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="buildings" href="#">Buildings</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="upgrades" href="#">Upgrades</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="deities" href="#">Deities</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="conquest" href="#">Conquest</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="trade" href="#">Trade</a>
-						</li>
-						<li>
-								<a class="show-page" data-page="achievements" href="#">Achievements</a>
-						</li>
-						<li>&nbsp;</li>
-						<li>
-								<a href="#">FAQ</a>
-            </li>
-						<li>
-								<a href="#">Log</a>
-            </li>
-						<li>
-								<a href="#">Reddit</a>
-            </li>
-						<li>
-								<a href="#">Settings</a>
-            </li>
-				</ul>
-		</div>
-		-->
-		<!-- /#sidebar-wrapper -->
-
-		<div id="page-content-wrapper">
-
-		<div id="strip">
-			<div id="header">
-				<h1>The <span id="civType">Thorp</span> of <span id="civName">Woodstock</span>
-					<small id="ruler">Ruled by the <span id="appellation">mighty</span> <span id="rulerName">Orteil</span></small>
-				</h1>
-			</div>
-		</div>
-
 		<div id="main" class="row">
+
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Reports</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Export</a></li>
+        </ul>
+      </div>
+
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+        <div id="strip">
+          <div id="header">
+            <h1>The <span id="civType">Thorp</span> of <span id="civName">Woodstock</span>
+              <small id="ruler">Ruled by the <span id="appellation">mighty</span> <span id="rulerName">Orteil</span></small>
+            </h1>
+          </div>
+        </div>
+
 
       <div id="page-resources" class="page">
 
@@ -728,6 +613,9 @@
 
     </div>
     </div>
+
+    </div> <!-- End main col -->
+
     <footer>
 	<!--
 	<span class="title">CivClicker v1.2</span>
@@ -801,10 +689,6 @@
         {{/elems}}
       </div>
     </script>
-
-    </div> <!-- End page content wrapper -->
-
-  </div> <!-- End wrapper -->
 
   <!-- Modal for settings etc -->
   <div id="civ-modal" class="modal fade" tabindex="-1" role="dialog">
