@@ -3548,6 +3548,14 @@ $(function () {
   setup.templates();
 
 	$("#wrapper").toggleClass("toggled");
+
+  $(".show-page").on("click", function(ev) {
+    ev.preventDefault();
+
+    var targetPage = $(ev.target).data("page");
+    $(".page").hide();
+    $("#page-" + targetPage).show();
+  });
 })
 
 /**
