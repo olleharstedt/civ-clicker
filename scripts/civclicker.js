@@ -3416,9 +3416,9 @@ setup.all = function () {
   setup.civSizes();
   document.addEventListener("DOMContentLoaded", function(e){
     //setup.game();  // Wait with this until all pages are loaded with Ajax
-    setup.loop();
+    //setup.loop();
     // Show the game
-    $('#main').css('display', 'block');
+    //$('#main').css('display', 'block');
   });
 };
 
@@ -3470,7 +3470,7 @@ setup.game = function () {
 
 setup.loop = function () {
 	// This sets up the main game loop, which is scheduled to execute once per second.
-	console.log("Setting up Main Loop");
+	console.log("Setting up main loop");
 	gameLoop();
 	loopTimer = window.setInterval(gameLoop, 1000); //updates once per second (1000 milliseconds)
 };
@@ -3577,6 +3577,9 @@ setup.pages = function() {
   });
   p.then(function() {
     setup.game();
+    setup.loop();
+    // Show the game
+    $('#main').css('display', 'block');
   });
 }
 
