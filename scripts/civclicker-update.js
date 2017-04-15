@@ -201,7 +201,8 @@ function updatePartyButtons(){
  * Maybe add a function here to look in various locations for vars, so it
  * doesn't need multiple action types?
  */
-function updateResourceTotals(){
+function updateResourceTotals() {
+
 	var i,displayElems,elem,val;
 	var landTotals = getLandTotals();
 
@@ -226,7 +227,9 @@ function updateResourceTotals(){
 	{
 		elem = displayElems[i];
 		val = civData[dataset(elem,"target")].net;
-		if (!isValid(val)) { continue; }
+		if (!isValid(val)) {
+      continue;
+    }
 
 		// Colourise net production values.
 		if      (val < 0) { elem.style.color="#f00"; }
@@ -242,11 +245,11 @@ function updateResourceTotals(){
 	//}
 
 	//Update page with building numbers, also stockpile limits.
-	$("#maxfood").innerHTML = prettify(civData.food.limit);
-	$("#maxwood").innerHTML = prettify(civData.wood.limit);
-	$("#maxstone").innerHTML = prettify(civData.stone.limit);
-	$("#totalBuildings").innerHTML = prettify(landTotals.buildings);
-	$("#totalLand"     ).innerHTML = prettify(landTotals.lands);
+	$("#maxfood").html(prettify(civData.food.limit));
+	$("#maxwood").html(prettify(civData.wood.limit));
+	$("#maxstone").html(prettify(civData.stone.limit));
+	$("#totalBuildings").html(prettify(landTotals.buildings));
+	$("#totalLand"     ).html(prettify(landTotals.lands));
 
 	// Unlock advanced control tabs as they become enabled (they never disable)
 	// Temples unlock Deity, barracks unlock Conquest, having gold unlocks Trade.
@@ -490,7 +493,13 @@ function updateDeity(){
 // Enables or disables availability of activated religious powers.
 // Passive religious benefits are handled by the upgrade system.
 function updateDevotion(){
-	ui.find("#deityA"+"Devotion").innerHTML = civData.devotion.owned;
+	var dev = ui.find("#deityA"+"Devotion");
+  if (dev) {
+    dev.innerHTML = civData.devotion.owned;
+  } else {
+    // Not yet initialised?
+    return;
+  }
 
 	// Process altars
 	buildingData.forEach(function(elem) { if (elem.subType == "altar") {

@@ -3410,7 +3410,7 @@ setup.all = function () {
   setup.navigation();
   setup.civSizes();
   document.addEventListener("DOMContentLoaded", function(e){
-    setup.game();
+    //setup.game();  // Wait with this until all pages are loaded with Ajax
     setup.loop();
     // Show the game
     $('#main').css('display', 'block');
@@ -3548,7 +3548,8 @@ setup.pages = function() {
   CivClicker.pages = {};
   var pageNames = [
     'resources',
-    'population'
+    'population',
+    'buildings'
   ];
   var p = $.when(1);  // Empty promise
   pageNames.forEach(function(pageName) {
@@ -3591,7 +3592,6 @@ $(function () {
   $(".show-page").on("click", function(ev) {
     ev.preventDefault();
 
-    console.log('here');
     var targetPage = $(ev.target).data("page");
     $(".page").hide();
     $("#page-" + targetPage).show();
