@@ -3582,6 +3582,8 @@ setup.pages = function() {
     setup.loop();
     // Show the game
     $('#main').css('display', 'block');
+    // "Click" on resources page
+    $('.show-page[data-page="resources"]').trigger('click');
   });
 }
 
