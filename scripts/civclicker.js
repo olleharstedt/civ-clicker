@@ -919,6 +919,15 @@ function onIncrement(control) {
 function doPurchase(objId, num) {
 	var purchaseObj = civData[objId];
 
+  // Fire event.
+  CivClicker.events.publish(
+    'global.doPurchase.begin',
+    {
+      purchaseObj: purchaseObj,
+      num: num
+    }
+  );
+
   // Abort if there's no corresponding object.
 	if (!purchaseObj) {
     console.log("Unknown purchase: "+objId);
@@ -999,6 +1008,16 @@ function doPurchase(objId, num) {
 
 
   var progressTime = purchaseObj.calculateProgressTime(num);
+
+  // Fire event. If we've come this far, the purchase will go through.
+  CivClicker.events.publish(
+    'global.doPurchase.success',
+    {
+      purchaseObj:  purchaseObj,
+      num:          num,
+      progressTime: progressTime
+    }
+  );
 
   // No need to show progress bar if time is too small
   if (purchaseObj.useProgressBar && progressTime > 200) {
