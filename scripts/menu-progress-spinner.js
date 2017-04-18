@@ -42,7 +42,7 @@ CivClicker.menuProgressSpinner = (function() {
       });
     }
 
-    if (buildingTimeLeft < 0) {
+    if (buildingTimeLeft <= 0) {
       $('#buildings-sidemenu-loader')
         .removeClass('fa fa-spinner fa-pulse')
         .addClass('fa fa-check');
@@ -54,4 +54,7 @@ CivClicker.menuProgressSpinner = (function() {
       buildingTimeLeft = 0;
     }
   });
+
+  // No public functions.
+  return {};
 })();
