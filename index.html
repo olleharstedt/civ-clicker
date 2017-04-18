@@ -48,6 +48,9 @@
 	<script type="application/javascript" src="scripts/ui.js"></script>
 	<script type="application/javascript" src="scripts/events.js"></script>
 
+  <!-- GUI modules -->
+	<script type="application/javascript" src="scripts/menu-progress-spinner.js"></script>
+
   <!-- Classes -->
 	<script type="application/javascript" src="scripts/classes/VersionData.js" defer="defer"></script>
 	<script type="application/javascript" src="scripts/classes/CivObj.js" defer="defer"></script>
@@ -82,7 +85,7 @@
             <a class="show-page" data-page="population" href="#">Population<span class="sidemenu-loader pull-right"></span></a>
           </li>
           <li>
-            <a class="show-page" data-page="buildings" href="#">Buildings<span class="sidemenu-loader pull-right"></span></a>
+            <a class="show-page" data-page="buildings" href="#">Buildings<span id="buildings-sidemenu-loader" class="sidemenu-loader pull-right"></span></a>
           </li>
           <li>
             <a class="show-page" data-page="upgrades" href="#">Upgrades<span class="sidemenu-loader pull-right"></span></a>
