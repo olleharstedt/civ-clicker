@@ -14,7 +14,11 @@ CivClicker.menuProgressSpinner = (function() {
   CivClicker.events.subscribe('global.doPurchase.success', function(info) {
 
     if (info.purchaseObj instanceof Building) {
-      buildingTimeLeft += info.progressTime;
+
+      // Always pick the highest time left.
+      if (info.progressTime > buildingTimeLeft) {
+        buildingTimeLeft = info.progressTime;
+      }
 
       if (removeBuildingCheck) {
         removeBuildingCheck = false;
