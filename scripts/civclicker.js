@@ -3325,6 +3325,8 @@ function gameLoop () {
 	//debugging - mark beginning of loop execution
 	//var start = new Date().getTime();
 	
+  CivClicker.events.publish('global.tick');
+
 	tickAutosave();
 
 	calculatePopulation();
