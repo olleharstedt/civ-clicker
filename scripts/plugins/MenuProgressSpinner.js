@@ -21,7 +21,7 @@ CivClicker.MenuProgressSpinner = (function() {
       var buildingSpinner = new CivClicker.ProgressSpinner(
         '#buildings-sidemenu-loader',
         'building',  // Type
-        'normal'     // Subtype
+        ['normal']   // Subtypes
       );
       CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
         buildingSpinner.onPurchaseSuccess(info);
@@ -34,7 +34,7 @@ CivClicker.MenuProgressSpinner = (function() {
       var upgradeSpinner = new CivClicker.ProgressSpinner(
         '#upgrades-sidemenu-loader',
         'upgrade',
-        'upgrade'
+        ['upgrade']  // Subtypes
       );
       CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
         upgradeSpinner.onPurchaseSuccess(info);
@@ -47,13 +47,26 @@ CivClicker.MenuProgressSpinner = (function() {
       var deitySpinner = new CivClicker.ProgressSpinner(
         '#deities-sidemenu-loader',
         'upgrade',  // Type
-        'deity'     // Subtype
+        ['deity']   // Subtypes
       );
       CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
         deitySpinner.onPurchaseSuccess(info);
       });
       CivClicker.Events.subscribe('global.tick', function() {
         deitySpinner.onTick();
+      });
+
+      // Setup upgrade spinner for trade upgrades.
+      var tradeSpinner = new CivClicker.ProgressSpinner(
+        '#trade-sidemenu-loader',
+        'upgrade',  // Type
+        ['trade']   // Subtypes
+      );
+      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
+        tradeSpinner.onPurchaseSuccess(info);
+      });
+      CivClicker.Events.subscribe('global.tick', function() {
+        tradeSpinner.onTick();
       });
     }
   };

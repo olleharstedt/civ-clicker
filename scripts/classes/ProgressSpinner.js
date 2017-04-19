@@ -11,15 +11,15 @@ var CivClicker = CivClicker || {};
  * @property {boolean} removeCheck Whether or not to remove the check mark this tick.
  * @property {string} loaderSpanId ID of span to put the spinner.
  * @property {string} type Type of object.
- * @property {string|undefined} subType Subtype of object, like 'conquest' or 'deity'.
+ * @property {array} subTypes Subtypes of object, like 'conquest', 'deity', 'altar'.
  * @class
  */
-CivClicker.ProgressSpinner = function(loaderSpanId, type, subType) {
+CivClicker.ProgressSpinner = function(loaderSpanId, type, subTypes) {
   this.timeLeft = 0;
   this.removeCheck = false;
   this.loaderSpanId = loaderSpanId;
   this.type = type;
-  this.subType = subType || undefined;
+  this.subTypes = subTypes || [];
 };
 
 /**
@@ -33,7 +33,7 @@ CivClicker.ProgressSpinner.prototype.onPurchaseSuccess = function(info) {
     // Subtype has to be either undefined or equal defined subtype.
     // NB: Subtype is used for upgrade subtypes like deity, conquest, etc.
     if (info.purchaseObj.subType === undefined ||
-        info.purchaseObj.subType == this.subType) {
+        this.subTypes.indexOf(info.purchaseObj.subType) !== -1) {
 
       // Always pick the highest time left.
       if (info.progressTime > this.timeLeft) {
