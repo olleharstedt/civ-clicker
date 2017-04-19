@@ -11,6 +11,28 @@ var CivClicker = CivClicker || {};
  */
 CivClicker.MenuProgressSpinner = (function() {
 
+  /**
+   * Helper function to create spinners.
+   * @param {string} id
+   * @param {array} types
+   * @param {array} subtypes
+   */
+  function createSpinner(id, types, subtypes) {
+    // Setup building spinner.
+    var spinner = new CivClicker.ProgressSpinner(
+      id,
+      types,
+      subtypes
+    );
+    CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
+      spinner.onPurchaseSuccess(info);
+    });
+    CivClicker.Events.subscribe('global.tick', function() {
+      spinner.onTick();
+    });
+
+  }
+
   return {
     /**
      * Init this plugin.
@@ -18,69 +40,39 @@ CivClicker.MenuProgressSpinner = (function() {
      */
     init: function() {
       // Setup building spinner.
-      var buildingSpinner = new CivClicker.ProgressSpinner(
+      createSpinner(
         '#buildings-sidemenu-loader',
-        ['building'],  // Type
-        ['normal']   // Subtypes
+        ['building'],
+        ['normal']
       );
-      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
-        buildingSpinner.onPurchaseSuccess(info);
-      });
-      CivClicker.Events.subscribe('global.tick', function() {
-        buildingSpinner.onTick();
-      });
 
-      // Setup upgrade spinner for 'upgrade' upgrades.
-      var upgradeSpinner = new CivClicker.ProgressSpinner(
+      // Setup spinner for 'upgrade' upgrades.
+      createSpinner(
         '#upgrades-sidemenu-loader',
         ['upgrade'],
         ['upgrade']  // Subtypes
       );
-      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
-        upgradeSpinner.onPurchaseSuccess(info);
-      });
-      CivClicker.Events.subscribe('global.tick', function() {
-        upgradeSpinner.onTick();
-      });
 
-      // Setup upgrade spinner for deity upgrades.
-      var deitySpinner = new CivClicker.ProgressSpinner(
+      // Setup spinner for deity upgrades and alter buildings.
+      createSpinner(
         '#deities-sidemenu-loader',
         ['upgrade', 'building'],  // Type
         ['deity', 'altar']   // Subtypes
       );
-      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
-        deitySpinner.onPurchaseSuccess(info);
-      });
-      CivClicker.Events.subscribe('global.tick', function() {
-        deitySpinner.onTick();
-      });
 
-      // Setup upgrade spinner for conquest upgrades.
-      var conquestSpinner = new CivClicker.ProgressSpinner(
+      // Setup spinner for conquest upgrades.
+      createSpinner(
         '#conquest-sidemenu-loader',
         ['upgrade'],  // Type
         ['conquest']   // Subtypes
       );
-      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
-        conquestSpinner.onPurchaseSuccess(info);
-      });
-      CivClicker.Events.subscribe('global.tick', function() {
-        conquestSpinner.onTick();
-      });
 
-      // Setup upgrade spinner for trade upgrades.
-      var tradeSpinner = new CivClicker.ProgressSpinner(
+      // Setup spinner for trade upgrades.
+      createSpinner(
         '#trade-sidemenu-loader',
         ['upgrade'],  // Type
         ['trade']   // Subtypes
       );
-      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
-        tradeSpinner.onPurchaseSuccess(info);
-      });
-      CivClicker.Events.subscribe('global.tick', function() {
-        tradeSpinner.onTick();
-      });
     }
   };
 })();
