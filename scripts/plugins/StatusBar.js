@@ -12,9 +12,7 @@ var CivClicker = CivClicker || {};
 CivClicker.StatusBar = (function() {
   return {
     init: function() {
-      console.log('running init');
       CivClicker.Events.subscribe('global.tick', () => {
-        console.log('ticking');
         $('#status-bar-food')
           .attr('title', 'Max: ' + prettify(civData.food.limit))
           .tooltip('fixTitle');
