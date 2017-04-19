@@ -19,10 +19,10 @@ CivClicker.MenuProgressSpinner = (function() {
     init: function() {
       // Setup building spinner.
       var buildingSpinner = new CivClicker.ProgressSpinner('#buildings-sidemenu-loader', 'building');
-      CivClicker.events.subscribe('global.doPurchase.success', function(info) {
+      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
         buildingSpinner.onPurchaseSuccess(info);
       });
-      CivClicker.events.subscribe('global.tick', function() {
+      CivClicker.Events.subscribe('global.tick', function() {
         buildingSpinner.onTick();
       });
     }

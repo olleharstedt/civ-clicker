@@ -920,7 +920,7 @@ function doPurchase(objId, num) {
 	var purchaseObj = civData[objId];
 
   // Fire event.
-  CivClicker.events.publish(
+  CivClicker.Events.publish(
     'global.doPurchase.begin',
     {
       purchaseObj: purchaseObj,
@@ -1010,7 +1010,7 @@ function doPurchase(objId, num) {
   var progressTime = purchaseObj.calculateProgressTime(num);
 
   // Fire event. If we've come this far, the purchase will go through.
-  CivClicker.events.publish(
+  CivClicker.Events.publish(
     'global.doPurchase.success',
     {
       purchaseObj:  purchaseObj,
@@ -3344,7 +3344,7 @@ function gameLoop () {
 	//debugging - mark beginning of loop execution
 	//var start = new Date().getTime();
 	
-  CivClicker.events.publish('global.tick');
+  CivClicker.Events.publish('global.tick');
 
 	tickAutosave();
 

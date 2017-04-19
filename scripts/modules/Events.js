@@ -1,11 +1,11 @@
 /**
- * Moduled copied from https://davidwalsh.name/pubsub-javascript
+ * Module copied from https://davidwalsh.name/pubsub-javascript
  */
 
 /** @namespace */
 var CivClicker = CivClicker || {};
 
-CivClicker.events = (function(){
+CivClicker.Events = (function(){
   var topics = {};
   var hOP = topics.hasOwnProperty;
 
@@ -30,7 +30,7 @@ CivClicker.events = (function(){
 
       // Cycle through topics queue, fire!
       topics[topic].forEach(function(item) {
-      		item(info != undefined ? info : {});
+        item(info != undefined ? info : {});
       });
     }
   };
