@@ -10,15 +10,15 @@ var CivClicker = CivClicker || {};
  * @property {number|String} timeLeft Time left on building, or 'stop' for no action.
  * @property {boolean} removeCheck Whether or not to remove the check mark this tick.
  * @property {string} loaderSpanId ID of span to put the spinner.
- * @property {string} type Type of object.
+ * @property {array} types Types of objects. Deity page has both buildings and upgrades.
  * @property {array} subTypes Subtypes of object, like 'conquest', 'deity', 'altar'.
  * @class
  */
-CivClicker.ProgressSpinner = function(loaderSpanId, type, subTypes) {
+CivClicker.ProgressSpinner = function(loaderSpanId, types, subTypes) {
   this.timeLeft = new String('stop');
   this.removeCheck = false;
   this.loaderSpanId = loaderSpanId;
-  this.type = type;
+  this.types = types || [];
   this.subTypes = subTypes || [];
 };
 
@@ -29,7 +29,7 @@ CivClicker.ProgressSpinner = function(loaderSpanId, type, subTypes) {
  */
 CivClicker.ProgressSpinner.prototype.onPurchaseSuccess = function(info) {
 
-  if (info.purchaseObj.type == this.type) {
+  if (this.types.indexOf(info.purchaseObj.type) !== -1) {
     // Subtype has to be either undefined or equal defined subtype.
     // NB: Subtype is used for upgrade subtypes like deity, conquest, etc.
     if (info.purchaseObj.subType === undefined ||

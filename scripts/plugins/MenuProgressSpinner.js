@@ -20,7 +20,7 @@ CivClicker.MenuProgressSpinner = (function() {
       // Setup building spinner.
       var buildingSpinner = new CivClicker.ProgressSpinner(
         '#buildings-sidemenu-loader',
-        'building',  // Type
+        ['building'],  // Type
         ['normal']   // Subtypes
       );
       CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
@@ -33,7 +33,7 @@ CivClicker.MenuProgressSpinner = (function() {
       // Setup upgrade spinner for 'upgrade' upgrades.
       var upgradeSpinner = new CivClicker.ProgressSpinner(
         '#upgrades-sidemenu-loader',
-        'upgrade',
+        ['upgrade'],
         ['upgrade']  // Subtypes
       );
       CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
@@ -46,8 +46,8 @@ CivClicker.MenuProgressSpinner = (function() {
       // Setup upgrade spinner for deity upgrades.
       var deitySpinner = new CivClicker.ProgressSpinner(
         '#deities-sidemenu-loader',
-        'upgrade',  // Type
-        ['deity']   // Subtypes
+        ['upgrade', 'building'],  // Type
+        ['deity', 'altar']   // Subtypes
       );
       CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
         deitySpinner.onPurchaseSuccess(info);
@@ -56,10 +56,23 @@ CivClicker.MenuProgressSpinner = (function() {
         deitySpinner.onTick();
       });
 
+      // Setup upgrade spinner for conquest upgrades.
+      var conquestSpinner = new CivClicker.ProgressSpinner(
+        '#conquest-sidemenu-loader',
+        ['upgrade'],  // Type
+        ['conquest']   // Subtypes
+      );
+      CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
+        conquestSpinner.onPurchaseSuccess(info);
+      });
+      CivClicker.Events.subscribe('global.tick', function() {
+        conquestSpinner.onTick();
+      });
+
       // Setup upgrade spinner for trade upgrades.
       var tradeSpinner = new CivClicker.ProgressSpinner(
         '#trade-sidemenu-loader',
-        'upgrade',  // Type
+        ['upgrade'],  // Type
         ['trade']   // Subtypes
       );
       CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
