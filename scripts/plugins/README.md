@@ -4,4 +4,5 @@ List of available events:
 
 * global.doPurchase.begin
 * global.doPurchase.success
+* global.init
 * global.tick

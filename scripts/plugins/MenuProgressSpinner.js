@@ -24,10 +24,10 @@ CivClicker.MenuProgressSpinner = (function() {
       types,
       subtypes
     );
-    CivClicker.Events.subscribe('global.doPurchase.success', function(info) {
+    CivClicker.Events.subscribe('global.doPurchase.success', info => {
       spinner.onPurchaseSuccess(info);
     });
-    CivClicker.Events.subscribe('global.tick', function() {
+    CivClicker.Events.subscribe('global.tick', () => {
       spinner.onTick();
     });
 
@@ -76,3 +76,10 @@ CivClicker.MenuProgressSpinner = (function() {
     }
   };
 })();
+
+// Subscribe to game init event and install the plugin.
+$(function() {
+  CivClicker.Events.subscribe('global.init', () => {
+    CivClicker.MenuProgressSpinner.init();
+  });
+});

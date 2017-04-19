@@ -3488,7 +3488,8 @@ setup.game = function () {
 
   setDefaultSettings();
 
-  CivClicker.MenuProgressSpinner.init();
+  // Fire game init event.
+  CivClicker.Events.publish('global.init');
 };
 
 setup.loop = function () {

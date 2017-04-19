@@ -48,8 +48,9 @@
 	<script type="application/javascript" src="scripts/ui.js"></script>
 	<script type="application/javascript" src="scripts/modules/Events.js"></script>
 
-  <!-- GUI modules -->
+  <!-- Plugins -->
 	<script type="application/javascript" src="scripts/plugins/MenuProgressSpinner.js"></script>
+	<script type="application/javascript" src="scripts/plugins/StatusBar.js"></script>
 
   <!-- Classes -->
 	<script type="application/javascript" src="scripts/classes/ProgressSpinner.js"></script>
@@ -134,7 +135,7 @@
           </div>
           <div class="collapse navbar-collapse">
             <span class="navbar-text">Population: <span id="navbar-population" data-action="display_pop" data-target="living"></span></span>
-            <span class="navbar-text">
+            <span id="status-bar-food" data-toggle="tooltip" title="Some title" data-html="true" data-placement="bottom" class="navbar-text">
               Food: <span id="navbar-food" data-action="display" data-target="food"></span>
               <span data-action="displayNet" data-target="food"></span>
             </span>
