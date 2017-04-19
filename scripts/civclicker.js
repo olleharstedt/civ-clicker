@@ -3466,34 +3466,36 @@ setup.civSizes = function () {
 };
 
 setup.game = function () {
-	console.log("Setting up game");
-	//document.title = "CivClicker ("+versionData+")"; //xxx Not in XML DOM.
+  console.log("Setting up game");
+  //document.title = "CivClicker ("+versionData+")"; //xxx Not in XML DOM.
 
-	addUITable(basicResources, "basicResources"); // Dynamically create the basic resource table.
-	addUITable(homeBuildings, "buildings"); // Dynamically create the building controls table.
-	addUITable(homeUnits, "jobs"); // Dynamically create the job controls table.
-	addUITable(armyUnits, "party"); // Dynamically create the party controls table.
-	addUpgradeRows(); // This sets up the framework for the upgrade items.
-	addUITable(normalUpgrades, "upgrades"); // Place the stubs for most upgrades under the upgrades tab.
-	addAchievementRows();
-	addRaidRows();
-	addWonderSelectText();
-	makeDeitiesTables();
+  addUITable(basicResources, "basicResources"); // Dynamically create the basic resource table.
+  addUITable(homeBuildings, "buildings"); // Dynamically create the building controls table.
+  addUITable(homeUnits, "jobs"); // Dynamically create the job controls table.
+  addUITable(armyUnits, "party"); // Dynamically create the party controls table.
+  addUpgradeRows(); // This sets up the framework for the upgrade items.
+  addUITable(normalUpgrades, "upgrades"); // Place the stubs for most upgrades under the upgrades tab.
+  addAchievementRows();
+  addRaidRows();
+  addWonderSelectText();
+  makeDeitiesTables();
 
-	if (!load("localStorage")) { //immediately attempts to load
-		//Prompt player for names
-		renameCiv();
-		renameRuler();
-	}
+  if (!load("localStorage")) { //immediately attempts to load
+    //Prompt player for names
+    renameCiv();
+    renameRuler();
+  }
 
-	setDefaultSettings();
+  setDefaultSettings();
+
+  CivClicker.MenuProgressSpinner.init();
 };
 
 setup.loop = function () {
-	// This sets up the main game loop, which is scheduled to execute once per second.
-	console.log("Setting up main loop");
-	gameLoop();
-	loopTimer = window.setInterval(gameLoop, 1000); //updates once per second (1000 milliseconds)
+  // This sets up the main game loop, which is scheduled to execute once per second.
+  console.log("Setting up main loop");
+  gameLoop();
+  loopTimer = window.setInterval(gameLoop, 1000); //updates once per second (1000 milliseconds)
 };
 
 /**
@@ -3606,7 +3608,7 @@ setup.pages = function() {
     // "Click" on resources page
     $('.show-page[data-page="resources"]').trigger('click');
   });
-}
+};
 
 setup.all();
 
@@ -3636,7 +3638,7 @@ $(function () {
     $(".show-page").parent().removeClass("active");
     $(ev.target).parent().addClass("active");
   });
-})
+});
 
 /**
  * Debug function to restock all resources.
