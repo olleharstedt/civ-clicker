@@ -7,7 +7,7 @@ var CivClicker = CivClicker || {};
 /**
  * @param {string} loaderSpanId ID of loader span.
  * @param {string} type Type of object, like "building" or "upgrade".
- * @property {timeLeft} number Time left on building.
+ * @property {number|String} timeLeft Time left on building, or 'stop' for no action.
  * @property {boolean} removeCheck Whether or not to remove the check mark this tick.
  * @property {string} loaderSpanId ID of span to put the spinner.
  * @property {string} type Type of object.
@@ -15,7 +15,7 @@ var CivClicker = CivClicker || {};
  * @class
  */
 CivClicker.ProgressSpinner = function(loaderSpanId, type, subTypes) {
-  this.timeLeft = 0;
+  this.timeLeft = new String('stop');
   this.removeCheck = false;
   this.loaderSpanId = loaderSpanId;
   this.type = type;
@@ -36,7 +36,10 @@ CivClicker.ProgressSpinner.prototype.onPurchaseSuccess = function(info) {
         this.subTypes.indexOf(info.purchaseObj.subType) !== -1) {
 
       // Always pick the highest time left.
-      if (info.progressTime > this.timeLeft) {
+      // timeLeft can also be String('stop').
+      // NB: 'asd' instanceof String === false
+      if (this.timeLeft instanceof String
+          || info.progressTime > this.timeLeft) {
         this.timeLeft = info.progressTime;
       }
 
@@ -56,12 +59,18 @@ CivClicker.ProgressSpinner.prototype.onPurchaseSuccess = function(info) {
  * @return
  */
 CivClicker.ProgressSpinner.prototype.onTick = function() {
+
+  if (this.timeLeft == 'stop') {
+    return;
+  }
+
   if (this.timeLeft > 0) {
     this.timeLeft -= 1000;
   }
 
   if (this.removeCheck) {
     this.removeCheck = false;
+    this.timeLeft = new String('stop');
     $(this.loaderSpanId).fadeOut('slow', function() {
       $(this.loaderSpanId).removeClass('fa fa-check');
     });
