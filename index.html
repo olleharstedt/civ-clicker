@@ -51,6 +51,7 @@
   <!-- Plugins -->
 	<script type="application/javascript" src="scripts/plugins/MenuProgressSpinner.js"></script>
 	<script type="application/javascript" src="scripts/plugins/StatusBar.js"></script>
+	<script type="application/javascript" src="scripts/plugins/SidemenuTooltips.js"></script>
 
   <!-- Classes -->
 	<script type="application/javascript" src="scripts/classes/ProgressSpinner.js"></script>
@@ -83,7 +84,7 @@
           <li>
             <a class="show-page" data-page="resources,population,buildings" href="#">Dashboard<span class="sidemenu-loader pull-right"></span></a>
           </li>
-          <li>
+          <li id="sidemenu-resources" data-toggle="tooltip" data-html="true" data-placement="right" title="Bla">
             <a class="show-page" data-page="resources" href="#">Resources<span class="sidemenu-loader pull-right"></span></a>
           </li>
           <li>
@@ -138,15 +139,15 @@
           </div>
           <div class="collapse navbar-collapse">
             <span class="navbar-text">Population: <span id="navbar-population" data-action="display_pop" data-target="living"></span></span>
-            <span id="status-bar-food" data-toggle="tooltip" title="Some title" data-html="true" data-placement="bottom" class="navbar-text">
+            <span id="status-bar-food" data-toggle="tooltip" title="" data-html="true" data-placement="bottom" class="navbar-text">
               Food: <span id="navbar-food" data-action="display" data-target="food"></span>
               <span data-action="displayNet" data-target="food"></span>
             </span>
-            <span class="navbar-text">
+            <span id="status-bar-wood" data-toggle="tooltip" title="" data-html="true" data-placement="bottom" class="navbar-text">
               Wood: <span id="navbar-wood" data-action="display" data-target="wood"></span>
               <span data-action="displayNet" data-target="wood"></span>
             </span>
-            <span class="navbar-text">
+            <span id="status-bar-stone" data-toggle="tooltip" title="" data-html="true" data-placement="bottom" class="navbar-text">
               Stone: <span id="navbar-stone" data-action="display" data-target="stone"></span>
               <span data-action="displayNet" data-target="stone"></span>
             </span>

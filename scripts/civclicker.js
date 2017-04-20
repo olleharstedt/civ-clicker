@@ -3606,7 +3606,9 @@ setup.all();
 
 $(function () {
   // Enable Bootstrap tooltips
-  $('[data-toggle="tooltip"]').tooltip();
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'hover'
+  });
 
   // Logger
   // TODO: Use multiple logger for different categories.
@@ -3619,7 +3621,7 @@ $(function () {
   // Load pages
   setup.pages();
 
-	$('#wrapper').toggleClass('toggled');
+  $('#wrapper').toggleClass('toggled');
 
   // Sidemenu clicking
   $('.show-page').on('click', function(ev) {
@@ -3640,16 +3642,16 @@ $(function () {
  * Debug function to restock all resources.
  */
 function restock() {
-  civData.wood.owned = 1000;
-  civData.food.owned = 1000;
-  civData.stone.owned = 1000;
-  civData.ore.owned = 1000;
-  civData.skins.owned = 1000;
-  civData.herbs.owned = 1000;
-  civData.gold.owned = 1000;
-  civData.leather.owned = 1000;
-  civData.piety.owned = 1000;
-  civData.metal.owned = 1000;
+  civData.wood.owned = 10000;
+  civData.food.owned = 10000;
+  civData.stone.owned = 10000;
+  civData.ore.owned = 10000;
+  civData.skins.owned = 10000;
+  civData.herbs.owned = 10000;
+  civData.gold.owned = 10000;
+  civData.leather.owned = 10000;
+  civData.piety.owned = 10000;
+  civData.metal.owned = 10000;
 }
 
 
