@@ -5,8 +5,7 @@
 var CivClicker = CivClicker || {};
 
 /**
- * Small plugin that listens to doPurchase and tick to show a spinner if a building
- * is in progress.
+ * Render tooltips for status bar.
  * @module StatusBar
  */
 CivClicker.StatusBar = (function() {

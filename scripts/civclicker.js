@@ -919,15 +919,6 @@ function onIncrement(control) {
 function doPurchase(objId, num) {
 	var purchaseObj = civData[objId];
 
-  // Fire event.
-  CivClicker.Events.publish(
-    'global.doPurchase.begin',
-    {
-      purchaseObj: purchaseObj,
-      num: num
-    }
-  );
-
   // Abort if there's no corresponding object.
 	if (!purchaseObj) {
     console.log("Unknown purchase: "+objId);
@@ -3615,7 +3606,7 @@ setup.all();
 
 $(function () {
   // Enable Bootstrap tooltips
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip();
 
   // Logger
   // TODO: Use multiple logger for different categories.
@@ -3628,16 +3619,20 @@ $(function () {
   // Load pages
   setup.pages();
 
-	$("#wrapper").toggleClass("toggled");
+	$('#wrapper').toggleClass('toggled');
 
-  $(".show-page").on("click", function(ev) {
+  // Sidemenu clicking
+  $('.show-page').on('click', function(ev) {
     ev.preventDefault();
 
-    var targetPage = $(ev.target).data("page");
-    $(".page").hide();
-    $("#page-" + targetPage).show();
-    $(".show-page").parent().removeClass("active");
-    $(ev.target).parent().addClass("active");
+    var targetPages = $(ev.target).data('page').split(',');
+    $('.page').hide();
+    for (var i = 0; i < targetPages.length; ++i) { 
+      var targetPage = targetPages[i];
+      $('#page-' + targetPage).show();
+    }
+    $('.show-page').parent().removeClass('active');
+    $(ev.target).parent().addClass('active');
   });
 });
 
