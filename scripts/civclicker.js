@@ -3607,7 +3607,8 @@ setup.all();
 $(function () {
   // Enable Bootstrap tooltips
   $('[data-toggle="tooltip"]').tooltip({
-    trigger: 'hover'
+    trigger: 'hover',
+    container: 'body'
   });
 
   // Logger

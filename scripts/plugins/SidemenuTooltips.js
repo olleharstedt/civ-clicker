@@ -21,17 +21,23 @@ CivClicker.SidemenuTooltips = (function() {
             templates.resources,
             {
               civData: civData,
-              round: function() {
-                return function(val, render) {
+              round: () =>
+                // Implicit return
+                (val, render) => {
                   let number = render(val);
                   return Math.round(number * 100) / 100;
-                };
-              }
+                }
             }
           );
           $('#sidemenu-resources')
             .attr('title', s)
             .tooltip('fixTitle');
+
+          $('#sidemenu-resources').on('show.bs.tooltip', function (a) {
+            // Get id of tooltip?
+          });
+
+          //$('.tooltip-inner').html(s);
         });
       });
     }
