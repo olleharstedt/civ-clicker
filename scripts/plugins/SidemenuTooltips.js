@@ -17,15 +17,16 @@ CivClicker.SidemenuTooltips = (function() {
       }).then(function () {
         CivClicker.Events.subscribe('global.tick', () => {
 
-          // Since prettify did not work in template.
-          civData.stone.owned = Math.round(civData.stone.owned * 100) / 100;
-          civData.piety.owned = Math.round(civData.stone.owned * 100) / 100;
-
           var s = Mustache.to_html(
             templates.resources,
             {
               civData: civData,
-              prettify: prettify  // Does not work?
+              round: function() {
+                return function(val, render) {
+                  let number = render(val);
+                  return Math.round(number * 100) / 100;
+                };
+              }
             }
           );
           $('#sidemenu-resources')
