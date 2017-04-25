@@ -15,9 +15,16 @@ CivClicker.SidemenuTooltips = (function() {
       $.get('templates/tooltips/sidemenu-resources.html', function(template) {
         templates.resources = template;
       }).then(function () {
+
+        // toggle is used to decide if we can use .tooltip-inner class to change content.
+        // Necessary to update tooltip content when it's shown.
+        let toggle = false;
+        $('#sidemenu-resources').on('show.bs.tooltip', () => { toggle = true; });
+        $('#sidemenu-resources').on('hide.bs.tooltip', () => { toggle = false; });
+
         CivClicker.Events.subscribe('global.tick', () => {
 
-          var s = Mustache.to_html(
+          let s = Mustache.to_html(
             templates.resources,
             {
               civData: civData,
@@ -33,11 +40,9 @@ CivClicker.SidemenuTooltips = (function() {
             .attr('title', s)
             .tooltip('fixTitle');
 
-          $('#sidemenu-resources').on('show.bs.tooltip', function (a) {
-            // Get id of tooltip?
-          });
-
-          //$('.tooltip-inner').html(s);
+          if (toggle) {
+            $('.tooltip-inner').html(s);
+          }
         });
       });
     }
