@@ -1,0 +1,19 @@
+<table class="table">
+  <caption>Population</caption>
+  <tr>
+    <td>Total</td>
+    <td class="text-right">{{population.living}}</td>
+    <td>/</td>
+    <td class="text-left">{{population.limit}}</td>
+  </tr>
+  {{#unitData}}
+    {{#isPopulation}}
+      {{#owned}}
+        <tr>
+          <td class="text-right">{{#ucfirst}}{{id}}{{/ucfirst}}</td>
+          <td class="text-left">{{owned}}</td>
+        </tr>
+      {{/owned}}
+    {{/isPopulation}}
+  {{/unitData}}
+</table>
