@@ -1,8 +1,8 @@
 <table class="table">
   <caption>Population</caption>
   <tr>
-    <td>Total</td>
-    <td class="text-right">{{population.living}}</td>
+    <td class="text-right">Total</td>
+    <td class="text-left">{{population.living}}</td>
     <td>/</td>
     <td class="text-left">{{population.limit}}</td>
   </tr>
@@ -16,4 +16,15 @@
       {{/owned}}
     {{/isPopulation}}
   {{/unitData}}
+</table>
+<table class="table">
+  <caption>Health</caption>
+  <tr>
+    <td class="text-right">Happiness</td>
+    <td class="text-left" colspan=10>{{#ucfirst}}{{happiness}}{{/ucfirst}}</td>
+  </tr>
+  <tr>
+    <td class="text-right">Sick</td>
+    <td class="text-left">{{population.totalSick}}</td>
+  </tr>
 </table>

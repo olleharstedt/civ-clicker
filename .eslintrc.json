@@ -27,6 +27,9 @@
       "Logger": true,
       "Mustache": true,
       "civData": true,
-      "prettify": true
+      "unitData" : true,
+      "curCiv" : true,
+      "prettify": true,
+      "population" : true
     }
 }

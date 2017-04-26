@@ -614,13 +614,38 @@ function updateMorale(){
 		return;
 	}
 
-	if (curCiv.morale.efficiency > 1.4) { 		happinessRank = 1; }
-	else if (curCiv.morale.efficiency > 1.2) { 	happinessRank = 2;    }
-	else if (curCiv.morale.efficiency > 0.8) { 	happinessRank = 3;  }
-	else if (curCiv.morale.efficiency > 0.6) { 	happinessRank = 4;  }
-	else                              { 		happinessRank = 5;    }
+	elt.className = "happy-" + getHappinessRank();
+}
 
-	elt.className = "happy-" + happinessRank;
+/**
+ * @return {number} Integer between 1-5
+ */
+function getHappinessRank() {
+  let happinessRank = 0;
+  if (curCiv.morale.efficiency > 1.4) { 		happinessRank = 1; }
+  else if (curCiv.morale.efficiency > 1.2) { 	happinessRank = 2;    }
+  else if (curCiv.morale.efficiency > 0.8) { 	happinessRank = 3;  }
+  else if (curCiv.morale.efficiency > 0.6) { 	happinessRank = 4;  }
+  else                              { 		happinessRank = 5;    }
+  return happinessRank;
+}
+
+/**
+ * Convert happiness rank to a string.
+ * @return {string}
+ */
+function stringOfHappinessRank(rank) {
+  if (rank < 1 || rank > 5) {
+    throw 'rank must be between 1 and 5';
+  }
+  const strings = [
+    'blissful',
+    'happy',
+    'content',
+    'unhappy',
+    'angry'
+  ];
+  return strings[rank - 1];
 }
 
 function addWonderSelectText() {

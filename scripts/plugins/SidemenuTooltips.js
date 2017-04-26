@@ -27,14 +27,14 @@ CivClicker.SidemenuTooltips = (function() {
 
       CivClicker.Events.subscribe('global.tick', () => {
 
-        let s = Mustache.to_html(
+        const s = Mustache.to_html(
           templates.resources,
           {
             civData: civData,
             round: () =>
             // Implicit return
             (val, render) => {
-              let number = render(val);
+              const number = render(val);
               return Math.round(number * 100) / 100;
             }
           }
@@ -57,13 +57,22 @@ CivClicker.SidemenuTooltips = (function() {
     $.get('templates/tooltips/sidemenu-population.html', (template) => {
       templates.population = template;
     }).then(() => {
+
+      // toggle is used to decide if we can use .tooltip-inner class to change content.
+      // Necessary to update tooltip content when it's shown.
+      let toggle = false;
+      $('#sidemenu-population').on('show.bs.tooltip', () => { toggle = true; });
+      $('#sidemenu-population').on('hide.bs.tooltip', () => { toggle = false; });
+
       CivClicker.Events.subscribe('global.tick', () => {
 
-        let s = Mustache.to_html(
+        const s = Mustache.to_html(
           templates.population,
           {
             population: population,  // Global var
-            unitData: unitData,
+            unitData: unitData,      // Global var
+            happiness: stringOfHappinessRank(getHappinessRank()),
+            // Upper-case first letter.
             ucfirst: () => {
               return (s, render) => {
                 let rendered = render(s);
@@ -76,9 +85,9 @@ CivClicker.SidemenuTooltips = (function() {
         .attr('title', s)
         .tooltip('fixTitle');
 
-        //if (toggle) {
-        //$('.tooltip-inner').html(s);
-        //}
+        if (toggle) {
+          $('.tooltip-inner').html(s);
+        }
       });
     });
   }
