@@ -251,7 +251,6 @@ html {
 
 #stripInner {
   position: fixed;
-  width: 100%;
   z-index: 900;
   /*
   left: 230px;

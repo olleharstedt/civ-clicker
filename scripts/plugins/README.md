@@ -4,4 +4,5 @@ List of available events:
 
 * global.doPurchase.success - Run when a purchase is successfull.
 * global.init - Run when game is initialised.
-* global.tick - Run on every tick (once each second)
+* global.tick - Run on every tick (once each second).
+* global.autosave - Run when autosave is successful.

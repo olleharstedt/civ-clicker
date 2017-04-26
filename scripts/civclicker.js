@@ -2506,12 +2506,20 @@ function resetCivClicker() {
 	return true;
 }
 
+/**
+ * Ticks autosave counter and saves if above timer.
+ */
 function tickAutosave() {
-	if (settings.autosave && (++settings.autosaveCounter >= settings.autosaveTime)){ 
-		settings.autosaveCounter = 0;
-		// If autosave fails, disable it.
-		if (!save("auto")) { settings.autosave = false; }
-	}
+  if (settings.autosave && (++settings.autosaveCounter >= settings.autosaveTime)) {
+    settings.autosaveCounter = 0;
+    // If autosave fails, disable it.
+    if (!save("auto")) {
+      settings.autosave = false;
+    } else {
+      // Fire event.
+      CivClicker.Events.publish('global.autosave');
+    }
+  }
 }
 
 // TODO: Need to improve 'net' handling.
@@ -3139,8 +3147,8 @@ function prettify(input){
 
 
 function setAutosave(value){ 
-	if (value !== undefined) { settings.autosave = value; } 
-	$("#toggleAutosave").attr('checked', settings.autosave);
+  if (value !== undefined) { settings.autosave = value; } 
+  $("#toggleAutosave").attr('checked', settings.autosave);
 }
 function onToggleAutosave(control){ return setAutosave(control.checked); }
 
@@ -3527,12 +3535,12 @@ setup.navigation = function() {
     ui.find("#renameDeity").disabled = (!civData.worship.owned);
     ui.find("#renameRuler").disabled = (curCiv.rulerName == "Cheater");
 
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="tooltip"]').tooltip();
 
     // Enable toggle selector
     $('[data-toggle-selector]').on('click',function () {
       $($(this).data('toggle-selector')).toggle(300);
-    })
+    });
 
     $('#bs-theme-selector').bootstrapThemeSwitcher();
 
@@ -3559,7 +3567,7 @@ setup.templates = function() {
       CivClicker.templates[templateName] = template;
     });
   });
-}
+};
 
 /**
  * As with templates above, load HTML and put them
