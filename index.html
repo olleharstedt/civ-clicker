@@ -52,6 +52,7 @@
 	<script type="application/javascript" src="scripts/plugins/MenuProgressSpinner.js"></script>
 	<script type="application/javascript" src="scripts/plugins/StatusBar.js"></script>
 	<script type="application/javascript" src="scripts/plugins/SidemenuTooltips.js"></script>
+	<script type="application/javascript" src="scripts/plugins/AutosaveIcon.js"></script>
 
   <!-- Classes -->
 	<script type="application/javascript" src="scripts/classes/ProgressSpinner.js"></script>
@@ -90,36 +91,23 @@
           <li id="sidemenu-population" data-toggle="tooltip" data-html="true" data-placement="right">
             <a class="show-page" data-page="population" href="#">Population<span class="sidemenu-loader pull-right"></span></a>
           </li>
-          <li>
+          <li id="sidemenu-buildings" data-toggle="tooltip" data-html="true" data-placement="right">
             <a class="show-page" data-page="buildings" href="#">Buildings<span id="buildings-sidemenu-loader" class="sidemenu-loader pull-right"></span></a>
           </li>
-          <li>
+          <li id="sidemenu-upgrades" data-toggle="tooltip" data-html="true" data-placement="right">
             <a class="show-page" data-page="upgrades" href="#">Upgrades<span id="upgrades-sidemenu-loader" class="sidemenu-loader pull-right"></span></a>
           </li>
-          <li>
+          <li id="sidemenu-deities" data-toggle="tooltip" data-html="true" data-placement="right">
             <a class="show-page" data-page="deities" href="#">Deities<span id="deities-sidemenu-loader" class="sidemenu-loader pull-right"></span></a>
           </li>
-          <li>
+          <li id="sidemenu-conquest" data-toggle="tooltip" data-html="true" data-placement="right">
             <a class="show-page" data-page="conquest" href="#">Conquest<span id="conquest-sidemenu-loader" class="sidemenu-loader pull-right"></span></a>
           </li>
-          <li>
+          <li id="sidemenu-trade" data-toggle="tooltip" data-html="true" data-placement="right">
             <a class="show-page" data-page="trade" href="#">Trade<span id="trade-sidemenu-loader" class="sidemenu-loader pull-right"></span></a>
           </li>
           <li>
             <a class="show-page" data-page="achievements" href="#">Achievements</a>
-          </li>
-          <li><hr></li>
-          <li>
-            <a id="faq-modal" href="#">FAQ</a>
-          </li>
-          <li>
-            <a id="updates-modal" href="#">Log</a>
-          </li>
-          <li>
-            <a href="https://www.reddit.com/r/CivClicker/" target="_blank">Reddit</a>
-          </li>
-          <li>
-            <a id="settings-modal" href="#">Settings</a>
           </li>
         </ul>
       </div>
@@ -128,7 +116,9 @@
     <div id="right" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
       <!-- Status bar -->
-      <nav class="navbar navbar-default" id="stripInner">
+      <nav class="navbar navbar-default col-xs-10" id="stripInner">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
               <span class="sr-only">Toggle navigation</span>
@@ -137,7 +127,9 @@
               <span class="icon-bar"></span>
             </button>
           </div>
-          <div class="collapse navbar-collapse">
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <span class="navbar-text">Population: <span id="navbar-population" data-action="display_pop" data-target="living"></span></span>
             <span id="status-bar-food" data-toggle="tooltip" title="" data-html="true" data-placement="bottom" class="navbar-text">
               Food: <span id="navbar-food" data-action="display" data-target="food"></span>
@@ -151,7 +143,30 @@
               Stone: <span id="navbar-stone" data-action="display" data-target="stone"></span>
               <span data-action="displayNet" data-target="stone"></span>
             </span>
-          </div>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-bars"></span></a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a id="faq-modal" href="#"><span class="fa fa-info"></span>&nbsp;FAQ</a>
+                  </li>
+                  <li>
+                    <a id="updates-modal" href="#"><span class="fa fa-history"></span>&nbsp;Log</a>
+                  </li>
+                  <li>
+                    <a href="https://www.reddit.com/r/CivClicker/" target="_blank"><span class="fa fa-external-link"></span>&nbsp;Reddit</a>
+                  </li>
+                  <li>
+                    <a id="settings-modal" href="#"><span class="fa fa-cog"></span>&nbsp;Settings</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <ul id="save-disk" class="nav navbar-nav navbar-right" style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Autosaved">
+              <li><a><span class="fa fa-floppy-o"></a></span></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
       </nav>
 
       <div id="pages">
