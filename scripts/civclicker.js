@@ -3628,40 +3628,59 @@ setup.pages = function() {
   });
 };
 
-setup.all();
-
+/**
+ * Main entry point.
+ */
 $(function () {
-  // Enable Bootstrap tooltips
-  $('[data-toggle="tooltip"]').tooltip({
-    trigger: 'hover',
-    container: 'body'
-  });
 
-  // Logger
-  // TODO: Use multiple logger for different categories.
-  Logger.useDefaults();
-  Logger.setLevel(Logger.ALL);
-
-  // Load templates
-  setup.templates();
-
-  // Load pages
-  setup.pages();
-
-  $('#wrapper').toggleClass('toggled');
-
-  // Sidemenu clicking
-  $('.show-page').on('click', function(ev) {
-    ev.preventDefault();
-
-    var targetPages = $(ev.target).data('page').split(',');
-    $('.page').hide();
-    for (var i = 0; i < targetPages.length; ++i) { 
-      var targetPage = targetPages[i];
-      $('#page-' + targetPage).show();
+  // Before ANYTHING else happens, we want to load config.json.
+  $.ajax({
+    type: 'GET',
+    url:  'config.json',
+    success: (response) => {
+      // All good.
+      settings = settings || {};
+      settings.server = response;
+    },
+    error: () => {
+      alert('Error: Could not find configuration file - CivClicker is not correctly setup on the server.');
     }
-    $('.show-page').parent().removeClass('active');
-    $(ev.target).parent().addClass('active');
+  }).then(() => {
+
+    setup.all();
+
+    // Enable Bootstrap tooltips
+    $('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover',
+      container: 'body'
+    });
+
+    // Logger
+    // TODO: Use multiple logger for different categories.
+    Logger.useDefaults();
+    Logger.setLevel(Logger.ALL);
+
+    // Load templates
+    setup.templates();
+
+    // Load pages
+    setup.pages();
+
+    $('#wrapper').toggleClass('toggled');
+
+    // Sidemenu clicking
+    $('.show-page').on('click', function(ev) {
+      ev.preventDefault();
+
+      var targetPages = $(ev.target).data('page').split(',');
+      $('.page').hide();
+      for (var i = 0; i < targetPages.length; ++i) { 
+        var targetPage = targetPages[i];
+        $('#page-' + targetPage).show();
+      }
+      $('.show-page').parent().removeClass('active');
+      $(ev.target).parent().addClass('active');
+    });
   });
 });
 
