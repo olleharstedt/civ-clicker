@@ -3,6 +3,9 @@
     "version": "2.0.0-alpha",
     "debug": true
   },
+  "gameplay": {
+    "useProgressBars": true
+  },
   "plugins": [
   ]
 }
