@@ -39,6 +39,7 @@
       "getCurDeityDomain" : true,
       "calcWorkerCost" : true,
       "calcZombieCost" : true,
+      "isValid" : true,
       "calculatePopulation" : true
     }
 }

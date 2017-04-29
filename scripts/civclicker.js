@@ -581,32 +581,44 @@ function getPurchaseCellText(purchaseObj, qty, inTable) {
 	return s;
 }
 
-// Pass this the item definition object.
-// Or pass nothing, to create a blank row.
+/**
+ * Pass this the item definition object.
+ * Or pass nothing, to create a blank row.
+ * @param {object} purchaseObj
+ * @return {string}
+ */
 function getPurchaseRowText (purchaseObj) {
-	// Make sure to update this if the number of columns changes.
-	if (!purchaseObj) { return "<tr class='purchaseRow'><td colspan='13'/>&nbsp;</tr>"; }
+  // Make sure to update this if the number of columns changes.
+  if (!purchaseObj) {
+    return '<tr class="purchaseRow"><td colspan="13"/>&nbsp;</tr>';
+  }
 
-	var objId = purchaseObj.id;
-	var s = "<tr id='"+objId+"Row' class='purchaseRow' data-target='"+purchaseObj.id+"'>";
- 
-	[-Infinity, "-custom", -100, -10, -1]
-	.forEach(function(elem) { s += getPurchaseCellText(purchaseObj, elem); });
+  var objId = purchaseObj.id;
+  var s = '<tr id="'+objId+'Row" class="purchaseRow" data-target="'+purchaseObj.id+'">';
 
-	var enemyFlag = (purchaseObj.alignment == "enemy") ? " enemy" : "";
-	s += "<td class='text-capitalize itemname"+enemyFlag+"'>"+purchaseObj.getQtyName(0)+": </td>";
+  [-Infinity, '-custom', -1000, -100, -10, -1].forEach(function(elem) {
+    s += getPurchaseCellText(purchaseObj, elem);
+  });
 
-	var action = (isValid(population[objId])) ? "display_pop" : "display"; //xxx Hack
-	s += "<td class='number'><span data-action='"+action+"'>0</span></td>";
+  var enemyFlag = (purchaseObj.alignment == 'enemy') ? ' enemy' : '';
+  s += '<td class="text-capitalize itemname'+enemyFlag+'">'+purchaseObj.getQtyName(0)+': </td>';
 
-	// Don't allow Infinite (max) purchase on things we can't sell back.
-	[1, 10, 100, "custom", ((purchaseObj.salable) ? Infinity : 1000)]
-	.forEach(function(elem) { s += getPurchaseCellText(purchaseObj, elem); });
+  var action = (isValid(population[objId])) ? 'display_pop' : 'display'; //xxx Hack
+  s += '<td class="number"><span data-action="'+action+'">0</span></td>';
 
-	s += "<td class='cost'>" + getCostNote(purchaseObj) + "</td>";
-	s += "</tr>";
+  // Don't allow Infinite (max) purchase on things we can't sell back.
+  let positive = [1, 10, 100, 1000, 'custom',];
+  if (purchaseObj.salable) {
+    positive.push(Infinity);
+  }
+  positive.forEach(function(elem) {
+    s += getPurchaseCellText(purchaseObj, elem);
+  });
 
-	return s;
+  s += '<td class="cost">' + getCostNote(purchaseObj) + '</td>';
+  s += '</tr>';
+
+  return s;
 }
 
 /**
