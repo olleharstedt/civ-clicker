@@ -609,32 +609,38 @@ function getPurchaseRowText (purchaseObj) {
 	return s;
 }
 
-// For efficiency, we set up a single bulk listener for all of the buttons, rather
-// than putting a separate listener on each button.
+/**
+ * For efficiency, we set up a single bulk listener for all of the buttons, rather
+ * than putting a separate listener on each button.
+ * @return {boolean}
+ */
 function onBulkEvent(e) {
-	switch (dataset(e.target,"action")) 
-	{
-		case "increment": return onIncrement(e.target);
-		case "purchase" : return onPurchase(e.target);
-		case "raid"     : return onInvade(e.target);
-	}
-	return false;
+  switch (dataset(e.target,'action')) {
+  case 'increment': return onIncrement(e.target);
+  case 'purchase' : return onPurchase(e.target);
+  case 'raid'     : return onInvade(e.target);
+  }
+  return false;
 }
 
-function addUITable(civObjs, groupElemName)
-{
-	var s="";
-	civObjs.forEach(function(elem) { 
-		s += elem.type == "resource" ? getResourceRowText(elem) 
-				: elem.type == "upgrade"  ? getUpgradeRowText(elem) 
-					: getPurchaseRowText(elem); 
-	});
-	var groupElem = document.getElementById(groupElemName);
+/**
+ * @param {object} civObjs
+ * @param {string} groupElemName
+ * @return string
+ */
+function addUITable(civObjs, groupElemName) {
+  var s='';
+  civObjs.forEach(function(elem) {
+    s += elem.type == 'resource' ? getResourceRowText(elem)
+      : elem.type == 'upgrade'  ? getUpgradeRowText(elem)
+        : getPurchaseRowText(elem);
+  });
+  var groupElem = document.getElementById(groupElemName);
   if (groupElem) {
     groupElem.innerHTML += s;
     groupElem.onmousedown = onBulkEvent;
   }
-	return groupElem;
+  return groupElem;
 }
 
 
