@@ -275,134 +275,137 @@ function updateResourceTotals() {
  * @return
  */
 function updatePopulation (calc) {
-	var i, elem, elems, displayElems,
-		spawn1button = ui.find("#spawn1button"),
-		spawnCustomButton = ui.find("#spawnCustomButton"),
-		spawnMaxbutton = ui.find("#spawnMaxbutton"),
-		spawn10button = ui.find("#spawn10button"),
-		spawn100button = ui.find("#spawn100button"),
-		spawn1000button = ui.find("#spawn1000button");
+  var
+    i,
+    elems,
+    displayElems,
+    spawn1button = ui.find('#spawn1button'),
+    spawnCustomButton = ui.find('#spawnCustomButton'),
+    spawnMaxbutton = ui.find('#spawnMaxbutton'),
+    spawn10button = ui.find('#spawn10button'),
+    spawn100button = ui.find('#spawn100button'),
+    spawn1000button = ui.find('#spawn1000button');
 
   if (spawn1button == null) {
     // Not yet initialised?
     return;
   }
 
-	if (calc) {
+  if (calc) {
     calculatePopulation();
   }
 
-	// Scan the HTML document for elements with a "data-action" element of
-	// "display_pop".  The "data-target" of such elements is presumed to contain
-	// the population subproperty to be displayed as the element's content.
-	//xxx This selector should probably require data-target too.
-	//xxx Note that relatively few values are still stored in the population
-	// struct; most of them are now updated by the 'display' action run
-	// by updateResourceTotals().
-	displayElems = document.querySelectorAll("[data-action='display_pop']");
-	displayElems.forEach(function(elt){
-		var prop = dataset(elt, "target");
-		elt.innerHTML = prettify(Math.floor(population[prop]));
-	});
+  // Scan the HTML document for elements with a "data-action" element of
+  // "display_pop".  The "data-target" of such elements is presumed to contain
+  // the population subproperty to be displayed as the element's content.
+  //xxx This selector should probably require data-target too.
+  //xxx Note that relatively few values are still stored in the population
+  // struct; most of them are now updated by the 'display' action run
+  // by updateResourceTotals().
+  displayElems = document.querySelectorAll('[data-action="display_pop"]');
+  displayElems.forEach(function(elt){
+    var prop = dataset(elt, 'target');
+    elt.innerHTML = prettify(Math.floor(population[prop]));
+  });
 
-	civData.house.update(); // TODO: Effect might change dynamically.  Need a more general way to do this.
-	civData.barn.update();
+  civData.house.update(); // TODO: Effect might change dynamically.  Need a more general way to do this.
+  civData.barn.update();
 
-	ui.show("#graveTotal", (curCiv.grave.owned > 0));
-	ui.show("#totalSickRow",(population.totalSick > 0));
+  ui.show('#graveTotal', (curCiv.grave.owned > 0));
+  ui.show('#totalSickRow',(population.totalSick > 0));
 
-	//As population increases, various things change
-	// Update our civ type name
-	ui.find("#civType").innerHTML = getCivType();
+  //As population increases, various things change
+  // Update our civ type name
+  ui.find('#civType').innerHTML = getCivType();
 
-	//Unlocking interface elements as population increases to reduce unnecessary clicking
-	//xxx These should be reset in reset()
-	if (population.current >= 10) {
-		if (!settings.customIncr){    
-			elems = document.getElementsByClassName("unit10");
-			for(i = 0; i < elems.length; i++) {
-				ui.show(elems[i], !settings.customincr);
-			}
-		}
-	}
-	if (population.current >= 100) {
-		if (!settings.customIncr){
-			elems = document.getElementsByClassName("building10");
-			for(i = 0; i < elems.length; i++) {
-				ui.show(elems[i], !settings.customincr);
-			}
-			elems = document.getElementsByClassName("unit100");
-			for(i = 0; i < elems.length; i++) {
-				ui.show(elems[i], !settings.customincr);
-			}
-		}
-	}
-	if (population.current >= 1000) {
-		if (!settings.customIncr){
-			elems = document.getElementsByClassName("building100");
-			for(i = 0; i < elems.length; i++) {
-				ui.show(elems[i], !settings.customincr);
-			}
-			elems = document.getElementsByClassName("unit1000");
-			for(i = 0; i < elems.length; i++) {
-				ui.show(elems[i], !settings.customincr);
-			}
-			elems = document.getElementsByClassName("unitInfinity");
-			for(i = 0; i < elems.length; i++) {
-				ui.show(elems[i], !settings.customincr);
-			}
-		}
-	}
-	if (population.current >= 10000) {
-		if (!settings.customIncr){
-			elems = document.getElementsByClassName("building1000");
-			for(i = 0; i < elems.length; i++) {
-				ui.show(elems[i], !settings.customincr);
-			}
-		}
-	}
+  //Unlocking interface elements as population increases to reduce unnecessary clicking
+  //xxx These should be reset in reset()
+  if (population.current >= 10) {
+    if (!settings.customIncr) {
+      elems = document.getElementsByClassName('unit10');
+      for(i = 0; i < elems.length; i++) {
+        ui.show(elems[i], !settings.customincr);
+      }
+    }
+  }
+  if (population.current >= 100) {
+    if (!settings.customIncr) {
+      elems = document.getElementsByClassName('building10');
+      for(i = 0; i < elems.length; i++) {
+        ui.show(elems[i], !settings.customincr);
+      }
+      elems = document.getElementsByClassName('unit100');
+      for(i = 0; i < elems.length; i++) {
+        ui.show(elems[i], !settings.customincr);
+      }
+    }
+  }
+  if (population.current >= 1000) {
+    if (!settings.customIncr) {
+      elems = document.getElementsByClassName('building100');
+      for(i = 0; i < elems.length; i++) {
+        ui.show(elems[i], !settings.customincr);
+      }
+      elems = document.getElementsByClassName('unit1000');
+      for(i = 0; i < elems.length; i++) {
+        ui.show(elems[i], !settings.customincr);
+      }
+      elems = document.getElementsByClassName('unitInfinity');
+      for(i = 0; i < elems.length; i++) {
+        ui.show(elems[i], !settings.customincr);
+      }
+    }
+  }
+  if (population.current >= 10000) {
+    if (!settings.customIncr){
+      elems = document.getElementsByClassName('building1000');
+      for(i = 0; i < elems.length; i++) {
+        ui.show(elems[i], !settings.customincr);
+      }
+    }
+  }
 
-	//Turning on/off buttons based on free space.
-	var maxSpawn = Math.max(0,Math.min((population.limit - population.living),logSearchFn(calcWorkerCost,civData.food.owned)));
+  //Turning on/off buttons based on free space.
+  var maxSpawn = Math.max(0,Math.min((population.limit - population.living),logSearchFn(calcWorkerCost,civData.food.owned)));
 
-	spawn1button.disabled = (maxSpawn < 1);
-	spawnCustomButton.disabled = (maxSpawn < 1);
-	spawnMaxbutton.disabled = (maxSpawn < 1);
-	spawn10button.disabled = (maxSpawn < 10);
-	spawn100button.disabled = (maxSpawn < 100);
-	spawn1000button.disabled = (maxSpawn < 1000);
+  spawn1button.disabled = (maxSpawn < 1);
+  spawnCustomButton.disabled = (maxSpawn < 1);
+  spawnMaxbutton.disabled = (maxSpawn < 1);
+  spawn10button.disabled = (maxSpawn < 10);
+  spawn100button.disabled = (maxSpawn < 100);
+  spawn1000button.disabled = (maxSpawn < 1000);
 
-	var canRaise = (getCurDeityDomain() == "underworld" && civData.devotion.owned >= 20);
-	var maxRaise = canRaise ? logSearchFn(calcZombieCost,civData.piety.owned) : 0;
-	ui.show("#raiseDeadRow", canRaise);
+  var canRaise = (getCurDeityDomain() == 'underworld' && civData.devotion.owned >= 20);
+  var maxRaise = canRaise ? logSearchFn(calcZombieCost,civData.piety.owned) : 0;
+  ui.show('#raiseDeadRow', canRaise);
   /*
-	ui.find("#raiseDead").disabled = (maxRaise < 1);
-	ui.find("#raiseDeadMax").disabled = (maxRaise < 1);
-	ui.find("#raiseDead100").disabled = (maxRaise < 100);
-  */
-	$("#raiseDead").attr('disabled', (maxRaise < 1));
-	$("#raiseDeadMax").attr('disabled', (maxRaise < 1));
-	$("#raiseDead100").attr('disabled', (maxRaise < 100));
+     ui.find("#raiseDead").disabled = (maxRaise < 1);
+     ui.find("#raiseDeadMax").disabled = (maxRaise < 1);
+     ui.find("#raiseDead100").disabled = (maxRaise < 100);
+     */
+  $('#raiseDead').attr('disabled', (maxRaise < 1));
+  $('#raiseDeadMax').attr('disabled', (maxRaise < 1));
+  $('#raiseDead100').attr('disabled', (maxRaise < 100));
 
-	//Calculates and displays the cost of buying workers at the current population
-	$("#raiseDeadCost").html(prettify(Math.round(calcZombieCost(1))));
+  //Calculates and displays the cost of buying workers at the current population
+  $('#raiseDeadCost').html(prettify(Math.round(calcZombieCost(1))));
 
-	$("#workerNumMax").html(prettify(Math.round(maxSpawn)));
+  $('#workerNumMax').html(prettify(Math.round(maxSpawn)));
 
-	spawn1button.title = "Cost: " + prettify(Math.round(calcWorkerCost(1))) + " food";
-	spawn10button.title = "Cost: " + prettify(Math.round(calcWorkerCost(10))) + " food";
-	spawn100button.title = "Cost: " + prettify(Math.round(calcWorkerCost(100))) + " food";
-	spawn1000button.title = "Cost: " + prettify(Math.round(calcWorkerCost(1000))) + " food";
-	spawnMaxbutton.title = "Cost: " + prettify(Math.round(calcWorkerCost(maxSpawn))) + " food";
+  spawn1button.title = 'Cost: ' + prettify(Math.round(calcWorkerCost(1))) + ' food';
+  spawn10button.title = 'Cost: ' + prettify(Math.round(calcWorkerCost(10))) + ' food';
+  spawn100button.title = 'Cost: ' + prettify(Math.round(calcWorkerCost(100))) + ' food';
+  spawn1000button.title = 'Cost: ' + prettify(Math.round(calcWorkerCost(1000))) + ' food';
+  spawnMaxbutton.title = 'Cost: ' + prettify(Math.round(calcWorkerCost(maxSpawn))) + ' food';
 
-	$("#workerCost").html(prettify(Math.round(calcWorkerCost(1))));
+  $('#workerCost').html(prettify(Math.round(calcWorkerCost(1))));
 
-	updateJobButtons(); //handles the display of units in the player's kingdom.
-	updatePartyButtons(); // handles the display of units out on raids.
-	updateMorale();
-	updateAchievements(); //handles display of achievements
-	updatePopulationBar();
-	updateLandBar();
+  updateJobButtons(); //handles the display of units in the player's kingdom.
+  updatePartyButtons(); // handles the display of units out on raids.
+  updateMorale();
+  updateAchievements(); //handles display of achievements
+  updatePopulationBar();
+  updateLandBar();
 }
 
 /**

@@ -30,6 +30,15 @@
       "unitData" : true,
       "curCiv" : true,
       "prettify": true,
-      "population" : true
+      "population" : true,
+      "ui" : true,
+      "dataset" : true,
+      "getCivType" : true,
+      "settings" : true,
+      "logSearchFn" : true,
+      "getCurDeityDomain" : true,
+      "calcWorkerCost" : true,
+      "calcZombieCost" : true,
+      "calculatePopulation" : true
     }
 }
