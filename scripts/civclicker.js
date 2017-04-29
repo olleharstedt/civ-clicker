@@ -1,4 +1,5 @@
-"use strict";
+'use strict';
+
 /**
 	CivClicker
 	Copyright (C) 2014; see the README.md file for authorship.
@@ -28,6 +29,7 @@ var setup = {};
 var loopTimer = 0;
 
 // TODO: Update the version numbering internally
+// Version is read from config.json - see entry point at bottom of file.
 var version = 19; // This is an ordinal used to trigger reloads.
 var versionData = new VersionData(1,1,59,"alpha"); // this is not accurate
 
@@ -3421,28 +3423,6 @@ function gameLoop () {
 
 
 
-//========== TESTING (cheating)
-
-function ruinFun(){
-	//Debug function adds loads of stuff for free to help with testing.
-	civData.food.owned += 1000000;
-	civData.wood.owned += 1000000;
-	civData.stone.owned += 1000000;
-	civData.barn.owned += 5000;
-	civData.woodstock.owned += 5000;
-	civData.stonestock.owned += 5000;
-	civData.herbs.owned += 1000000;
-	civData.skins.owned += 1000000;
-	civData.ore.owned += 1000000;
-	civData.leather.owned += 1000000;
-	civData.metal.owned += 1000000;
-	civData.piety.owned += 1000000;
-	civData.gold.owned += 10000;
-	renameRuler("Cheater");
-	calculatePopulation();
-	updateAll();
-};
-
 
 
 //========== SETUP (Functions meant to be run once on the DOM)
@@ -3628,6 +3608,8 @@ setup.pages = function() {
   });
 };
 
+var ruinFun = null;
+
 /**
  * Main entry point.
  */
@@ -3637,13 +3619,59 @@ $(function () {
   $.ajax({
     type: 'GET',
     url:  'config.json',
-    success: (response) => {
+    cache: false,
+    success: (config) => {
       // All good.
       settings = settings || {};
-      settings.server = response;
+      settings.server = config;
+      
+      if (settings.server.system.debug) {
+        // Enable debug functionality.
+        ruinFun = () => {
+          //Debug function adds loads of stuff for free to help with testing.
+          civData.food.owned += 1000000;
+          civData.wood.owned += 1000000;
+          civData.stone.owned += 1000000;
+          civData.barn.owned += 5000;
+          civData.woodstock.owned += 5000;
+          civData.stonestock.owned += 5000;
+          civData.herbs.owned += 1000000;
+          civData.skins.owned += 1000000;
+          civData.ore.owned += 1000000;
+          civData.leather.owned += 1000000;
+          civData.metal.owned += 1000000;
+          civData.piety.owned += 1000000;
+          civData.gold.owned += 10000;
+          renameRuler('Cheater');
+          calculatePopulation();
+          updateAll();
+        };
+
+      } else {
+        // Disable console.
+				(function() {
+						try {
+								var $_console$$ = console;
+								Object.defineProperty(window, "console", {
+										get: function() {
+												if ($_console$$._commandLineAPI)
+														throw "Sorry, for security reasons, the script console is deactivated on netflix.com";
+												return $_console$$
+										},
+										set: function($val$$) {
+												$_console$$ = $val$$
+										}
+								})
+						} catch ($ignore$$) {
+						}
+				})();
+      }
+
     },
     error: () => {
+      // Die horribly.
       alert('Error: Could not find configuration file - CivClicker is not correctly setup on the server.');
+      throw 'No config.json found';
     }
   }).then(() => {
 
@@ -3685,23 +3713,6 @@ $(function () {
 });
 
 /**
- * Debug function to restock all resources.
- */
-function restock() {
-  civData.wood.owned = 10000;
-  civData.food.owned = 10000;
-  civData.stone.owned = 10000;
-  civData.ore.owned = 10000;
-  civData.skins.owned = 10000;
-  civData.herbs.owned = 10000;
-  civData.gold.owned = 10000;
-  civData.leather.owned = 10000;
-  civData.piety.owned = 10000;
-  civData.metal.owned = 10000;
-}
-
-
-/*
  * If you're reading this, thanks for playing!
  * This project was my first major HTML5/Javascript game, and was as
  * much about learning Javascript as it is anything else. I hope it

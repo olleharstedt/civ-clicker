@@ -40,6 +40,7 @@
       "calcWorkerCost" : true,
       "calcZombieCost" : true,
       "isValid" : true,
+      "updateAll" : true,
       "calculatePopulation" : true
     }
 }
