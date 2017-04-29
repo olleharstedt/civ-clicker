@@ -36,6 +36,11 @@ CivClicker.SidemenuTooltips = (function() {
             (val, render) => {
               const number = render(val);
               return Math.round(number * 100) / 100;
+            },
+            prettify: () => 
+            // Implicit return
+            (val, render) => {
+              return prettify(render(val));
             }
           }
         );
