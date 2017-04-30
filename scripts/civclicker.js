@@ -1031,7 +1031,9 @@ function doPurchase(objId, num) {
   );
 
   // No need to show progress bar if time is too small
-  if (purchaseObj.useProgressBar && progressTime > 200) {
+  if (purchaseObj.useProgressBar
+      && progressTime > 200
+      && serverSettings.gameplay.useProgressBars) {
     purchaseObj.progressTimeLeft = progressTime;
 
     Logger.debug(purchaseObj);
@@ -3611,6 +3613,12 @@ setup.pages = function() {
 var ruinFun = null;
 
 /**
+ * Configuration loaded from server config.json.
+ * @var {object}
+ */
+var serverSettings = {};
+
+/**
  * Main entry point.
  */
 $(function () {
@@ -3622,10 +3630,9 @@ $(function () {
     cache: false,
     success: (config) => {
       // All good.
-      settings = settings || {};
-      settings.server = config;
+      serverSettings = config;
       
-      if (settings.server.system.debug) {
+      if (serverSettings.system.debug) {
         // Enable debug functionality.
         ruinFun = () => {
           //Debug function adds loads of stuff for free to help with testing.
