@@ -3610,6 +3610,23 @@ setup.pages = function() {
   });
 };
 
+/**
+ * Run init method for all plugins in list.
+ * @param {String[]} plugins
+ */
+setup.initPlugins = function(plugins) {
+  console.log('Init plugins');
+  plugins.forEach((plugin) => {
+    if (CivClicker[plugin]) {
+      console.log('Init plugin ' + plugin);
+      CivClicker[plugin].init();
+    } else {
+      alert('Error in server configuration: No such plugin: ' + plugin);
+      throw 'No such plugin: ' + plugin;
+    }
+  });
+};
+
 var ruinFun = null;
 
 /**
@@ -3666,6 +3683,8 @@ $(function () {
   }).then(() => {
 
     setup.all();
+
+    setup.initPlugins(serverSettings.plugins);
 
     // Enable Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip({

@@ -37,10 +37,3 @@ CivClicker.AutosaveIcon = (function() {
     }
   };
 })();
-
-// Subscribe to game init event and install the plugin.
-$(function() {
-  CivClicker.Events.subscribe('global.init', () => {
-    CivClicker.AutosaveIcon.init();
-  });
-});
