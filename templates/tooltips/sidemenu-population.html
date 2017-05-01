@@ -2,16 +2,16 @@
   <caption>Population</caption>
   <tr>
     <td class="text-right">Total</td>
-    <td class="text-left">{{population.living}}</td>
+    <td class="text-left">{{#shortify}}{{population.living}}{{/shortify}}</td>
     <td>/</td>
-    <td class="text-left">{{population.limit}}</td>
+    <td class="text-left">{{#shortify}}{{population.limit}}{{/shortify}}</td>
   </tr>
   {{#unitData}}
     {{#isPopulation}}
       {{#owned}}
         <tr>
           <td class="text-right">{{#ucfirst}}{{id}}{{/ucfirst}}</td>
-          <td class="text-left">{{owned}}</td>
+          <td class="text-left">{{#shortify}}{{owned}}{{/shortify}}</td>
         </tr>
       {{/owned}}
     {{/isPopulation}}
@@ -25,6 +25,6 @@
   </tr>
   <tr>
     <td class="text-right">Sick</td>
-    <td class="text-left">{{population.totalSick}}</td>
+    <td class="text-left">{{#shortify}}{{population.totalSick}}{{/shortify}}</td>
   </tr>
 </table>

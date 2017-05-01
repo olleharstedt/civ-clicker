@@ -37,11 +37,11 @@ CivClicker.SidemenuTooltips = (function() {
               const number = render(val);
               return Math.round(number * 100) / 100;
             },
-            prettify: () => 
-            // Implicit return
-            (val, render) => {
-              return prettify(render(val));
-            }
+            shortify: () =>
+              // Implicit return
+              (val, render) => {
+                return shortify(render(val));
+              }
           }
         );
 
@@ -83,7 +83,12 @@ CivClicker.SidemenuTooltips = (function() {
                 let rendered = render(s);
                 return rendered.charAt(0).toUpperCase() + rendered.slice(1);
               };
-            }
+            },
+            shortify: () =>
+              // Implicit return
+              (val, render) => {
+                return shortify(render(val));
+              }
           }
         );
         $('#sidemenu-population')
