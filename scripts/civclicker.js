@@ -3162,11 +3162,32 @@ function versionAlert(){
 	ui.find("#versionAlert").style.display = "inline";
 }
 
+/**
+ * @param {number} input
+ * @return {string}
+ */
 function prettify(input){
 	//xxx TODO: Add appropriate format options
 	return (settings.delimiters) ? Number(input).toLocaleString() : input.toString();
 }
 
+/**
+ * Copied from this thread: http://stackoverflow.com/questions/9461621/how-to-format-a-number-as-2-5k-if-a-thousand-or-more-otherwise-900-in-javascrip
+ * @param {number} num
+ * @return {string}
+ */
+function shortify(num) {
+  if (num >= 1000000000) {
+    return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+  }
+  if (num >= 1000000) {
+    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  }
+  if (num >= 1000) {
+    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+  }
+  return num;
+}
 
 function setAutosave(value){ 
   if (value !== undefined) { settings.autosave = value; } 

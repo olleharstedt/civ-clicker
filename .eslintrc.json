@@ -30,6 +30,7 @@
       "unitData" : true,
       "curCiv" : true,
       "prettify": true,
+      "shortify": true,
       "population" : true,
       "ui" : true,
       "dataset" : true,

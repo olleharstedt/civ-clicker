@@ -232,10 +232,7 @@ function updateResourceTotals() {
     }
 
 		// Colourise net production values.
-		if      (val < 0) { elem.style.color="#f00"; }
-		else if (val > 0) { elem.style.color="#0b0"; }
-		else              { elem.style.color="#000"; }
-
+    elem.style.color = getNetColor(val);
 		elem.innerHTML = ((val < 0) ? "" : "+") + prettify(val.toFixed(1));
 	}
 
@@ -268,6 +265,18 @@ function updateResourceTotals() {
 
 	// Cheaters don't get names.
 	//ui.find("#renameRuler").disabled = (curCiv.rulerName == "Cheater");
+}
+
+/**
+ * @param {number} val
+ * @return {string}
+ */
+function getNetColor(val) {
+  let color = null;
+  if      (val < 0) { color='#f00'; }
+  else if (val > 0) { color='#0b0'; }
+  else              { color='#000'; }
+  return color;
 }
 
 /**
