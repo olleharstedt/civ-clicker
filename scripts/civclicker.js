@@ -3667,6 +3667,8 @@ $(function () {
     success: (config) => {
       // All good.
       serverSettings = config;
+
+      $('#version').html(serverSettings.system.version);
       
       if (serverSettings.system.debug) {
         // Enable debug functionality.
