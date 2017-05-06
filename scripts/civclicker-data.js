@@ -1,22 +1,30 @@
-
-// Requires 
-
+/**
+ * @return {array} Array of all resources, buildings, etc.
+ */
 function getCivData () {
 	// Initialize Data
-	var civData = [
+  var civData = [
 	// Resources
-	new Resource({ 
-		id:"gather", name:"gather", increment:1, specialChance:0.1,
-		subType:"basic",
-		specialMaterial: "skins", verb: "gather", activity: "gathering", //I18N
-		get limit() { 
-			//var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
-			//return 200 + (civData.barn.owned * barnBonus); 
-      return 900;
-		},
-		set limit(value) { return this.limit; }, // Only here for JSLint.
-    progressFactor: 1
-	}),
+    new Resource({
+      id:'gather',
+      name:'gather',
+      increment:1,
+      specialChance:0.1,
+      subType:'basic',
+      specialMaterial: 'stone',
+      verb: 'gather',
+      activity: 'gathering', //I18N
+      get limit() {
+        //var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
+        //return 200 + (civData.barn.owned * barnBonus); 
+        return 200;
+      },
+      // Only here for JSLint.
+      set limit(value) {
+        return this.limit;
+      },
+      progressFactor: 1
+    }),
 	new Resource({ 
 		id:"food", name:"food", increment:1, specialChance:0.1,
 		subType:"basic",

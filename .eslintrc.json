@@ -45,7 +45,9 @@
       "getLandTotals" : true,
       "resetCivClicker" : true,
       "CivObj" : true,
+      "Resource" : true,
       "copyProps" : true,
+      "resourceData" : true,
       "calculatePopulation" : true
     }
 }

@@ -248,15 +248,16 @@ function updateResourceTotals() {
     elem.innerHTML = ((val < 0) ? '' : '+') + prettify(val.toFixed(1));
   }
 
-
 	//if (civData.gold.owned >= 1){
 	//	ui.show("#goldRow",true);
 	//}
 
-	//Update page with building numbers, also stockpile limits.
-  $('#maxfood').html(prettify(civData.food.limit));
-  $('#maxwood').html(prettify(civData.wood.limit));
-  $('#maxstone').html(prettify(civData.stone.limit));
+  // Run updateTotals for each resource.
+  resourceData.forEach((res) => {
+    res.updateTotals();
+  });
+
+	// Update page with building numbers, also stockpile limits.
   $('#totalBuildings').html(prettify(landTotals.buildings));
   $('#totalLand'     ).html(prettify(landTotals.lands));
 
