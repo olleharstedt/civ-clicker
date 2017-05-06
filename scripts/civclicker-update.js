@@ -203,38 +203,50 @@ function updatePartyButtons(){
  */
 function updateResourceTotals() {
 
-	var i,displayElems,elem,val;
-	var landTotals = getLandTotals();
+  var i,displayElems,elem,val;
+  var landTotals = getLandTotals();
 
-	// Scan the HTML document for elements with a "data-action" element of
-	// "display".  The "data-target" of such elements (or their ancestors) 
-	// is presumed to contain
-	// the global variable name to be displayed as the element's content.
-	//xxx Note that this is now also updating nearly all updatable values,
-	// including population
-	displayElems = document.querySelectorAll("[data-action='display']");
-	for (i=0;i<displayElems.length;++i)
-	{
-		elem = displayElems[i];
-		//xxx Have to use curCiv here because of zombies and other non-civData displays.
-		elem.innerHTML = prettify(Math.floor(curCiv[dataset(elem,"target")].owned));
-	}
+	/** 
+   * Scan the HTML document for elements with a "data-action" element of
+	 * "display".  The "data-target" of such elements (or their ancestors) 
+	 * is presumed to contain
+	 * the global variable name to be displayed as the element's content.
+	 * Note that this is now also updating nearly all updatable values,
+	 * including population
+   */
+  displayElems = document.querySelectorAll('[data-action="display"]');
+  for (i=0;i<displayElems.length;++i) {
+    elem = displayElems[i];
+		// Have to use curCiv here because of zombies and other non-civData displays.
+    const target = dataset(elem, 'target');
+    if (target) {
+      if (curCiv[target]) {
+        const owned = curCiv[target].owned;
+        elem.innerHTML = prettify(Math.floor(owned));
+      } else {
+        // Problem with load?
+        alert('Could not find target ' + target + ', resetting CivClicker');
+        resetCivClicker();
+      }
+    } else {
+      throw 'Found no target for elem ' + elem;
+    }
+  }
 
 	// Update net production values for primary resources.  Same as the above,
 	// but look for "data-action" == "displayNet".
-	displayElems = document.querySelectorAll("[data-action='displayNet']");
-	for (i=0;i<displayElems.length;++i)
-	{
-		elem = displayElems[i];
-		val = civData[dataset(elem,"target")].net;
-		if (!isValid(val)) {
+  displayElems = document.querySelectorAll('[data-action="displayNet"]');
+  for (i=0;i<displayElems.length;++i) {
+    elem = displayElems[i];
+    val = civData[dataset(elem,'target')].net;
+    if (!isValid(val)) {
       continue;
     }
 
-		// Colourise net production values.
+    // Colourise net production values.
     elem.style.color = getNetColor(val);
-		elem.innerHTML = ((val < 0) ? "" : "+") + prettify(val.toFixed(1));
-	}
+    elem.innerHTML = ((val < 0) ? '' : '+') + prettify(val.toFixed(1));
+  }
 
 
 	//if (civData.gold.owned >= 1){
@@ -242,21 +254,21 @@ function updateResourceTotals() {
 	//}
 
 	//Update page with building numbers, also stockpile limits.
-	$("#maxfood").html(prettify(civData.food.limit));
-	$("#maxwood").html(prettify(civData.wood.limit));
-	$("#maxstone").html(prettify(civData.stone.limit));
-	$("#totalBuildings").html(prettify(landTotals.buildings));
-	$("#totalLand"     ).html(prettify(landTotals.lands));
+  $('#maxfood').html(prettify(civData.food.limit));
+  $('#maxwood').html(prettify(civData.wood.limit));
+  $('#maxstone').html(prettify(civData.stone.limit));
+  $('#totalBuildings').html(prettify(landTotals.buildings));
+  $('#totalLand'     ).html(prettify(landTotals.lands));
 
 	// Unlock advanced control tabs as they become enabled (they never disable)
 	// Temples unlock Deity, barracks unlock Conquest, having gold unlocks Trade.
 	// Deity is also unlocked if there are any prior deities present.
-	if ((civData.temple.owned > 0)||(curCiv.deities.length > 1)) { ui.show("#deitySelect",true); }
-	if (civData.barracks.owned > 0) { ui.show("#conquestSelect",true); }
-	if (civData.gold.owned > 0) { ui.show("#tradeSelect",true); }
+  if ((civData.temple.owned > 0)||(curCiv.deities.length > 1)) { ui.show('#deitySelect',true); }
+  if (civData.barracks.owned > 0) { ui.show('#conquestSelect',true); }
+  if (civData.gold.owned > 0) { ui.show('#tradeSelect',true); }
 
 	// Need to have enough resources to trade
-	$("#tradeButton").attr(
+  $('#tradeButton').attr(
     'disabled',
     !curCiv.trader
       || !curCiv.trader.timer

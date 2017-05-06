@@ -42,6 +42,8 @@
       "calcZombieCost" : true,
       "isValid" : true,
       "updateAll" : true,
+      "getLandTotals" : true,
+      "resetCivClicker" : true,
       "calculatePopulation" : true
     }
 }
