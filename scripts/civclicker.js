@@ -3177,16 +3177,14 @@ function prettify(input){
  * @return {string}
  */
 function shortify(num) {
-  if (num >= 1000000000) {
+  if (num >= 1000000000 || num <= -1000000000 ) {
     return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
-  }
-  if (num >= 1000000) {
+  } else if (num >= 1000000 || num <= -1000000) {
     return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-  }
-  if (num >= 1000) {
+  } else if (num >= 1000 || num <= -1000) {
     return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
   }
-  return num;
+  return parseFloat(num).toFixed(2);
 }
 
 function setAutosave(value){ 
