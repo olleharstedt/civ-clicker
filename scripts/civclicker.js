@@ -878,7 +878,10 @@ function setDefaultSettings(){
 
 // Game functions
 
-//This function is called every time a player clicks on a primary resource button
+/**
+ * This function is called every time a player clicks on a primary resource button
+ * @param {string} objId
+ */
 function increment (objId) {
 	var purchaseObj = civData[objId];
 	var numArmy = 0;
