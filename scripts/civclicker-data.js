@@ -1,10 +1,10 @@
 /**
  * @return {array} Array of all resources, buildings, etc.
  */
-function getCivData () {
+function getCivData() {
 	// Initialize Data
   var civData = [
-	// Resources
+    // Resources
     new Resource({
       id:'gather',
       name:'gather',
@@ -22,6 +22,17 @@ function getCivData () {
       // Only here for JSLint.
       set limit(value) {
         return this.limit;
+      },
+      /**
+       * Gathering increases food. There's no 'gather' resource.
+       */
+      incrementResource: function() {
+        civData.food.owned += civData.gather.increment;
+        // Checks to see that resources are not exceeding their limits
+        if (civData.food.owned > civData.food.limit) {
+          civData.food.owned = civData.food.limit;
+        }
+        updateResourceTotals();
       },
       progressFactor: 1
     }),
