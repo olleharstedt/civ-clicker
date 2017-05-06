@@ -3184,7 +3184,12 @@ function shortify(num) {
   } else if (num >= 1000 || num <= -1000) {
     return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
   }
-  return parseFloat(num).toFixed(2);
+
+  if (Math.round(num) == num) {
+    return num;
+  } else {
+    return parseFloat(num).toFixed(2);
+  }
 }
 
 function setAutosave(value){ 
