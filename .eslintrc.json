@@ -48,6 +48,8 @@
       "Resource" : true,
       "copyProps" : true,
       "resourceData" : true,
+      "updateResourceTotals" : true,
+      "gameLog" : true,
       "calculatePopulation" : true
     }
 }
