@@ -102,8 +102,6 @@ Resource.prototype = new CivObj({
       purchaseObj.owned = purchaseObj.limit;
     }
 
-    ui.find('#clicks').innerHTML = prettify(Math.round(++curCiv.resourceClicks));
-
     //Update the page with totals
     updateResourceTotals();
   },

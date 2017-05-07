@@ -892,6 +892,7 @@ function onIncrement(control) {
 
   const resource = civData[targetId];
   if (resource) {
+    CivClicker.Events.publish('global.onIncrement');
     return resource.incrementResource(targetId);
   } else {
     // Internal error.
