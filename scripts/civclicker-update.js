@@ -46,6 +46,7 @@ function updateAfterReset () {
 	updateRequirements(civData.catAltar);
 
 	ui.find("#graceCost").innerHTML = prettify(civData.grace.cost);
+
 	//Update page with all new values
 	updateResourceTotals();
 	updateUpgrades();
@@ -58,27 +59,27 @@ function updateAfterReset () {
 	updateWonder();
 	//Reset upgrades and other interface elements that might have been unlocked
 	//xxx Some of this probably isn't needed anymore; the update routines will handle it.
-	ui.find("#renameDeity").disabled = "true";
-	ui.find("#raiseDead").disabled = "true";
-	ui.find("#raiseDead100").disabled = "true";
-	ui.find("#raiseDeadMax").disabled = "true";
-	ui.find("#smite").disabled = "true";
-	ui.find("#wickerman").disabled = "true";
-	ui.find("#pestControl").disabled = "true";
-	ui.find("#grace").disabled = "true";
-	ui.find("#walk").disabled = "true";
-	ui.find("#ceaseWalk").disabled = "true";
-	ui.find("#lure").disabled = "true";
-	ui.find("#companion").disabled = "true";
-	ui.find("#comfort").disabled = "true";
-	ui.find("#book").disabled = "true";
-	ui.find("#feast").disabled = "true";
-	ui.find("#blessing").disabled = "true";
-	ui.find("#waste").disabled = "true";
-	ui.find("#riddle").disabled = "true";
-	ui.find("#throne").disabled = "true";
-	ui.find("#glory").disabled = "true";
-	ui.find("#summonShade").disabled = "true";
+	$('#renameDeity').attr('disabled', true);
+	$('#raiseDead').attr('disabled', true);
+	$('#raiseDead100').attr('disabled', true);
+	$('#raiseDeadMax').attr('disabled', true);
+	$('#smite').attr('disabled', true);
+	$('#wickerman').attr('disabled', true);
+	$('#pestControl').attr('disabled', true);
+	$('#grace').attr('disabled', true);
+	$('#walk').attr('disabled', true);
+	$('#ceaseWalk').attr('disabled', true);
+	$('#lure').attr('disabled', true);
+	$('#companion').attr('disabled', true);
+	$('#comfort').attr('disabled', true);
+	$('#book').attr('disabled', true);
+	$('#feast').attr('disabled', true);
+	$('#blessing').attr('disabled', true);
+	$('#waste').attr('disabled', true);
+	$('#riddle').attr('disabled', true);
+	$('#throne').attr('disabled', true);
+	$('#glory').attr('disabled', true);
+	$('#summonShade').attr('disabled', true);
 
 	ui.find("#conquest").style.display = "none";
 
