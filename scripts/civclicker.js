@@ -3718,6 +3718,10 @@ $(function () {
       trigger: 'hover',
       container: 'body'
     });
+    // Hide tooltip when someone clicks.
+    $('[data-toggle="tooltip"]').on('click', function() {
+      $(this).tooltip('hide');
+    });
 
     // Logger
     // TODO: Use multiple logger for different categories.
