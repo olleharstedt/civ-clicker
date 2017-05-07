@@ -33,7 +33,8 @@ var loopTimer = 0;
 var version = 19; // This is an ordinal used to trigger reloads.
 var versionData = new VersionData(1,1,59,"alpha"); // this is not accurate
 
-var saveTag = "civ";
+// Include URL in save tag so players can play different version of CivClicker on one host.
+var saveTag = "civ_" + window.location.href;
 var saveTag2 = saveTag + "2"; // For old saves.
 var saveSettingsTag = "civSettings";
 var logRepeat = 1;
