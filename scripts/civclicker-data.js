@@ -14,6 +14,8 @@ function getCivData() {
       specialMaterial: 'stone',
       verb: 'gather',
       activity: 'gathering', //I18N
+      progressFactor: 1,
+      templateName: '#gather-resource-row-template',
       get limit() {
         //var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
         //return 200 + (civData.barn.owned * barnBonus); 
@@ -25,16 +27,16 @@ function getCivData() {
       },
       /**
        * Gathering increases food. There's no 'gather' resource.
+       * @return
        */
-      incrementResource: function() {
+      incrementResource() {
         civData.food.owned += civData.gather.increment;
         // Checks to see that resources are not exceeding their limits
         if (civData.food.owned > civData.food.limit) {
           civData.food.owned = civData.food.limit;
         }
         updateResourceTotals();
-      },
-      progressFactor: 1
+      }
     }),
 	new Resource({ 
 		id:"food", name:"food", increment:1, specialChance:0.1,

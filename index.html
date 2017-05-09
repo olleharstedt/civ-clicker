@@ -232,7 +232,7 @@
     <!-- Template for primary resource row -->
     <script id="resource-row-template" type="text/template">
       <tr id="{{objId}}Row" class="purchaseRow" data-target="{{objId}}">
-        <td>
+        <td class="text-center">
           <img src="images/{{objId}}.png" class="icon icon-lg" alt="{{objName}}"/>
         </td>
         <td>
@@ -246,6 +246,21 @@
         <td class="number mainNumber"><span data-action="display">.</span></td>
         <td class="number maxNumber">/ max: <span id="max{{objId}}">...</span></td>
         <td class="number net"><span data-action="displayNet">..</span>/s</td>
+      </tr>
+    </script>
+
+    <!-- Template for gather resource row -->
+    <script id="gather-resource-row-template" type="text/template">
+      <tr id="{{objId}}Row" class="purchaseRow" data-target="{{objId}}">
+        <td class="text-center">
+          <img src="images/{{objId}}.png" class="icon icon-lg" alt="{{objName}}"/>
+        </td>
+        <td>
+          <button class="btn btn-default btn-block" data-action="increment">
+            {{verb}}
+          </button>
+        </td>
+        <td colspan="10"><span class="text-muted">Gather will give you food</span></td>
       </tr>
     </script>
 

@@ -19,6 +19,7 @@ function Resource(props)
  * @property {number} increment      - How much to increment with each click.
  * @property {string} name           - Like 'food', 'stone', etc.
  * @property {number} progressFactor - With how much each resource element should be multiplied when calculating progress time
+ * @property {string} templateName   - Name of template that Mustache.js will use to render resource row.
  */
 Resource.prototype = new CivObj({
   constructor: Resource,
@@ -28,6 +29,7 @@ Resource.prototype = new CivObj({
   specialMaterial: '',
   activity: 'gathering', //I18N
   progressFactor: 1,
+  templateName: '#resource-row-template',
 
   /**
    * 'net' accessor always exists, even if the underlying value is undefined for most resources.
@@ -121,7 +123,7 @@ Resource.prototype = new CivObj({
     const objId = this.id;
     const objName = this.getQtyName(0);
     const s = Mustache.to_html(
-      $('#resource-row-template').html(),
+      $(this.templateName).html(),
       {
         objId: objId,
         objName: objName.charAt(0).toUpperCase() + objName.slice(1),
