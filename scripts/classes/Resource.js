@@ -23,6 +23,12 @@ function Resource(props)
 Resource.prototype = new CivObj({
   constructor: Resource,
   type: 'resource',
+  increment: 0,
+  specialChance: 0,
+  specialMaterial: '',
+  activity: 'gathering', //I18N
+  progressFactor: 1,
+
   /**
    * 'net' accessor always exists, even if the underlying value is undefined for most resources.
    * @return {number}
@@ -46,7 +52,7 @@ Resource.prototype = new CivObj({
    * Update limit.
    * Factored out from updateResourceTotals.
    */
-  updateTotals: function() {
+  updateTotals() {
     if (civData[this.name]) {
       const limit = civData[this.name].limit;
       $('#max' + this.name).html(prettify(limit));
@@ -59,7 +65,7 @@ Resource.prototype = new CivObj({
    * This function is called every time a player clicks on a primary resource button
    * @param {string} objId
    */
-  incrementResource: function(objId) {
+  incrementResource(objId) {
     let purchaseObj = civData[objId];
     let numArmy = 0;
 
@@ -105,9 +111,23 @@ Resource.prototype = new CivObj({
     //Update the page with totals
     updateResourceTotals();
   },
-  increment: 0,
-  specialChance: 0,
-  specialMaterial: '',
-  activity: 'gathering', //I18N
-  progressFactor: 1
+
+  /**
+   * Render the HTML row for this resource in the
+   * primary resource table.
+   * @return {string} html
+   */
+  getResourceRowText() {
+    const objId = this.id;
+    const objName = this.getQtyName(0);
+    const s = Mustache.to_html(
+      $('#resource-row-template').html(),
+      {
+        objId: objId,
+        objName: objName.charAt(0).toUpperCase() + objName.slice(1),
+        verb: this.verb.charAt(0).toUpperCase() + this.verb.slice(1)
+      }
+    );
+    return s;
+  }
 },true);

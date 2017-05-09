@@ -485,32 +485,6 @@ function sgn(x) { return (typeof x == "number") ? sgnnum(x)
 					   : (typeof x == "boolean") ? sgnbool(x) : 0; }
 function abs(x) { return (typeof x == "number") ? Math.abs(x) : (typeof x == "string") ? absstr(x) : x; }
 
-
-/**
- * Pass this the item definition object.
- * Or pass nothing, to create a blank row.
- * @param {object} purchaseObj
- * @return string HTML
- */
-function getResourceRowText(purchaseObj) {
-	// Make sure to update this if the number of columns changes.
-	if (!purchaseObj) { 
-    return "<tr class='purchaseRow'><td colspan='6'/>&nbsp;</tr>";
-  }
-
-	var objId = purchaseObj.id;
-	var objName = purchaseObj.getQtyName(0);
-	var s = Mustache.to_html(
-    $('#resource-row-template').html(),
-    {
-      objId: objId,
-      objName: objName.charAt(0).toUpperCase() + objName.slice(1),
-      verb: purchaseObj.verb.charAt(0).toUpperCase() + purchaseObj.verb.slice(1)
-    }
-	);
-	return s;
-}
-
 /**
  * @param purchaseObj Example value: {id: "cottage", prereqs: Object, require: Object,
  *                    effectText: "+6 max pop.", singular: "cottage", plural: "cottages" }
@@ -646,7 +620,7 @@ function onBulkEvent(e) {
 function addUITable(civObjs, groupElemName) {
   var s='';
   civObjs.forEach(function(elem) {
-    s += elem.type == 'resource' ? getResourceRowText(elem)
+    s += elem.type == 'resource' ? elem.getResourceRowText(elem)
       : elem.type == 'upgrade'  ? getUpgradeRowText(elem)
         : getPurchaseRowText(elem);
   });
