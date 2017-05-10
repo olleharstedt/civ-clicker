@@ -45,6 +45,7 @@
       "getLandTotals" : true,
       "resetCivClicker" : true,
       "CivObj" : true,
+      "Upgrade" : true,
       "Resource" : true,
       "copyProps" : true,
       "resourceData" : true,

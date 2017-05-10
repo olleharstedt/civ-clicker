@@ -38,17 +38,20 @@ function getCivData() {
         updateResourceTotals();
       }
     }),
-	new Resource({ 
-		id:"food", name:"food", increment:1, specialChance:0.1,
-		subType:"basic",
-		specialMaterial: "skins", verb: "harvest", activity: "harvesting", //I18N
-		get limit() { 
-			var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
-			return 200 + (civData.barn.owned * barnBonus); 
-		},
-		set limit(value) { return this.limit; }, // Only here for JSLint.
-    progressFactor: 1
-	}),
+    // Harvest
+    new Resource({ 
+      id:'food', name:'food', increment:1, specialChance:0.1,
+      subType:'basic',
+      specialMaterial: 'skins', verb: 'harvest', activity: 'harvesting', //I18N
+      progressFactor: 1,
+      prereqs: {agriculture: true},
+      notAvailableTooltip: 'Harvesting requires agriculture',
+      get limit() { 
+        var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
+        return 200 + (civData.barn.owned * barnBonus); 
+      },
+      set limit(value) { return this.limit; } // Only here for JSLint.
+    }),
 	new Resource({ 
 		id:"wood", name:"wood", increment:1, specialChance:0.1,
 		subType:"basic",
@@ -238,6 +241,13 @@ function getCivData() {
 		set require(value) { return this.require; }, // Only here for JSLint.
 		effectText:"+1 Devotion" }),
 	// Upgrades
+    new Upgrade({ 
+      id:         'agriculture',
+      name:       'Agriculture',
+      subType:    'upgrade',
+      require:    {},
+      effectText: 'The agricultural revolution made it possible for humans to grow weat and other plants regularly.' 
+    }),
 	new Upgrade({ 
 		id: "skinning", name:"Skinning", subType: "upgrade",
 		require: { skins: 10 },

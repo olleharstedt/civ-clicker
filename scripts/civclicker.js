@@ -3461,6 +3461,16 @@ setup.game = function () {
 
   // Fire game init event.
   CivClicker.Events.publish('global.init');
+
+  // Enable Bootstrap tooltips
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'hover',
+    container: 'body'
+  });
+  // Hide tooltip when someone clicks.
+  $('[data-toggle="tooltip"]').on('click', function() {
+    $(this).tooltip('hide');
+  });
 };
 
 setup.loop = function () {

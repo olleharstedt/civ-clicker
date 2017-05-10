@@ -30,6 +30,7 @@ Resource.prototype = new CivObj({
   activity: 'gathering', //I18N
   progressFactor: 1,
   templateName: '#resource-row-template',
+  prereqs: {},
 
   /**
    * 'net' accessor always exists, even if the underlying value is undefined for most resources.
@@ -127,9 +128,11 @@ Resource.prototype = new CivObj({
       {
         objId: objId,
         objName: objName.charAt(0).toUpperCase() + objName.slice(1),
-        verb: this.verb.charAt(0).toUpperCase() + this.verb.slice(1)
+        verb: this.verb.charAt(0).toUpperCase() + this.verb.slice(1),
+        available: meetsPrereqs(this.prereqs),
+        notAvailableTooltip: this.notAvailableTooltip
       }
     );
     return s;
-  }
+  },
 },true);

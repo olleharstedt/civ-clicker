@@ -234,9 +234,16 @@
         <img src="images/{{objId}}.png" class="icon icon-lg" alt="{{objName}}"/>
       </td>
       <td>
-        <button class="btn btn-default btn-block" data-action="increment">
-          {{verb}}
-        </button>
+        {{#available}}
+          <button class="btn btn-default btn-block" data-action="increment">
+            {{verb}}
+          </button>
+        {{/available}}
+        {{^available}}
+            <button disabled="disabled" class="btn btn-default btn-block" data-toggle="tooltip" title="{{notAvailableTooltip}}">
+              {{verb}}
+            </button>
+        {{/available}}
       </td>
       <td>
         <label>{{objName}}:</label>

@@ -38,7 +38,13 @@ CivObj.prototype = {
 	subType: "normal",
 	get data() { return curCiv[this.id]; },
 	set data(value) { curCiv[this.id] = value; },
-	get owned() { return this.data.owned; },
+	get owned() {
+    if (this.data === undefined) {
+      return 0;
+    } else {
+      return this.data.owned;
+    }
+  },
 	set owned(value) { this.data.owned = value; },
 	prereqs: {},
 	require: {}, // Default to free.  If this is undefined, makes the item unpurchaseable
