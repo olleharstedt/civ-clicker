@@ -346,27 +346,33 @@ function getReqText(costObj, qty)
 	return text;
 }
 
-// Returns when the player meets the given upgrade prereqs.
-// Undefined prereqs are assumed to mean the item is unpurchasable
+/**
+ * Returns true when the player meets the given upgrade prereqs.
+ * Undefined prereqs are assumed to mean the item is unpurchasable
+ * @return {boolean}
+ */
 function meetsPrereqs(prereqObj)
 {
-	if (!isValid(prereqObj)) { return false; }
-	var i;
-	for(i in prereqObj)
-	{
-		//xxx HACK:  Ugly special checks for non-upgrade pre-reqs.
-		// This should be simplified/eliminated once the resource
-		// system is unified.
-		if (i === "deity") { // Deity
-			if (getCurDeityDomain() != prereqObj[i]) { return false; }
-		} else if (i === "wonderStage") { //xxx Hack to check if we're currently building a wonder.
-			if (curCiv.curWonder.stage !== prereqObj[i]) { return false; }
-		} else if (isValid(civData[i]) && isValid(civData[i].owned)) { // Resource/Building/Upgrade
-			if (civData[i].owned < prereqObj[i]) { return false; }
-		}
-	}
-
-	return true;
+  if (!isValid(prereqObj)) {
+    return false;
+  }
+  for(let i in prereqObj) {
+    // HACK:  Ugly special checks for non-upgrade pre-reqs.
+    // This should be simplified/eliminated once the resource
+    // system is unified.
+    if (i === 'deity') { // Deity
+      if (getCurDeityDomain() != prereqObj[i]) { return false; }
+    } else if (i === 'wonderStage') { //xxx Hack to check if we're currently building a wonder.
+      if (curCiv.curWonder.stage !== prereqObj[i]) { return false; }
+    } else if (isValid(civData[i]) && isValid(civData[i].owned)) { // Resource/Building/Upgrade
+      if (typeof prereqObj[i] == 'number' && civData[i].owned < prereqObj[i]) {
+        return false;
+      } else if (typeof prereqObj[i] == 'boolean' && curCiv[i].owned != prereqObj[i]) {
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 
@@ -2491,6 +2497,8 @@ function resetCivClicker() {
 	renameCiv();
 	renameRuler();
 
+  setUITable(basicResources, 'basicResources');
+
 	return true;
 }
 
@@ -3494,6 +3502,11 @@ setup.game = function () {
 setup.loop = function () {
   // This sets up the main game loop, which is scheduled to execute once per second.
   console.log("Setting up main loop");
+
+  // NB: Needed here, since civData is not up to date before due to load.
+  // Needed for harvest/agriculture requirement.
+  setUITable(basicResources, 'basicResources');
+
   gameLoop();
   loopTimer = window.setInterval(gameLoop, 1000); //updates once per second (1000 milliseconds)
 };
@@ -3724,6 +3737,7 @@ $(function () {
       $('.show-page').parent().removeClass('active');
       $(ev.target).parent().addClass('active');
     });
+
   });
 });
 
