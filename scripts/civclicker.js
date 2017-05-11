@@ -632,6 +632,23 @@ function addUITable(civObjs, groupElemName) {
   return groupElem;
 }
 
+/**
+ * As above, but sets instead of adds.
+ */
+function setUITable(civObjs, groupElemName) {
+  var s='';
+  civObjs.forEach(function(elem) {
+    s += elem.type == 'resource' ? elem.getResourceRowText(elem)
+      : elem.type == 'upgrade'  ? getUpgradeRowText(elem)
+        : getPurchaseRowText(elem);
+  });
+  var groupElem = document.getElementById(groupElemName);
+  if (groupElem) {
+    groupElem.innerHTML = s;
+    groupElem.onmousedown = onBulkEvent;
+  }
+  return groupElem;
+}
 
 /**
  * We have a separate row generation function for upgrades, because their
@@ -961,6 +978,7 @@ function doPurchase(objId, num) {
     updateUpgrades(); //Update which upgrades are available to the player
     updateDevotion(); //might be necessary if building was an altar
     updateTargets(); // might enable/disable raiding
+    setUITable(basicResources, 'basicResources');
 
     return num;
   }
