@@ -135,4 +135,49 @@ Resource.prototype = new CivObj({
     );
     return s;
   },
+
+  /**
+   * Update purchase row
+   * @param {object} purchaseObj
+   * @return
+   */
+  updateResourceRow() {
+    const elem = ui.find('#' + this.id + 'Row');
+    if (!elem) {
+      // console.warn("Missing UI element for "+purchaseObj.id);
+      // Not yet initialised?
+      return;
+    }
+
+    // If the item's cost is variable, update its requirements.
+    if (this.hasVariableCost()) {
+      updateRequirements(this);
+    }
+
+    // Already having one reveals it as though we met the prereq.
+    const havePrereqs = true; //(this.owned > 0) || meetsPrereqs(this.prereqs);
+
+    // Special check: Hide one-shot upgrades after purchase; they're
+    // redisplayed elsewhere.
+    const hideBoughtUpgrade = ((this.type == 'upgrade') && (this.owned == this.limit) && !this.salable);
+
+    const maxQty = canPurchase(this);
+    const minQty = canPurchase(this, -Infinity);
+
+    const buyElems = elem.querySelectorAll('[data-action="purchase"]');
+
+    buyElems.forEach(function(elt) {
+      var purchaseQty = dataset(elt, 'quantity');
+      // Treat 'custom' or Infinity as +/-1.
+      //xxx Should we treat 'custom' as its appropriate value instead?
+      var absQty = Math.abs(purchaseQty);
+      if ((absQty == 'custom') || (absQty == Infinity)) { 
+        purchaseQty = Math.sign(purchaseQty); 
+      }
+      elt.disabled = ((purchaseQty > maxQty) || (purchaseQty < minQty));
+    });
+
+    // Reveal the row if  prereqs are met
+    ui.show(elem, havePrereqs && !hideBoughtUpgrade);
+  }
 },true);

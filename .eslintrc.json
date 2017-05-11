@@ -50,7 +50,11 @@
       "copyProps" : true,
       "resourceData" : true,
       "updateResourceTotals" : true,
-      "gameLog" : true,
+      "gameLog": true,
+      "canPurchase": true,
+      "updateRequirements": true,
+      "meetsPrereqs": true,
+      "updateRequirements" : true,
       "calculatePopulation" : true
     }
 }

@@ -168,8 +168,8 @@ function updatePurchaseRow (purchaseObj) {
  * Only set up for the basic resources right now.
  */
 function updateResourceRows() { 
-	basicResources.forEach(function(elem) {
-    updatePurchaseRow(elem);
+  basicResources.forEach(function(resource) {
+    resource.updateResourceRow();
   }); 
 }
 
