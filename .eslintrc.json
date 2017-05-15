@@ -47,6 +47,7 @@
       "CivObj" : true,
       "Upgrade" : true,
       "Resource" : true,
+      "Tool" : true,
       "copyProps" : true,
       "resourceData" : true,
       "updateResourceTotals" : true,
