@@ -7,8 +7,15 @@
  * @prop {array} and
  */
 class Requirement {
-  constructor() {
+
+  /**
+   * @param {string} name
+   * @param {number} amount
+   */
+  constructor(name, amount) {
     this.type = 'requirement';
+    this.name = name;
+    this.amount = amount;
   }
 
   /**
@@ -16,7 +23,7 @@ class Requirement {
    * @return {boolean}
    */
   isFulfilled() {
-    return true;
+    return civData[this.name] && civData[this.name].owned >= this.amount;
   }
 }
 
@@ -26,7 +33,7 @@ class Requirement {
  */
 class OrRequirement extends Requirement {
   constructor() {
-    super();
+    super(null, null);
     this.or = [];
   }
 
@@ -41,6 +48,10 @@ class OrRequirement extends Requirement {
       }
     });
     return orIsTrue;
+  }
+
+  add(req) {
+    this.or.push(req);
   }
 }
 
@@ -65,6 +76,10 @@ class AndRequirement extends Requirement {
       }
     });
     return andIsTrue;
+  }
+
+  add(req) {
+    this.or.push(req);
   }
 }
 
