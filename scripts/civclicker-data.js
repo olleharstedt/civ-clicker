@@ -840,7 +840,8 @@ function getCivData() {
 
     // Tools
     new Tool({
-      name: 'handaxe',
+      id:       'handaxe',
+      name:     'handaxe',
       material: 'stone'
     })
   ];
@@ -861,7 +862,7 @@ function getCivData() {
   // Create 'civData.foo' entries as aliases for the civData element with 
   // id = "foo".  This makes it a lot easier to refer to the array
   // elements in a readable fashion.
-  indexArrayByAttr(civData,"id");
+  indexArrayByAttr(civData, 'id');
 
   // Initialize our data. 
   civData.forEach(function(elem){ 
