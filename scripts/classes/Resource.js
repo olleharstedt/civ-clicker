@@ -141,6 +141,11 @@ Resource.prototype = new CivObj({
    */
   meetsPrereqs() {
     const prereqObj = this.prereqs;
+
+    if (prereqObj instanceof Requirement) {
+      return prereqObj.isFulfilled();
+    }
+
     for(let i in prereqObj) {
       // HACK:  Ugly special checks for non-upgrade pre-reqs.
       // This should be simplified/eliminated once the resource

@@ -45,19 +45,19 @@ function getCivData() {
       get limit() { 
         var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
         return 200 + (civData.barn.owned * barnBonus); 
-      },
-      set limit(value) { return this.limit; } // Only here for JSLint.
+      }
     }),
     new Resource({ 
-      id:             'wood',
-      name:           'wood',
-      increment:      1,
-      specialChance:  0.1,
-      subType:        'basic',
+      id:              'wood',
+      name:            'wood',
+      increment:       1,
+      specialChance:   0.1,
+      subType:         'basic',
       specialMaterial: 'herbs',
-      verb:           'cut',
-      activity:       'woodcutting', //I18N
-      progressFactor: 10,
+      verb:            'cut',
+      activity:        'woodcutting', //I18N
+      progressFactor:  10,
+      prereqs:         new Requirement('handaxe', 1),
       get limit() {
         return 200 + (civData.woodstock.owned  * 200);
       }

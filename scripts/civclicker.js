@@ -356,6 +356,7 @@ function meetsPrereqs(prereqObj)
   if (!isValid(prereqObj)) {
     return false;
   }
+
   for(let i in prereqObj) {
     // HACK:  Ugly special checks for non-upgrade pre-reqs.
     // This should be simplified/eliminated once the resource
