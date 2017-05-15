@@ -129,11 +129,35 @@ Resource.prototype = new CivObj({
         objId: objId,
         objName: objName.charAt(0).toUpperCase() + objName.slice(1),
         verb: this.verb.charAt(0).toUpperCase() + this.verb.slice(1),
-        available: meetsPrereqs(this.prereqs),
+        available: this.meetsPrereqs(),
         notAvailableTooltip: this.notAvailableTooltip
       }
     );
     return s;
+  },
+
+  /**
+   * @return {boolean}
+   */
+  meetsPrereqs() {
+    const prereqObj = this.prereqs;
+    for(let i in prereqObj) {
+      // HACK:  Ugly special checks for non-upgrade pre-reqs.
+      // This should be simplified/eliminated once the resource
+      // system is unified.
+      if (i === 'deity') { // Deity
+        if (getCurDeityDomain() != prereqObj[i]) { return false; }
+      } else if (i === 'wonderStage') { //xxx Hack to check if we're currently building a wonder.
+        if (curCiv.curWonder.stage !== prereqObj[i]) { return false; }
+      } else if (isValid(civData[i]) && isValid(civData[i].owned)) { // Resource/Building/Upgrade
+        if (typeof prereqObj[i] == 'number' && civData[i].owned < prereqObj[i]) {
+          return false;
+        } else if (typeof prereqObj[i] == 'boolean' && curCiv[i].owned != prereqObj[i]) {
+          return false;
+        }
+      }
+    }
+    return true;
   },
 
   /**
