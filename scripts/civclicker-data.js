@@ -6,24 +6,20 @@ function getCivData() {
   var civData = [
     // Resources
     new Resource({
-      id:'gather',
-      name:'gather',
-      increment:1,
-      specialChance:0.1,
-      subType:'basic',
+      id:              'gather',
+      name:            'gather',
+      increment:       1,
+      specialChance:   0.1,
+      subType:         'basic',
       specialMaterial: 'stone',
-      verb: 'gather',
-      activity: 'gathering', //I18N
-      progressFactor: 1,
-      templateName: '#gather-resource-row-template',
+      verb:            'gather',
+      activity:        'gathering', //I18N
+      progressFactor:  1,
+      templateName:    '#gather-resource-row-template',
       get limit() {
-        //var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
-        //return 200 + (civData.barn.owned * barnBonus); 
-        return 200;
-      },
-      // Only here for JSLint.
-      set limit(value) {
-        return this.limit;
+        // Same as food.
+        const barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
+        return 200 + (civData.barn.owned * barnBonus); 
       },
       /**
        * Gathering increases food. There's no 'gather' resource.
@@ -52,14 +48,20 @@ function getCivData() {
       },
       set limit(value) { return this.limit; } // Only here for JSLint.
     }),
-	new Resource({ 
-		id:"wood", name:"wood", increment:1, specialChance:0.1,
-		subType:"basic",
-		specialMaterial: "herbs", verb: "cut", activity: "woodcutting", //I18N
-		get limit() { return 200 + (civData.woodstock.owned  * 200); },
-		set limit(value) { return this.limit; }, // Only here for JSLint.
-    progressFactor: 10
-	}),
+    new Resource({ 
+      id:             'wood',
+      name:           'wood',
+      increment:      1,
+      specialChance:  0.1,
+      subType:        'basic',
+      specialMaterial: 'herbs',
+      verb:           'cut',
+      activity:       'woodcutting', //I18N
+      progressFactor: 10,
+      get limit() {
+        return 200 + (civData.woodstock.owned  * 200);
+      }
+    }),
 	new Resource({ 
 		id:"stone", name:"stone", increment:1, specialChance:0.1,
 		subType:"basic",
@@ -245,7 +247,7 @@ function getCivData() {
       id:         'agriculture',
       name:       'Agriculture',
       subType:    'upgrade',
-      require:    {},
+      require:    {food: 500},
       effectText: 'The agricultural revolution made it possible for humans to grow weat and other plants regularly.' 
     }),
 	new Upgrade({ 
