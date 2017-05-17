@@ -21,4 +21,4 @@ Tool.prototype = new CivObj({
   constructor: Tool,
   type: 'tool',
   material: ''
-});
+}, true);
