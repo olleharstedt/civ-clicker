@@ -141,6 +141,7 @@ var homeBuildings	= []; // All buildings to be displayed in the home area
 var homeUnits		= []; // All units to be displayed in the home area
 var armyUnits		= []; // All units to be displayed in the army area
 var basicResources	= []; // All basic (click-to-get) resources
+var tools = [];  // All tools
 var normalUpgrades	= []; // All upgrades to be listed in the normal upgrades area
 
 // The resources that Wonders consume, and can give bonuses for.
@@ -160,45 +161,50 @@ var settings = {
 	useIcons: 			true
 };
 
-
+/**
+ * @param {array} civData
+ */
 function setIndexArrays (civData) {
-	civData.forEach(function(elem){ 
-		if (!(elem instanceof CivObj)) { 
-			console.error("Unknown type:", elem);
-			return; 
-		}
-		if (elem.type == "resource") { 
-			resourceData.push(elem); 
-			if (elem.vulnerable === true) { 
-				lootable.push(elem); 
-			}
-			if (elem.subType == "basic") { 
-				basicResources.push(elem); 
-			} 
-		} 
-		if (elem.type == "building") { 
-			buildingData.push(elem); 
-			if (elem.vulnerable === true) { sackable.push(elem); }
-			if (elem.subType == "normal" || elem.subType == "land") { homeBuildings.push(elem); } 
-		}
-		if (elem.subType == "prayer") { 
-			powerData.push(elem); 
-		} else if (elem.type == "upgrade") { 
-			upgradeData.push(elem); 
-			if (elem.subType == "upgrade") { 
-				normalUpgrades.push(elem); 
-			} 
-		}
-		if (elem.type == "unit") { 
-			unitData.push(elem); 
-			if (elem.vulnerable === true) { killable.push(elem); }
-			if (elem.place == "home") { homeUnits.push(elem); }
-			if (elem.place == "party") { armyUnits.push(elem); } 
-		}
-		if (elem.type == "achievement") { 
-			achData.push(elem); 
-		}
-	});
+  civData.forEach(function(elem){ 
+    if (!(elem instanceof CivObj)) { 
+      console.error('Unknown type:', elem);
+      return; 
+    }
+    if (elem.type == 'resource') { 
+      resourceData.push(elem); 
+      if (elem.vulnerable === true) { 
+        lootable.push(elem); 
+      }
+      if (elem.subType == 'basic') { 
+        basicResources.push(elem); 
+      } 
+    } 
+    if (elem.type == 'building') { 
+      buildingData.push(elem); 
+      if (elem.vulnerable === true) { sackable.push(elem); }
+      if (elem.subType == 'normal' || elem.subType == 'land') { homeBuildings.push(elem); } 
+    }
+    if (elem.subType == 'prayer') { 
+      powerData.push(elem); 
+    } else if (elem.type == 'upgrade') { 
+      upgradeData.push(elem); 
+      if (elem.subType == 'upgrade') { 
+        normalUpgrades.push(elem); 
+      } 
+    }
+    if (elem.type == 'unit') { 
+      unitData.push(elem); 
+      if (elem.vulnerable === true) { killable.push(elem); }
+      if (elem.place == 'home') { homeUnits.push(elem); }
+      if (elem.place == 'party') { armyUnits.push(elem); } 
+    }
+    if (elem.type == 'achievement') { 
+      achData.push(elem); 
+    }
+    if (elem.type == 'tool') {
+      tools.push(elem);
+    }
+  });
 }
 
 

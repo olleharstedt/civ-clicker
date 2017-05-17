@@ -842,7 +842,8 @@ function getCivData() {
     new Tool({
       id:       'handaxe',
       name:     'handaxe',
-      material: 'stone'
+      material: 'stone',
+      prereqs:  {},  // Available from the start.
     })
   ];
 
