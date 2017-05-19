@@ -374,7 +374,7 @@ function meetsPrereqs(prereqObj)
     } else if (isValid(civData[i]) && isValid(civData[i].owned)) { // Resource/Building/Upgrade
       if (typeof prereqObj[i] == 'number' && civData[i].owned < prereqObj[i]) {
         return false;
-      } else if (typeof prereqObj[i] == 'boolean' && curCiv[i].owned != prereqObj[i]) {
+      } else if (typeof prereqObj[i] == 'boolean' && civData[i].owned != prereqObj[i]) {
         return false;
       }
     }
