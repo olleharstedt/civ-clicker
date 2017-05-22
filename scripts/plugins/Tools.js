@@ -18,7 +18,7 @@ CivClicker.Tools = (function() {
 
   return {
     init() {
-      tickSub = CivClicker.Events.subscribe('global.tick', () => {
+      //tickSub = CivClicker.Events.subscribe('global.tick', () => {
         const availableTools = [];
         const $table = $('#toolsTable');
         $table.html('');
@@ -45,7 +45,7 @@ CivClicker.Tools = (function() {
           );
           $table.append(s);
         });
-      });
+      //});
     },
 
     unload() {

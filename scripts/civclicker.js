@@ -998,6 +998,7 @@ function doPurchase(objId, num) {
 
 
   var progressTime = purchaseObj.calculateProgressTime(num);
+  console.log(progressTime);
 
   // Fire event. If we've come this far, the purchase will go through.
   CivClicker.Events.publish(

@@ -21,9 +21,26 @@ function Tool(props)
  * @property {object} require  - Cost to build the tool.
  */
 Tool.prototype = new CivObj({
-  constructor: Tool,
-  type:        'tool',
-  material:     '',
-  icon:        'missingicon.png',
-  require:     {}
+  constructor:    Tool,
+  type:           'tool',
+  material:        '',
+  icon:           'missingicon.png',
+  require:        {},
+  useProgressBar: true,
+
+  /**
+   * @return {number}
+   */
+  calculateProgressTime(amount) {
+    return 5000;
+  },
+
+  /**
+   * @return Element
+   */
+  getProgressBarCell() {
+    const selector = '#toolsTable .tool-row-' + this.name + ' .button-td';
+    const cells = $(selector);
+    return cells[0];
+  }
 }, true);

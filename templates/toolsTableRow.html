@@ -1,10 +1,10 @@
-<tr>
+<tr class='tool-row-{{tool.name}}'>
   <td class='text-center'>
     <img class='icon icon-lg' src='images/{{tool.icon}}' />
   </td>
   <td>{{#ucfirst}}{{tool.name}}{{/ucfirst}}</td>
   <td>{{owned}}</td>
-  <td>
+  <td class='button-td' style='width: 100px;'>
     <button class='btn btn-default btn-small' onclick='doPurchase("{{tool.name}}", 1);'>
       Construct
     </button>
