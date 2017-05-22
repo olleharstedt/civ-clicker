@@ -10,6 +10,12 @@ var CivClicker = CivClicker || {};
  */
 CivClicker.Tools = (function() {
   let tickSub = null;
+  let toolsRowTemplate = null;
+
+  $.get('templates/toolsTableRow.html', (template) => {
+    toolsRowTemplate = template;
+  });
+
   return {
     init() {
       tickSub = CivClicker.Events.subscribe('global.tick', () => {
@@ -23,7 +29,20 @@ CivClicker.Tools = (function() {
           }
         });
         availableTools.forEach((tool) => {
-          $table.append('<tr><td>asd</td></tr>');
+          const s = Mustache.to_html(
+            toolsRowTemplate,
+            {
+              tool: tool,
+              owned: civData[tool.name].owned,
+              ucfirst: () => {
+                return (s, render) => {
+                  let rendered = render(s);
+                  return rendered.charAt(0).toUpperCase() + rendered.slice(1);
+                };
+              }
+            }
+          );
+          $table.append(s);
         });
       });
     },
