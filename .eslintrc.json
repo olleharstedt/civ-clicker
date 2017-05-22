@@ -59,6 +59,7 @@
       "updateRequirements": true,
       "meetsPrereqs": true,
       "updateRequirements" : true,
-      "calculatePopulation" : true
+      "calculatePopulation" : true,
+      "tools": true
     }
 }

@@ -3604,7 +3604,8 @@ setup.pages = function() {
     'deities',
     'conquest',
     'trade',
-    'achievements'
+    'achievements',
+    'tools'
   ];
   var p = $.when(1);  // Empty promise
   pageNames.forEach(function(pageName) {
