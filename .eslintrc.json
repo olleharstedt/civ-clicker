@@ -60,6 +60,7 @@
       "meetsPrereqs": true,
       "updateRequirements" : true,
       "calculatePopulation" : true,
-      "tools": true
+      "tools": true,
+      "getCostNote": true
     }
 }

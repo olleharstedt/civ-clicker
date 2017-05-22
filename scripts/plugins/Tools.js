@@ -34,6 +34,7 @@ CivClicker.Tools = (function() {
             {
               tool: tool,
               owned: civData[tool.name].owned,
+              cost: getCostNote(tool),
               ucfirst: () => {
                 return (s, render) => {
                   let rendered = render(s);

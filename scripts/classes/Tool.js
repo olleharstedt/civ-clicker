@@ -18,10 +18,12 @@ function Tool(props)
  * @property {string} name     - Like 'axe' etc.
  * @property {string} material - TODO
  * @property {string} icon     - Name of icon pic.
+ * @property {object} require  - Cost to build the tool.
  */
 Tool.prototype = new CivObj({
   constructor: Tool,
   type:        'tool',
   material:     '',
-  icon:        'missingicon.png'
+  icon:        'missingicon.png',
+  require:     {}
 }, true);
