@@ -25,7 +25,3 @@ Fork of CivClicker.
 * Scott A. Colcord - Extensive refactoring and bug fixes to all files; jsutils.js file.
 * Luke Nickerson - revamped the UI design, fixed some bugs, tweaked some things.
 * Olle Härstedt - This fork.
-
-## Icons from thenounproject.com
-
-Needle by Anastasia Latysheva from the Noun Project.
