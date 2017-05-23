@@ -3470,6 +3470,21 @@ setup.civSizes = function () {
 	};
 };
 
+/**
+ * Setup tooltips.
+ */
+setup.tooltip = function() {
+  // Enable Bootstrap tooltips
+  $('[data-toggle="tooltip"]').tooltip({
+    trigger: 'hover',
+    container: 'body'
+  });
+  // Hide tooltip when someone clicks.
+  $('[data-toggle="tooltip"]').on('click', function() {
+    $(this).tooltip('hide');
+  });
+};
+
 setup.game = function () {
   console.log("Setting up game");
   //document.title = "CivClicker ("+versionData+")"; //xxx Not in XML DOM.
@@ -3496,15 +3511,6 @@ setup.game = function () {
   // Fire game init event.
   CivClicker.Events.publish('global.init');
 
-  // Enable Bootstrap tooltips
-  $('[data-toggle="tooltip"]').tooltip({
-    trigger: 'hover',
-    container: 'body'
-  });
-  // Hide tooltip when someone clicks.
-  $('[data-toggle="tooltip"]').on('click', function() {
-    $(this).tooltip('hide');
-  });
 };
 
 setup.loop = function () {
@@ -3556,7 +3562,7 @@ setup.navigation = function() {
     ui.find("#renameDeity").disabled = (!civData.worship.owned);
     ui.find("#renameRuler").disabled = (curCiv.rulerName == "Cheater");
 
-    $('[data-toggle="tooltip"]').tooltip();
+    setup.tooltip();
 
     // Enable toggle selector
     $('[data-toggle-selector]').on('click',function () {
@@ -3708,16 +3714,6 @@ $(function () {
 
     setup.all();
 
-    // Enable Bootstrap tooltips
-    $('[data-toggle="tooltip"]').tooltip({
-      trigger: 'hover',
-      container: 'body'
-    });
-    // Hide tooltip when someone clicks.
-    $('[data-toggle="tooltip"]').on('click', function() {
-      $(this).tooltip('hide');
-    });
-
     // Logger
     // TODO: Use multiple logger for different categories.
     Logger.useDefaults();
@@ -3730,6 +3726,7 @@ $(function () {
     setup.pages().then(() => {
       // Only setup plugins AFTER pages are loaded.
       setup.initPlugins(serverSettings.plugins);
+      setup.tooltip();
     });
 
     $('#wrapper').toggleClass('toggled');

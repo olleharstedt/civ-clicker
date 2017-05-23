@@ -67,12 +67,20 @@ CivClicker.Tools = new (class ToolsPlugin {
   }
 
   /**
+   * Unemployed.
+   */
+  updateIdleCitizens() {
+    $('#tools-idle-citizens').html(civData.unemployed.owned);
+  }
+
+  /**
    * Init plugin.
    */
   init() {
     this.renderTable();
     this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
       this.updateAmount();
+      this.updateIdleCitizens();
     });
   }
 
