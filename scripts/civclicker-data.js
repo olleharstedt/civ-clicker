@@ -843,7 +843,7 @@ function getCivData() {
       id:       'handaxe',
       name:     'handaxe',
       material: 'stone',
-      icon:     'handaxe.jpg',
+      icon:     'handaxe.png',
       require:  {stone: 1},
       prereqs:  {},  // Available from the start.
     })
