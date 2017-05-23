@@ -3622,7 +3622,7 @@ setup.pages = function() {
       });
     });
   });
-  p.then(function() {
+  return p.then(function() {
     setup.game();
     setup.loop();
     // Show the game
@@ -3708,8 +3708,6 @@ $(function () {
 
     setup.all();
 
-    setup.initPlugins(serverSettings.plugins);
-
     // Enable Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover',
@@ -3729,7 +3727,10 @@ $(function () {
     setup.templates();
 
     // Load pages
-    setup.pages();
+    setup.pages().then(() => {
+      // Only setup plugins AFTER pages are loaded.
+      setup.initPlugins(serverSettings.plugins);
+    });
 
     $('#wrapper').toggleClass('toggled');
 
