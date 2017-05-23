@@ -5,53 +5,83 @@
 var CivClicker = CivClicker || {};
 
 /**
- * Show tools table
- * @module Tools
+ * Plugin for all tools related and tools page.
+ * @property object tickSub
+ * @property string toolsRowTemplate
+ * @property array availableTools
  */
-CivClicker.Tools = (function() {
-  let tickSub = null;
-  let toolsRowTemplate = null;
+CivClicker.Tools = new (class ToolsPlugin {
 
-  $.get('templates/toolsTableRow.html', (template) => {
-    toolsRowTemplate = template;
-  });
+  constructor() {
+    this.tickSub = null;
+    this.toolsRowTemplate = null;
+    this.availableTools = [];
 
-  return {
-    init() {
-      //tickSub = CivClicker.Events.subscribe('global.tick', () => {
-        const availableTools = [];
-        const $table = $('#toolsTable');
-        $table.html('');
+    $.get('templates/toolsTableRow.html', (template) => {
+      this.toolsRowTemplate = template;
+    });
 
-        tools.forEach((tool) => {
-          if (meetsPrereqs(tool)) {
-            availableTools.push(tool);
-          }
-        });
-        availableTools.forEach((tool) => {
-          const s = Mustache.to_html(
-            toolsRowTemplate,
-            {
-              tool: tool,
-              owned: civData[tool.name].owned,
-              cost: getCostNote(tool),
-              ucfirst: () => {
-                return (s, render) => {
-                  let rendered = render(s);
-                  return rendered.charAt(0).toUpperCase() + rendered.slice(1);
-                };
-              }
-            }
-          );
-          $table.append(s);
-        });
-      //});
-    },
+  }
 
-    unload() {
-      if (tickSub) {
-        tickSub.remove();
+  /**
+   * Render tools table.
+   */
+  renderTable() {
+    const $table = $('#toolsTable');
+    $table.html('');
+
+    tools.forEach((tool) => {
+      if (meetsPrereqs(tool)) {
+        this.availableTools.push(tool);
       }
+    });
+    this.availableTools.forEach((tool) => {
+      const s = Mustache.to_html(
+        this.toolsRowTemplate,
+        {
+          tool: tool,
+          owned: civData[tool.name].owned,
+          cost: getCostNote(tool),
+          ucfirst: () => {
+            return (s, render) => {
+              let rendered = render(s);
+              return rendered.charAt(0).toUpperCase() + rendered.slice(1);
+            };
+          }
+        }
+      );
+      $table.append(s);
+    });
+
+  }
+
+  /**
+   * Update amount of tools owned in tool table.
+   */
+  updateAmount() {
+    this.availableTools.forEach((tool) => {
+      const owned = civData[tool.name].owned;
+      const selector = `.tool-${tool.name}-owned`;
+      $(selector).html(owned);
+    });
+  }
+
+  /**
+   * Init plugin.
+   */
+  init() {
+    this.renderTable();
+    this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
+      this.updateAmount();
+    });
+  }
+
+  /**
+   * Unload plugin.
+   */
+  unload() {
+    if (this.tickSub) {
+      this.tickSub.remove();
     }
-  };
-})();
+  }
+});
