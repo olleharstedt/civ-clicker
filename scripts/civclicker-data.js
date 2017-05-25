@@ -35,9 +35,7 @@ function getCivData() {
         if (Math.random() > 0.8) {
           civData.wood.owned += 1;
           gameLog('Found wood while gathering');
-        }
-
-        if (Math.random() > 0.8) {
+        } else if (Math.random() > 0.8) {
           civData.stone.owned += 1;
           gameLog('Found stone while gathering');
         }
