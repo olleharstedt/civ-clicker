@@ -1189,25 +1189,42 @@ function spawn(num) {
 // Deployed military starve last.
 // Return the job ID of the selected target.
 function pickStarveTarget() {
-	var modNum,jobNum;
-	var modList=["ill","owned"]; // The sick starve first
-	//xxx Remove this hard-coded list.
-	var jobList=["unemployed","blacksmith","tanner","miner","woodcutter",
-		"cleric","cavalry","soldier","healer","labourer","farmer"];
+  const modList = [
+    'ill',  // The sick starve first
+    'owned'
+  ];
+  // TODO: Remove this hard-coded list.
+  const jobList=[
+    'unemployed',
+    'blacksmith',
+    'tanner',
+    'miner',
+    'woodcutter',
+    'cleric',
+    'cavalry',
+    'soldier',
+    'healer',
+    'labourer',
+    'farmer'
+  ];
 
-	for (modNum=0;modNum<modList.length;++modNum)
-	{
-		for (jobNum=0;jobNum<jobList.length;++jobNum)
-		{
-			if (civData[jobList[jobNum]][modList[modNum]] > 0) 
-				{ return civData[jobList[jobNum]]; }
-		}
-	}
-	// These don't have Ill variants at the moment.
-	if (civData.cavalryParty.owned > 0) { return civData.cavalryParty; }
-	if (civData.soldierParty.owned > 0) { return civData.soldierParty; }
+  for (let modNum=0;modNum<modList.length;++modNum) {
+    for (let jobNum=0;jobNum<jobList.length;++jobNum) {
+      if (civData[jobList[jobNum]][modList[modNum]] > 0) {
+        return civData[jobList[jobNum]];
+      }
+    }
+  }
 
-	return null;
+  // These don't have Ill variants at the moment.
+  if (civData.cavalryParty.owned > 0) {
+    return civData.cavalryParty;
+  }
+  if (civData.soldierParty.owned > 0) {
+    return civData.soldierParty;
+  }
+
+  return null;
 }
 
 // Culls workers when they starve.
@@ -1232,7 +1249,7 @@ function doStarve() {
 		civData.food.owned += corpsesEaten;
 	}
 
-	if (civData.food.owned < 0) { // starve if there's not enough food.
+	if (civData.food.owned <= 0) { // starve if there's not enough food.
 		//xxx This is very kind.  Only 0.1% deaths no matter how big the shortage?
 		numberStarve = starve(Math.ceil(population.living/1000));
 		if (numberStarve == 1) { 
