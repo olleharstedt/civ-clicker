@@ -209,6 +209,8 @@ function setIndexArrays (civData) {
 
 /**
  * Calculate population limit.
+ * Multiplying out housing numbers.
+ * @return number
  */
 function getPopulationLimit() {
   return civData.tent.owned 
@@ -234,8 +236,8 @@ function calculatePopulation () {
     extra: 		0
   };
 
-  //Update population limit by multiplying out housing numbers
-  population.limit = getPopulationLimit();
+  // Limit is no longer dependent on housing (existed no houses during early stone-age).
+  population.limit = civData.freeLand.owned * 10;
   population.limitIncludingUndead = population.limit + population.zombie;
 
   //Update sick workers

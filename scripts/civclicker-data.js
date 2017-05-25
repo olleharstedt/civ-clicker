@@ -585,6 +585,19 @@ function getCivData() {
       salable: false,  // Cannot be sold.
       customQtyId:"spawnCustomQty",
       effectText:"Playing idle games" }),
+    new Unit({
+      id: 'gatherer',
+      singular:        'gatherer',
+      plural:          'gatherers',
+      source:          'unemployed',
+      efficiency_base: 0.2,
+      effectText:      'Gather for food, wood and stone',
+      get efficiency() { 
+      },
+      set efficiency(value) {
+        this.efficiency_base = value
+      }
+    }),
     new Unit({ 
       id:"farmer", singular:"farmer", plural:"farmers",
       source:"unemployed",
