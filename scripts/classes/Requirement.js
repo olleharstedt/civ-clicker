@@ -28,6 +28,15 @@ class Requirement {
 }
 
 /**
+ * Requirement that never is true.
+ */
+class NeverRequirement extends Requirement {
+  isFulfilled() {
+    return false;
+  }
+}
+
+/**
  * Requirement chain for OR.
  * @prop {array} or - Array of requirements.
  */

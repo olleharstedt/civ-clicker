@@ -142,6 +142,10 @@ Resource.prototype = new CivObj({
   meetsPrereqs() {
     const prereqObj = this.prereqs;
 
+    if (prereqObj === false) {
+      return false;
+    }
+
     if (prereqObj instanceof Requirement) {
       return prereqObj.isFulfilled();
     }
