@@ -31,6 +31,17 @@ function getCivData() {
         if (civData.food.owned > civData.food.limit) {
           civData.food.owned = civData.food.limit;
         }
+
+        if (Math.random() > 0.8) {
+          civData.wood.owned += 1;
+          gameLog('Found wood while gathering');
+        }
+
+        if (Math.random() > 0.8) {
+          civData.stone.owned += 1;
+          gameLog('Found stone while gathering');
+        }
+
         updateResourceTotals();
       }
     }),
