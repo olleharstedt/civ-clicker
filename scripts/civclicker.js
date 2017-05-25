@@ -207,78 +207,85 @@ function setIndexArrays (civData) {
   });
 }
 
+/**
+ * Calculate population limit.
+ */
+function getPopulationLimit() {
+  return civData.tent.owned 
+    + (civData.hut.owned * 3) 
+    + (civData.cottage.owned * 6) 
+    + (civData.house.owned * (10 + ((civData.tenements.owned) * 2) + ((civData.slums.owned) * 2))) 
+    + (civData.mansion.owned * 50);
+}
 
+/**
+ * 
+ */
 function calculatePopulation () {
 
-	population = {
-		current:	0,
-		living:		0,
-		zombie:		curCiv.zombie.owned,
-		limit:		0,
-		limitIncludingUndead: 0,
-		healthy:	0,
-		totalSick:	0,
-		extra: 		0
-	};
+  population = {
+    current:	0,
+    living:		0,
+    zombie:		curCiv.zombie.owned,
+    limit:		0,
+    limitIncludingUndead: 0,
+    healthy:	0,
+    totalSick:	0,
+    extra: 		0
+  };
 
-	//Update population limit by multiplying out housing numbers
-	population.limit = (
-		civData.tent.owned 
-		+ (civData.hut.owned * 3) 
-		+ (civData.cottage.owned * 6) 
-		+ (civData.house.owned * (10 + ((civData.tenements.owned) * 2) + ((civData.slums.owned) * 2))) 
-		+ (civData.mansion.owned * 50)
-	);
-	population.limitIncludingUndead = population.limit + population.zombie;
+  //Update population limit by multiplying out housing numbers
+  population.limit = getPopulationLimit();
+  population.limitIncludingUndead = population.limit + population.zombie;
 
-	//Update sick workers
-	unitData.forEach(function(unit) { 
-		if (unit.isPopulation) { // has to be a player, non-special, non-mechanical
-			population.current += unit.owned;
-			
-			if (unit.vulnerable) {
-				// TODO Should this use 'killable'?
-				population.healthy += unit.owned;
-			}
-			if (unit.ill) {
-				population.totalSick += (unit.ill||0);
-			} else {
-				population.healthy += 1; // TODO: Not sure if this is calculated right
-			}
-		} else {
-			population.extra += unit.owned;
-		}
-	});
-	// Calculate housed/fed population (excludes zombies)
-	population.living = Math.max(0, population.current - population.zombie);
-	// Calculate healthy workers (should exclude sick, zombies and deployed units)
-	// TODO: Doesn't subtracting the zombies here throw off the calculations in randomHealthyWorker()?
-	population.healthy = Math.max(0, population.healthy - population.zombie);
+  //Update sick workers
+  unitData.forEach(function(unit) { 
+    if (unit.isPopulation) { // has to be a player, non-special, non-mechanical
+      population.current += unit.owned;
 
-	//Zombie soldiers dying can drive population.current negative if they are 
-	// killed and zombies are the only thing left.
-	// TODO: This seems like a hack that should be given a real fix.
-	if (population.current < 0){
-		if (curCiv.zombie.owned > 0){
-			//This fixes that by removing zombies and setting to zero.
-			curCiv.zombie.owned += population.current;
-			population.current = 0;
-		} else {
-			console.warn("Warning: Negative current population detected.");
-		}
-	}	
+      if (unit.vulnerable) {
+        // TODO Should this use 'killable'?
+        population.healthy += unit.owned;
+      }
+      if (unit.ill) {
+        population.totalSick += (unit.ill||0);
+      } else {
+        population.healthy += 1; // TODO: Not sure if this is calculated right
+      }
+    } else {
+      population.extra += unit.owned;
+    }
+  });
+  // Calculate housed/fed population (excludes zombies)
+  population.living = Math.max(0, population.current - population.zombie);
+  // Calculate healthy workers (should exclude sick, zombies and deployed units)
+  // TODO: Doesn't subtracting the zombies here throw off the calculations in randomHealthyWorker()?
+  population.healthy = Math.max(0, population.healthy - population.zombie);
+
+  //Zombie soldiers dying can drive population.current negative if they are 
+  // killed and zombies are the only thing left.
+  // TODO: This seems like a hack that should be given a real fix.
+  if (population.current < 0){
+    if (curCiv.zombie.owned > 0){
+      //This fixes that by removing zombies and setting to zero.
+      curCiv.zombie.owned += population.current;
+      population.current = 0;
+    } else {
+      console.warn('Warning: Negative current population detected.');
+    }
+  }	
 }
 
 
 function getCivType () {
-	var civType = civSizes.getCivSize(population.living).name;
-	if (population.living === 0 && population.limit >= 1000){
-		civType = "Ghost Town";
-	}
-	if (population.zombie >= 1000 && population.zombie >= 2 * population.living){ //easter egg
-		civType = "Necropolis";
-	}
-	return civType;
+  var civType = civSizes.getCivSize(population.living).name;
+  if (population.living === 0 && population.limit >= 1000){
+    civType = 'Ghost Town';
+  }
+  if (population.zombie >= 1000 && population.zombie >= 2 * population.living){ //easter egg
+    civType = 'Necropolis';
+  }
+  return civType;
 }
 
 
@@ -1123,39 +1130,48 @@ function spawnCat() {
 	gameLog("Found a cat!");
 }
 
-// Creates or destroys workers
-function spawn(num){
-	var newJobId = "unemployed";
-	var bums = civData.unemployed;
-	if (num == "custom" ) { num =  getCustomNumber(bums); }
-	if (num == "-custom") { num = -getCustomNumber(bums); }
+/**
+ * Creates or destroys workers
+ * @param numbern num
+ */
+function spawn(num) {
+  let newJobId = 'unemployed';
+  let bums = civData.unemployed;
+  if (num == 'custom' ) {
+    num = getCustomNumber(bums);
+  }
+  if (num == '-custom') {
+    num = -getCustomNumber(bums);
+  }
 
-	// Find the most workers we can spawn
-	num = Math.max(num, -bums.owned);  // Cap firing by # in that job.
-	num = Math.min(num,logSearchFn(calcWorkerCost,civData.food.owned));
+  // Find the most workers we can spawn
+  num = Math.max(num, -bums.owned);  // Cap firing by # in that job.
+  num = Math.min(num,logSearchFn(calcWorkerCost,civData.food.owned));
 
-	// Apply population limit, and only allow whole workers.
-	num = Math.min(num, (population.limit - population.living));
+  // Apply population limit, and only allow whole workers.
+  num = Math.min(num, (population.limit - population.living));
 
-	// Update numbers and resource levels
-	civData.food.owned -= calcWorkerCost(num);
+  // Update numbers and resource levels
+  civData.food.owned -= calcWorkerCost(num);
 
-	// New workers enter as a job that has been selected, but we only destroy idle ones.
-	newJobId = ui.find("#newSpawnJobSelection").value;
-	if (num >= 0 && typeof civData[newJobId] === "object") {
-		civData[newJobId].owned += num;
-	} else { 
-		bums.owned += num; 
-	}
-	calculatePopulation(); //Run through the population->job update cycle
+  // New workers enter as a job that has been selected, but we only destroy idle ones.
+  newJobId = ui.find('#newSpawnJobSelection').value;
+  if (num >= 0 && typeof civData[newJobId] === 'object') {
+    civData[newJobId].owned += num;
+  } else { 
+    bums.owned += num; 
+  }
+  calculatePopulation(); //Run through the population->job update cycle
 
-	//This is intentionally independent of the number of workers spawned
-	if (Math.random() * 100 < 1 + (civData.lure.owned)) { spawnCat(); }
+  //This is intentionally independent of the number of workers spawned
+  if (Math.random() * 100 < 1 + (civData.lure.owned)) {
+    spawnCat();
+  }
 
-	updateResourceTotals(); //update with new resource number
-	updatePopulation();
-	
-	return num;
+  updateResourceTotals(); //update with new resource number
+  updatePopulation();
+
+  return num;
 }
 
 // Picks the next worker to starve.  Kills the sick first, then the healthy.
