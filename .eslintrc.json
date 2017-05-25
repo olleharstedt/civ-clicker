@@ -62,6 +62,8 @@
       "updateRequirements" : true,
       "calculatePopulation" : true,
       "tools": true,
+      "getWonderBonus": true,
+      "rndRound": true,
       "getCostNote": true
     }
 }
