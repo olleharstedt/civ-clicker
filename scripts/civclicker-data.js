@@ -593,6 +593,7 @@ function getCivData() {
       efficiency_base: 0.2,
       effectText:      'Gather for food, wood and stone',
       get efficiency() { 
+        return 1;
       },
       set efficiency(value) {
         this.efficiency_base = value

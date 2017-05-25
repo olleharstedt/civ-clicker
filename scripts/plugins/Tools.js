@@ -1,16 +1,13 @@
 /* @flow */
 'use strict';
 
-/** @namespace */
-var CivClicker = CivClicker || {};
-
 /**
  * Plugin for all tools related and tools page.
  * @property object tickSub
  * @property string toolsRowTemplate
  * @property array availableTools
  */
-CivClicker.Tools = new (class ToolsPlugin {
+CivClicker.plugins.Tools = new (class ToolsPlugin {
 
   constructor() {
     this.tickSub = null;

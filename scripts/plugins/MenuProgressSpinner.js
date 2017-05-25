@@ -1,15 +1,12 @@
 /* @flow */
 'use strict';
 
-/** @namespace */
-var CivClicker = CivClicker || {};
-
 /**
  * Small plugin that listens to doPurchase and tick to show a spinner if a building
  * is in progress.
  * @module MenuProgressSpinner
  */
-CivClicker.MenuProgressSpinner = (function() {
+CivClicker.plugins.MenuProgressSpinner = (function() {
 
   /**
    * Helper function to create spinners.

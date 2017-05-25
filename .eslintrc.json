@@ -26,6 +26,7 @@
       "$": true,
       "Logger": true,
       "Mustache": true,
+      "CivClicker": true,
       "civData": true,
       "unitData" : true,
       "curCiv" : true,

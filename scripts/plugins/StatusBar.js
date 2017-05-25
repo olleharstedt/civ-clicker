@@ -1,14 +1,11 @@
 /* @flow */
 'use strict';
 
-/** @namespace */
-var CivClicker = CivClicker || {};
-
 /**
  * Render tooltips for status bar.
  * @module StatusBar
  */
-CivClicker.StatusBar = (function() {
+CivClicker.plugins.StatusBar = (function() {
   return {
     init: function() {
       CivClicker.Events.subscribe('global.tick', () => {

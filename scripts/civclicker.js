@@ -3389,25 +3389,18 @@ function gameLoop () {
 	//debugging - mark beginning of loop execution
 	//var start = new Date().getTime();
 	
+	// The "net" values for special resources are just running totals of the
+	// adjustments made each tick; as such they need to be zero'd out at the
+	// start of each new tick.
+  // NB: Does not work when doFarmers etc moved to Workers plugin.
+	//clearSpecialResourceNets();
+
   CivClicker.Events.publish('global.tick');
 
 	tickAutosave();
 
 	calculatePopulation();
 
-	// The "net" values for special resources are just running totals of the
-	// adjustments made each tick; as such they need to be zero'd out at the
-	// start of each new tick.
-	clearSpecialResourceNets();
-
-	// Production workers do their thing.
-	doFarmers();
-	doWoodcutters();
-	doMiners();
-	doBlacksmiths();
-	doTanners();
-	doClerics();
-	
 	// Check for starvation
 	doStarve();
 	// TODO: Need to kill workers who die from exposure.
@@ -3663,9 +3656,9 @@ setup.pages = function() {
 setup.initPlugins = function(plugins) {
   console.log('Init plugins');
   plugins.forEach((plugin) => {
-    if (CivClicker[plugin]) {
+    if (CivClicker.plugins[plugin]) {
       console.log('Init plugin ' + plugin);
-      CivClicker[plugin].init();
+      CivClicker.plugins[plugin].init();
     } else {
       alert('Error in server configuration: No such plugin: ' + plugin);
       throw 'No such plugin: ' + plugin;

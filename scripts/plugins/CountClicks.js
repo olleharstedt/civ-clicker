@@ -1,14 +1,11 @@
 /* @flow */
 'use strict';
 
-/** @namespace */
-var CivClicker = CivClicker || {};
-
 /**
  * Count number of primary resource clicks.
  * @module CountClicks
  */
-CivClicker.CountClicks = (function() {
+CivClicker.plugins.CountClicks = (function() {
   let countClicksSub = null;
 
   return {
