@@ -13,7 +13,7 @@ CivClicker.plugins.Workers = (function() {
     if (population.current > 0) { 
       millMod = population.living / population.current; 
     }
-    civData.food.net = (
+    civData.food.net += (
       civData.farmer.owned 
       * (1 + (civData.farmer.efficiency * curCiv.morale.efficiency)) 
       * ((civData.pestControl.timer > 0) ? 1.01 : 1) 
@@ -104,7 +104,7 @@ CivClicker.plugins.Workers = (function() {
         doClerics();
 
         unitData.forEach((unit) => {
-          if (unit.type == 'workunit') {
+          if (unit instanceof WorkUnit) {
             unit.doWork();
           }
         });

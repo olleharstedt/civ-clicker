@@ -599,6 +599,9 @@ function getCivData() {
         this.efficiency_base = value;
       },
       doWork() {
+        const inc = 2 * civData.gatherer.owned; 
+        civData.food.owned += inc;
+        civData.food.net += inc;
       }
     }),
     new Unit({ 
