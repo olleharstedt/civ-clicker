@@ -585,8 +585,8 @@ function getCivData() {
       salable: false,  // Cannot be sold.
       customQtyId:"spawnCustomQty",
       effectText:"Playing idle games" }),
-    new Unit({
-      id: 'gatherer',
+    new WorkUnit({
+      id:              'gatherer',
       singular:        'gatherer',
       plural:          'gatherers',
       source:          'unemployed',
@@ -596,7 +596,9 @@ function getCivData() {
         return 1;
       },
       set efficiency(value) {
-        this.efficiency_base = value
+        this.efficiency_base = value;
+      },
+      doWork() {
       }
     }),
     new Unit({ 

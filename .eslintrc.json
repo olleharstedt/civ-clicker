@@ -64,6 +64,8 @@
       "tools": true,
       "getWonderBonus": true,
       "rndRound": true,
+      "Unit": true,
+      "WorkUnit": true,
       "getCostNote": true
     }
 }

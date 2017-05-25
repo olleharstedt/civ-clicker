@@ -56,8 +56,17 @@ var civSizes = [
 ];
 
 var PATIENT_LIST = [
-	"healer","cleric","farmer","soldier","cavalry","labourer",
-	"woodcutter","miner","tanner","blacksmith","unemployed"
+  'healer',
+  'cleric',
+  'farmer',
+  'soldier',
+  'cavalry',
+  'labourer',
+  'woodcutter',
+  'miner',
+  'tanner',
+  'blacksmith',
+  'unemployed'
 ];
 
 // Declare variables here so they can be referenced later.  
@@ -192,7 +201,7 @@ function setIndexArrays (civData) {
         normalUpgrades.push(elem); 
       } 
     }
-    if (elem.type == 'unit') { 
+    if (elem.type == 'unit' || elem instanceof Unit) { 
       unitData.push(elem); 
       if (elem.vulnerable === true) { killable.push(elem); }
       if (elem.place == 'home') { homeUnits.push(elem); }
@@ -3312,12 +3321,6 @@ function checkResourceLimits () {
 function gameLoop () {
 	//debugging - mark beginning of loop execution
 	//var start = new Date().getTime();
-	
-	// The "net" values for special resources are just running totals of the
-	// adjustments made each tick; as such they need to be zero'd out at the
-	// start of each new tick.
-  // NB: Does not work when doFarmers etc moved to Workers plugin.
-	//clearSpecialResourceNets();
 
   CivClicker.Events.publish('global.tick');
 

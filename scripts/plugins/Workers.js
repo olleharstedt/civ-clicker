@@ -88,6 +88,13 @@ CivClicker.plugins.Workers = (function() {
   return new (class WorkersPlugin {
     init() {
       this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
+	
+        // The "net" values for special resources are just running totals of the
+        // adjustments made each tick; as such they need to be zero'd out at the
+        // start of each new tick.
+        // NB: Does not work when doFarmers etc moved to Workers plugin.
+        clearSpecialResourceNets();
+
         // Production workers do their thing.
         doFarmers();
         doWoodcutters();
@@ -95,6 +102,12 @@ CivClicker.plugins.Workers = (function() {
         doBlacksmiths();
         doTanners();
         doClerics();
+
+        unitData.forEach((unit) => {
+          if (unit.type == 'workunit') {
+            unit.doWork();
+          }
+        });
       });
     }
 
