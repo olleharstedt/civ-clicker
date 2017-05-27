@@ -604,18 +604,13 @@ function getCivData() {
         civData.food.net += inc;
       }
     }),
-    new Unit({ 
-      id:"farmer", singular:"farmer", plural:"farmers",
-      source:"unemployed",
+    new FarmerUnit({ 
+      id:              'farmer',
+      singular:        'farmer',
+      plural:          'farmers',
+      source:          'unemployed',
       efficiency_base: 0.2,
-      get efficiency() { 
-        return this.efficiency_base + (0.1 * (
-          + civData.domestication.owned + civData.ploughshares.owned + civData.irrigation.owned 
-          + civData.croprotation.owned + civData.selectivebreeding.owned + civData.fertilisers.owned 
-          + civData.blessing.owned)); 
-      },
-      set efficiency(value) { this.efficiency_base = value; },
-      effectText:"Automatically harvest food" 
+      effectText:      'Automatically harvest food' 
     }),
     new Unit({ 
       id:"woodcutter", singular:"woodcutter", plural:"woodcutters",

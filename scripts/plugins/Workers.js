@@ -7,29 +7,6 @@
  */
 CivClicker.plugins.Workers = (function() {
 
-  function doFarmers() {
-    var specialChance = civData.food.specialChance + (0.1 * civData.flensing.owned);
-    var millMod = 1;
-    if (population.current > 0) { 
-      millMod = population.living / population.current; 
-    }
-    civData.food.net += (
-      civData.farmer.owned 
-      * (1 + (civData.farmer.efficiency * curCiv.morale.efficiency)) 
-      * ((civData.pestControl.timer > 0) ? 1.01 : 1) 
-      * getWonderBonus(civData.food) 
-      * (1 + civData.walk.rate/120) 
-      * (1 + civData.mill.owned * millMod / 200) //Farmers farm food
-    );
-    civData.food.net -= population.living; //The living population eats food.
-    civData.food.owned += civData.food.net;
-    if (civData.skinning.owned && civData.farmer.owned > 0){ //and sometimes get skins
-      var skinsChance = specialChance * (civData.food.increment + ((civData.butchering.owned) * civData.farmer.owned / 15.0)) * getWonderBonus(civData.skins);
-      var skinsEarned = rndRound(skinsChance);
-      civData.skins.net += skinsEarned;
-      civData.skins.owned += skinsEarned;
-    }
-  }
   function doWoodcutters() {
     civData.wood.net = civData.woodcutter.owned * (civData.woodcutter.efficiency * curCiv.morale.efficiency) * getWonderBonus(civData.wood); //Woodcutters cut wood
     civData.wood.owned += civData.wood.net;
@@ -92,11 +69,9 @@ CivClicker.plugins.Workers = (function() {
         // The "net" values for special resources are just running totals of the
         // adjustments made each tick; as such they need to be zero'd out at the
         // start of each new tick.
-        // NB: Does not work when doFarmers etc moved to Workers plugin.
         clearSpecialResourceNets();
 
         // Production workers do their thing.
-        doFarmers();
         doWoodcutters();
         doMiners();
         doBlacksmiths();
