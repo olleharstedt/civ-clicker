@@ -5,12 +5,12 @@ class BlacksmithUnit extends WorkUnit {
 
   constructor() {
     super({});
-    this.id= 'blacksmith';
-    this.singular= 'blacksmith';
-    this.plural= 'blacksmiths';
-    this.source= 'unemployed';
-    this.efficiency=  0.5;
-    this.effectText= 'Convert ore to metal';
+    this.id         = 'blacksmith';
+    this.singular   = 'blacksmith';
+    this.plural     = 'blacksmiths';
+    this.source     = 'unemployed';
+    this.efficiency =  0.5;
+    this.effectText = 'Convert ore to metal';
 
     this.prereqs = {
       smithy: 1
