@@ -607,14 +607,7 @@ function getCivData() {
     new FarmerUnit(),
     new WoodcutterUnit(),
     new MinerUnit(),
-    new Unit({ 
-      id:"tanner", singular:"tanner", plural:"tanners",
-      source:"unemployed",
-      efficiency: 0.5,
-      prereqs:{ tannery: 1 },
-      get limit() { return civData.tannery.owned; },
-      set limit(value) { return this.limit; }, // Only here for JSLint.
-      effectText:"Convert skins to leather" }),
+    new TannerUnit(),
     new Unit({ 
       id:"blacksmith", singular:"blacksmith", plural:"blacksmiths",
       source:"unemployed",

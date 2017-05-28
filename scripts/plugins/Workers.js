@@ -7,21 +7,6 @@
  */
 CivClicker.plugins.Workers = (function() {
 
-  function doWoodcutters() {
-  }
-
-  function doMiners() {
-    var specialChance = civData.stone.specialChance + (civData.macerating.owned ? 0.1 : 0);
-    civData.stone.net = civData.miner.owned * (civData.miner.efficiency * curCiv.morale.efficiency) * getWonderBonus(civData.stone); //Miners mine stone
-    civData.stone.owned += civData.stone.net;
-    if (civData.prospecting.owned && civData.miner.owned > 0){ //and sometimes get ore
-      var oreChance = specialChance * (civData.stone.increment + ((civData.extraction.owned) * civData.miner.owned / 5.0)) * getWonderBonus(civData.ore);
-      var oreEarned = rndRound(oreChance);
-      civData.ore.net += oreEarned;
-      civData.ore.owned += oreEarned;
-    }
-  }
-
   function doBlacksmiths() {
     var oreUsed = Math.min(civData.ore.owned, (civData.blacksmith.owned * civData.blacksmith.efficiency * curCiv.morale.efficiency));
     var metalEarned = oreUsed * getWonderBonus(civData.metal);
@@ -29,15 +14,6 @@ CivClicker.plugins.Workers = (function() {
     civData.ore.owned -= oreUsed;
     civData.metal.net += metalEarned;
     civData.metal.owned += metalEarned;
-  }
-
-  function doTanners() {
-    var skinsUsed = Math.min(civData.skins.owned, (civData.tanner.owned * civData.tanner.efficiency * curCiv.morale.efficiency));
-    var leatherEarned = skinsUsed * getWonderBonus(civData.leather);
-    civData.skins.net -= skinsUsed;
-    civData.skins.owned -= skinsUsed;
-    civData.leather.net += leatherEarned;
-    civData.leather.owned += leatherEarned;
   }
 
   function doClerics() {
@@ -64,10 +40,7 @@ CivClicker.plugins.Workers = (function() {
         clearSpecialResourceNets();
 
         // Production workers do their thing.
-        doWoodcutters();
-        doMiners();
         doBlacksmiths();
-        doTanners();
         doClerics();
 
         unitData.forEach((unit) => {
