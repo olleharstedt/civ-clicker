@@ -8,7 +8,7 @@ class GatherResource extends Resource {
     this.subType         = 'basic';
     this.specialMaterial = 'stone';
     this.verb            = 'gather';
-    this.activity        = 'gathering', //I18;
+    this.activity        = 'gathering';
     this.progressFactor  =  1;
     this.templateName    = '#gather-resource-row-template';
   }

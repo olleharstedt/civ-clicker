@@ -70,6 +70,7 @@
   <!-- Resources -->
 	<script type="application/javascript" src="scripts/classes/resources/Resource.js" defer="defer"></script>
 	<script type="application/javascript" src="scripts/classes/resources/GatherResource.js" defer="defer"></script>
+	<script type="application/javascript" src="scripts/classes/resources/ScavageResource.js" defer="defer"></script>
   
   <!-- Units -->
 	<script type="application/javascript" src="scripts/classes/units/Unit.js" defer="defer"></script>
@@ -285,6 +286,28 @@
         </button>
       </td>
       <td colspan="10"><span class="text-muted">Gather will give you food, wood and stone.</span></td>
+    </tr>
+  </script>
+
+  <!-- Template for scavage resource row -->
+  <script id="scavage-resource-row-template" type="text/template">
+    <tr id="{{objId}}Row" class="purchaseRow" data-target="{{objId}}">
+      <td class="text-center">
+        <img src="images/{{objId}}.png" class="icon icon-lg" alt="{{objName}}"/>
+      </td>
+      <td>
+        {{#available}}
+          <button class="btn btn-default btn-block" data-action="increment">
+            {{verb}}
+          </button>
+        {{/available}}
+        {{^available}}
+            <button disabled="disabled" class="btn btn-default btn-block" data-toggle="tooltip" title="{{notAvailableTooltip}}">
+              {{verb}}
+            </button>
+        {{/available}}
+      </td>
+      <td colspan="10"><span class="text-muted">Scavage carcass for meat, bones and leather.</span></td>
     </tr>
   </script>
 
