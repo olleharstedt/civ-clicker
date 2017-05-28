@@ -8,12 +8,6 @@
 CivClicker.plugins.Workers = (function() {
 
   function doBlacksmiths() {
-    var oreUsed = Math.min(civData.ore.owned, (civData.blacksmith.owned * civData.blacksmith.efficiency * curCiv.morale.efficiency));
-    var metalEarned = oreUsed * getWonderBonus(civData.metal);
-    civData.ore.net -= oreUsed;
-    civData.ore.owned -= oreUsed;
-    civData.metal.net += metalEarned;
-    civData.metal.owned += metalEarned;
   }
 
   function doClerics() {

@@ -608,14 +608,7 @@ function getCivData() {
     new WoodcutterUnit(),
     new MinerUnit(),
     new TannerUnit(),
-    new Unit({ 
-      id:"blacksmith", singular:"blacksmith", plural:"blacksmiths",
-      source:"unemployed",
-      efficiency: 0.5,
-      prereqs:{ smithy: 1 },
-      get limit() { return civData.smithy.owned; },
-      set limit(value) { return this.limit; }, // Only here for JSLint.
-      effectText:"Convert ore to metal" }),
+    new BlacksmithUnit(),
     new Unit({ 
       id:"healer", singular:"healer", plural:"healers",
       source:"unemployed",

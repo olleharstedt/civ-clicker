@@ -69,6 +69,8 @@
       "FarmerUnit": true,
       "WoodcutterUnit": true,
       "MinerUnit": true,
+      "TannerUnit": true,
+      "BlacksmithUnit": true,
       "getCostNote": true
     }
 }
