@@ -66,6 +66,9 @@
       "rndRound": true,
       "Unit": true,
       "WorkUnit": true,
+      "FarmerUnit": true,
+      "WoodcutterUnit": true,
+      "MinerUnit": true,
       "getCostNote": true
     }
 }

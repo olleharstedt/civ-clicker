@@ -606,11 +606,7 @@ function getCivData() {
     }),
     new FarmerUnit(),
     new WoodcutterUnit(),
-    new Unit({ 
-      id:"miner", singular:"miner", plural:"miners",
-      source:"unemployed",
-      efficiency: 0.2,
-      effectText:"Automatically mine stone" }),
+    new MinerUnit(),
     new Unit({ 
       id:"tanner", singular:"tanner", plural:"tanners",
       source:"unemployed",
