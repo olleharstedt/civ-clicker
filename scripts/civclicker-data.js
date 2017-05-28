@@ -5,44 +5,7 @@ function getCivData() {
 	// Initialize Data
   var civData = [
     // Resources
-    new Resource({
-      id:              'gather',
-      name:            'gather',
-      increment:       1,
-      specialChance:   0.1,
-      subType:         'basic',
-      specialMaterial: 'stone',
-      verb:            'gather',
-      activity:        'gathering', //I18N
-      progressFactor:  1,
-      templateName:    '#gather-resource-row-template',
-      get limit() {
-        // Same as food.
-        const barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
-        return 200 + (civData.barn.owned * barnBonus); 
-      },
-      /**
-       * Gathering increases food. There's no 'gather' resource.
-       * @return
-       */
-      incrementResource() {
-        civData.food.owned += civData.gather.increment;
-        // Checks to see that resources are not exceeding their limits
-        if (civData.food.owned > civData.food.limit) {
-          civData.food.owned = civData.food.limit;
-        }
-
-        if (Math.random() > 0.8) {
-          civData.wood.owned += 1;
-          gameLog('Found wood while gathering');
-        } else if (Math.random() > 0.8) {
-          civData.stone.owned += 1;
-          gameLog('Found stone while gathering');
-        }
-
-        updateResourceTotals();
-      }
-    }),
+    new GatherResource(),
     // Harvest
     new Resource({ 
       id:'food', name:'food', increment:1, specialChance:0.1,
