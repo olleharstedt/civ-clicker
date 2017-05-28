@@ -7,22 +7,6 @@
  */
 CivClicker.plugins.Workers = (function() {
 
-  function doBlacksmiths() {
-  }
-
-  function doClerics() {
-    var pietyEarned = (
-      civData.cleric.owned 
-      * (civData.cleric.efficiency + (civData.cleric.efficiency * (civData.writing.owned))) 
-      * (1 + ((civData.secrets.owned) 
-      * (1 - 100/(civData.graveyard.owned + 100)))) 
-      * curCiv.morale.efficiency 
-      * getWonderBonus(civData.piety)
-    );
-    civData.piety.net += pietyEarned;
-    civData.piety.owned += pietyEarned;
-  }
-
   // Return an instance of the actual plugin.
   return new (class WorkersPlugin {
     init() {
@@ -34,9 +18,6 @@ CivClicker.plugins.Workers = (function() {
         clearSpecialResourceNets();
 
         // Production workers do their thing.
-        doBlacksmiths();
-        doClerics();
-
         unitData.forEach((unit) => {
           if (unit instanceof WorkUnit) {
             unit.doWork();

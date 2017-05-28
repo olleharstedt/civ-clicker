@@ -7,7 +7,7 @@ class WorkUnit extends Unit {
   }
 
   doWork() {
-    throw 'Must be overwritten';
+    throw 'doWork must be overwritten';
   }
 
   get limit() {
