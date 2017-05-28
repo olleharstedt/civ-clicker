@@ -71,6 +71,7 @@
       "MinerUnit": true,
       "TannerUnit": true,
       "BlacksmithUnit": true,
+      "ClericUnit": true,
       "clearSpecialResourceNets": true,
       "getCostNote": true
     }

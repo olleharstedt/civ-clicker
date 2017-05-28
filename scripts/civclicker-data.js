@@ -609,6 +609,7 @@ function getCivData() {
     new MinerUnit(),
     new TannerUnit(),
     new BlacksmithUnit(),
+    new ClericUnit(),
     new Unit({ 
       id:"healer", singular:"healer", plural:"healers",
       source:"unemployed",
@@ -620,14 +621,6 @@ function getCivData() {
       get cureCount() { return this.data.cureCount; }, // Carryover fractional healing
       set cureCount(value) { this.data.cureCount = value; }, // Only here for JSLint.
       effectText:"Cure sick workers" }),
-    new Unit({ 
-      id:"cleric", singular:"cleric", plural:"clerics",
-      source:"unemployed",
-      efficiency: 0.05,
-      prereqs:{ temple: 1 },
-      get limit() { return civData.temple.owned; },
-      set limit(value) { return this.limit; }, // Only here for JSLint.
-      effectText:"Generate piety, bury corpses" }),
     new Unit({ id:"labourer", singular:"labourer", plural:"labourers",
       source:"unemployed",
       efficiency: 1.0,
