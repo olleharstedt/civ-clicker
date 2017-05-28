@@ -604,14 +604,7 @@ function getCivData() {
         civData.food.net += inc;
       }
     }),
-    new FarmerUnit({ 
-      id:              'farmer',
-      singular:        'farmer',
-      plural:          'farmers',
-      source:          'unemployed',
-      efficiency_base: 0.2,
-      effectText:      'Automatically harvest food' 
-    }),
+    new FarmerUnit(),
     new Unit({ 
       id:"woodcutter", singular:"woodcutter", plural:"woodcutters",
       source:"unemployed",

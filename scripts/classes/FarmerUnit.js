@@ -2,6 +2,17 @@
  * Farmer unit.
  */
 class FarmerUnit extends WorkUnit {
+
+  constructor() {
+    super({});
+    this.id              = 'farmer';
+    this.singular        = 'farmer';
+    this.plural          = 'farmers';
+    this.source          = 'unemployed';
+    this.efficiency_base = 0.2;
+    this.effectText      = 'Automatically harvest food';
+  }
+
   get efficiency() { 
     return this.efficiency_base + (0.1 * (
       + civData.domestication.owned + civData.ploughshares.owned + civData.irrigation.owned 
