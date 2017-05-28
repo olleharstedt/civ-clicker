@@ -13,13 +13,26 @@ class FarmerUnit extends WorkUnit {
     this.effectText      = 'Automatically harvest food';
   }
 
+  /**
+   * @return number
+   */
   get efficiency() { 
     return this.efficiency_base + (0.1 * (
       + civData.domestication.owned + civData.ploughshares.owned + civData.irrigation.owned 
       + civData.croprotation.owned + civData.selectivebreeding.owned + civData.fertilisers.owned 
       + civData.blessing.owned)); 
   }
-  set efficiency(value) { this.efficiency_base = value; }
+
+  /**
+   * @param number value
+   */
+  set efficiency(value) {
+    this.efficiency_base = value;
+  }
+
+  /**
+   * Do work each tick.
+   */
   doWork() {
     const specialChance = civData.food.specialChance + (0.1 * civData.flensing.owned);
     let millMod = 1;
