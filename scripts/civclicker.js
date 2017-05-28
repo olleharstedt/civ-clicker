@@ -2500,58 +2500,69 @@ function renameDeity(newName){
 	makeDeitiesTables();
 }
 
+/**
+ * Reset the game.
+ */
 function resetCivClicker() {
-	console.log("Reset");
-	//Resets the game, keeping some values but resetting most back to their initial values.
-	var msg = "Really reset? You will keep past deities and wonders (and cats)"; //Check player really wanted to do that.
-	if (!confirm(msg)) { return false; } // declined
+  console.log("Reset");
+  //Resets the game, keeping some values but resetting most back to their initial values.
+  var msg = "Really reset? You will keep past deities and wonders (and cats)"; //Check player really wanted to do that.
 
-	// Let each data subpoint re-init.
-	civData.forEach( function(elem){ if (elem instanceof CivObj) { elem.reset(); } });
+  if (!confirm(msg)) {
+    // declined
+    return false;
+  }
 
-	curCiv.zombie.owned = 0;
-	curCiv.grave.owned = 0;
-	curCiv.enemySlain.owned = 0;
-	curCiv.resourceClicks = 0; // For NeverClick
-	curCiv.attackCounter = 0; // How long since last attack?
-	curCiv.morale = { mod: 1.0, efficiency: 1.0 };
+  // Let each data subpoint re-init.
+  civData.forEach(function(elem) {
+    if (elem instanceof CivObj) {
+      elem.reset();
+    }
+  });
 
-	// If our current deity is powerless, delete it.
-	if (!curCiv.deities[0].maxDev) {
-		curCiv.deities.shift();
-	}
-	// Insert space for a fresh deity.
-	curCiv.deities.unshift({ name:"", domain:"", maxDev:0 });
+  curCiv.zombie.owned = 0;
+  curCiv.grave.owned = 0;
+  curCiv.enemySlain.owned = 0;
+  curCiv.resourceClicks = 0; // For NeverClick
+  curCiv.attackCounter = 0; // How long since last attack?
+  curCiv.morale = { mod: 1.0, efficiency: 1.0 };
 
-	population = {
-		current:0,
-		limit:0,
-		healthy:0,
-		totalSick:0
-	};
+  // If our current deity is powerless, delete it.
+  if (!curCiv.deities[0].maxDev) {
+    curCiv.deities.shift();
+  }
+  // Insert space for a fresh deity.
+  curCiv.deities.unshift({ name:"", domain:"", maxDev:0 });
 
-	resetRaiding();
-	curCiv.raid.targetMax = civSizes[0].id;
+  population = {
+    current:0,
+    limit:0,
+    healthy:0,
+    totalSick:0
+  };
 
-	curCiv.trader.materialId="";
-	curCiv.trader.requested=0;
-	curCiv.trader.timer=0;
-	curCiv.trader.counter = 0; // How long since last trader?
+  resetRaiding();
+  curCiv.raid.targetMax = civSizes[0].id;
 
-	curCiv.curWonder.name = "";
-	curCiv.curWonder.stage = 0;
-	curCiv.curWonder.rushed = false;
-	curCiv.curWonder.progress = 0;
+  curCiv.trader.materialId="";
+  curCiv.trader.requested=0;
+  curCiv.trader.timer=0;
+  curCiv.trader.counter = 0; // How long since last trader?
 
-	updateAfterReset();
-	gameLog("Game Reset"); //Inform player.
+  curCiv.curWonder.name = "";
+  curCiv.curWonder.stage = 0;
+  curCiv.curWonder.rushed = false;
+  curCiv.curWonder.progress = 0;
 
-	renameCiv();
-	renameRuler();
+  updateAfterReset();
+  gameLog("Game Reset"); //Inform player.
+
+  renameCiv();
+  renameRuler();
 
   setUITable(basicResources, 'basicResources');
 
-	return true;
+  return true;
 }
 
 /**

@@ -31,10 +31,10 @@ class GatherResource extends Resource {
       civData.food.owned = civData.food.limit;
     }
 
-    if (Math.random() > 0.8) {
+    if (Math.random() > 0.9) {
       civData.wood.owned += 1;
       gameLog('Found wood while gathering');
-    } else if (Math.random() > 0.8) {
+    } else if (Math.random() > 0.9) {
       civData.stone.owned += 1;
       gameLog('Found stone while gathering');
     }
