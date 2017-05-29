@@ -1,7 +1,7 @@
 /**
- * Scavage carcass for meat, bone and leather.
+ * Scavenge carcass for meat, bone and leather.
  */
-class ScavageResource extends Resource {
+class ScavengeResource extends Resource {
   constructor() {
     super({});
     this.id              = 'scavage';

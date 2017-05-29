@@ -73,7 +73,7 @@
       "BlacksmithUnit": true,
       "ClericUnit": true,
       "GatherResource": true,
-      "ScavageResource": true,
+      "ScavengeResource": true,
       "clearSpecialResourceNets": true,
       "getCostNote": true
     }
