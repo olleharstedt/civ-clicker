@@ -4,21 +4,21 @@
 class ScavengeResource extends Resource {
   constructor() {
     super({});
-    this.id              = 'scavage';
-    this.name            = 'scavage';
+    this.id              = 'scavenge';
+    this.name            = 'scavenge';
     this.increment       =  1;
     this.subType         = 'basic';
-    this.verb            = 'scavage';
+    this.verb            = 'scavenge';
     this.activity        = 'Scavaging';
     this.progressFactor  =  1;
-    this.templateName    = '#scavage-resource-row-template';
+    this.templateName    = '#scavenge-resource-row-template';
     this.prereqs         = {
       handaxe: 1
     };
   }
 
   /**
-   * Used when scavage is clicked/produced.
+   * Used when scavenge is clicked/produced.
    */
   incrementResource() {
     civData.food.owned += civData.gather.increment;
