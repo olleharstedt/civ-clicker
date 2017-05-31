@@ -14,4 +14,4 @@ Source: Trigger, 2003: Understanding early civilizations.
 
  Methods: Swidden, terrace, irrigation.
 
- TODO: Rain. Frost.
+ TODO: Rain. Frost. Tools used to dig, harvest, etc.
