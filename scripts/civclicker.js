@@ -3583,13 +3583,18 @@ setup.pages = function() {
   var p = $.when(1);  // Empty promise
   pageNames.forEach(function(pageName) {
     p = p.then(function() {
-      return $.get('templates/pages/' + pageName + '.html', function(pageHtml) {
-        var page = $('#page-' + pageName);
-        if (page.length == 0) {
-          throw 'Invalid page name: ' + pageName;
-        } else {
-          Logger.debug('Populating page html for page ' + pageName);
-          page.html(pageHtml);
+      return $.get({
+        type: 'GET',
+        cache: false,
+        url:  'templates/pages/' + pageName + '.html', 
+        success: function(pageHtml) {
+          var page = $('#page-' + pageName);
+          if (page.length == 0) {
+            throw 'Invalid page name: ' + pageName;
+          } else {
+            Logger.debug('Populating page html for page ' + pageName);
+            page.html(pageHtml);
+          }
         }
       });
     });
