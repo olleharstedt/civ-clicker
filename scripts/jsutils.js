@@ -214,3 +214,25 @@ function indexArrayByAttr(inArray, attr) {
         else { console.log("Duplicate or missing "+attr+" attribute in array: "+elem[attr]); }
 }); }
 
+/**
+ * First letter upper-case.
+ * @param string str
+ * @return string
+ */
+function ucfirst(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/**
+ * Pad a string.
+ * @return string
+ */
+function pad(pad, str, padLeft) {
+  if (typeof str === 'undefined')
+    return pad;
+  if (padLeft) {
+    return (pad + str).slice(-pad.length);
+  } else {
+    return (str + pad).substring(0, pad.length);
+  }
+}
