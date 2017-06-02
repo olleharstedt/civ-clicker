@@ -1,14 +1,33 @@
-<p>Idle citizens: <span id='tools-idle-citizens'>...</span>.</p>
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" class="active">
+    <a href="#tools-tab-produce" role="tab" data-toggle="tab">
+      Produce
+    </a>
+  </li>
+  <li role="presentation">
+    <a href="#tools-tab-equip" role="tab" data-toggle="tab">
+      Equip
+    </a>
+  </li>
+</ul>
 
-<p class='text-muted'>Recruit more idle citizens to be able to assign tool makers.</p>
+<div class="tab-content">
+  <div id="tools-tab-produce" class="tab-pane active">
+    <p>Idle citizens: <span id='tools-idle-citizens'>...</span>.</p>
 
-<div id="toolsContainer" class="panel panel-default">
-  <div class="panel-heading">
-    Tools
+    <p class='text-muted'>Recruit more idle citizens to be able to assign tool makers.</p>
+
+    <div id="toolsContainer" class="panel panel-default">
+      <div class="panel-heading">
+        Tools
+      </div>
+      <div class="panel-content">
+        <table id="toolsTable" class="tools table">
+          <!-- Populated by Tools plugin. -->
+        </table>
+      </div>
+    </div>
   </div>
-  <div class="panel-content">
-    <table id="toolsTable" class="tools table">
-      <!-- Populated by Tools plugin. -->
-    </table>
+  <div id="tools-tab-equip" class="tab-pane">
   </div>
 </div>
