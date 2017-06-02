@@ -13,6 +13,8 @@ class Unit extends CivObj { // props is an object containing the desired propert
     this.species     = 'human';   // Also:  'animal', "mechanical", "undead"
     this.place       = 'home';    // Also:  'party'
     this.combatType  =	'';       // Default noncombatant.  Also "infantry","cavalry","animal"
+    this.canEquip    = [];        // List of tools this unit can equip.
+    this.equipment   = {};        // Key-value store of equipment for this unit type.
 
     CivObj.call(this,props);
     copyProps(this,props,null,true);
@@ -24,7 +26,10 @@ class Unit extends CivObj { // props is an object containing the desired propert
   set customQtyId(value) {
     return this.customQtyId;
   }
-  onWin() { return; } // Do nothing.
+  onWin() {
+     // Do nothing.
+    return;
+  }
   get vulnerable() {
     return ((this.place == 'home')&&(this.alignment=='player')&&(this.subType=='normal'));
   }

@@ -71,6 +71,50 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
   }
 
   /**
+   * Update the equip table.
+   */
+  updateEquip() {
+    this.populateEquipAvailable();
+    this.populateEquipUnits();
+    $('#tools-equip-available option').on('click', () => {
+      this.populateEquipUnits();
+    });
+  }
+
+  /**
+   * Tools available for equipment.
+   */
+  populateEquipAvailable() {
+    const select = $('#tools-equip-available');
+    select.html('');
+    tools.forEach((tool) => {
+      const name = ucfirst(tool.name);
+      const amount = tool.owned;
+      select.append(`<option data-name="${tool.name}">${name} (${amount})</option>`);
+    });
+  }
+
+  /**
+   * List of units available for equipment.
+   */
+  populateEquipUnits() {
+    const activeTool = $('#tools-equip-available option:selected');
+    if (activeTool.length === 0) {
+      // Do nothing
+    } else {
+      const option = activeTool[0];
+      const toolName = $(option).data('name');
+      const select = $('#tools-equip-units');
+      unitData.forEach((unit) => {
+        if (unit.canEquip.indexOf(toolName) !== -1) {
+          const unitId = ucfirst(unit.id);
+          select.append(`<option>${unitId}</option>`);
+        }
+      });
+    }
+  }
+
+  /**
    * Init plugin.
    */
   init() {
