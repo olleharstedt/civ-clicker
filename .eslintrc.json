@@ -66,6 +66,7 @@
       "rndRound": true,
       "Unit": true,
       "WorkUnit": true,
+      "GathererUnit": true,
       "FarmerUnit": true,
       "WoodcutterUnit": true,
       "MinerUnit": true,
@@ -75,6 +76,7 @@
       "GatherResource": true,
       "ScavengeResource": true,
       "clearSpecialResourceNets": true,
+      "ucfirst": true,
       "getCostNote": true
     }
 }
