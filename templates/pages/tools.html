@@ -5,13 +5,14 @@
     </a>
   </li>
   <li role="presentation">
-    <a href="#tools-tab-equip" role="tab" data-toggle="tab">
+    <a onclick="CivClicker.plugins.Tools.updateEquip();" href="#tools-tab-equip" role="tab" data-toggle="tab">
       Equip
     </a>
   </li>
 </ul>
 
 <div class="tab-content">
+
   <div id="tools-tab-produce" class="tab-pane active">
     <p>Idle citizens: <span id='tools-idle-citizens'>...</span>.</p>
 
@@ -28,6 +29,28 @@
       </div>
     </div>
   </div>
+
   <div id="tools-tab-equip" class="tab-pane">
+    <div class="col-sm-4">
+      <select id="tools-equip-available" class="form-control" size=10>
+      </select>
+    </div>
+    <div class="col-sm-4">
+      <button id="tools-equip-equip" class="btn btn-default btn-block">
+        Equip
+        &nbsp;
+        <span class="fa fa-arrow-right"></span>
+      </button>
+      <button id="tools-equip-unequip" class="btn btn-default btn-block">
+        <span class="fa fa-arrow-left"></span>
+        &nbsp;
+        Unequip
+      </button>
+    </div>
+    <div class="col-sm-4">
+      <select id="tools-equip-units" class="form-control" size=10>
+      </select>
+    </div>
   </div>
+
 </div>
