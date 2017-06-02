@@ -549,25 +549,7 @@ function getCivData() {
       salable: false,  // Cannot be sold.
       customQtyId:"spawnCustomQty",
       effectText:"Playing idle games" }),
-    new WorkUnit({
-      id:              'gatherer',
-      singular:        'gatherer',
-      plural:          'gatherers',
-      source:          'unemployed',
-      efficiency_base: 0.2,
-      effectText:      'Gather for food, wood and stone',
-      get efficiency() { 
-        return 1;
-      },
-      set efficiency(value) {
-        this.efficiency_base = value;
-      },
-      doWork() {
-        const inc = 2 * civData.gatherer.owned; 
-        civData.food.owned += inc;
-        civData.food.net += inc;
-      }
-    }),
+    new GathererUnit(),
     new FarmerUnit(),
     new WoodcutterUnit(),
     new MinerUnit(),
