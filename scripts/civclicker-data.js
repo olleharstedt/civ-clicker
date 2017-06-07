@@ -6,7 +6,6 @@ function getCivData() {
   var civData = [
     // Resources
     new GatherResource(),
-    new ScavengeResource(),
     // Harvest
     new Resource({ 
       id:'food', name:'food', increment:1, specialChance:0.1,
