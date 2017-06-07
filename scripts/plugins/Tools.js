@@ -105,6 +105,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       const option = activeTool[0];
       const toolName = $(option).data('name');
       const select = $('#tools-equip-units');
+      select.html('');
       unitData.forEach((unit) => {
         if (unit.canEquip(toolName)) {
           const unitId = ucfirst(unit.id);
