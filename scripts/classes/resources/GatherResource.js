@@ -21,24 +21,28 @@ class GatherResource extends Resource {
 
   /**
    * Gathering increases food. There's no 'gather' resource.
-   * @return
+   * @param number times
+   * @return number
    */
-  incrementResource() {
-    civData.food.owned += civData.gather.increment;
+  incrementResource(targetId = 'gather', times = 1) {
+    const increment = civData.gather.increment * times;
+    civData.food.owned += increment;
 
     // Checks to see that resources are not exceeding their limits
     if (civData.food.owned > civData.food.limit) {
       civData.food.owned = civData.food.limit;
     }
 
-    if (Math.random() > 0.9) {
+    if (Math.random() > Math.pow(0.9, times)) {
       civData.wood.owned += 1;
       gameLog('Found wood while gathering');
-    } else if (Math.random() > 0.9) {
+    } else if (Math.random() > Math.pow(0.9, times)) {
       civData.stone.owned += 1;
       gameLog('Found stone while gathering');
     }
 
     updateResourceTotals();
+
+    return increment;
   }
 }

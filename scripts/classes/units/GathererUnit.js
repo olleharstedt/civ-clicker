@@ -11,9 +11,9 @@ class GathererUnit extends WorkUnit {
     this.source          = 'unemployed';
     this.efficiency_base =  0.2;
     this.effectText      = 'Gather for food, wood and stone';
-    this.canEquip        = [
+    this._canEquip        = [
       'handaxe'
-    ]
+    ];
   }
 
   get efficiency() { 

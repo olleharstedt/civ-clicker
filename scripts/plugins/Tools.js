@@ -106,11 +106,102 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       const toolName = $(option).data('name');
       const select = $('#tools-equip-units');
       unitData.forEach((unit) => {
-        if (unit.canEquip.indexOf(toolName) !== -1) {
+        if (unit.canEquip(toolName)) {
           const unitId = ucfirst(unit.id);
-          select.append(`<option>${unitId}</option>`);
+          select.append(`<option data-name="${unit.id}">${unitId}</option>`);
         }
       });
+    }
+  }
+
+  /**
+   * Run when user click "Equip" in tools
+   * equipment view.
+   */
+  equip() {
+    const toolName = this.getToolName();
+    const unitName = this.getUnitName();
+
+    if (toolName == null || unitName == null) {
+      // User did not select anything.
+    } else {
+      //
+    }
+  }
+
+  /**
+   * Run when user click "Unequip" in tools
+   * equipment view.
+   */
+  unequip() {
+  }
+
+  /**
+   * Get selected tool name.
+   * @return {string|null}
+   */
+  getToolName() {
+    const toolNames = $('#tools-equip-available option:selected');
+    if (toolNames.length === 0) {
+      return null;
+    } else {
+      const toolName = $(toolNames[0]).data('name');
+      return toolName;
+    }
+  }
+
+  /**
+   * Get selected unit name.
+   * @return {string|null}
+   */
+  getUnitName() {
+    const unitNames = $('#tools-equip-units option:selected');
+    if (unitNames.length === 0) {
+      return null;
+    } else {
+      const unitName = $(unitNames[0]).data('name');
+      return unitName;
+    }
+  }
+
+  /**
+   * Update equip/unequip buttons.
+   */
+  onEquipChange() {
+    const toolName = this.getToolName();
+    const unitName = this.getUnitName();
+
+    if (toolName == null || unitName == null) {
+      // Disable buttons.
+      $('#tools-equip-equip').attr('disabled', 'disabled');
+      $('#tools-equip-unequip').attr('disabled', 'disabled');
+    } else {
+      // Check if you can equip/unequip.
+      const unit = civData[unitName];
+      const tool = civData[toolName];
+
+      if (unit == null) {
+        throw 'Found no unit with name ' + unitName;
+      }
+
+      if (tool == null) {
+        throw 'Found no tool with name ' + toolName;
+      }
+
+      // Check if unit can equip this tool.
+      if (unit.canEquip(tool)) {
+        $('#tools-equip-equip').removeAttr('disabled');
+      } else {
+        $('#tools-equip-equip').attr('disabled', 'disabled');
+      }
+
+      // Check if unit can unequip this tool.
+      if (unit.canUnequip(tool)) {
+        $('#tools-equip-unequip').removeAttr('disabled');
+      } else {
+        $('#tools-equip-unequip').attr('disabled', 'disabled');
+      }
+
     }
   }
 

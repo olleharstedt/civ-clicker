@@ -32,23 +32,41 @@
 
   <div id="tools-tab-equip" class="tab-pane">
     <div class="col-sm-4">
-      <select id="tools-equip-available" class="form-control" size=10>
+      <select 
+        id="tools-equip-available"
+        class="form-control"
+        size=10
+        onchange="CivClicker.plugins.Tools.onEquipChange();"
+        >
       </select>
     </div>
     <div class="col-sm-4">
-      <button id="tools-equip-equip" class="btn btn-default btn-block">
+      <button 
+        id="tools-equip-equip"
+        class="btn btn-default btn-block"
+        onclick="CivClicker.plugins.Tools.equip();"
+      >
         Equip
         &nbsp;
         <span class="fa fa-arrow-right"></span>
       </button>
-      <button id="tools-equip-unequip" class="btn btn-default btn-block">
+      <button 
+        id="tools-equip-unequip"
+        class="btn btn-default btn-block"
+        onclick="CivClicker.plugins.Tools.unequip();"
+      >
         <span class="fa fa-arrow-left"></span>
         &nbsp;
         Unequip
       </button>
     </div>
     <div class="col-sm-4">
-      <select id="tools-equip-units" class="form-control" size=10>
+      <select 
+         id="tools-equip-units"
+         class="form-control"
+         size=10
+         onchange="CivClicker.plugins.Tools.onEquipChange();"
+        >
       </select>
     </div>
   </div>
