@@ -55,4 +55,11 @@ Tool.prototype = new CivObj({
     return amount;
   }
 
+  /**
+   * Total amount of unequipped tools available.
+   * @return {number}
+   */
+  totalUnequipped() {
+  }
+
 }, true);

@@ -131,6 +131,7 @@ class Unit extends CivObj {
 
   /**
    * Returns true if this unit can equip tool.
+   * Assumes one tool per unit, so never two swords for one man.
    * @param {Tool|string} tool tool or tool name
    * @return bool
    */
@@ -143,6 +144,28 @@ class Unit extends CivObj {
       }
     }
     return this._canEquip.indexOf(tool.id) !== -1;
+  }
+
+  /**
+   * Returns number of eqippable spaces left.
+   * If you have 10 gatheres, and equipped five of them
+   * with handaxes, you have 5 equip spaces left for the
+   * handaxe..
+   * @param {Tool} tool
+   * @return {number}
+   */
+  equipSpaceLeft(tool) {
+    if (typeof tool !== 'object') {
+      throw 'tool must be object';
+    }
+
+    if (this.canEquip(tool)) {
+      const equippedAmount = this.getEquipmentAmount(tool);
+      const unitsOwned = civData[this.id].owned;
+      return unitsOwned - equippedAmount;
+    } else {
+      return 0;
+    }
   }
 
   /**
@@ -159,14 +182,12 @@ class Unit extends CivObj {
    * @param {Tool} tool
    */
   equip(tool) {
-    if (this.canEquip(tool)) {
+    if (this.canEquip(tool) && this.equipSpaceLeft(tool) > 0) {
       if (typeof this._equipment[tool.id] == 'number') {
         this._equipment[tool.id]++;
       } else {
         this._equipment[tool.id] = 1;
       }
-    } else {
-      throw 'This unit can not equip this tool';
     }
   }
 

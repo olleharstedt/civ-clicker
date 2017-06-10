@@ -86,11 +86,17 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
    */
   populateEquipAvailable() {
     const select = $('#tools-equip-available');
+    // Remember if anything was selected from before.
+    const selected = $('#tools-equip-available option:selected');
     select.html('');
     tools.forEach((tool) => {
       const name = ucfirst(tool.name);
       const amount = tool.owned - tool.getTotalEquipped();
-      select.append(`<option data-name="${tool.name}">${name} (${amount})</option>`);
+      if (selected[0] && $(selected[0]).data('name') == tool.name) {
+        select.append(`<option selected="selected" data-name="${tool.name}">${name} (${amount})</option>`);
+      } else {
+        select.append(`<option data-name="${tool.name}">${name} (${amount})</option>`);
+      }
     });
   }
 
@@ -101,12 +107,18 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
     const tool = this.getSelectedTool();
     if (tool) {
       const select = $('#tools-equip-units');
+      const selected = $('#tools-equip-units option:selected');
       select.html('');
       unitData.forEach((unit) => {
         if (unit.canEquip(tool)) {
           const unitId = ucfirst(unit.id);
           const amount = unit.getEquipmentAmount(tool);
-          select.append(`<option data-name="${unit.id}">${unitId} (${amount})</option>`);
+          const unitsOwned = civData[unit.id].owned;
+          if (selected[0] && $(selected[0]).data('name') == unit.id) {
+            select.append(`<option selected="selected" data-name="${unit.id}">${unitId} (${amount}/${unitsOwned})</option>`);
+          } else {
+            select.append(`<option data-name="${unit.id}">${unitId} (${amount}/${unitsOwned})</option>`);
+          }
         }
       });
     }
