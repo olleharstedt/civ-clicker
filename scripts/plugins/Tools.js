@@ -125,8 +125,15 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
 
     if (toolName == null || unitName == null) {
       // User did not select anything.
+      console.log('missing selection');
+      this.onEquipChange();
     } else {
       //
+      console.log('toolName', toolName);
+      console.log('unitName', unitName);
+
+      const unit = civData[unitName];
+      const tool = civData[toolName];
     }
   }
 
@@ -169,40 +176,82 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
    * Update equip/unequip buttons.
    */
   onEquipChange() {
-    const toolName = this.getToolName();
-    const unitName = this.getUnitName();
-
-    if (toolName == null || unitName == null) {
-      // Disable buttons.
-      $('#tools-equip-equip').attr('disabled', 'disabled');
-      $('#tools-equip-unequip').attr('disabled', 'disabled');
+    // Check if unit can equip this tool.
+    if (this.canEquipSelected()) {
+      $('#tools-equip-equip').removeAttr('disabled');
     } else {
-      // Check if you can equip/unequip.
-      const unit = civData[unitName];
+      $('#tools-equip-equip').attr('disabled', 'disabled');
+    }
+
+    // Check if unit can unequip this tool.
+    if (this.canUnequipSelected()) {
+      $('#tools-equip-unequip').removeAttr('disabled');
+    } else {
+      $('#tools-equip-unequip').attr('disabled', 'disabled');
+    }
+  }
+
+  /**
+   * Returns true if selected unit can equip selected tool.
+   * @return bool
+   * @throws Exception if unit/tool name is invalid (not in civData).
+   */
+  canEquipSelected() {
+    const unit = this.getSelectedUnit();
+    const tool = this.getSelectedTool();
+
+    if (unit && tool) {
+      return unit.canEquip(tool);
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * Returns true if selected unit can unequip selected tool.
+   * @return bool
+   * @throws Exception if unit/tool name is invalid (not in civData).
+   */
+  canUnequipSelected() {
+    const unit = this.getSelectedUnit();
+    const tool = this.getSelectedTool();
+
+    if (unit && tool) {
+      return unit.canUnequip(tool);
+    } else {
+      return false;
+    }
+  }
+
+  /**
+   * @return {Tool|null}
+   */
+  getSelectedTool() {
+    const toolName = this.getToolName();
+    if (toolName == null) {
+      return null;
+    } else {
       const tool = civData[toolName];
-
-      if (unit == null) {
-        throw 'Found no unit with name ' + unitName;
-      }
-
       if (tool == null) {
         throw 'Found no tool with name ' + toolName;
       }
+      return tool;
+    }
+  }
 
-      // Check if unit can equip this tool.
-      if (unit.canEquip(tool)) {
-        $('#tools-equip-equip').removeAttr('disabled');
-      } else {
-        $('#tools-equip-equip').attr('disabled', 'disabled');
+  /**
+   * @return {Unit|null}
+   */
+  getSelectedUnit() {
+    const unitName = this.getUnitName();
+    if (unitName == null) {
+      return null;
+    } else {
+      const unit = civData[unitName];
+      if (unit == null) {
+        throw 'Found no unit with name ' + unitName;
       }
-
-      // Check if unit can unequip this tool.
-      if (unit.canUnequip(tool)) {
-        $('#tools-equip-unequip').removeAttr('disabled');
-      } else {
-        $('#tools-equip-unequip').attr('disabled', 'disabled');
-      }
-
+      return unit;
     }
   }
 
