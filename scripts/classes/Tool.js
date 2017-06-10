@@ -36,11 +36,23 @@ Tool.prototype = new CivObj({
   },
 
   /**
-   * @return Element
+   * @return {Element}
    */
   getProgressBarCell() {
     const selector = '#toolsTable .tool-row-' + this.name + ' .button-td';
     const cells = $(selector);
     return cells[0];
+  },
+
+  /**
+   * @return {number}
+   */
+  getTotalEquipped() {
+    let amount = 0;
+    unitData.forEach((unit) => {
+      amount += unit.getEquipmentAmount(this);
+    });
+    return amount;
   }
+
 }, true);

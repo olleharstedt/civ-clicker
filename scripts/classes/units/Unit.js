@@ -131,7 +131,7 @@ class Unit extends CivObj {
 
   /**
    * Returns true if this unit can equip tool.
-   * @param Tool|string tool or tool name
+   * @param {Tool|string} tool tool or tool name
    * @return bool
    */
   canEquip(tool) {
@@ -142,7 +142,6 @@ class Unit extends CivObj {
         tool = civData[tool];
       }
     }
-
     return this._canEquip.indexOf(tool.id) !== -1;
   }
 
@@ -152,6 +151,43 @@ class Unit extends CivObj {
    * @return bool
    */
   canUnequip(tool) {
-    return this._equipment[tool.id] && this._equipment[tool.id];
+    return this._equipment[tool.id] > 0;
   }
+
+  /**
+   * Equip this unit with tool.
+   * @param {Tool} tool
+   */
+  equip(tool) {
+    if (this.canEquip(tool)) {
+      if (typeof this._equipment[tool.id] == 'number') {
+        this._equipment[tool.id]++;
+      } else {
+        this._equipment[tool.id] = 1;
+      }
+    } else {
+      throw 'This unit can not equip this tool';
+    }
+  }
+
+  /**
+   * Unequip tool from this unit
+   * @param {Tool} tool
+   */
+  unequip(tool) {
+  }
+
+  /**
+   * Returns the amount that is equiped for this unit and tool.
+   * @param {Tool} tool
+   * @return {number}
+   */
+  getEquipmentAmount(tool) {
+    if (typeof this._equipment[tool.id] == 'number') {
+      return this._equipment[tool.id];
+    } else {
+      return 0;
+    }
+  }
+
 }

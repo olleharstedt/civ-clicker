@@ -89,7 +89,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
     select.html('');
     tools.forEach((tool) => {
       const name = ucfirst(tool.name);
-      const amount = tool.owned;
+      const amount = tool.owned - tool.getTotalEquipped();
       select.append(`<option data-name="${tool.name}">${name} (${amount})</option>`);
     });
   }
@@ -98,18 +98,15 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
    * List of units available for equipment.
    */
   populateEquipUnits() {
-    const activeTool = $('#tools-equip-available option:selected');
-    if (activeTool.length === 0) {
-      // Do nothing
-    } else {
-      const option = activeTool[0];
-      const toolName = $(option).data('name');
+    const tool = this.getSelectedTool();
+    if (tool) {
       const select = $('#tools-equip-units');
       select.html('');
       unitData.forEach((unit) => {
-        if (unit.canEquip(toolName)) {
+        if (unit.canEquip(tool)) {
           const unitId = ucfirst(unit.id);
-          select.append(`<option data-name="${unit.id}">${unitId}</option>`);
+          const amount = unit.getEquipmentAmount(tool);
+          select.append(`<option data-name="${unit.id}">${unitId} (${amount})</option>`);
         }
       });
     }
@@ -120,20 +117,12 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
    * equipment view.
    */
   equip() {
-    const toolName = this.getToolName();
-    const unitName = this.getUnitName();
+    const unit = this.getSelectedUnit();
+    const tool = this.getSelectedTool();
 
-    if (toolName == null || unitName == null) {
-      // User did not select anything.
-      console.log('missing selection');
-      this.onEquipChange();
-    } else {
-      //
-      console.log('toolName', toolName);
-      console.log('unitName', unitName);
-
-      const unit = civData[unitName];
-      const tool = civData[toolName];
+    if (unit && tool && unit.canEquip(tool)) {
+      unit.equip(tool);
+      this.updateEquip();
     }
   }
 
@@ -142,6 +131,13 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
    * equipment view.
    */
   unequip() {
+    const unit = this.getSelectedUnit();
+    const tool = this.getSelectedTool();
+
+    if (unit && tool && unit.canUnequip(tool)) {
+      unit.unequip(tool);
+      this.updateEquip();
+    }
   }
 
   /**
