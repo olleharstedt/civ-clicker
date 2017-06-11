@@ -214,4 +214,27 @@ class Unit extends CivObj {
     }
   }
 
+  /**
+   * Retrun object that can be saved in local storage.
+   * @return {object}
+   */
+  save() {
+    return {
+      owned: this.owned,
+      _canEquip: this._canEquip,
+      _equipment: this._equipment
+    };
+  }
+
+  /**
+   * Load data into object upon load.
+   * Data should come from save() method above.
+   * @param {object} data
+   */
+  load(data) {
+    for (let key in data) {
+      this[key] = data[key];
+    }
+  }
+
 }

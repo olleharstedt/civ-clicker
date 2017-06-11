@@ -76,6 +76,9 @@
       "GatherResource": true,
       "ScavengeResource": true,
       "clearSpecialResourceNets": true,
+      "VersionData": true,
+      "read_cookie": true,
+      "mergeObj": true,
       "ucfirst": true,
       "getCostNote": true
     }

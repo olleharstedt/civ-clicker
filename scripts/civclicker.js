@@ -31,7 +31,7 @@ var loopTimer = 0;
 // TODO: Update the version numbering internally
 // Version is read from config.json - see entry point at bottom of file.
 var version = 19; // This is an ordinal used to trigger reloads.
-var versionData = new VersionData(1,1,59,"alpha"); // this is not accurate
+var versionData = new VersionData(2, 0, 0, 'alpha'); // this is not accurate
 
 // Include URL in save tag so players can play different version of CivClicker on one host.
 var saveTag = "civ_" + window.location.href;
@@ -2197,123 +2197,165 @@ function migrateGameData(loadVar, settingsVarReturn)
 }
 
 // Load in saved data
-function load (loadType) {
-	//define load variables
-	var loadVar = {},
-		loadVar2 = {},
-		settingsVar = {};
-	var saveVersion = new VersionData(1,0,0,"legacy");
+function load(loadType) {
+  //define load variables
+  let loadVar = {};
+  let loadVar2 = {};
+  let settingsVar = {};
+  let saveVersion = new VersionData(1,0,0,'legacy');
+  let string1;
+  let string2;
+  let settingsString;
 
-	if (loadType === "cookie") {
-		//check for cookies
-		if (read_cookie(saveTag) && read_cookie(saveTag2)){
-			//set variables to load from
-			loadVar = read_cookie(saveTag);
-			loadVar2 = read_cookie(saveTag2);
-			loadVar = mergeObj(loadVar, loadVar2);
-			loadVar2 = undefined;
-			//notify user
-			gameLog("Loaded saved game from cookie");
-			gameLog("Save system switching to localStorage.");
-		} else {
-			console.log("Unable to find cookie");
-			return false;
-		}
-	}
-	
-	if (loadType === "localStorage") {
-		//check for local storage
-		var string1;
-		var string2;
-		var settingsString;
-		try {
-			settingsString = localStorage.getItem(saveSettingsTag);
-			string1 = localStorage.getItem(saveTag);
-			string2 = localStorage.getItem(saveTag2);
+  if (loadType === 'cookie') {
+    //check for cookies
+    if (read_cookie(saveTag) && read_cookie(saveTag2)){
+      //set variables to load from
+      loadVar = read_cookie(saveTag);
+      loadVar2 = read_cookie(saveTag2);
+      loadVar = mergeObj(loadVar, loadVar2);
+      loadVar2 = undefined;
+      //notify user
+      gameLog('Loaded saved game from cookie');
+      gameLog('Save system switching to localStorage.');
+    } else {
+      console.log('Unable to find cookie');
+      return false;
+    }
+  }
 
-			if (!string1) {
-				console.log("Unable to find variables in localStorage. Attempting to load cookie.");
-				return load("cookie");
-			}
+  if (loadType === 'localStorage') {
+    //check for local storage
+    try {
+      settingsString = localStorage.getItem(saveSettingsTag);
+      string1 = localStorage.getItem(saveTag);
+      string2 = localStorage.getItem(saveTag2);
 
-		} catch(err) {
-			if (!string1) { // It could be fine if string2 or settingsString fail.
-				handleStorageError(err);
-				return load("cookie");
-			}
-		}
-		
-		// Try to parse the strings
-		if (string1) { try { loadVar  = JSON.parse(string1); } catch(ignore){} }
-		if (string2) { try { loadVar2 = JSON.parse(string2); } catch(ignore){} }
-		if (settingsString) { try { settingsVar = JSON.parse(settingsString); } catch(ignore){} }
+      if (!string1) {
+        console.log("Unable to find variables in localStorage. Attempting to load cookie.");
+        return load("cookie");
+      }
 
-		// If there's a second string (old save game format), merge it in.
-		if (loadVar2) { loadVar = mergeObj(loadVar, loadVar2); loadVar2 = undefined; }
+    } catch(err) {
+      if (!string1) { // It could be fine if string2 or settingsString fail.
+        handleStorageError(err);
+        return load("cookie");
+      }
+    }
 
-		if (!loadVar) {
-			console.log("Unable to parse variables in localStorage. Attempting to load cookie.");
-			return load("cookie");
-		}
+    // Try to parse the strings
+    if (string1) {
+      try {
+        loadVar  = JSON.parse(string1);
+      } catch(ignore) {
+        // TODO?
+      }
+    }
 
-		//notify user
-		gameLog("Loaded saved game from localStorage");
-	}
-	
-	if (loadType === "import") {
-		loadVar = importByInput(ui.find("#impexpField"));
-	}
+    if (string2) {
+      try {
+        loadVar2 = JSON.parse(string2);
+      } catch(ignore) {
+        // TODO?
+      }
+    }
+    if (settingsString) {
+      try {
+        settingsVar = JSON.parse(settingsString);
+      } catch(ignore) {
+        // TODO?
+      }
+    }
 
-	saveVersion = mergeObj(saveVersion, loadVar.versionData);
-	if (saveVersion.toNumber() > versionData.toNumber()) {
-		// Refuse to load saved games from future versions.
-		var alertStr = "Cannot load; saved game version " + saveVersion + " is newer than game version " + versionData;
-		console.log(alertStr);
-		alert(alertStr);
-		return false;
-	} 
-	if (saveVersion.toNumber() < versionData.toNumber()) {
-		// Migrate saved game data from older versions.
-		var settingsVarReturn = { val: {} };
-		migrateGameData(loadVar, settingsVarReturn);
-		settingsVar = settingsVarReturn.val;
+    // If there's a second string (old save game format), merge it in.
+    if (loadVar2) {
+      loadVar = mergeObj(loadVar, loadVar2);
+      loadVar2 = undefined;
+    }
 
-		// Merge the loaded data into our own, in case we've added fields.
-		mergeObj(curCiv, loadVar.curCiv);
-	} else {
-		curCiv = loadVar.curCiv; // No need to merge if the versions match; this is quicker.
-	}
+    if (!loadVar) {
+      console.log('Unable to parse variables in localStorage. Attempting to load cookie.');
+      return load('cookie');
+    }
 
-	console.log("Loaded save game version " + saveVersion.major +
-		"." + saveVersion.minor + "." + saveVersion.sub + "(" + saveVersion.mod + ") via", loadType);
+    //notify user
+    gameLog('Loaded saved game from localStorage');
+  }
 
-	if (isValid(settingsVar)){ settings = mergeObj(settings,settingsVar); }
- 
-	adjustMorale(0);
-	updateRequirements(civData.mill);
-	updateRequirements(civData.fortification);
-	updateRequirements(civData.battleAltar);
-	updateRequirements(civData.fieldsAltar);
-	updateRequirements(civData.underworldAltar);
-	updateRequirements(civData.catAltar);
-	updateResourceTotals();
-	updateJobButtons();
-	makeDeitiesTables();
-	updateDeity();
-	updateUpgrades();
-	updateTargets();
-	updateDevotion();
-	updatePartyButtons();
-	updateMorale();
-	updateWonder();
-	tallyWonderCount();
-	ui.find("#clicks").innerHTML = prettify(Math.round(curCiv.resourceClicks));
-	ui.find("#civName").innerHTML = curCiv.civName;
-	ui.find("#rulerName").innerHTML = curCiv.rulerName;
-	ui.find("#wonderNameP").innerHTML = curCiv.curWonder.name;
-	ui.find("#wonderNameC").innerHTML = curCiv.curWonder.name;
+  if (loadType === 'import') {
+    loadVar = importByInput(ui.find('#impexpField'));
+  }
 
-	return true;
+  saveVersion = mergeObj(saveVersion, loadVar.versionData);
+  if (saveVersion.toNumber() > versionData.toNumber()) {
+    // Refuse to load saved games from future versions.
+    var alertStr = 'Cannot load; saved game version ' + saveVersion + ' is newer than game version ' + versionData;
+    console.log(alertStr);
+    alert(alertStr);
+    return false;
+  } 
+  if (saveVersion.toNumber() < versionData.toNumber()) {
+    // Migrate saved game data from older versions.
+    var settingsVarReturn = {
+      val: {}
+    };
+    //migrateGameData(loadVar, settingsVarReturn);
+    settingsVar = settingsVarReturn.val;
+
+    // Merge the loaded data into our own, in case we've added fields.
+    mergeObj(curCiv, loadVar.curCiv);
+  } else {
+    curCiv = loadVar.curCiv; // No need to merge if the versions match; this is quicker.
+    if (loadVar.extraData.unitData) {
+      console.log('Loading extra data.');
+      const loadedUnitData = loadVar.extraData.unitData;
+      for (let unitId in loadedUnitData) {
+        if (civData[unitId]) {
+          civData[unitId].load(loadedUnitData[unitId]);
+        } else {
+          console.log('Load error: Could not load ' + unitId);
+        }
+      }
+    } else {
+      console.log('No extra data to load.');
+    }
+  }
+
+  console.log(
+    'Loaded save game version ' + saveVersion.major +
+    '.' + saveVersion.minor + '.' + saveVersion.sub + '(' + saveVersion.mod + ') via',
+    loadType
+  );
+
+  if (isValid(settingsVar)) {
+    settings = mergeObj(settings,settingsVar);
+  }
+
+  adjustMorale(0);
+  updateRequirements(civData.mill);
+  updateRequirements(civData.fortification);
+  updateRequirements(civData.battleAltar);
+  updateRequirements(civData.fieldsAltar);
+  updateRequirements(civData.underworldAltar);
+  updateRequirements(civData.catAltar);
+  updateResourceTotals();
+  updateJobButtons();
+  makeDeitiesTables();
+  updateDeity();
+  updateUpgrades();
+  updateTargets();
+  updateDevotion();
+  updatePartyButtons();
+  updateMorale();
+  updateWonder();
+  tallyWonderCount();
+  ui.find("#clicks").innerHTML = prettify(Math.round(curCiv.resourceClicks));
+  ui.find("#civName").innerHTML = curCiv.civName;
+  ui.find("#rulerName").innerHTML = curCiv.rulerName;
+  ui.find("#wonderNameP").innerHTML = curCiv.curWonder.name;
+  ui.find("#wonderNameC").innerHTML = curCiv.curWonder.name;
+
+  return true;
 }
 
 function importByInput (elt) {
@@ -2344,19 +2386,30 @@ function importByInput (elt) {
 // Create objects and populate them with the variables, these will be stored in HTML5 localStorage.
 // Cookie-based saves are no longer supported.
 function save(savetype) {
-  var saveVar = {
-    versionData:versionData, // Version information header
-    curCiv:curCiv // Game data
+
+  // Extra data contains data from save() methods.
+  let extraData = {
+    unitData: {}
   };
 
-  var settingsVar = settings; // UI Settings are saved separately.
+  unitData.forEach((unit) => {
+    extraData.unitData[unit.id] = unit.save();
+  });
+
+  const saveVar = {
+    versionData: versionData, // Version information header
+    curCiv:      curCiv,      // Game data
+    extraData:   extraData
+  };
+
+  const settingsVar = settings; // UI Settings are saved separately.
 
   ////////////////////////////////////////////////////
 
   // Handle export
   if (savetype == 'export'){
-    var savestring = '[' + JSON.stringify(saveVar) + ']';
-    var compressed = LZString.compressToBase64(savestring);
+    const savestring = '[' + JSON.stringify(saveVar) + ']';
+    const compressed = LZString.compressToBase64(savestring);
     console.log('Compressed save from ' + savestring.length + ' to ' + compressed.length + ' characters');
     ui.find('#impexpField').value = compressed;
     gameLog('Exported game to text');
