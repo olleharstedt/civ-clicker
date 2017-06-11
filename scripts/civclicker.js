@@ -2343,63 +2343,61 @@ function importByInput (elt) {
 
 // Create objects and populate them with the variables, these will be stored in HTML5 localStorage.
 // Cookie-based saves are no longer supported.
-function save(savetype){
-	var xmlhttp;
+function save(savetype) {
+  var saveVar = {
+    versionData:versionData, // Version information header
+    curCiv:curCiv // Game data
+  };
 
-	var saveVar = {
-		versionData:versionData, // Version information header
-		curCiv:curCiv // Game data
-	};
+  var settingsVar = settings; // UI Settings are saved separately.
 
-	var settingsVar = settings; // UI Settings are saved separately.
+  ////////////////////////////////////////////////////
 
-	////////////////////////////////////////////////////
+  // Handle export
+  if (savetype == 'export'){
+    var savestring = '[' + JSON.stringify(saveVar) + ']';
+    var compressed = LZString.compressToBase64(savestring);
+    console.log('Compressed save from ' + savestring.length + ' to ' + compressed.length + ' characters');
+    ui.find('#impexpField').value = compressed;
+    gameLog('Exported game to text');
+    return true;
+  }
 
-	// Handle export
-	if (savetype == "export"){
-		var savestring = "[" + JSON.stringify(saveVar) + "]";
-		var compressed = LZString.compressToBase64(savestring);
-		console.log("Compressed save from " + savestring.length + " to " + compressed.length + " characters");
-		ui.find("#impexpField").value = compressed;
-		gameLog("Exported game to text");
-		return true;
-	}
+  //set localstorage
+  try {
+    // Delete the old cookie-based save to avoid mismatched saves
+    deleteCookie(saveTag);
+    deleteCookie(saveTag2);
 
-	//set localstorage
-	try {
-		// Delete the old cookie-based save to avoid mismatched saves
-		deleteCookie(saveTag);
-		deleteCookie(saveTag2);
+    localStorage.setItem(saveTag, JSON.stringify(saveVar));
 
-		localStorage.setItem(saveTag, JSON.stringify(saveVar));
+    // We always save the game settings.
+    localStorage.setItem(saveSettingsTag, JSON.stringify(settingsVar));
 
-		// We always save the game settings.
-		localStorage.setItem(saveSettingsTag, JSON.stringify(settingsVar));
+    //Update console for debugging, also the player depending on the type of save (manual/auto)
+    if (savetype == 'auto'){
+      console.log('Autosave');
+      gameLog('Autosaved');
+    } else if (savetype == 'manual'){
+      alert('Game Saved');
+      console.log('Manual Save');
+      gameLog('Saved game');
+    }
+  } catch(err) {
+    handleStorageError(err);
 
-		//Update console for debugging, also the player depending on the type of save (manual/auto)
-		if (savetype == "auto"){
-			console.log("Autosave");
-			gameLog("Autosaved");
-		} else if (savetype == "manual"){
-			alert("Game Saved");
-			console.log("Manual Save");
-			gameLog("Saved game");
-		}
-	} catch(err) {
-		handleStorageError(err);
+    if (savetype == 'auto'){
+      console.log('Autosave Failed');
+      gameLog('Autosave Failed');
+    } else if (savetype == 'manual'){
+      alert('Save Failed!');
+      console.log('Save Failed');
+      gameLog('Save Failed');
+    }
+    return false;
+  }
 
-		if (savetype == "auto"){
-			console.log("Autosave Failed");
-			gameLog("Autosave Failed");
-		} else if (savetype == "manual"){
-			alert("Save Failed!");
-			console.log("Save Failed");
-			gameLog("Save Failed");
-		}
-		return false;
-	}
-
-	return true;
+  return true;
 }
 
 function deleteSave(){
