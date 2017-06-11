@@ -2160,7 +2160,7 @@ function migrateGameData(loadVar, settingsVarReturn)
 		delete loadVar.curCiv.tradeCounter;
 	}
 
-	if (isValid(loadVar.wonder.array)) // v1.1.59: wonder.array moved to curCiv.wonders
+	if (isValid(loadVar.wonder) && isValid(loadVar.wonder.array)) // v1.1.59: wonder.array moved to curCiv.wonders
 	{
 		if (!isValid(loadVar.curCiv.wonders)) { 
 			loadVar.curCiv.wonders = [];
