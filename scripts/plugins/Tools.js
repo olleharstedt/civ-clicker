@@ -11,6 +11,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
 
   constructor() {
     this.tickSub = null;
+    this.purchaseSub = null;
     this.toolsRowTemplate = null;
     this.availableTools = [];
 
@@ -277,6 +278,12 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       this.updateAmount();
       this.updateIdleCitizens();
     });
+
+    // Update equip tables after purchase is done.
+    this.purchaseSub = CivClicker.Events.subscribe('global.doPurchase.finished', () => {
+      this.onEquipChange();
+      this.updateEquip();
+    });
   }
 
   /**
@@ -285,6 +292,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
   unload() {
     if (this.tickSub) {
       this.tickSub.remove();
+      this.purchaseSub.remove();
     }
   }
 });

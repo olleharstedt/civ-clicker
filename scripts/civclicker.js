@@ -1011,6 +1011,13 @@ function doPurchase(objId, num) {
     updateTargets(); // might enable/disable raiding
     setUITable(basicResources, 'basicResources');
 
+    CivClicker.Events.publish(
+      'global.doPurchase.finished',
+      {
+        purchaseObj:  purchaseObj
+      }
+    );
+
     return num;
   }
 
