@@ -3,7 +3,23 @@
     <img class='icon icon-lg' src='images/{{tool.icon}}' />
   </td>
   <td>{{#ucfirst}}{{tool.name}}{{/ucfirst}}</td>
-  <td class='tool-{{tool.name}}-owned'>{{owned}}</td>
+  <td>
+    <span
+      data-toggle="tooltip"
+      title="Number of total tools owned."
+      class='tool-{{tool.name}}-owned'
+    >
+      {{owned}}
+    </span>
+    &nbsp;
+    <span
+      data-toggle="tooltip"
+      title="Number of equipped tools."
+      class='tool-{{tool.name}}-equipped'
+    >
+      ({{equipped}})
+    </span>
+  </td>
   <td class='button-td' style='width: 100px;'>
     <button class='btn btn-default btn-small' onclick='doPurchase("{{tool.name}}", 1);'>
       Construct

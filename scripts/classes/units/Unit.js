@@ -192,10 +192,13 @@ class Unit extends CivObj {
   }
 
   /**
-   * Unequip tool from this unit
+   * Unequip tool from this unit.
    * @param {Tool} tool
    */
   unequip(tool) {
+    if (this.canUnequip(tool) && this.getEquipmentAmount(tool) > 0) {
+      this._equipment[tool.id]--;
+    }
   }
 
   /**

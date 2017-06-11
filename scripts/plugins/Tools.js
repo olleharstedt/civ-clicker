@@ -40,6 +40,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
           tool: tool,
           owned: civData[tool.name].owned,
           cost: getCostNote(tool),
+          equipped: tool.getTotalEquipped(),
           ucfirst: () => {
             return (s, render) => {
               let rendered = render(s);
@@ -61,6 +62,10 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       const owned = civData[tool.name].owned;
       const selector = `.tool-${tool.name}-owned`;
       $(selector).html(owned);
+
+      // Update equipped.
+      const equippedSelector = `.tool-${tool.name}-equipped`;
+      $(equippedSelector).html('(' + tool.getTotalEquipped() + ')')
     });
   }
 
