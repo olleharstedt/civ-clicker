@@ -53,7 +53,15 @@ Tool.prototype = new CivObj({
       amount += unit.getEquipmentAmount(this);
     });
     return amount;
-  }
+  },
+
+  /**
+   * Return number of available tools (not equipped).
+   * @return {number}
+   */
+  getAvailableTools() {
+    return this.owned - this.getTotalEquipped();
+  },
 
   /**
    * Total amount of unequipped tools available.

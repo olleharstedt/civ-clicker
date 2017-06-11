@@ -132,8 +132,12 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
     const unit = this.getSelectedUnit();
     const tool = this.getSelectedTool();
 
-    if (unit && tool && unit.canEquip(tool)) {
+    if (unit
+        && tool
+        && unit.canEquip(tool)
+        && tool.getAvailableTools() > 0) {
       unit.equip(tool);
+      this.onEquipChange();
       this.updateEquip();
     }
   }
@@ -148,6 +152,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
 
     if (unit && tool && unit.canUnequip(tool)) {
       unit.unequip(tool);
+      this.onEquipChange();
       this.updateEquip();
     }
   }
@@ -209,7 +214,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
     const tool = this.getSelectedTool();
 
     if (unit && tool) {
-      return unit.canEquip(tool);
+      return unit.canEquip(tool) && tool.getAvailableTools() > 0;
     } else {
       return false;
     }
