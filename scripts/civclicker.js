@@ -2299,7 +2299,7 @@ function load(loadType) {
     var settingsVarReturn = {
       val: {}
     };
-    //migrateGameData(loadVar, settingsVarReturn);
+    migrateGameData(loadVar, settingsVarReturn);
     settingsVar = settingsVarReturn.val;
 
     // Merge the loaded data into our own, in case we've added fields.
