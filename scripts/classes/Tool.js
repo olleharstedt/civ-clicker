@@ -32,7 +32,16 @@ Tool.prototype = new CivObj({
    * @return {number}
    */
   calculateProgressTime(amount) {
-    return 5000;
+    let time = 0;
+    for (let material in this.require) {
+      switch (material) {
+        case 'stone':
+          // One second per stone used.
+          time += this.require[material] * amount * 1000;
+          break;
+      }
+    }
+    return time;
   },
 
   /**
