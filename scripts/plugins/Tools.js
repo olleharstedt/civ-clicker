@@ -65,7 +65,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
 
       // Update equipped.
       const equippedSelector = `.tool-${tool.name}-equipped`;
-      $(equippedSelector).html('(' + tool.getTotalEquipped() + ')')
+      $(equippedSelector).html('(' + tool.getTotalEquipped() + ')');
     });
   }
 
@@ -294,7 +294,6 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       const val = that.currentTarget.value;
       $('.tool-btn-construct').data('x', val);
       $('.tool-btn-construct').html('Construct ' + shortify(val));
-      console.log(that.currentTarget);
     });
   }
 
