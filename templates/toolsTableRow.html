@@ -21,11 +21,15 @@
     </span>
   </td>
   <td class='button-td' style='width: 100px;'>
-    <button class='btn btn-default btn-small' onclick='doPurchase("{{tool.name}}", 1);'>
-      Construct
+    <button
+      class='btn btn-default btn-small tool-btn-construct'
+      onclick='doPurchase("{{tool.name}}", $(this).data("x"));'
+      data-x="1"
+    >
+      Construct 1
     </button>
   </td>
-  <td>{{{cost}}}</td>
+  <td class="text-center" data-toggle="tooltip" title="Cost to produce x tool(s)">{{{cost}}}</td>
   <td>Tool makers:</td>
   <td>
     <button id='tool-{{tool.name}}-decrease' data-toggle='tooltip' title='Remove tool maker' class='btn btn-default btn-sm x1'>-1</button>

@@ -14,9 +14,25 @@
 <div class="tab-content">
 
   <div id="tools-tab-produce" class="tab-pane active">
-    <p>Idle citizens: <span id='tools-idle-citizens'>...</span>.</p>
+    <p>Idle citizens: <span id="tools-idle-citizens">...</span>.</p>
 
-    <p class='text-muted'>Recruit more idle citizens to be able to assign tool makers.</p>
+    <div class="row row-margin">
+      <span class="col-sm-6 text-muted">Recruit more idle citizens to be able to assign tool makers.</span>
+      <div class="col-sm-6">
+        <div class="btn-group pull-right" data-toggle="buttons" role="group">
+          <label class="btn btn-default active"><input type="radio" name="tool-produce-x" value="1" />1</label>
+          <label class="btn btn-default"><input type="radio" name="tool-produce-x" value="10" />10</label>
+          <label class="btn btn-default"><input type="radio" name="tool-produce-x" value="100" />100</label>
+          <label class="btn btn-default"><input type="radio" name="tool-produce-x" value="1000" />1k</label>
+          <!--
+          <button class="btn btn-default active">1</button>
+          <button class="btn btn-default">10</button>
+          <button class="btn btn-default">100</button>
+          <button class="btn btn-default">1k</button>
+          -->
+        </div>
+      </div>
+    </div>
 
     <div id="toolsContainer" class="panel panel-default">
       <div class="panel-heading">

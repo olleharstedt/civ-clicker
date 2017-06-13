@@ -289,6 +289,13 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       this.onEquipChange();
       this.updateEquip();
     });
+
+    $('input[name="tool-produce-x"]').on('change', (that) => {
+      const val = that.currentTarget.value;
+      $('.tool-btn-construct').data('x', val);
+      $('.tool-btn-construct').html('Construct ' + shortify(val));
+      console.log(that.currentTarget);
+    });
   }
 
   /**
