@@ -41,7 +41,8 @@ class GathererUnit extends WorkUnit {
 
     const foodChance = Math.pow(0.9, owned);
     if (Math.random() > foodChance) {
-      const found = 1;
+      const handaxes = this.getEquipmentAmount(civData['handaxe']);
+      const found = 1 + (0.2 * handaxes);
       const formatChance = Math.round(((1 - foodChance) * 100)) + '%';
       civData.food.owned += found;
       gameLog(`Found ${found} food while gathering (chance ${formatChance})`);
