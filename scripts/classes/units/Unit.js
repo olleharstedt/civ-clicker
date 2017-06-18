@@ -213,10 +213,24 @@ class Unit extends CivObj {
   /**
    * Unequip tool from this unit.
    * @param {Tool} tool
+   * @param {number} amount
    */
-  unequip(tool) {
-    if (this.canUnequip(tool) && this.getEquipmentAmount(tool) > 0) {
-      this._equipment[tool.id]--;
+  unequip(tool, amount) {
+    if (amount == undefined) {
+      amount = 1;
+    }
+
+    const equipmentAmount = this.getEquipmentAmount(tool);
+    let toTransfer = 1;
+
+    if (equipmentAmount >= amount) {
+      toTransfer = amount;
+    } else if (equipmentAmount < amount) {
+      toTransfer = equipmentAmount;
+    }
+
+    if (this.canUnequip(tool) && equipmentAmount > 0) {
+      this._equipment[tool.id] -= parseInt(toTransfer);
     }
   }
 

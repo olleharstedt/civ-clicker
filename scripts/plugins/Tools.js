@@ -156,9 +156,10 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
   unequip() {
     const unit = this.getSelectedUnit();
     const tool = this.getSelectedTool();
+    const amount = $('#tools-equip-equip').data('x');
 
     if (unit && tool && unit.canUnequip(tool)) {
-      unit.unequip(tool);
+      unit.unequip(tool, amount);
       this.onEquipChange();
       this.updateEquip();
     }
