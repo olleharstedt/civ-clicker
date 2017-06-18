@@ -24,12 +24,6 @@
           <label class="btn btn-default"><input type="radio" name="tool-produce-x" value="10" />10</label>
           <label class="btn btn-default"><input type="radio" name="tool-produce-x" value="100" />100</label>
           <label class="btn btn-default"><input type="radio" name="tool-produce-x" value="1000" />1k</label>
-          <!--
-          <button class="btn btn-default active">1</button>
-          <button class="btn btn-default">10</button>
-          <button class="btn btn-default">100</button>
-          <button class="btn btn-default">1k</button>
-          -->
         </div>
       </div>
     </div>
@@ -47,6 +41,19 @@
   </div>
 
   <div id="tools-tab-equip" class="tab-pane">
+    <div class="row row-margin">
+    <div class="col-sm-6">
+      <span class="text-muted">Equip your citizens with the tools you produce.</span>
+    </div>
+    <div class="col-sm-6 pull-right">
+        <div class="btn-group pull-right" data-toggle="buttons" role="group">
+          <label class="btn btn-default active"><input type="radio" name="tool-equip-x" value="1" />1</label>
+          <label class="btn btn-default"><input type="radio" name="tool-equip-x" value="10" />10</label>
+          <label class="btn btn-default"><input type="radio" name="tool-equip-x" value="100" />100</label>
+          <label class="btn btn-default"><input type="radio" name="tool-equip-x" value="1000" />1k</label>
+        </div>
+    </div>
+    </div>
     <div class="col-sm-4">
       <select 
         id="tools-equip-available"
@@ -62,8 +69,9 @@
         class="btn btn-default btn-block"
         onclick="CivClicker.plugins.Tools.equip();"
         disabled="disabled"
+        data-x="1"
       >
-        Equip
+        Equip 1
         &nbsp;
         <span class="fa fa-arrow-right"></span>
       </button>
@@ -72,10 +80,11 @@
         class="btn btn-default btn-block"
         onclick="CivClicker.plugins.Tools.unequip();"
         disabled="disabled"
+        data-x="1"
       >
         <span class="fa fa-arrow-left"></span>
         &nbsp;
-        Unequip
+        Unequip 1
       </button>
     </div>
     <div class="col-sm-4">

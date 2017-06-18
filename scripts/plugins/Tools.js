@@ -295,6 +295,20 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       $('.tool-btn-construct').data('x', val);
       $('.tool-btn-construct').html('Construct ' + shortify(val));
     });
+
+    $('input[name="tool-equip-x"]').on('change', (that) => {
+      const val = that.currentTarget.value;
+      $('#tools-equip-equip, #tools-equip-unequip').data('x', val);
+      $('#tools-equip-equip').html('Equip ' + shortify(val) + `
+        &nbsp;
+        <span class="fa fa-arrow-right"></span>
+      `);
+      $('#tools-equip-unequip').html(`
+        <span class="fa fa-arrow-left"></span>
+        &nbsp;
+        `
+        + 'Unequip ' + shortify(val));
+    });
   }
 
   /**
