@@ -137,12 +137,13 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
   equip() {
     const unit = this.getSelectedUnit();
     const tool = this.getSelectedTool();
+    const amount = $('#tools-equip-equip').data('x');
 
     if (unit
         && tool
         && unit.canEquip(tool)
         && tool.getAvailableTools() > 0) {
-      unit.equip(tool);
+      unit.equip(tool, amount);
       this.onEquipChange();
       this.updateEquip();
     }

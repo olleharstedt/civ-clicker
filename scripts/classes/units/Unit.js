@@ -180,13 +180,32 @@ class Unit extends CivObj {
   /**
    * Equip this unit with tool.
    * @param {Tool} tool
+   * @param {number} amount
    */
-  equip(tool) {
-    if (this.canEquip(tool) && this.equipSpaceLeft(tool) > 0) {
+  equip(tool, amount) {
+    if (amount == undefined) {
+      amount = 1;
+    }
+
+    const spaceLeft = this.equipSpaceLeft(tool);
+    let toTransfer = 1;
+    if (spaceLeft >= amount) {
+      toTransfer = amount;
+    } else if (spaceLeft < amount) {
+      toTransfer = spaceLeft;
+    }
+
+    const availableTools = tool.getAvailableTools();
+
+    if (availableTools < toTransfer) {
+      toTransfer = availableTools;
+    }
+
+    if (this.canEquip(tool) && spaceLeft > 0) {
       if (typeof this._equipment[tool.id] == 'number') {
-        this._equipment[tool.id]++;
+        this._equipment[tool.id] += parseInt(toTransfer);
       } else {
-        this._equipment[tool.id] = 1;
+        this._equipment[tool.id] = parseInt(toTransfer);
       }
     }
   }
