@@ -39,7 +39,7 @@ class GathererUnit extends WorkUnit {
     // Gatherers can sustain them selves.
     civData.food.net += owned;
 
-    const foodChance = Math.pow(0.9, owned);
+    const foodChance = Math.pow(0.95, owned);
     if (Math.random() > foodChance) {
       const handaxes = this.getEquipmentAmount(civData['handaxe']);
       const found = 1 + (0.2 * handaxes);

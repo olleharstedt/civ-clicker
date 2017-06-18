@@ -785,6 +785,14 @@ function getCivData() {
       icon:     'handaxe.png',
       require:  {stone: 1},
       prereqs:  {},  // Available from the start.
+    }),
+    new Tool({
+      id:       'stonespear',
+      name:     'stonespear',
+      material: 'stone',
+      icon:     'stonespear.png',
+      require:  {stone: 1, wood: 1},
+      prereqs:  {}
     })
   ];
 
