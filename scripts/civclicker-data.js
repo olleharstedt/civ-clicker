@@ -58,6 +58,7 @@ function getCivData() {
     new Resource({ id:'gold', name:'gold', vulnerable:false, progressFactor: 100}), // Can't be stolen
     new Resource({ id:'corpses', singular:'corpse', plural:'corpses', vulnerable:false }), // Can't be stolen
     new Resource({ id:'devotion', name:'devotion', vulnerable:false }), // Can't be stolen
+    new Resource({ id:'culture', name:'culture', vulnerable:false }), // Can't be stolen
     // Buildings
     new Building({ id:'freeLand', name:'free land', plural:'free land', 
       subType: "land",
