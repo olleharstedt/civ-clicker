@@ -349,25 +349,23 @@ function playerCombatMods() {
 
 // Get an object's requirements in text form.
 // Pass it a cost object and optional quantity
-function getReqText(costObj, qty)
-{
-	if (!isValid(qty)) { qty = 1; }
-	costObj = valOf(costObj,qty); // valOf evals it if it's a function
-	if (!isValid(costObj)) { return ""; }
+function getReqText(costObj, qty) {
+  if (!isValid(qty)) { qty = 1; }
+  costObj = valOf(costObj,qty); // valOf evals it if it's a function
+  if (!isValid(costObj)) { return ''; }
 
-	var i, num;
-	var text = "";
-	for(i in costObj)
-	{
-		// If the cost is a function, eval it with qty as a param.  Otherwise
-		// just multiply by qty.
-		num = (typeof costObj[i] == "function") ? (costObj[i](qty)) : (costObj[i]*qty);
-		if (!num) { continue; }
-		if (text) { text += ", "; }
-		text += prettify(Math.round(num)) + " " + civData[i].getQtyName(num);
-	}
+  var i, num;
+  var text = '';
+  for(i in costObj) {
+    // If the cost is a function, eval it with qty as a param.  Otherwise
+    // just multiply by qty.
+    num = (typeof costObj[i] == 'function') ? (costObj[i](qty)) : (costObj[i]*qty);
+    if (!num) { continue; }
+    if (text) { text += ', '; }
+    text += prettify(Math.round(num)) + ' ' + civData[i].getQtyName(num);
+  }
 
-	return text;
+  return text;
 }
 
 /**
