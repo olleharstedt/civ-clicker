@@ -4,12 +4,15 @@
 /**
  * Player earns culture points by achieveming certain goals, like
  * population above 10 or 100, or owning 200 food, and so on.
+ * @property {array} cultureConditions List of conditions that grants culture points.
+ * @property {array} fulfilledConditions List of conditions that has been fulfilled/done.
  */
 CivClicker.plugins.Culture = new (class CulturePlugin {
   constructor() {
     this.tickSub = null;
     this.cultureConditions = [
     ];
+    this.fulfilledConditions = [];
   }
 
   /**
@@ -38,3 +41,31 @@ CivClicker.plugins.Culture = new (class CulturePlugin {
   }
 
 });
+
+/**
+ * Condition class.
+ */
+class CultureCondition {
+
+  /**
+   * @param {string} name
+   * @param {object} requires
+   * @param {number} points
+   */
+  constructor(name, requires, points) {
+    this.name = name;
+    this.requires = requires;
+    this.points = points;
+    this.isFulfilled = false;
+  }
+
+  isFulfilled() {
+    return meetsPrereqs(this.requires);
+  }
+
+  fulfill() {
+    this.isFulfilled = true;
+    civData.culture.owned += this.points;
+    gameLog(`You gain ${this.points} culture point by ${this.name}!`);
+  }
+}
