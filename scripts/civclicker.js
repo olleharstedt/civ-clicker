@@ -3383,79 +3383,73 @@ function gameLog(message){
 }
 
 function clearSpecialResourceNets () {
-	civData.food.net = 0;
-	civData.wood.net = 0;
-	civData.stone.net = 0;
-	civData.skins.net = 0;
-	civData.herbs.net = 0;
-	civData.ore.net = 0;
-	civData.leather.net = 0;
-	civData.piety.net = 0;
-	civData.metal.net = 0;
+  civData.food.net = 0;
+  civData.wood.net = 0;
+  civData.stone.net = 0;
+  civData.skins.net = 0;
+  civData.herbs.net = 0;
+  civData.ore.net = 0;
+  civData.leather.net = 0;
+  civData.piety.net = 0;
+  civData.metal.net = 0;
 }
 
 function checkResourceLimits () {
-	//Resources occasionally go above their caps.
-	//Cull the excess /after/ other workers have taken their inputs.
-	resourceData.forEach(function(resource){ 
-		if (resource.owned > resource.limit) { 
-			resource.owned = resource.limit; 
-		} 
-	});
+  //Resources occasionally go above their caps.
+  //Cull the excess /after/ other workers have taken their inputs.
+  resourceData.forEach(function(resource){ 
+    if (resource.owned > resource.limit) { 
+      resource.owned = resource.limit; 
+    } 
+  });
 }
 
 function gameLoop () {
-	//debugging - mark beginning of loop execution
-	//var start = new Date().getTime();
+  //debugging - mark beginning of loop execution
+  //var start = new Date().getTime();
 
   CivClicker.Events.publish('global.tick');
 
-	tickAutosave();
+  tickAutosave();
 
-	calculatePopulation();
+  calculatePopulation();
 
-	// Check for starvation
-	doStarve();
-	// TODO: Need to kill workers who die from exposure.
+  // Check for starvation
+  doStarve();
+  // TODO: Need to kill workers who die from exposure.
 
-	checkResourceLimits();
+  checkResourceLimits();
 
-	//Timers - routines that do not occur every second
-	doMobs();
-	doPestControl();
-	tickGlory();
-	doShades();
-	doEsiege(civData.esiege, civData.fortification);
-	doRaid("party", "player", "enemy");
+  //Timers - routines that do not occur every second
+  doMobs();
+  doPestControl();
+  tickGlory();
+  doShades();
+  doEsiege(civData.esiege, civData.fortification);
+  doRaid('party', 'player', 'enemy');
 
-	//Population-related
-	doGraveyards();
-	doHealers();
-	doPlague(); 
-	doCorpses();
-	doThrone();
-	tickGrace();
-	tickWalk();
-	doLabourers();
-	tickTraders();
-	
-	updateResourceTotals(); //This is the point where the page is updated with new resource totals
-	testAchievements();
-	
-	//Data changes should be done; now update the UI.
-	updateAll();
-	
-	//Debugging - mark end of main loop and calculate delta in milliseconds
-	//var end = new Date().getTime();
-	//var time = end - start;
-	//console.log("Main loop execution time: " + time + "ms");
-};
+  //Population-related
+  doGraveyards();
+  doHealers();
+  doPlague(); 
+  doCorpses();
+  doThrone();
+  tickGrace();
+  tickWalk();
+  doLabourers();
+  tickTraders();
 
+  updateResourceTotals(); //This is the point where the page is updated with new resource totals
+  testAchievements();
 
+  //Data changes should be done; now update the UI.
+  updateAll();
 
-
-
-
+  //Debugging - mark end of main loop and calculate delta in milliseconds
+  //var end = new Date().getTime();
+  //var time = end - start;
+  //console.log("Main loop execution time: " + time + "ms");
+}
 
 //========== SETUP (Functions meant to be run once on the DOM)
 
@@ -3473,25 +3467,25 @@ setup.all = function () {
 };
 
 setup.data = function () {
-	setIndexArrays(civData);
+  setIndexArrays(civData);
 };
 
 setup.civSizes = function () {
-	indexArrayByAttr(civSizes, "id");
+  indexArrayByAttr(civSizes, 'id');
 
-	// Annotate with max population and index.
-	civSizes.forEach(function(elem,i,arr) {
-		elem.max_pop = (i+1 < arr.length) ? (arr[i+1].min_pop - 1) : Infinity;
-		elem.idx = i;
-	});
+  // Annotate with max population and index.
+  civSizes.forEach(function(elem,i,arr) {
+    elem.max_pop = (i+1 < arr.length) ? (arr[i+1].min_pop - 1) : Infinity;
+    elem.idx = i;
+  });
 
-	civSizes.getCivSize = function(popcnt) {
-		var i;
-		for(i = 0; i< this.length; ++i){
-			if (popcnt <= this[i].max_pop) { return this[i]; }
-		}
-		return this[0];
-	};
+  civSizes.getCivSize = function(popcnt) {
+    var i;
+    for(i = 0; i< this.length; ++i){
+      if (popcnt <= this[i].max_pop) { return this[i]; }
+    }
+    return this[0];
+  };
 };
 
 /**
@@ -3510,21 +3504,21 @@ setup.tooltip = function() {
 };
 
 setup.game = function () {
-  console.log("Setting up game");
+  console.log('Setting up game');
   //document.title = "CivClicker ("+versionData+")"; //xxx Not in XML DOM.
 
-  addUITable(basicResources, "basicResources"); // Dynamically create the basic resource table.
-  addUITable(homeBuildings, "buildings"); // Dynamically create the building controls table.
-  addUITable(homeUnits, "jobs"); // Dynamically create the job controls table.
-  addUITable(armyUnits, "party"); // Dynamically create the party controls table.
+  addUITable(basicResources, 'basicResources'); // Dynamically create the basic resource table.
+  addUITable(homeBuildings, 'buildings'); // Dynamically create the building controls table.
+  addUITable(homeUnits, 'jobs'); // Dynamically create the job controls table.
+  addUITable(armyUnits, 'party'); // Dynamically create the party controls table.
   addUpgradeRows(); // This sets up the framework for the upgrade items.
-  addUITable(normalUpgrades, "upgrades"); // Place the stubs for most upgrades under the upgrades tab.
+  addUITable(normalUpgrades, 'upgrades'); // Place the stubs for most upgrades under the upgrades tab.
   addAchievementRows();
   addRaidRows();
   addWonderSelectText();
   makeDeitiesTables();
 
-  if (!load("localStorage")) { //immediately attempts to load
+  if (!load('localStorage')) { //immediately attempts to load
     //Prompt player for names
     renameCiv();
     renameRuler();
@@ -3539,7 +3533,7 @@ setup.game = function () {
 
 setup.loop = function () {
   // This sets up the main game loop, which is scheduled to execute once per second.
-  console.log("Setting up main loop");
+  console.log('Setting up main loop');
 
   // NB: Needed here, since civData is not up to date before due to load.
   // Needed for harvest/agriculture requirement.
@@ -3583,8 +3577,8 @@ setup.navigation = function() {
     $('#civ-modal .modal-title').html('Settings');
     $('#civ-modal .modal-body').html(CivClicker.templates['settings.html']);
 
-    ui.find("#renameDeity").disabled = (!civData.worship.owned);
-    ui.find("#renameRuler").disabled = (curCiv.rulerName == "Cheater");
+    ui.find('#renameDeity').disabled = (!civData.worship.owned);
+    ui.find('#renameRuler').disabled = (curCiv.rulerName == 'Cheater');
 
     setup.tooltip();
 
