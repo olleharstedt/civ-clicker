@@ -1,7 +1,8 @@
 # 2017-06-23
 
 * Clay - pottery and house building.
-* Equipment as configuration.
+* Equipment as configuration. Only allow one equipment per citizen? Or one equipment per type, like one tool/weapon, one clothing, one jewlery. Use equipment to deal with different climate, weather, and war.
+* Göbekli Tepe - ideology before material change? Religion before agriculture.
 
 # 2017-06-16
 

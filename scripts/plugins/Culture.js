@@ -2,6 +2,46 @@
 'use strict';
 
 /**
+ * Condition class.
+ * @property {string} name
+ * @property {requires} object
+ * @property {number} points
+ * @property {boolean} isFulfilled
+ */
+class CultureCondition {
+
+  /**
+   * @param {string} name
+   * @param {number} points
+   * @param {object} requires
+   */
+  constructor(name, points, requires) {
+    this.name = name;
+    this.requires = requires;
+    this.points = points;
+    this._isFulfilled = false;
+  }
+
+  /**
+   * @return {boolean}
+   */
+  isFulfilled() {
+    console.log('checking ' + this.name);
+    return meetsPrereqs(this.requires);
+  }
+
+  /**
+   * Run after isFulfilled returns true to apply
+   * this condition and give culture points.
+   */
+  fulfill() {
+    this._isFulfilled = true;
+    civData.culture.owned += this.points;
+    gameLog(`You gain ${this.points} culture point by ${this.name}!`);
+  }
+}
+
+/**
  * Player earns culture points by achieveming certain goals, like
  * population above 10 or 100, or owning 200 food, and so on.
  * @property {array} cultureConditions List of conditions that grants culture points.
@@ -11,6 +51,12 @@ CivClicker.plugins.Culture = new (class CulturePlugin {
   constructor() {
     this.tickSub = null;
     this.cultureConditions = [
+      new CultureCondition(
+        '10 population',
+        1,
+        {
+        }
+      )
     ];
     this.fulfilledConditions = [];
   }
@@ -38,34 +84,24 @@ CivClicker.plugins.Culture = new (class CulturePlugin {
    * culture point if fulfilled.
    */
   checkCultureConditions() {
+    /** @type {number[]} */
+    let remove = [];
+
+    // Check all remaining conditions.
+    this.cultureConditions.forEach((condition, pos) => {
+      if (condition.isFulfilled()) {
+        condition.fulfill();
+        // Remember position so we can move this condition to
+        // the other array.
+        remove.push(pos);
+      }
+    });
+
+    // Move all fulfilled conditions to fulfilled array.
+    remove.forEach((pos) => {
+      let removed = this.cultureConditions.splice(pos, 1);
+      this.fulfilledConditions.push(removed);
+    });
   }
 
 });
-
-/**
- * Condition class.
- */
-class CultureCondition {
-
-  /**
-   * @param {string} name
-   * @param {object} requires
-   * @param {number} points
-   */
-  constructor(name, requires, points) {
-    this.name = name;
-    this.requires = requires;
-    this.points = points;
-    this.isFulfilled = false;
-  }
-
-  isFulfilled() {
-    return meetsPrereqs(this.requires);
-  }
-
-  fulfill() {
-    this.isFulfilled = true;
-    civData.culture.owned += this.points;
-    gameLog(`You gain ${this.points} culture point by ${this.name}!`);
-  }
-}
