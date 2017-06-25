@@ -29,7 +29,7 @@ function getCivData() {
       verb:            'cut',
       activity:        'woodcutting', //I18N
       progressFactor:  10,
-      prereqs:         new Requirement('handaxe', 1),
+      prereqs:         new Requirement('stoneaxe', 1),
       get limit() {
         return 200 + (civData.woodstock.owned  * 200);
       }
