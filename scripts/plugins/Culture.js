@@ -49,7 +49,14 @@ CivClicker.plugins.Culture = (function() {
     fulfill() {
       this._isFulfilled = true;
       civData.culture.owned += this.points;
-      gameLog(`You gain ${this.points} culture point by ${this.name}!`);
+      const msg = `You gain ${this.points} culture point by ${this.name}!`;
+      gameLog(msg);
+      if (Notification.permission == 'granted') {
+        new Notification(
+          'CivClicker',
+          {body: msg}
+        );
+      }
     }
   }
 
