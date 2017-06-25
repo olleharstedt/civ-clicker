@@ -24,6 +24,11 @@ class Unit extends CivObj {
     copyProps(this,props,null,true);
   }
 
+  reset() {
+    this._equipment = {};
+    super.reset();
+  }
+
   get customQtyId() {
     return this.place + 'CustomQty';
   }

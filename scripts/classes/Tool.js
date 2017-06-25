@@ -28,6 +28,10 @@ Tool.prototype = new CivObj({
   require:        {},
   useProgressBar: true,
 
+  reset() {
+    this.owned = 0;
+  },
+
   /**
    * @return {number}
    */

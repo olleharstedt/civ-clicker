@@ -32,6 +32,19 @@ CivClicker.plugins.StatusBar = (function() {
         $('#status-bar-stone')
           .attr('title', 'Max: ' + shortify(civData.stone.limit))
           .tooltip('fixTitle');
+
+        // Culture
+        if (curCiv.culture.owned > 0) {
+          $('#navbar-culture').html(
+            '<span class="badge">'
+            + shortify(curCiv.culture.owned))
+            + '</span>';
+          $('#status-bar-culture')
+            .attr('title', 'Purchase upgrades for your culture points.')
+            .tooltip('fixTitle');
+        } else {
+          $('#navbar-culture').html(shortify(curCiv.culture.owned));
+        }
       });
     }
   };
