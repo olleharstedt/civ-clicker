@@ -2314,6 +2314,12 @@ function load(loadType) {
           console.log('Load error: Could not load ' + unitId);
         }
       }
+      const loadedPluginData = loadVar.extraData.pluginData;
+      for (let plugin in loadedPluginData) {
+        if (typeof CivClicker.plugins[plugin].save == 'function') {
+          CivClicker.plugins[plugin].load(loadedPluginData[plugin]);
+        }
+      }
     } else {
       console.log('No extra data to load.');
     }
@@ -2387,12 +2393,19 @@ function save(savetype) {
 
   // Extra data contains data from save() methods.
   let extraData = {
-    unitData: {}
+    unitData: {},
+    pluginData: {}
   };
 
   unitData.forEach((unit) => {
     extraData.unitData[unit.id] = unit.save();
   });
+
+  for (let plugin in CivClicker.plugins) {
+    if (typeof CivClicker.plugins[plugin].save == 'function') {
+      extraData.pluginData[plugin] = CivClicker.plugins[plugin].save();
+    }
+  }
 
   const saveVar = {
     versionData: versionData, // Version information header
