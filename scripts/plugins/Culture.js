@@ -61,7 +61,7 @@ CivClicker.plugins.Culture = (function() {
           '10 population',
           1,
           () => {
-            return population.living > 10;
+            return population.living > 9;
           }
         )
       ];
