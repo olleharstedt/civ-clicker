@@ -3462,6 +3462,9 @@ setup.all = function () {
     // Show the game
     //$('#main').css('display', 'block');
   });
+
+  // Ask for permission to push browser notifications.
+  Notification.requestPermission();
 };
 
 setup.data = function () {
