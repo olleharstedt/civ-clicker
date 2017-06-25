@@ -47,8 +47,17 @@ class FarmerUnit extends WorkUnit {
       * (1 + civData.walk.rate/120) 
       * (1 + civData.mill.owned * millMod / 200) //Farmers farm food
     );
-    civData.food.net -= population.living; //The living population eats food.
-    civData.food.owned += civData.food.net;
+
+    // NB: population.living can be undefined after reset.
+    if (population.living !== undefined) {
+      civData.food.net -= population.living; //The living population eats food.
+    }
+
+    // NB: net can be NaN after reset.
+    if (!isNaN(civData.food.net)) {
+      civData.food.owned += civData.food.net;
+    }
+
     if (civData.skinning.owned && civData.farmer.owned > 0){ //and sometimes get skins
       const skinsChance = specialChance * (civData.food.increment + ((civData.butchering.owned) * civData.farmer.owned / 15.0)) * getWonderBonus(civData.skins);
       const skinsEarned = rndRound(skinsChance);
