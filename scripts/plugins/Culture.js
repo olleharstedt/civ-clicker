@@ -63,6 +63,13 @@ CivClicker.plugins.Culture = (function() {
   return new (class CulturePlugin {
     constructor() {
       this.tickSub = null;
+    }
+
+    /**
+     * Init plugin.
+     */
+    init() {
+      // Setup data.
       this.cultureConditions = [
         new CultureCondition(
           '10 population',
@@ -73,12 +80,7 @@ CivClicker.plugins.Culture = (function() {
         )
       ];
       this.fulfilledConditions = [];
-    }
 
-    /**
-     * Init plugin.
-     */
-    init() {
       this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
         this.checkCultureConditions();
       });
@@ -91,6 +93,24 @@ CivClicker.plugins.Culture = (function() {
       if (this.tickSub) {
         this.tickSub.remove();
       }
+    }
+
+    /**
+     * Save what conditions we've already fulfilled.
+     */
+    save() {
+      return {
+        cultureConditions: this.cultureConditions,
+        fulfilledConditions: this.fulfilledConditions
+      };
+    }
+
+    /**
+     * Load what conditions we've fulfilled.
+     */
+    load(data) {
+      this.cultureConditions = data.cultureConditions;
+      this.fulfilledConditions = data.fulfilledConditions;
     }
 
     /**
