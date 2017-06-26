@@ -223,13 +223,20 @@ function getCivData() {
       set require(value) { return this.require; }, // Only here for JSLint.
       effectText:"+1 Devotion" }),
     // Upgrades
-      new Upgrade({ 
-        id:         'agriculture',
-        name:       'Agriculture',
-        subType:    'upgrade',
-        require:    {food: 500},
-        effectText: 'The agricultural revolution made it possible for humans to grow weat and other plants regularly.' 
-      }),
+    new Upgrade({ 
+      id:         'agriculture',
+      name:       'Agriculture',
+      subType:    'upgrade',
+      require:    {food: 500},
+      effectText: 'The agricultural revolution made it possible for humans to grow weat and other plants regularly.' 
+    }),
+    new Upgrade({
+      id:         'stonespear_upgrade',
+      name:       'Stonespear',
+      subType:    'upgrade',
+      require:    {culture: 1},
+      effectText: 'Unlock stonespear tool, making hunting possible for gatherers.'
+    }),
     new Upgrade({ 
       id: "skinning", name:"Skinning", subType: "upgrade",
       require: { skins: 10 },
@@ -793,7 +800,7 @@ function getCivData() {
       material: 'stone',
       icon:     'stonespear.png',
       require:  {stone: 1, wood: 1},
-      prereqs:  {}
+      prereqs:  {stonespear_upgrade: true}
     })
   ];
 

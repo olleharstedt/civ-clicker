@@ -27,9 +27,10 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
   renderTable() {
     const $table = $('#toolsTable');
     $table.html('');
+    this.availableTools = [];
 
     tools.forEach((tool) => {
-      if (meetsPrereqs(tool)) {
+      if (meetsPrereqs(tool.prereqs)) {
         this.availableTools.push(tool);
       }
     });
@@ -287,9 +288,16 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
     });
 
     // Update equip tables after purchase is done.
-    this.purchaseSub = CivClicker.Events.subscribe('global.doPurchase.finished', () => {
+    this.purchaseSub = CivClicker.Events.subscribe('global.doPurchase.finished', (data) => {
       this.onEquipChange();
       this.updateEquip();
+
+      // If we upgraded something, we need to render the tool table again
+      // to show possibly new tools available.
+      if (data.purchaseObj
+          && data.purchaseObj.subType == 'upgrade') {
+        this.renderTable();
+      }
     });
 
     $('input[name="tool-produce-x"]').on('change', (that) => {

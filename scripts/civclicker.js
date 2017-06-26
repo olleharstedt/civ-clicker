@@ -931,11 +931,11 @@ function onIncrement(control) {
  * @return {integer}
  */
 function doPurchase(objId, num) {
-	var purchaseObj = civData[objId];
+  var purchaseObj = civData[objId];
 
   // Abort if there's no corresponding object.
-	if (!purchaseObj) {
-    console.log("Unknown purchase: "+objId);
+  if (!purchaseObj) {
+    console.log('Unknown purchase: '+objId);
     return 0;
   }
 
@@ -946,23 +946,23 @@ function doPurchase(objId, num) {
   }
 
   // Default to amount 1.
-	if (num === undefined) {
+  if (num === undefined) {
     num = 1;
   }
 
-	if (abs(num) ==  "custom") {
+  if (abs(num) ==  'custom') {
     num =  sgn(num) * getCustomNumber(purchaseObj);
   }
 
   // How many can we actually get?
-	num = canPurchase(purchaseObj,num);
+  num = canPurchase(purchaseObj,num);
 
 	// Pay for them
-	num = payFor(purchaseObj.require,num);
-	if (abs(num) < 1) { 
-		gameLog("Could not build, insufficient resources."); // I18N
-		return 0;
-	}
+  num = payFor(purchaseObj.require,num);
+  if (abs(num) < 1) { 
+    gameLog('Could not build, insufficient resources.'); // I18N
+    return 0;
+  }
 
   function apply() {
     // Then increment the total number of that building
