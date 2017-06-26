@@ -78,6 +78,19 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
   }
 
   /**
+   * Enable/disable construct buttons.
+   */
+  updateConstructButtons() {
+    this.availableTools.forEach((tool) => {
+      if (canPurchase(tool, 1)) {
+        $(`#tool-${tool.name}-construct`).removeAttr('disabled');
+      } else {
+        $(`#tool-${tool.name}-construct`).attr('disabled', 'disabled');
+      }
+    });
+  }
+
+  /**
    * Update the equip table.
    */
   updateEquip() {
@@ -285,6 +298,7 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
     this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
       this.updateAmount();
       this.updateIdleCitizens();
+      this.updateConstructButtons()
     });
 
     // Update equip tables after purchase is done.
