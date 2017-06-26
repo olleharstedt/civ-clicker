@@ -80,6 +80,7 @@
       "read_cookie": true,
       "mergeObj": true,
       "ucfirst": true,
-      "getCostNote": true
+      "getCostNote": true,
+      "PNotify": true
     }
 }

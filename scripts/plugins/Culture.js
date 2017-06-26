@@ -56,6 +56,19 @@ CivClicker.plugins.Culture = (function() {
           'CivClicker',
           {body: msg}
         );
+      } else {
+        new PNotify({
+          title: 'Culture point',
+          text: msg,
+          timer: 1,
+          type: 'notice',
+          icon: false,
+          buttons: {
+            closer: true,
+            closer_hover: false,
+            sticker: false
+          }
+        });
       }
     }
   }

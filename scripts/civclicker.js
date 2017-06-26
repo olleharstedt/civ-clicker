@@ -3469,7 +3469,7 @@ setup.all = function () {
   setup.data();
   setup.navigation();
   setup.civSizes();
-  document.addEventListener("DOMContentLoaded", function(e){
+  document.addEventListener('DOMContentLoaded', function(e){
     //setup.game();  // Wait with this until all pages are loaded with Ajax
     //setup.loop();
     // Show the game
@@ -3478,6 +3478,9 @@ setup.all = function () {
 
   // Ask for permission to push browser notifications.
   Notification.requestPermission();
+  PNotify.prototype.options.styling = 'bootstrap3';
+  PNotify.prototype.options.styling = 'fontawesome';
+
 };
 
 setup.data = function () {
