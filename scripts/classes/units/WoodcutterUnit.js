@@ -11,6 +11,7 @@ class WoodcutterUnit extends WorkUnit {
     this.source = 'unemployed';
     this.efficiency  =  0.5;
     this.effectText  = 'Automatically cut wood';
+    this.prereqs     = {basiccarpentry: true};
   }
 
   /**

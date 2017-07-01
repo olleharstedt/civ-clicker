@@ -11,6 +11,7 @@ class MinerUnit extends WorkUnit {
     this.source     = 'unemployed';
     this.efficiency =  0.2;
     this.effectText = 'Automatically mine stone';
+    this.prereqs    = {mining: true};
   }
 
   /**

@@ -11,6 +11,7 @@ class FarmerUnit extends WorkUnit {
     this.source          = 'unemployed';
     this.efficiency_base = 0.2;
     this.effectText      = 'Automatically harvest food';
+    this.prereqs         = {agriculture: true};
   }
 
   /**

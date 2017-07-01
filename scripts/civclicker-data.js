@@ -264,6 +264,14 @@ function getCivData() {
       require:    {culture: 1},
       effectText: 'Basic carpentry allows your citizens to work with wood.'
     }),
+    new Upgrade({
+      id:         'mining',
+      name:       'Mining',
+      subType:    'upgrade',
+      require:    {culture: 1},
+      prereqs:    {basiccarpentry: true},
+      effectText: 'Enable mining'
+    }),
     new Upgrade({ 
       id: "skinning", name:"Skinning", subType: "upgrade",
       require: { skins: 10 },
