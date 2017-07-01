@@ -81,6 +81,7 @@
       "mergeObj": true,
       "ucfirst": true,
       "getCostNote": true,
-      "PNotify": true
+      "PNotify": true,
+      "serverSettings": true
     }
 }

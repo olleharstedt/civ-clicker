@@ -10,8 +10,11 @@ CivClicker.plugins.DayNight = (() => {
   const DAY = 0;
   const NIGHT = 1;
 
-  /** @type {number} Length of day (and night) in number of ticks (seconds). */
-  const LENGTHOFDAY = 5;
+  /** 
+   * @type {number} Length of day (and night) in number of ticks (seconds).
+   * Default is overwritten by server config.
+   */
+  const DEFAULTLENGTHOFDAY = 60;
 
   return new (class DayNightPlugin {
 
@@ -19,6 +22,7 @@ CivClicker.plugins.DayNight = (() => {
       this.time = 0;
       this.tickSub = null;
       this.dayOrNight = DAY;
+      this.lengthOfDay = DEFAULTLENGTHOFDAY;
     }
 
     /**
@@ -26,7 +30,7 @@ CivClicker.plugins.DayNight = (() => {
      */
     tick() {
       this.time++;
-      if (this.time > LENGTHOFDAY) {
+      if (this.time > this.lengthOfDay) {
         this.time = 0;
 
         // Switch between day or night.
@@ -51,6 +55,10 @@ CivClicker.plugins.DayNight = (() => {
       this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
         this.tick();
       });
+      if (serverSettings.weather && serverSettings.weather.lengthOfDay) {
+        this.lengthOfDay = serverSettings.weather.lengthOfDay;
+        console.log('lengthOfDay initialised to ' + this.lengthOfDay);
+      }
     }
 
     /**
