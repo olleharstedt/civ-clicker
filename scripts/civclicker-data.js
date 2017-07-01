@@ -73,15 +73,17 @@ function getCivData() {
       singular: 'hearth',
       plural: 'hearths',
       require: {stone: 5},
-      effectText: 'Protectice fire during night; cook your food'
+      effectText: 'Protective fire during night; cook your food'
     }),
     new Building({ 
       id:"tent", singular:"tent", plural:"tents",
       require: { wood:2, skins:2 },
+      prereqs: {tents: true},
       effectText:"+1 max pop." }),
     new Building({ 
       id:"hut", singular:"wooden hut", plural:"wooden huts",
       require : { wood:20, skins:1 },
+      prereqs: {basiccarpentry: true},
       effectText:"+3 max pop." }),
     new Building({ 
       id:"cottage", singular:"cottage", plural:"cottages",
@@ -110,6 +112,7 @@ function getCivData() {
     new Building({ 
       id: "barn", singular:"barn", plural:"barns",
       require:{ wood: 100 },
+      prereqs: {basiccarpentry: true},
       get effectText() {
         var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
         return "+" + barnBonus + " food storage"; 
@@ -123,11 +126,13 @@ function getCivData() {
     new Building({ 
       id: "woodstock", singular:"wood stockpile", plural:"wood stockpiles",
       require:{ wood:100 },
+      prereqs: {basiccarpentry: true},
       effectText: "+200 wood storage" 
     }),
     new Building({ 
       id: "stonestock", singular:"stone stockpile", plural:"stone stockpiles",
       require:{ wood:100 },
+      prereqs: {basiccarpentry: true},
       effectText: "+200 stone storage" 
     }),
     new Building({ 
@@ -244,6 +249,20 @@ function getCivData() {
       subType:    'upgrade',
       require:    {culture: 1},
       effectText: 'Unlock stonespear tool, making hunting possible for gatherers.'
+    }),
+    new Upgrade({
+      id:         'tents',
+      name:       'Tents',
+      subType:    'upgrade',
+      require:    {culture: 1},
+      effectText: 'Unlock the knowledge to build tents, to protect your citizens from harsh weather.'
+    }),
+    new Upgrade({
+      id:         'basiccarpentry',
+      name:       'Basic carpentry',
+      subType:    'upgrade',
+      require:    {culture: 1},
+      effectText: 'Basic carpentry allows your citizens to work with wood.'
     }),
     new Upgrade({ 
       id: "skinning", name:"Skinning", subType: "upgrade",
