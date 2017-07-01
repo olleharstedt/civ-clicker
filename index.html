@@ -60,6 +60,8 @@
 	<script type="application/javascript" src="scripts/plugins/Tools.js"></script>
 	<script type="application/javascript" src="scripts/plugins/Culture.js"></script>
 	<script type="application/javascript" src="scripts/plugins/Workers.js"></script>
+	<script type="application/javascript" src="scripts/plugins/DayNight.js"></script>
+	<script type="application/javascript" src="scripts/plugins/Weather.js"></script>
 
   <!-- Classes -->
 	<script type="application/javascript" src="scripts/classes/Requirement.js"></script>
@@ -201,9 +203,12 @@
                 </ul>
               </li>
             </ul>
-            <ul id="weather" class="nav navbar-nav navbar-right" data-toggle="tooltip" data-placement="bottom" title="Weather">
-              <li><a><span class="wi wi-day-cloudy"></span></a></li>
+
+            <!-- Weather and time information -->
+            <ul id="weather-ul" class="nav navbar-nav navbar-right" data-toggle="tooltip" data-placement="bottom" title="Weather">
+              <li><a><span id="weather-icon" class="wi wi-day-sunny"></span></a></li>
             </ul>
+
             <ul id="save-disk" class="nav navbar-nav navbar-right" style="display: none;" data-toggle="tooltip" data-placement="bottom" title="Autosaved">
               <li><a><span class="fa fa-floppy-o"></span></a></li>
             </ul>
