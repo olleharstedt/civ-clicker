@@ -45,21 +45,34 @@ class GathererUnit extends WorkUnit {
       const found = 1 + (0.2 * handaxes);
       const formatChance = Math.round(((1 - foodChance) * 100)) + '%';
       civData.food.owned += found;
-      gameLog(`Found ${found} food while gathering (chance ${formatChance})`);
+      civData.food.net += found;
+
+      // Don't spam found food if chance is higher than 50%.
+      if (foodChance > 0.5) {
+        gameLog(`Found ${found} food while gathering (chance ${formatChance})`);
+      }
     }
 
     const stoneChance = Math.pow(0.99, owned);
     if (Math.random() > stoneChance) {
       civData.stone.owned += 1;
+      civData.stone.net += 1;
       const formatChance = Math.round(((1 - stoneChance) * 100)) + '%';
-      gameLog(`Found stone while gathering (chance ${formatChance})`);
+
+      if (stoneChance > 0.5) {
+        gameLog(`Found stone while gathering (chance ${formatChance})`);
+      }
     }
 
     const woodChance = Math.pow(0.99, owned);
     if (Math.random() > woodChance) {
       civData.wood.owned += 1;
+      civData.wood.net += 1;
       const formatChance = Math.round(((1 - woodChance) * 100)) + '%';
-      gameLog(`Found wood while gathering (chance ${formatChance})`);
+
+      if (woodChance > 0.5) {
+        gameLog(`Found wood while gathering (chance ${formatChance})`);
+      }
     }
   }
 

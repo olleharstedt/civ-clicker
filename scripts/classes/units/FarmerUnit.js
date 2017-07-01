@@ -40,7 +40,7 @@ class FarmerUnit extends WorkUnit {
     if (population.current > 0) { 
       millMod = population.living / population.current; 
     }
-    civData.food.net += (
+    const toAdd = (
       civData.farmer.owned 
       * (1 + (civData.farmer.efficiency * curCiv.morale.efficiency)) 
       * ((civData.pestControl.timer > 0) ? 1.01 : 1) 
@@ -48,6 +48,7 @@ class FarmerUnit extends WorkUnit {
       * (1 + civData.walk.rate/120) 
       * (1 + civData.mill.owned * millMod / 200) //Farmers farm food
     );
+    civData.food.net += toAdd;
 
     // NB: population.living can be undefined after reset.
     if (population.living !== undefined) {
@@ -56,7 +57,7 @@ class FarmerUnit extends WorkUnit {
 
     // NB: net can be NaN after reset.
     if (!isNaN(civData.food.net)) {
-      civData.food.owned += civData.food.net;
+      civData.food.owned += toAdd;
     }
 
     if (civData.skinning.owned && civData.farmer.owned > 0){ //and sometimes get skins
