@@ -479,43 +479,43 @@ function updateLandBar () {
 
 // Check to see if the player has an upgrade and hide as necessary
 // Check also to see if the player can afford an upgrade and enable/disable as necessary
-function updateUpgrades(){
-	var domain = getCurDeityDomain();
-	var hasDomain = (getCurDeityDomain() === "") ? false : true;
-	var canSelectDomain = ((civData.worship.owned) && !hasDomain);
+function updateUpgrades() {
+  var domain = getCurDeityDomain();
+  var hasDomain = (getCurDeityDomain() === "") ? false : true;
+  var canSelectDomain = ((civData.worship.owned) && !hasDomain);
 
-	// Update all of the upgrades
-	upgradeData.forEach( function(elem){ 
-		updatePurchaseRow(elem);  // Update the purchase row.
+  // Update all of the upgrades
+  upgradeData.forEach( function(elem){ 
+    updatePurchaseRow(elem);  // Update the purchase row.
 
-		// Show the already-purchased line if we've already bought it.
-		ui.show(("#P" + elem.id), elem.owned);
-	});
+    // Show the already-purchased line if we've already bought it.
+    ui.show(("#P" + elem.id), elem.owned);
+  });
 
-	// Deity techs
-	ui.show("#deityPane .notYet", (!hasDomain && !canSelectDomain));
-	//ui.find("#renameDeity").disabled = (!civData.worship.owned);
-	ui.show("#battleUpgrades", (getCurDeityDomain() == "battle"));
-	ui.show("#fieldsUpgrades", (getCurDeityDomain() == "fields"));
-	ui.show("#underworldUpgrades", (getCurDeityDomain() == "underworld"));
-	ui.show("#zombieWorkers", (curCiv.zombie.owned > 0));
-	ui.show("#catsUpgrades", (getCurDeityDomain() == "cats"));
+  // Deity techs
+  ui.show("#deityPane .notYet", (!hasDomain && !canSelectDomain));
+  //ui.find("#renameDeity").disabled = (!civData.worship.owned);
+  ui.show("#battleUpgrades", (getCurDeityDomain() == "battle"));
+  ui.show("#fieldsUpgrades", (getCurDeityDomain() == "fields"));
+  ui.show("#underworldUpgrades", (getCurDeityDomain() == "underworld"));
+  ui.show("#zombieWorkers", (curCiv.zombie.owned > 0));
+  ui.show("#catsUpgrades", (getCurDeityDomain() == "cats"));
 
-	ui.show("#deityDomains", canSelectDomain);
-	ui.findAll("#deityDomains button.purchaseFor500Piety").forEach(function(button){
-		button.disabled = (!canSelectDomain || (civData.piety.owned < 500));
-	});
-	//ui.show("#deitySelect .alert", canSelectDomain);
+  ui.show("#deityDomains", canSelectDomain);
+  ui.findAll("#deityDomains button.purchaseFor500Piety").forEach(function(button){
+    button.disabled = (!canSelectDomain || (civData.piety.owned < 500));
+  });
+  //ui.show("#deitySelect .alert", canSelectDomain);
 
-	ui.show("#" + domain + "Upgrades", hasDomain);
+  ui.show("#" + domain + "Upgrades", hasDomain);
 
-	// Conquest / battle standard
-	ui.show("#conquest", civData.standard.owned);
-	ui.show("#conquestPane .notYet", (!civData.standard.owned));
+  // Conquest / battle standard
+  ui.show("#conquest", civData.standard.owned);
+  ui.show("#conquestPane .notYet", (!civData.standard.owned));
 
-	// Trade
-	ui.show("#tradeUpgradeContainer", civData.trade.owned);
-	ui.show("#tradePane .notYet", !civData.trade.owned);
+  // Trade
+  ui.show("#tradeUpgradeContainer", civData.trade.owned);
+  ui.show("#tradePane .notYet", !civData.trade.owned);
 }
 
 
