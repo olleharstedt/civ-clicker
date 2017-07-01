@@ -144,7 +144,10 @@ function updatePurchaseRow (purchaseObj) {
 
   // Special check: Hide one-shot upgrades after purchase; they're
   // redisplayed elsewhere.
-  const hideBoughtUpgrade = ((purchaseObj.type == 'upgrade') && (purchaseObj.owned == purchaseObj.limit) && !purchaseObj.salable);
+  const hideBoughtUpgrade =
+    (purchaseObj.type == 'upgrade')
+    && (purchaseObj.owned == purchaseObj.limit)
+    && !purchaseObj.salable;
 
   const maxQty = canPurchase(purchaseObj);
   const minQty = canPurchase(purchaseObj,-Infinity);
