@@ -3,6 +3,7 @@
 * Clay - pottery and house building.
 * Equipment as configuration. Only allow one equipment per citizen? Or one equipment per type, like one tool/weapon, one clothing, one jewlery. Use equipment to deal with different climate, weather, and war.
 * Göbekli Tepe - ideology before material change? Religion before agriculture.
+* Culture points.
 
 # 2017-06-16
 
@@ -12,3 +13,13 @@
 * Dogs were domesticated before agriculture was fully fleshed out.
 * Shells as currency? Enabling more efficient trade?
 * Hunting dependent on season, as would harvest be.
+
+# Another game
+
+* One-dimensional, all units and buildings placed on a line.
+    Walk, horse, Train, car, plane, ...
+* Logistics, transfer good between places.
+* Logic on backend to enable highscore and multiplayer.
+* Backend in vanilla Java, frontend in vanilla ES6.
+    Dropwizard, spring
+* GPL license.
