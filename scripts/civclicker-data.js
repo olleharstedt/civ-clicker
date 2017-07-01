@@ -59,6 +59,7 @@ function getCivData() {
     new Resource({ id:'corpses', singular:'corpse', plural:'corpses', vulnerable:false }), // Can't be stolen
     new Resource({ id:'devotion', name:'devotion', vulnerable:false }), // Can't be stolen
     new Resource({ id:'culture', name:'culture', vulnerable:false }), // Can't be stolen
+
     // Buildings
     new Building({ id:'freeLand', name:'free land', plural:'free land', 
       subType: "land",
@@ -67,6 +68,13 @@ function getCivData() {
       vulnerable:false, // Cannot be stolen
       initOwned:1000,  
       effectText:"Conquer more from your neighbors." }),
+    new Building({
+      id: 'hearth',
+      singular: 'hearth',
+      plural: 'hearths',
+      require: {stone: 5},
+      effectText: 'Protectice fire during night; cook your food'
+    }),
     new Building({ 
       id:"tent", singular:"tent", plural:"tents",
       require: { wood:2, skins:2 },
