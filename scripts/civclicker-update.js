@@ -95,24 +95,26 @@ function updateAfterReset () {
  * @return {boolean}
  */
 function updateTrader () {
-	var isHere = isTraderHere();
-	if (isHere) {
-		ui.find("#tradeType").innerHTML = civData[curCiv.trader.materialId].getQtyName(curCiv.trader.requested);
-		ui.find("#tradeRequested").innerHTML = prettify(curCiv.trader.requested);
-		ui.find("#traderTimer").innerHTML = curCiv.trader.timer + " second" + ((curCiv.trader.timer != 1) ? "s" : "");
-	} else {
-		
-	}
-	ui.show("#tradeContainer", isHere);
-	ui.show("#noTrader", !isHere);
-	$("#trade-pane-alert").toggle(isHere);
-	return isHere;
+  const isHere = isTraderHere();
+  if (isHere) {
+    ui.find('#tradeType').innerHTML = civData[curCiv.trader.materialId].getQtyName(curCiv.trader.requested);
+    ui.find('#tradeRequested').innerHTML = prettify(curCiv.trader.requested);
+    ui.find('#traderTimer').innerHTML = curCiv.trader.timer + ' second' + ((curCiv.trader.timer != 1) ? 's' : '');
+  } else {
+    // Do nothing
+  }
+  ui.show('#tradeContainer', isHere);
+  ui.show('#noTrader', !isHere);
+  $('#trade-pane-alert').toggle(isHere);
+  return isHere;
 }
 
 //xxx This should become an onGain() member method of the building classes
 function updateRequirements(buildingObj){
-	var displayNode = document.getElementById(buildingObj.id + "Cost");
-	if (displayNode) { displayNode.innerHTML = getReqText(buildingObj.require); }
+  let displayNode = document.getElementById(buildingObj.id + 'Cost');
+  if (displayNode) {
+    displayNode.innerHTML = getReqText(buildingObj.require);
+  }
 }
 
 /**
