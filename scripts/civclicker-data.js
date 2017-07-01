@@ -822,20 +822,22 @@ function getCivData() {
 
     // Tools
     new Tool({
-      id:       'handaxe',
-      name:     'handaxe',
-      material: 'stone',
-      icon:     'handaxe.png',
-      require:  {stone: 1},
-      prereqs:  {},  // Available from the start.
+      id:          'handaxe',
+      name:        'handaxe',
+      description: 'Help your gatherers get more food from carcesses when gathering.',
+      material:    'stone',
+      icon:        'handaxe.png',
+      require:     {stone: 1},
+      prereqs:     {},  // Available from the start.
     }),
     new Tool({
-      id:       'stonespear',
-      name:     'stonespear',
-      material: 'stone',
-      icon:     'stonespear.png',
-      require:  {stone: 1, wood: 1},
-      prereqs:  {stonespear_upgrade: true}
+      id:          'stonespear',
+      name:        'stonespear',
+      description: 'Gatherers can hunt for food when gathering.',
+      material:    'stone',
+      icon:        'stonespear.png',
+      require:     {stone: 1, wood: 1},
+      prereqs:     {stonespear_upgrade: true}
     })
   ];
 

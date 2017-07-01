@@ -1,3 +1,10 @@
+# 2017-07-02
+
+* Hearth uses fire to keep citizens warm during night and scare off wild animals.
+* Cook food?
+* Policy to control hearth fire usage? As in Cities Skylines.
+* Use sin(x) to control findings from gatherers; distribution.
+
 # 2017-06-23
 
 * Clay - pottery and house building.

@@ -2,7 +2,12 @@
   <td class='text-center'>
     <img class='icon icon-lg' src='images/{{tool.icon}}' />
   </td>
-  <td>{{#ucfirst}}{{tool.name}}{{/ucfirst}}</td>
+  <td
+    data-toggle="tooltip"
+    title="{{tool.description}}"
+  >
+    {{#ucfirst}}{{tool.name}}{{/ucfirst}}
+  </td>
   <td>
     <span
       data-toggle="tooltip"
