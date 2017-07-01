@@ -121,47 +121,47 @@ function updateRequirements(buildingObj){
  * @return
  */
 function updatePurchaseRow (purchaseObj) {
-	if (!purchaseObj) {
+  if (!purchaseObj) {
     return;
   }
 
-	var elem = ui.find("#" + purchaseObj.id + "Row");
-	if (!elem) {
+  const elem = ui.find('#' + purchaseObj.id + 'Row');
+  if (!elem) {
     // console.warn("Missing UI element for "+purchaseObj.id);
     // Not yet initialised?
     return;
   }
 
-	// If the item's cost is variable, update its requirements.
-	if (purchaseObj.hasVariableCost()) {
+  // If the item's cost is variable, update its requirements.
+  if (purchaseObj.hasVariableCost()) {
     updateRequirements(purchaseObj);
   }
 
-	// Already having one reveals it as though we met the prereq.
-	var havePrereqs = (purchaseObj.owned > 0) || meetsPrereqs(purchaseObj.prereqs);
+  // Already having one reveals it as though we met the prereq.
+  const havePrereqs = (purchaseObj.owned > 0) || meetsPrereqs(purchaseObj.prereqs);
 
-	// Special check: Hide one-shot upgrades after purchase; they're
-	// redisplayed elsewhere.
-	var hideBoughtUpgrade = ((purchaseObj.type == "upgrade") && (purchaseObj.owned == purchaseObj.limit) && !purchaseObj.salable);
+  // Special check: Hide one-shot upgrades after purchase; they're
+  // redisplayed elsewhere.
+  const hideBoughtUpgrade = ((purchaseObj.type == 'upgrade') && (purchaseObj.owned == purchaseObj.limit) && !purchaseObj.salable);
 
-	var maxQty = canPurchase(purchaseObj);
-	var minQty = canPurchase(purchaseObj,-Infinity);
+  const maxQty = canPurchase(purchaseObj);
+  const minQty = canPurchase(purchaseObj,-Infinity);
 
-	var buyElems = elem.querySelectorAll("[data-action='purchase']");
+  const buyElems = elem.querySelectorAll('[data-action="purchase"]');
 
-	buyElems.forEach(function(elt) {
-		var purchaseQty = dataset(elt, "quantity");
-		// Treat 'custom' or Infinity as +/-1.
-		//xxx Should we treat 'custom' as its appropriate value instead?
-		var absQty = abs(purchaseQty);
-		if ((absQty == "custom") || (absQty == Infinity)) { 
-			purchaseQty = sgn(purchaseQty); 
-		}
-		elt.disabled = ((purchaseQty > maxQty) || (purchaseQty < minQty));
-	});
+  buyElems.forEach(function(elt) {
+    let purchaseQty = dataset(elt, 'quantity');
+    // Treat 'custom' or Infinity as +/-1.
+    //xxx Should we treat 'custom' as its appropriate value instead?
+    const absQty = Math.abs(purchaseQty);
+    if ((absQty == 'custom') || (absQty == Infinity)) {
+      purchaseQty = Math.sign(purchaseQty);
+    }
+    elt.disabled = ((purchaseQty > maxQty) || (purchaseQty < minQty));
+  });
 
-	// Reveal the row if  prereqs are met
-	ui.show(elem, havePrereqs && !hideBoughtUpgrade);
+  // Reveal the row if  prereqs are met
+  ui.show(elem, havePrereqs && !hideBoughtUpgrade);
 }
 
 /**
@@ -178,7 +178,7 @@ function updateResourceRows() {
  * Can't do altars; they're not in the proper format.
  */
 function updateBuildingButtons() { 
-	homeBuildings.forEach(function(elem) {
+  homeBuildings.forEach(function(elem) {
     updatePurchaseRow(elem);
   }); 
 }
@@ -187,14 +187,18 @@ function updateBuildingButtons() {
  * Update the page with the latest worker distribution and stats
  */
 function updateJobButtons(){ 
-	homeUnits.forEach(function(elem) { updatePurchaseRow(elem); }); 
+  homeUnits.forEach(function(elem) {
+    updatePurchaseRow(elem);
+  }); 
 }
 
 /**
  * Updates the party (and enemies)
  */
 function updatePartyButtons(){ 
-	armyUnits.forEach(function(elem) { updatePurchaseRow(elem); }); 
+  armyUnits.forEach(function(elem) {
+    updatePurchaseRow(elem);
+  }); 
 }
 
 
