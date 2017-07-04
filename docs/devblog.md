@@ -4,6 +4,7 @@
 * Cook food?
 * Policy to control hearth fire usage? As in Cities Skylines.
 * Use sin(x) to control findings from gatherers; distribution.
+* Math: (1 - (1 / (x / 300 + 1))) * 100. See pics.
 
 # 2017-06-23
 
