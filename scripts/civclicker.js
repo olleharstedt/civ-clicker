@@ -1073,9 +1073,9 @@ function doPurchase(objId, num) {
         $(cell).find('.progress-bar').css('width', '100%');
         purchaseObj.progressTimeLeft = 1;  // Lock until done
         setTimeout(function() {
-          apply();
           $(cell).html(cellHtml);
           purchaseObj.progressTimeLeft = 0;  // Unlock
+          apply();
         }, 500);
       }
     }

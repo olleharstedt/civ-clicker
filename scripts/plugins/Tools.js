@@ -53,6 +53,22 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
       $table.append(s);
     });
 
+    this.setProduceX();
+  }
+
+  /**
+   * After tool construction, table is rendered again.
+   * So we need to update the amount to construct
+   * for each button.
+   */
+  setProduceX() {
+    let x = $('input[name="tool-produce-x"]:checked').val();
+    if (x == null) {
+      x = 1;
+    }
+    console.log('setProduceX', x);
+    $('.tool-btn-construct').data('x', x);
+    $('.tool-btn-construct').html('Construct ' + shortify(x));
   }
 
   /**
@@ -312,12 +328,11 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
           && data.purchaseObj.subType == 'upgrade') {
         this.renderTable();
       }
+      this.setProduceX();
     });
 
-    $('input[name="tool-produce-x"]').on('change', (that) => {
-      const val = that.currentTarget.value;
-      $('.tool-btn-construct').data('x', val);
-      $('.tool-btn-construct').html('Construct ' + shortify(val));
+    $('input[name="tool-produce-x"]').on('change', () => {
+      this.setProduceX();
     });
 
     $('input[name="tool-equip-x"]').on('change', (that) => {
