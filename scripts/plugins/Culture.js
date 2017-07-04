@@ -75,14 +75,31 @@ CivClicker.plugins.Culture = (function() {
 
   return new (class CulturePlugin {
     constructor() {
+      // Subscription to event global.tick.
       this.tickSub = null;
+
+      // True if data was loaded from save file.
+      this._loaded = false;
     }
 
     /**
      * Init plugin.
      */
     init() {
-      // Setup data.
+      // Only setup data if data was not loaded from save file.
+      // TODO: Change flow?
+      if (!this._loaded) {
+        this.setupConditions();
+      }
+      this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
+        this.checkCultureConditions();
+      });
+    }
+
+    /**
+     * Setup available conditions.
+     */
+    setupConditions() {
       this.cultureConditions = [
         new CultureCondition(
           '10 population',
@@ -94,9 +111,6 @@ CivClicker.plugins.Culture = (function() {
       ];
       this.fulfilledConditions = [];
 
-      this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
-        this.checkCultureConditions();
-      });
     }
 
     /**
@@ -124,6 +138,7 @@ CivClicker.plugins.Culture = (function() {
     load(data) {
       this.cultureConditions = data.cultureConditions;
       this.fulfilledConditions = data.fulfilledConditions;
+      this._loaded = true;
     }
 
     /**

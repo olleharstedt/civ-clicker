@@ -3545,7 +3545,6 @@ setup.game = function () {
 
   // Fire game init event.
   CivClicker.Events.publish('global.init');
-
 };
 
 setup.loop = function () {
