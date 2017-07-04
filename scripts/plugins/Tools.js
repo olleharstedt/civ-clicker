@@ -66,7 +66,6 @@ CivClicker.plugins.Tools = new (class ToolsPlugin {
     if (x == null) {
       x = 1;
     }
-    console.log('setProduceX', x);
     $('.tool-btn-construct').data('x', x);
     $('.tool-btn-construct').html('Construct ' + shortify(x));
   }
