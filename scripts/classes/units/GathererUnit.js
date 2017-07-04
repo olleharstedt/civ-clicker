@@ -39,16 +39,16 @@ class GathererUnit extends WorkUnit {
     // Gatherers can sustain them selves.
     civData.food.net += owned;
 
-    const foodChance = Math.pow(0.95, owned);
-    if (Math.random() > foodChance) {
+    const foodChance = 1 - 1 / (owned / 10 + 1);
+    if (Math.random() < foodChance) {
       const handaxes = this.getEquipmentAmount(civData['handaxe']);
       const found = 1 + (0.2 * handaxes);
-      const formatChance = Math.round(((1 - foodChance) * 100)) + '%';
+      const formatChance = Math.round(((foodChance) * 100)) + '%';
       civData.food.owned += found;
       civData.food.net += found;
 
       // Don't spam found food if chance is higher than 50%.
-      if (foodChance > 0.5) {
+      if (foodChance < 0.5) {
         gameLog(`Found ${found} food while gathering (chance ${formatChance})`);
       }
     }
