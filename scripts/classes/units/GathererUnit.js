@@ -42,6 +42,8 @@ class GathererUnit extends WorkUnit {
     const foodChance = 1 - 1 / (owned / 10 + 1);
     if (Math.random() < foodChance) {
       const handaxes = this.getEquipmentAmount(civData['handaxe']);
+      // (1 - (1 / (x / 20 + 1))) * 3
+      // (1 - (1 / (x / 300 + 1))) * 100
       const found = 1 + (0.2 * handaxes);
       const formatChance = Math.round(((foodChance) * 100)) + '%';
       civData.food.owned += found;

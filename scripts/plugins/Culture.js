@@ -142,6 +142,15 @@ CivClicker.plugins.Culture = (function() {
     }
 
     /**
+     * Called when game is reset by user.
+     * Needed to make save/load work properly.
+     */
+    reset() {
+      this._loaded = false;
+      this.setupConditions();
+    }
+
+    /**
      * Loop through culture conditions and grant
      * culture point if fulfilled.
      */

@@ -2589,6 +2589,14 @@ function resetCivClicker() {
     }
   });
 
+  // Reset each plugin.
+  for (let name in CivClicker.plugins) {
+    const plugin = CivClicker.plugins[name];
+    if (typeof plugin.reset == 'function') {
+      plugin.reset();
+    }
+  }
+
   curCiv.zombie.owned = 0;
   curCiv.grave.owned = 0;
   curCiv.enemySlain.owned = 0;
