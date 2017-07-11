@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+  <head>
+    <title>Markov chain tests</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <script type="application/javascript" src="scripts/lib/ObservableMarkovModel.js"></script>
+  </head>
+  <body>
+    <h1>Markov chain test</h1>
+    <div id="output"></div>
+    <script>
+      var omm = ProbabilityAPI.ObservableMarkovModel;
+
+      var probabilityTable = [
+        [.2, .65, .15],
+        [.1, .8, .1],
+        [.7, .25, .05]
+      ];
+
+      //fake an enum for readability
+      var states = {
+        animatedGIF:0,
+        photos:1,
+        video:2
+      };
+
+      var result=0;
+      var probabilities = [];
+      probabilities[0] = omm.getProbability([states.photos, states.video, states.video], probabilityTable);
+
+      probabilities[1] =  omm.getProbability([states.photos, states.animatedGIF, states.video], probabilityTable);
+
+
+      probabilities[2] =  omm.getProbability([states.photos, states.photos, states.video], probabilityTable);
+
+      for(var i=0; i < probabilities.length; i++){
+           result += probabilities[i];
+      }
+      document.getElementById('output').innerHTML = '<p>Probability: '+result+'</p>';
+    </script>
+  </body>
+</html>
