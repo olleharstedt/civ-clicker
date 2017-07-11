@@ -1,3 +1,15 @@
+# 2017-07-43
+
+* Weather simulation:
+    Stochastic model (not vectors etc).
+    Uses Markov chains.
+    Parameterized by earlier weather data.
+
+* Implementation:
+    Markov chain.
+
+* How long in realtime is one year in gametime? 1 x day/night = 4 weeks?
+
 # 2017-07-02
 
 * Hearth uses fire to keep citizens warm during night and scare off wild animals.
