@@ -11,10 +11,12 @@
     <script>
       var omm = ProbabilityAPI.ObservableMarkovModel;
 
+      //       rain | dry
+      // rain   0.7   0.4
+      // dry    0.3   0.6
       var probabilityTable = [
-        [.2, .65, .15],
-        [.1, .8, .1],
-        [.7, .25, .05]
+        [.8, .5],
+        [.5, .6]
       ];
 
       //fake an enum for readability
