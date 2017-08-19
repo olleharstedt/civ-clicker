@@ -6,11 +6,16 @@
  * @property {number} dayOrNight DAY or NIGHT.
  * @property {object} daySub
  * @property {objecy} nightSub
+ * @property {number} wetOrDry Either WET or DRY.
+ * @property {number} yesterdayWetOrDry Either WET or DRY.
  */
 CivClicker.plugins.Weather = (() => {
 
   const DAY = 0;
   const NIGHT = 1;
+
+  const DRY = 2;
+  const WET = 3;
 
   let toggle = false;
 
@@ -20,6 +25,41 @@ CivClicker.plugins.Weather = (() => {
       this.dayOrNight = DAY;
       this.daySub = null;
       this.nightSub = null;
+
+      this.wetOrDry = DRY;
+      this.yesterdayWetOrDry = DRY;
+      this._decideTick = 0;
+    }
+
+    /**
+     * Decide if this day is wet or dry using Markov chain logic.
+     * Run each tick, but only decided each 10nth tick.
+     */
+    decideWetOrDry() {
+      if (this._decideTick > 10) {
+        this._decideTick = 0;
+
+        const rand = Math.random();
+        if (this.yesterdayWetOrDry == WET) {
+          if (rand > 0.6) {
+            this.wetOrDry = WET;
+          } else {
+            this.wetOrDry = DRY;
+          }
+        } else if (this.yesterdayWetOrDry == DRY) {
+          if (rand > 0.5) {
+            this.wetOrDry = DRY;
+          } else {
+            this.wetOrDry = WET;
+          }
+        }
+
+        this.yesterdayWetOrDry = this.wetOrDry;
+        CivClicker.Events.publish('weather.wetOrDry', this.wetOrDry == WET ? 'wet' : 'dry');
+
+      } else {
+        this._decideTick++;
+      }
     }
 
     /**
@@ -45,6 +85,8 @@ CivClicker.plugins.Weather = (() => {
       if (toggle) {
         $('.tooltip-inner').html(msg);
       }
+
+      this.decideWetOrDry();
     }
 
     /**

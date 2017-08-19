@@ -3,7 +3,7 @@
 * Important property of weather is the probability of wet/dry spells.
 * P(w|w) > P(w|d)
 * Might be more "fun and colourful" if I use multiple states instead of just wet/dry, like "thunder", "storm", "fog" and so on.
-* Annual variety.
+* Annual variety
 
 # 2017-07-16
 

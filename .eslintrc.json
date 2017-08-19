@@ -82,6 +82,7 @@
       "ucfirst": true,
       "getCostNote": true,
       "PNotify": true,
-      "serverSettings": true
+      "serverSettings": true,
+      "setup": true
     }
 }
