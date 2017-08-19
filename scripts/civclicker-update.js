@@ -563,11 +563,20 @@ function addAchievementRows()
 	ui.find("#achievements").innerHTML += s;
 }
 
-// Displays achievements if they are unlocked
-function updateAchievements(){
-	achData.forEach(function(achObj) { 
-		ui.show("#" + achObj.id, achObj.owned);
-	});
+/**
+ * Displays achievements if they are unlocked
+ * Called on each tick.
+ */
+function updateAchievements() {
+  achData.forEach(function(achObj) {
+    let ach = $('#' + achObj.id);
+    if (achObj.owned) {
+      ach.show();
+      ach.html(`<img src='images/achievements/${achObj.id}.png' />`);
+    } else {
+      ach.hide();
+    }
+  });
 }
 
 

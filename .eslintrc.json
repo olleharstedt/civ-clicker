@@ -42,6 +42,7 @@
       "calcZombieCost" : true,
       "isValid" : true,
       "updateAll" : true,
-      "calculatePopulation" : true
+      "calculatePopulation" : true,
+      "achData" : true
     }
 }
