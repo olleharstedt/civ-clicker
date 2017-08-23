@@ -46,6 +46,7 @@ function updateAfterReset () {
 	updateRequirements(civData.catAltar);
 
 	ui.find("#graceCost").innerHTML = prettify(civData.grace.cost);
+
 	//Update page with all new values
 	updateResourceTotals();
 	updateUpgrades();
@@ -58,27 +59,27 @@ function updateAfterReset () {
 	updateWonder();
 	//Reset upgrades and other interface elements that might have been unlocked
 	//xxx Some of this probably isn't needed anymore; the update routines will handle it.
-	ui.find("#renameDeity").disabled = "true";
-	ui.find("#raiseDead").disabled = "true";
-	ui.find("#raiseDead100").disabled = "true";
-	ui.find("#raiseDeadMax").disabled = "true";
-	ui.find("#smite").disabled = "true";
-	ui.find("#wickerman").disabled = "true";
-	ui.find("#pestControl").disabled = "true";
-	ui.find("#grace").disabled = "true";
-	ui.find("#walk").disabled = "true";
-	ui.find("#ceaseWalk").disabled = "true";
-	ui.find("#lure").disabled = "true";
-	ui.find("#companion").disabled = "true";
-	ui.find("#comfort").disabled = "true";
-	ui.find("#book").disabled = "true";
-	ui.find("#feast").disabled = "true";
-	ui.find("#blessing").disabled = "true";
-	ui.find("#waste").disabled = "true";
-	ui.find("#riddle").disabled = "true";
-	ui.find("#throne").disabled = "true";
-	ui.find("#glory").disabled = "true";
-	ui.find("#summonShade").disabled = "true";
+	$('#renameDeity').attr('disabled', true);
+	$('#raiseDead').attr('disabled', true);
+	$('#raiseDead100').attr('disabled', true);
+	$('#raiseDeadMax').attr('disabled', true);
+	$('#smite').attr('disabled', true);
+	$('#wickerman').attr('disabled', true);
+	$('#pestControl').attr('disabled', true);
+	$('#grace').attr('disabled', true);
+	$('#walk').attr('disabled', true);
+	$('#ceaseWalk').attr('disabled', true);
+	$('#lure').attr('disabled', true);
+	$('#companion').attr('disabled', true);
+	$('#comfort').attr('disabled', true);
+	$('#book').attr('disabled', true);
+	$('#feast').attr('disabled', true);
+	$('#blessing').attr('disabled', true);
+	$('#waste').attr('disabled', true);
+	$('#riddle').attr('disabled', true);
+	$('#throne').attr('disabled', true);
+	$('#glory').attr('disabled', true);
+	$('#summonShade').attr('disabled', true);
 
 	ui.find("#conquest").style.display = "none";
 
@@ -94,24 +95,26 @@ function updateAfterReset () {
  * @return {boolean}
  */
 function updateTrader () {
-	var isHere = isTraderHere();
-	if (isHere) {
-		ui.find("#tradeType").innerHTML = civData[curCiv.trader.materialId].getQtyName(curCiv.trader.requested);
-		ui.find("#tradeRequested").innerHTML = prettify(curCiv.trader.requested);
-		ui.find("#traderTimer").innerHTML = curCiv.trader.timer + " second" + ((curCiv.trader.timer != 1) ? "s" : "");
-	} else {
-		
-	}
-	ui.show("#tradeContainer", isHere);
-	ui.show("#noTrader", !isHere);
-	$("#trade-pane-alert").toggle(isHere);
-	return isHere;
+  const isHere = isTraderHere();
+  if (isHere) {
+    ui.find('#tradeType').innerHTML = civData[curCiv.trader.materialId].getQtyName(curCiv.trader.requested);
+    ui.find('#tradeRequested').innerHTML = prettify(curCiv.trader.requested);
+    ui.find('#traderTimer').innerHTML = curCiv.trader.timer + ' second' + ((curCiv.trader.timer != 1) ? 's' : '');
+  } else {
+    // Do nothing
+  }
+  ui.show('#tradeContainer', isHere);
+  ui.show('#noTrader', !isHere);
+  $('#trade-pane-alert').toggle(isHere);
+  return isHere;
 }
 
 //xxx This should become an onGain() member method of the building classes
 function updateRequirements(buildingObj){
-	var displayNode = document.getElementById(buildingObj.id + "Cost");
-	if (displayNode) { displayNode.innerHTML = getReqText(buildingObj.require); }
+  let displayNode = document.getElementById(buildingObj.id + 'Cost');
+  if (displayNode) {
+    displayNode.innerHTML = getReqText(buildingObj.require);
+  }
 }
 
 /**
@@ -120,55 +123,58 @@ function updateRequirements(buildingObj){
  * @return
  */
 function updatePurchaseRow (purchaseObj) {
-	if (!purchaseObj) {
+  if (!purchaseObj) {
     return;
   }
 
-	var elem = ui.find("#" + purchaseObj.id + "Row");
-	if (!elem) {
+  const elem = ui.find('#' + purchaseObj.id + 'Row');
+  if (!elem) {
     // console.warn("Missing UI element for "+purchaseObj.id);
     // Not yet initialised?
     return;
   }
 
-	// If the item's cost is variable, update its requirements.
-	if (purchaseObj.hasVariableCost()) {
+  // If the item's cost is variable, update its requirements.
+  if (purchaseObj.hasVariableCost()) {
     updateRequirements(purchaseObj);
   }
 
-	// Already having one reveals it as though we met the prereq.
-	var havePrereqs = (purchaseObj.owned > 0) || meetsPrereqs(purchaseObj.prereqs);
+  // Already having one reveals it as though we met the prereq.
+  const havePrereqs = (purchaseObj.owned > 0) || meetsPrereqs(purchaseObj.prereqs);
 
-	// Special check: Hide one-shot upgrades after purchase; they're
-	// redisplayed elsewhere.
-	var hideBoughtUpgrade = ((purchaseObj.type == "upgrade") && (purchaseObj.owned == purchaseObj.limit) && !purchaseObj.salable);
+  // Special check: Hide one-shot upgrades after purchase; they're
+  // redisplayed elsewhere.
+  const hideBoughtUpgrade =
+    (purchaseObj.type == 'upgrade')
+    && (purchaseObj.owned == purchaseObj.limit)
+    && !purchaseObj.salable;
 
-	var maxQty = canPurchase(purchaseObj);
-	var minQty = canPurchase(purchaseObj,-Infinity);
+  const maxQty = canPurchase(purchaseObj);
+  const minQty = canPurchase(purchaseObj,-Infinity);
 
-	var buyElems = elem.querySelectorAll("[data-action='purchase']");
+  const buyElems = elem.querySelectorAll('[data-action="purchase"]');
 
-	buyElems.forEach(function(elt) {
-		var purchaseQty = dataset(elt, "quantity");
-		// Treat 'custom' or Infinity as +/-1.
-		//xxx Should we treat 'custom' as its appropriate value instead?
-		var absQty = abs(purchaseQty);
-		if ((absQty == "custom") || (absQty == Infinity)) { 
-			purchaseQty = sgn(purchaseQty); 
-		}
-		elt.disabled = ((purchaseQty > maxQty) || (purchaseQty < minQty));
-	});
+  buyElems.forEach(function(elt) {
+    let purchaseQty = dataset(elt, 'quantity');
+    // Treat 'custom' or Infinity as +/-1.
+    //xxx Should we treat 'custom' as its appropriate value instead?
+    const absQty = Math.abs(purchaseQty);
+    if ((absQty == 'custom') || (absQty == Infinity)) {
+      purchaseQty = Math.sign(purchaseQty);
+    }
+    elt.disabled = ((purchaseQty > maxQty) || (purchaseQty < minQty));
+  });
 
-	// Reveal the row if  prereqs are met
-	ui.show(elem, havePrereqs && !hideBoughtUpgrade);
+  // Reveal the row if  prereqs are met
+  ui.show(elem, havePrereqs && !hideBoughtUpgrade);
 }
 
 /**
  * Only set up for the basic resources right now.
  */
 function updateResourceRows() { 
-	basicResources.forEach(function(elem) {
-    updatePurchaseRow(elem);
+  basicResources.forEach(function(resource) {
+    resource.updateResourceRow();
   }); 
 }
 
@@ -177,7 +183,7 @@ function updateResourceRows() {
  * Can't do altars; they're not in the proper format.
  */
 function updateBuildingButtons() { 
-	homeBuildings.forEach(function(elem) {
+  homeBuildings.forEach(function(elem) {
     updatePurchaseRow(elem);
   }); 
 }
@@ -186,14 +192,18 @@ function updateBuildingButtons() {
  * Update the page with the latest worker distribution and stats
  */
 function updateJobButtons(){ 
-	homeUnits.forEach(function(elem) { updatePurchaseRow(elem); }); 
+  homeUnits.forEach(function(elem) {
+    updatePurchaseRow(elem);
+  }); 
 }
 
 /**
  * Updates the party (and enemies)
  */
 function updatePartyButtons(){ 
-	armyUnits.forEach(function(elem) { updatePurchaseRow(elem); }); 
+  armyUnits.forEach(function(elem) {
+    updatePurchaseRow(elem);
+  }); 
 }
 
 
@@ -203,60 +213,73 @@ function updatePartyButtons(){
  */
 function updateResourceTotals() {
 
-	var i,displayElems,elem,val;
-	var landTotals = getLandTotals();
+  var i,displayElems,elem,val;
+  var landTotals = getLandTotals();
 
-	// Scan the HTML document for elements with a "data-action" element of
-	// "display".  The "data-target" of such elements (or their ancestors) 
-	// is presumed to contain
-	// the global variable name to be displayed as the element's content.
-	//xxx Note that this is now also updating nearly all updatable values,
-	// including population
-	displayElems = document.querySelectorAll("[data-action='display']");
-	for (i=0;i<displayElems.length;++i)
-	{
-		elem = displayElems[i];
-		//xxx Have to use curCiv here because of zombies and other non-civData displays.
-		elem.innerHTML = prettify(Math.floor(curCiv[dataset(elem,"target")].owned));
-	}
+	/** 
+   * Scan the HTML document for elements with a "data-action" element of
+	 * "display".  The "data-target" of such elements (or their ancestors) 
+	 * is presumed to contain
+	 * the global variable name to be displayed as the element's content.
+	 * Note that this is now also updating nearly all updatable values,
+	 * including population
+   */
+  displayElems = document.querySelectorAll('[data-action="display"]');
+  for (i=0;i<displayElems.length;++i) {
+    elem = displayElems[i];
+		// Have to use curCiv here because of zombies and other non-civData displays.
+    const target = dataset(elem, 'target');
+    if (target) {
+      if (curCiv[target]) {
+        const owned = curCiv[target].owned;
+        elem.innerHTML = prettify(Math.floor(owned));
+      } else {
+        // Problem with load?
+        alert('Could not find target ' + target + ', resetting CivClicker');
+        resetCivClicker();
+      }
+    } else {
+      throw 'Found no target for elem ' + elem;
+    }
+  }
 
 	// Update net production values for primary resources.  Same as the above,
 	// but look for "data-action" == "displayNet".
-	displayElems = document.querySelectorAll("[data-action='displayNet']");
-	for (i=0;i<displayElems.length;++i)
-	{
-		elem = displayElems[i];
-		val = civData[dataset(elem,"target")].net;
-		if (!isValid(val)) {
+  displayElems = document.querySelectorAll('[data-action="displayNet"]');
+  for (i=0;i<displayElems.length;++i) {
+    elem = displayElems[i];
+    val = civData[dataset(elem,'target')].net;
+    if (!isValid(val)) {
       continue;
     }
 
-		// Colourise net production values.
+    // Colourise net production values.
     elem.style.color = getNetColor(val);
-		elem.innerHTML = ((val < 0) ? "" : "+") + prettify(val.toFixed(1));
-	}
-
+    elem.innerHTML = ((val < 0) ? '' : '+') + prettify(val.toFixed(1));
+  }
 
 	//if (civData.gold.owned >= 1){
 	//	ui.show("#goldRow",true);
 	//}
 
-	//Update page with building numbers, also stockpile limits.
-	$("#maxfood").html(prettify(civData.food.limit));
-	$("#maxwood").html(prettify(civData.wood.limit));
-	$("#maxstone").html(prettify(civData.stone.limit));
-	$("#totalBuildings").html(prettify(landTotals.buildings));
-	$("#totalLand"     ).html(prettify(landTotals.lands));
+  // Run updateTotals for each resource.
+  resourceData.forEach((res) => {
+    res.updateTotals();
+  });
+
+	// Update page with building numbers, also stockpile limits.
+  $('#totalBuildings').html(prettify(landTotals.buildings));
+  $('#totalLand'     ).html(prettify(landTotals.lands));
 
 	// Unlock advanced control tabs as they become enabled (they never disable)
 	// Temples unlock Deity, barracks unlock Conquest, having gold unlocks Trade.
 	// Deity is also unlocked if there are any prior deities present.
-	if ((civData.temple.owned > 0)||(curCiv.deities.length > 1)) { ui.show("#deitySelect",true); }
-	if (civData.barracks.owned > 0) { ui.show("#conquestSelect",true); }
-	if (civData.gold.owned > 0) { ui.show("#tradeSelect",true); }
+  if ((civData.temple.owned > 0)||(curCiv.deities.length > 1)) { ui.show('#deitySelect',true); }
+  if (civData.barracks.owned > 0) { ui.show('#conquestSelect',true); }
+  if (civData.gold.owned > 0) { ui.show('#tradeSelect',true); }
 
 	// Need to have enough resources to trade
-	$("#tradeButton").attr(
+  $('#tradeButton').attr(
     'disabled',
     !curCiv.trader
       || !curCiv.trader.timer
@@ -456,43 +479,43 @@ function updateLandBar () {
 
 // Check to see if the player has an upgrade and hide as necessary
 // Check also to see if the player can afford an upgrade and enable/disable as necessary
-function updateUpgrades(){
-	var domain = getCurDeityDomain();
-	var hasDomain = (getCurDeityDomain() === "") ? false : true;
-	var canSelectDomain = ((civData.worship.owned) && !hasDomain);
+function updateUpgrades() {
+  var domain = getCurDeityDomain();
+  var hasDomain = (getCurDeityDomain() === "") ? false : true;
+  var canSelectDomain = ((civData.worship.owned) && !hasDomain);
 
-	// Update all of the upgrades
-	upgradeData.forEach( function(elem){ 
-		updatePurchaseRow(elem);  // Update the purchase row.
+  // Update all of the upgrades
+  upgradeData.forEach( function(elem){ 
+    updatePurchaseRow(elem);  // Update the purchase row.
 
-		// Show the already-purchased line if we've already bought it.
-		ui.show(("#P" + elem.id), elem.owned);
-	});
+    // Show the already-purchased line if we've already bought it.
+    ui.show(("#P" + elem.id), elem.owned);
+  });
 
-	// Deity techs
-	ui.show("#deityPane .notYet", (!hasDomain && !canSelectDomain));
-	//ui.find("#renameDeity").disabled = (!civData.worship.owned);
-	ui.show("#battleUpgrades", (getCurDeityDomain() == "battle"));
-	ui.show("#fieldsUpgrades", (getCurDeityDomain() == "fields"));
-	ui.show("#underworldUpgrades", (getCurDeityDomain() == "underworld"));
-	ui.show("#zombieWorkers", (curCiv.zombie.owned > 0));
-	ui.show("#catsUpgrades", (getCurDeityDomain() == "cats"));
+  // Deity techs
+  ui.show("#deityPane .notYet", (!hasDomain && !canSelectDomain));
+  //ui.find("#renameDeity").disabled = (!civData.worship.owned);
+  ui.show("#battleUpgrades", (getCurDeityDomain() == "battle"));
+  ui.show("#fieldsUpgrades", (getCurDeityDomain() == "fields"));
+  ui.show("#underworldUpgrades", (getCurDeityDomain() == "underworld"));
+  ui.show("#zombieWorkers", (curCiv.zombie.owned > 0));
+  ui.show("#catsUpgrades", (getCurDeityDomain() == "cats"));
 
-	ui.show("#deityDomains", canSelectDomain);
-	ui.findAll("#deityDomains button.purchaseFor500Piety").forEach(function(button){
-		button.disabled = (!canSelectDomain || (civData.piety.owned < 500));
-	});
-	//ui.show("#deitySelect .alert", canSelectDomain);
+  ui.show("#deityDomains", canSelectDomain);
+  ui.findAll("#deityDomains button.purchaseFor500Piety").forEach(function(button){
+    button.disabled = (!canSelectDomain || (civData.piety.owned < 500));
+  });
+  //ui.show("#deitySelect .alert", canSelectDomain);
 
-	ui.show("#" + domain + "Upgrades", hasDomain);
+  ui.show("#" + domain + "Upgrades", hasDomain);
 
-	// Conquest / battle standard
-	ui.show("#conquest", civData.standard.owned);
-	ui.show("#conquestPane .notYet", (!civData.standard.owned));
+  // Conquest / battle standard
+  ui.show("#conquest", civData.standard.owned);
+  ui.show("#conquestPane .notYet", (!civData.standard.owned));
 
-	// Trade
-	ui.show("#tradeUpgradeContainer", civData.trade.owned);
-	ui.show("#tradePane .notYet", !civData.trade.owned);
+  // Trade
+  ui.show("#tradeUpgradeContainer", civData.trade.owned);
+  ui.show("#tradePane .notYet", !civData.trade.owned);
 }
 
 

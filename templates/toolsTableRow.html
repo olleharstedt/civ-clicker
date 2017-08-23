@@ -1,0 +1,47 @@
+<tr class='tool-row-{{tool.name}}'>
+  <td class='text-center'>
+    <img class='icon icon-lg' src='images/{{tool.icon}}' />
+  </td>
+  <td
+    data-toggle="tooltip"
+    title="{{tool.description}}"
+  >
+    {{#ucfirst}}{{tool.name}}{{/ucfirst}}
+  </td>
+  <td>
+    <span
+      data-toggle="tooltip"
+      title="Number of total tools owned."
+      class='tool-{{tool.name}}-owned'
+    >
+      {{owned}}
+    </span>
+    &nbsp;
+    <span
+      data-toggle="tooltip"
+      title="Number of equipped tools."
+      class='tool-{{tool.name}}-equipped'
+    >
+      ({{equipped}})
+    </span>
+  </td>
+  <td class='button-td' style='width: 100px;'>
+    <button
+      id="tool-{{tool.name}}-construct"
+      class='btn btn-default btn-small tool-btn-construct'
+      onclick='doPurchase("{{tool.name}}", $(this).data("x"));'
+      data-x="1"
+    >
+      Construct 1
+    </button>
+  </td>
+  <td class="text-center" data-toggle="tooltip" title="Cost to produce x tool(s)">{{{cost}}}</td>
+  <td>Tool makers:</td>
+  <td>
+    <button id='tool-{{tool.name}}-decrease' data-toggle='tooltip' title='Remove tool maker' class='btn btn-default btn-sm x1'>-1</button>
+  </td>
+  <td>0</td>
+  <td>
+    <button id='tool-{{tool.name}}-increase' data-toggle='tooltip' title='Assign tool maker' class='btn btn-default btn-sm x1'>+1</button>
+  </td>
+</tr>

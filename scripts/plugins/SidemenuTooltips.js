@@ -1,14 +1,11 @@
 /* @flow */
 'use strict';
 
-/** @namespace */
-var CivClicker = CivClicker || {};
-
 /**
  * Render tooltips for sidemenu.
  * @module SidemenuTooltips
  */
-CivClicker.SidemenuTooltips = (function() {
+CivClicker.plugins.SidemenuTooltips = (function() {
   var templates = {};
 
   /**

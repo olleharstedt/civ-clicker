@@ -1,14 +1,11 @@
 /* @flow */
 'use strict';
 
-/** @namespace */
-var CivClicker = CivClicker || {};
-
 /**
  * Show disk icon when autosaving.
  * @module AutosaveIcon
  */
-CivClicker.AutosaveIcon = (function() {
+CivClicker.plugins.AutosaveIcon = (function() {
   
   // Event subscription.
   let globalAutosave = null;
