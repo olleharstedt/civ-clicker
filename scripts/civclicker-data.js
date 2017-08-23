@@ -241,7 +241,7 @@ function getCivData() {
       name:       'Agriculture',
       subType:    'upgrade',
       require:    {food: 500},
-      effectText: 'The agricultural revolution made it possible for humans to grow weat and other plants regularly.' 
+      effectText: 'The agricultural revolution made it possible for humans to grow wheat and other plants regularly.'
     }),
     new Upgrade({
       id:         'stonespear_upgrade',
