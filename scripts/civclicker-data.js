@@ -781,7 +781,7 @@ function getCivData() {
       test:function() { return population.totalSick > population.healthy; }
     }),
     new Achievement({id:"ghostTownAch", name:"Ghost Town"     , 
-      test:function() { return (population.living === 0 && population.limit >= 50000); }
+      test:function() { return population.living === 0 && population.limit >= 50000; }
     }),
       //deities
       //xxx TODO: Should make this loop through the domains
