@@ -8,4 +8,5 @@ Using an agent system instead of just numbers to represent units.
 # Con
 
 * Is it really CivClicker anymore?
+* Supports micromanagement, too complex
 * CPU heavy
