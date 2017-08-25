@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+  <head>
+    <title>Weather test, skyhawkb</title>
+	</head>
+	<body>
+    <div id="list"></div>
+		<script>
+		function randomInt(min,max) {
+				return Math.floor(Math.random()*(max-min+1)+min);
+		} // credit francisc at stack overflow
+
+		function getWeather() {
+			var previousWeather = [false];
+				var isRain = previousWeather[previousWeather.length - 1];
+				// false = dry; true = wet
+				var change = randomInt(1,10);
+				if(change < 3 && isRain) {
+					isRain = !isRain;
+				}
+				if(change < 5 && !isRain) {
+					isRain = !isRain;
+				}
+				previousWeather.push(isRain);
+				return isRain;
+		}
+
+		var list = "";
+		for(var i = 0; i < 92; i++) {
+      var j = getWeather() + "<br/>";
+				list += j;
+		}
+		document.getElementById("list").innerHTML = list;
+		</script>
+	</body>
+</html>
