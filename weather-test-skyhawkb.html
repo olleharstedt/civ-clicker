@@ -5,33 +5,75 @@
     <title>Weather test, skyhawkb</title>
 	</head>
 	<body>
+    <div id="info"></div>
     <div id="list"></div>
+
 		<script>
 		function randomInt(min,max) {
 				return Math.floor(Math.random()*(max-min+1)+min);
 		} // credit francisc at stack overflow
 
-		function getWeather() {
-			var previousWeather = [false];
-				var isRain = previousWeather[previousWeather.length - 1];
-				// false = dry; true = wet
-				var change = randomInt(1,10);
-				if(change < 3 && isRain) {
-					isRain = !isRain;
-				}
-				if(change < 5 && !isRain) {
-					isRain = !isRain;
-				}
-				previousWeather.push(isRain);
-				return isRain;
-		}
 
-		var list = "";
-		for(var i = 0; i < 92; i++) {
-      var j = getWeather() + "<br/>";
-				list += j;
-		}
-		document.getElementById("list").innerHTML = list;
+    let previousWeather = [false];
+
+    /**
+     * @return {boolean} True if rain.
+     */
+		function getWeather() {
+      //console.log(previousWeather);
+      let isRain = previousWeather[previousWeather.length - 1];
+      let change = randomInt(1,10);
+      if(change < 3 && isRain) {
+        isRain = !isRain;
+      } else if(change < 5 && !isRain) {
+        isRain = !isRain;
+      }
+      previousWeather.push(isRain);
+      return isRain;
+    }
+
+    // Return number of rain streaks.
+    function getNumberOfStreaks(list) {
+      let streaks = 0;
+      let isStreak = true;
+      for (let i = 0; i < list.length; i++) {
+        let rain = list[i];
+        if (rain && list[i - 1]) {
+          if (!isStreak) {
+            streaks++;
+          }
+          isStreak = true;
+        } else {
+          isStreak = false;
+        }
+      }
+      return streaks;
+    }
+
+		let list = [];
+    let chars = '';
+    let totalDays = 1000;
+    let rainyDays = 0;
+    let yesterdayRain = false;
+    let isStreak = false;
+    let longestStreak = 0;
+    let RAIN = 1;
+    let DRY = 0;
+		for(let i = 0; i < totalDays; i++) {
+      if (getWeather()) {
+        list.push(RAIN);
+        chars += 'R<br/>';
+      } else {
+        list.push(DRY);
+        chars += 'D<br/>';
+      }
+    }
+    let streaks = getNumberOfStreaks(list);
+    document.getElementById('info').innerHTML = `
+      <p>Total days: ${totalDays}</p>
+      <p>Rain streaks: ${streaks}</p>
+    `;
+    document.getElementById('list').innerHTML = chars;
 		</script>
 	</body>
 </html>
