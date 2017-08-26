@@ -41,7 +41,6 @@ function getCivData () {
 	new Resource({ id:"gold", name:"gold", vulnerable:false, progressFactor: 100}), // Can't be stolen
 	new Resource({ id:"corpses", singular:"corpse", plural:"corpses", vulnerable:false }), // Can't be stolen
 	new Resource({ id:"devotion", name:"devotion", vulnerable:false }), // Can't be stolen
-	//SkyHawk resources
 	new Resource({ id:"silicate", name:"silicate", vulnerable:false, progressFactor: 50}),
 	new Resource({ id:"silicon", name:"silicon", vulnerable:false, progressFactor: 100}), // Can't be stolen
 	// Buildings
@@ -84,10 +83,9 @@ function getCivData () {
 		prereqs:{ architecture: true },
 		require:{ wood:200, stone:200, leather:20 },
 		effectText:"+50 max pop." }),
-	//SkyHawk building
 	new Building({ 
 		id: "apartment", singular:"apartment", plural:"apartments",
-		prereqs:{ architecture: true }, //TODO: silicon upgrade
+		prereqs:{ siliconage: true },
 		require:{ wood:2000, metal:1000, silicon:10 },
 		effectText:"+200 max pop." }),
 	new Building({ 
@@ -294,6 +292,11 @@ function getCivData () {
 		id: "architecture", name:"Architecture", subType: "upgrade",
 		prereqs:{ construction: true },
 		require: { wood: 10000, stone: 10000 },
+		effectText:"Unlock more buildings and upgrades" }),
+	new Upgrade({ 
+		id: "siliconage", name:"Silicon", subType: "upgrade",
+		prereqs:{ architecture: true },
+		require: { wood: 10000, metal: 10000 },
 		effectText:"Unlock more buildings and upgrades" }),
 	new Upgrade({ 
 		id: "tenements", name:"Tenements", subType: "upgrade",
