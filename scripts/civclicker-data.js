@@ -84,6 +84,12 @@ function getCivData () {
 		prereqs:{ architecture: true },
 		require:{ wood:200, stone:200, leather:20 },
 		effectText:"+50 max pop." }),
+	//SkyHawk building
+	new Building({ 
+		id: "apartment", singular:"apartment", plural:"apartments",
+		prereqs:{ architecture: true }, //TODO: silicon upgrade
+		require:{ wood:2000, metal:1000, silicon:10 },
+		effectText:"+200 max pop." }),
 	new Building({ 
 		id: "barn", singular:"barn", plural:"barns",
 		require:{ wood: 100 },
