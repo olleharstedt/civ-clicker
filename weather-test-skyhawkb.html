@@ -11,7 +11,7 @@
     <div id="info"></div>
     <div id="list"></div>
 
-    <div style="width: 400px; height: 400px;">
+    <div style="width: 800px;">
       <canvas id="streaks"></canvas>
     </div>
 
@@ -94,11 +94,11 @@
     let myLineChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Streaks'],
+        labels: streaks,
         datasets: [
           {
             label: 'Length of streak',
-            data: [1, 2, 3]
+            data: streaks
           }
         ]
       },
