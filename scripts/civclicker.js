@@ -3605,6 +3605,7 @@ setup.pages = function() {
     'resources',
     'population',
     'buildings',
+    'environment', 
     'upgrades',
     'deities',
     'conquest',
