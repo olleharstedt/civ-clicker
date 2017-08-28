@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * Weather plugin. Also used for day/night cycle.
+ * Weather plugin. Also used for day/night icons.
  * @property {number} dayOrNight DAY or NIGHT.
  * @property {object} daySub
  * @property {objecy} nightSub
@@ -36,30 +36,25 @@ CivClicker.plugins.Weather = (() => {
      * Run each tick, but only decided each 10nth tick.
      */
     decideWetOrDry() {
-      if (this._decideTick > 10) {
-        this._decideTick = 0;
-
-        const rand = Math.random();
-        if (this.yesterdayWetOrDry == WET) {
-          if (rand > 0.6) {
-            this.wetOrDry = WET;
-          } else {
-            this.wetOrDry = DRY;
-          }
-        } else if (this.yesterdayWetOrDry == DRY) {
-          if (rand > 0.5) {
-            this.wetOrDry = DRY;
-          } else {
-            this.wetOrDry = WET;
-          }
+      throw 'here';
+      const rand = Math.random();
+      console.log(rand);
+      if (this.yesterdayWetOrDry == WET) {
+        if (rand > 0.7) {
+          this.wetOrDry = WET;
+        } else {
+          this.wetOrDry = DRY;
         }
-
-        this.yesterdayWetOrDry = this.wetOrDry;
-        CivClicker.Events.publish('weather.wetOrDry', this.wetOrDry == WET ? 'wet' : 'dry');
-
-      } else {
-        this._decideTick++;
+      } else if (this.yesterdayWetOrDry == DRY) {
+        if (rand > 0.9) {
+          this.wetOrDry = WET;
+        } else {
+          this.wetOrDry = DRY;
+        }
       }
+
+      this.yesterdayWetOrDry = this.wetOrDry;
+      CivClicker.Events.publish('weather.wetOrDry', this.wetOrDry == WET ? 'wet' : 'dry');
     }
 
     /**
@@ -86,7 +81,12 @@ CivClicker.plugins.Weather = (() => {
         $('.tooltip-inner').html(msg);
       }
 
-      this.decideWetOrDry();
+      if (this._decideTick > 9) {
+        this._decideTick = 0;
+        this.decideWetOrDry();
+      } else {
+        this._decideTick++;
+      }
     }
 
     /**

@@ -78,13 +78,86 @@
     <script type="application/javascript" src="scripts/civclicker-data.js" defer="defer"></script>
     <script type="application/javascript" src="scripts/civclicker-update.js" defer="defer"></script>
     <script type="application/javascript" src="scripts/civclicker.js" defer="defer"></script>
+
+    <!-- Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
   </head>
   <body>
     <div class="container">
       <h1>Weather test</h1>
+      <div id="info"></div>
+      <div id="list"></div>
+
+      <div style="width: 800px;">
+        <canvas id="streaks"></canvas>
+      </div>
     </div>
     <script>
       $(function () {
+
+        // Return number of rain streaks.
+        function getNumberOfStreaks(list) {
+          let streaks = 0;
+          let isStreak = true;
+          let streakLength;
+          let streakLengths = [];
+          for (let i = 0; i < list.length; i++) {
+            let rain = list[i];
+            if (rain && list[i - 1]) {
+              if (!isStreak) {
+                streaks++;
+              }
+              isStreak = true;
+              streakLength++;
+            } else {
+              isStreak = false;
+              if (streakLength > 0) {
+                streakLengths.push(streakLength);
+              }
+              streakLength = 0;
+            }
+          }
+          return streakLengths;
+        }
+
+        let weatherList = [];
+        const totalDays = 1000;
+        for (let i = 0; i < totalDays; i++) {
+          CivClicker.plugins.Weather.decideWetOrDry();
+          if (CivClicker.plugins.Weather.wetOrDry == 2) {
+            // 2 == DRY
+            weatherList.push(0);
+          } else {
+            // 3 == WET
+            weatherList.push(1);
+          }
+        }
+
+        var streaks = getNumberOfStreaks(weatherList);
+        document.getElementById('info').innerHTML = `
+          <p>Total days: ${totalDays}</p>
+          <p>Rain streaks: ${streaks.length}</p>
+          `;
+
+        streaks.sort((a, b) => { return b - a;});
+        let ctx = document.getElementById("streaks").getContext('2d');
+        let options = {};
+        console.log(streaks);
+        let myLineChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: streaks,
+            datasets: [
+            {
+              label: 'Length of streak',
+              data: streaks
+            }
+            ]
+          },
+          options: {
+            'label': 'bla'
+          }
+        });
       });
     </script>
   </body>
