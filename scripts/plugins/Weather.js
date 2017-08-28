@@ -36,17 +36,15 @@ CivClicker.plugins.Weather = (() => {
      * Run each tick, but only decided each 10nth tick.
      */
     decideWetOrDry() {
-      throw 'here';
       const rand = Math.random();
-      console.log(rand);
       if (this.yesterdayWetOrDry == WET) {
-        if (rand > 0.7) {
+        if (rand > 0.5) {
           this.wetOrDry = WET;
         } else {
           this.wetOrDry = DRY;
         }
       } else if (this.yesterdayWetOrDry == DRY) {
-        if (rand > 0.9) {
+        if (rand > 0.6) {
           this.wetOrDry = WET;
         } else {
           this.wetOrDry = DRY;
