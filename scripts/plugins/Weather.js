@@ -1,5 +1,5 @@
 /* @flow */
-'use strict';
+//'use strict';
 
 /**
  * Weather plugin. Also used for day/night icons.
@@ -18,6 +18,93 @@ CivClicker.plugins.Weather = (() => {
   const WET = 3;
 
   let toggle = false;
+
+  // view-source:http://www.math.ucla.edu/~tom/distributions/gamma.html
+  // Gamma function for daily precipitation.
+  function LogGamma(Z) {
+    with (Math) {
+      var S=1+76.18009173/Z-86.50532033/(Z+1)+24.01409822/(Z+2)-1.231739516/(Z+3)+.00120858003/(Z+4)-.00000536382/(Z+5);
+      var LG= (Z-.5)*Math.log(Z+4.5)-(Z+4.5)+Math.log(S*2.50662827465);
+    }
+    return LG;
+  }
+  function Gcf(X,A) {        // Good for X>A+1
+    with (Math) {
+      var A0=0;
+      var B0=1;
+      var A1=1;
+      var B1=X;
+      var AOLD=0;
+      var N=0;
+      while (Math.abs((A1-AOLD)/A1)>.00001) {
+        AOLD=A1;
+        N=N+1;
+        A0=A1+(N-A)*A0;
+        B0=B1+(N-A)*B0;
+        A1=X*A0+N*A1;
+        B1=X*B0+N*B1;
+        A0=A0/B1;
+        B0=B0/B1;
+        A1=A1/B1;
+        B1=1;
+      }
+      var Prob=Math.exp(A*Math.log(X)-X-LogGamma(A))*A1;
+    }
+    return 1-Prob;
+  }
+  function Gser(X,A) {        // Good for X<A+1.
+    with (Math) {
+      var T9=1/A;
+      var G=T9;
+      var I=1;
+      while (T9>G*.00001) {
+        T9=T9*X/(A+I);
+        G=G+T9;
+        I=I+1;
+      }
+      G=G*Math.exp(A*Math.log(X)-X-LogGamma(A));
+    }
+    return G;
+  }
+  function normalcdf(X) {   //HASTINGS.  MAX ERROR = .000001
+    const T=1/(1+.2316419*Math.abs(X));
+    const D=.3989423*Math.exp(-X*X/2);
+    let Prob=D*T*(.3193815+T*(-.3565638+T*(1.781478+T*(-1.821256+T*1.330274))));
+    if (X>0) {
+      Prob=1-Prob;
+    }
+    return Prob;
+  }
+  function Gammacdf(x,a) {
+    var GI;
+    if (x<=0) {
+      GI=0;
+    } else if (a>200) {
+      const z=(x-a)/Math.sqrt(a);
+      const y=normalcdf(z);
+      const b1=2/Math.sqrt(a);
+      const phiz=.39894228*Math.exp(-z*z/2);
+      const w=y-b1*(z*z-1)*phiz/6;  //Edgeworth1
+      const b2=6/a;
+      const u=3*b2*(z*z-3)+b1*b1*(z^4-10*z*z+15);
+      GI=w-phiz*z*u/72;        //Edgeworth2
+    } else if (x<a+1) {
+      GI=Gser(x,a);
+    } else {
+      GI=Gcf(x,a);
+    }
+    return GI;
+  }
+  function compute(X, A, B) {
+    if (A<=0) {
+      throw 'alpha must be positive';
+    } else if (B<=0) {
+      throw 'beta must be positive';
+    }
+    let Prob=Gammacdf(X/B,A);
+    Prob=Math.round(Prob*100000)/100000;
+    return Prob;
+  }
 
   return new (class WeatherPlugin {
 
@@ -53,6 +140,23 @@ CivClicker.plugins.Weather = (() => {
 
       this.yesterdayWetOrDry = this.wetOrDry;
       CivClicker.Events.publish('weather.wetOrDry', this.wetOrDry == WET ? 'wet' : 'dry');
+    }
+
+    getGammaDistribution(x, a, b) {
+      return compute(x, a, b);
+    }
+
+    /**
+     * Get amount of precipitation for this day.
+     * @return {number} Mm of water.
+     */
+    getPrecipitation() {
+      const rand = Math.random();
+      if (this.wetOrDry == WET) {
+        return rand;
+      } else {
+        return 0;
+      }
     }
 
     /**
