@@ -2,7 +2,7 @@ $(function () {
 
   // Return number of rain streaks.
   function getNumberOfStreaks(list) {
-    //let streaks = 0;
+    let streaks = 0;
     let isStreak = true;
     let streakLength;
     let streakLengths = [];
@@ -10,7 +10,7 @@ $(function () {
       let rain = list[i];
       if (rain && list[i - 1]) {
         if (!isStreak) {
-          //streaks++;
+          streaks++;
         }
         isStreak = true;
         streakLength++;
@@ -31,14 +31,18 @@ $(function () {
   let totalPrec = 0;
   let precSeasonList = [];
   let cosList = [];
+  let wetDays = 0;
+  let dryDays = 0;
   for (let i = 0; i < totalDays; i++) {
     CivClicker.plugins.Weather.decideWetOrDry();
     if (CivClicker.plugins.Weather.wetOrDry == 2) {
       // 2 == DRY
       weatherList.push(0);
+      dryDays++;
     } else {
       // 3 == WET
       weatherList.push(1);
+      wetDays++;
     }
     const prec = CivClicker.plugins.Weather.getPrecipitation();
     totalPrec += prec;
@@ -49,10 +53,10 @@ $(function () {
   }
 
   var streaks = getNumberOfStreaks(weatherList);
-  document.getElementById('info').innerHTML = `
-    <p>Total "days": ${totalDays}</p>
-    <p>Rain streaks: ${streaks.length}</p>
-    `;
+  document.getElementById('total-days').innerHTML = totalDays;
+  document.getElementById('streaks').innerHTML = streaks.length;
+  document.getElementById('wet-days').innerHTML = dryDays;
+  document.getElementById('dry-days').innerHTML = wetDays;
 
   streaks.sort((a, b) => { return b - a;});
   let ctx = document.getElementById('streaks').getContext('2d');
