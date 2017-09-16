@@ -1,3 +1,12 @@
+# 2017-09-14
+
+* Gamma distribution is skewed wrong - less rain is more common than more rain
+* Temperature depends on wet/dry days.
+* Another article about weather generation: https://www.researchgate.net/publication/228543743_Climak_A_stochastic_model_for_weather_data_generatio
+* `8 + 5 * sin(x * (2 * 3.1415) / 100) + 3 * sin(x * (2 * 3.1415) / 50)`
+* SkyHawkB helping with icons, coding, ideas.
+* More work done on weather simulation, weather-test.html.
+
 # 2017-07-18
 
 * Important property of weather is the probability of wet/dry spells.
