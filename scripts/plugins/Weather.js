@@ -4,6 +4,7 @@
 /**
  * Weather plugin. Also used for day/night icons.
  * @property {number} dayOrNight DAY or NIGHT.
+ * @property {number} dayOfYear Day of year
  * @property {object} daySub
  * @property {objecy} nightSub
  * @property {number} wetOrDry Either WET or DRY.
@@ -16,6 +17,16 @@ CivClicker.plugins.Weather = (() => {
 
   const DRY = 2;
   const WET = 3;
+
+  /**
+   * Number of days in one year.
+   */
+  const DAYSINYEAR = 100;
+
+  /**
+   * Number of days in one month.
+   */
+  const DAYSOFMONTH = 10;
 
   let toggle = false;
 
@@ -139,10 +150,32 @@ CivClicker.plugins.Weather = (() => {
     };
   }
 
+  /**
+   * Get temperature of a dry day.
+   * @param {number} date Day of year
+   * @return {number}
+   */
+  let getDryTemperature = (function() {
+    let A = gaussian(6.83, 0.785);
+    let B = gaussian(10.08, 0.595);
+    const C = 111.8;
+    let D = gaussian(-0.545, 0.693);
+    const E = 130.91;
+
+    return function(date) {
+      return A() 
+        + (B() * Math.sin((date - C) * ((2 * Math.PI) / 100)))
+        + (D() * Math.sin((date - E) * ((2 * Math.PI) / 50)))
+      ;
+    };
+
+  })();
+
   return new (class WeatherPlugin {
 
     constructor() {
       this.dayOrNight = DAY;
+      this.dayOfYear = 1;
       this.daySub = null;
       this.nightSub = null;
 
@@ -225,19 +258,38 @@ CivClicker.plugins.Weather = (() => {
       } else {
         this._decideTick++;
       }
+
+      // Set temperature to GUI.
+      $('#temperature').html(this.temperature);
+      //console.log('Setting temp to ' + this.temperature);
     }
 
     /**
-     * Initialize the plugin.
+     * Increase day with one and wrap it around if it's new year.
+     */
+    increaseDay() {
+      this.dayOfYear++;
+      if (this.dayOfYear > DAYSINYEAR) {
+        this.dayOfYear = 1;
+      }
+    }
+
+    /**
+     * Initialize the plugin and subscribe to events.
      */
     init() {
+
       // Listen to the DayNight plugin.
       this.daySub = CivClicker.Events.subscribe('daynight.day.begin', () => {
         this.dayOrNight = DAY;
+        this.increaseDay();
+        this.temperature = getDryTemperature(this.dayOfYear);
       });
+
       this.nightSub = CivClicker.Events.subscribe('daynight.night.begin', () => {
         this.dayOrNight = NIGHT;
       });
+
       this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
         this.tick();
       });
