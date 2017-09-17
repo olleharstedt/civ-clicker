@@ -110,7 +110,6 @@ CivClicker.plugins.Culture = (function() {
         )
       ];
       this.fulfilledConditions = [];
-
     }
 
     /**
@@ -157,6 +156,12 @@ CivClicker.plugins.Culture = (function() {
     checkCultureConditions() {
       /** @type {number[]} */
       let remove = [];
+
+      if (this.cultureConditions === undefined) {
+        alert('Internal error: Found no culture conditions. Resetting game.');
+        resetCivClicker();
+        return;
+      }
 
       // Check all remaining conditions.
       this.cultureConditions.forEach((condition, pos) => {
