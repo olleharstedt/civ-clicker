@@ -155,7 +155,7 @@ CivClicker.plugins.Weather = (() => {
       const a = 3.5;
       const b = 4;
       if (this.wetOrDry == WET) {
-        return this.getGammaDistribution(rand, a, b) * 100;
+        return this.getGammaDistribution(rand, a, b) * 100000;
         //return Math.pow(rand, 10);
       } else {
         return 0;
