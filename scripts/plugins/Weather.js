@@ -259,6 +259,10 @@ CivClicker.plugins.Weather = (() => {
         this._decideTick++;
       }
 
+      // If temperature happens to be not set, set it now.
+      if (this.temperature === null) {
+        this.temperature = getDryTemperature(this.dayOfYear);
+      }
       // Set temperature to GUI.
       $('#temperature').html(this.temperature);
       //console.log('Setting temp to ' + this.temperature);

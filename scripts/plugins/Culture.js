@@ -80,6 +80,8 @@ CivClicker.plugins.Culture = (function() {
 
       // True if data was loaded from save file.
       this._loaded = false;
+
+      this.cultureConditions = [];
     }
 
     /**
@@ -135,7 +137,15 @@ CivClicker.plugins.Culture = (function() {
      * Load what conditions we've fulfilled.
      */
     load(data) {
-      this.cultureConditions = data.cultureConditions;
+      console.log(data.cultureConditions);
+      console.log(data.fulfilledConditions);
+      if (data.cultureConditions) {
+        data.cultureConditions.forEach(cond => {
+          console.log(cond.requires);throw 'end';
+          this.cultureConditions.push(new CultureCondition(cond.name, cond.points, cond.requires));
+        });
+      }
+      //this.cultureConditions = data.cultureConditions;
       this.fulfilledConditions = data.fulfilledConditions;
       this._loaded = true;
     }
