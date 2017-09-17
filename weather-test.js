@@ -78,16 +78,18 @@ $(function () {
 
   // Gamma
   let list = [];
-  let a = 0.5;
-  let b = 10;
+  let listb = [];
+  let a = 3.5;
+  let b = 4;
   for (let i = 0; i < 1; i += 0.01) {
     list.push(CivClicker.plugins.Weather.getGammaDistribution(i, a, b));
+    listb.push(i);
   }
   ctx = document.getElementById('gamma').getContext('2d');
   gammaChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: list,
+      labels: listb,
       datasets: [
         {
           label: 'Gamma distribution function',
