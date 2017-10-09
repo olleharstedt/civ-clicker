@@ -71,6 +71,34 @@ CivClicker.plugins.Culture = (function() {
         });
       }
     }
+
+    /**
+     * Use to save.
+     * JSON don't handle functions, so we need
+     * another way to save/load require methods.
+     * @return {string}
+     */
+    save() {
+      return {
+        name:         this.name,
+        points:       this.points,
+        requires:     this.requires.toString()
+      }
+    }
+
+    /**
+     * Load data object into proper class object.
+     * @param {object} data 
+     * @return {CultureCondition}
+     */
+    static load(data) {
+      return new CultureCondition(
+        data.name,
+        data.points,
+        eval(data.requires)
+      );
+    }
+
   }
 
   return new (class CulturePlugin {
@@ -128,24 +156,26 @@ CivClicker.plugins.Culture = (function() {
      */
     save() {
       return {
-        cultureConditions: this.cultureConditions,
-        fulfilledConditions: this.fulfilledConditions
+        cultureConditions: this.cultureConditions.map(([key, value]) => ({key, value.save()}));
+        fulfilledConditions: this.fulfilledConditions.map(([key, value]) => ({key, value.save()}));
       };
     }
 
     /**
      * Load what conditions we've fulfilled.
+     * Problem: Can't save function in JSON.
      */
     load(data) {
       console.log(data.cultureConditions);
       console.log(data.fulfilledConditions);
       if (data.cultureConditions) {
         data.cultureConditions.forEach(cond => {
-          console.log(cond.requires);throw 'end';
+          //console.log(cond.requires);throw 'end';
           this.cultureConditions.push(new CultureCondition(cond.name, cond.points, cond.requires));
         });
       }
       //this.cultureConditions = data.cultureConditions;
+      console.log(this.cultureConditions);
       this.fulfilledConditions = data.fulfilledConditions;
       this._loaded = true;
     }
