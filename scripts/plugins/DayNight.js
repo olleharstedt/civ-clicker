@@ -59,6 +59,12 @@ CivClicker.plugins.DayNight = (() => {
         this.lengthOfDay = serverSettings.weather.lengthOfDay;
         console.log('lengthOfDay initialised to ' + this.lengthOfDay);
       }
+
+      // Make it day after init.
+      this.tickSub = CivClicker.Events.subscribe('global.pluginInitDone', () => {
+        CivClicker.Events.publish('daynight.day.begin');
+      });
+
     }
 
     /**

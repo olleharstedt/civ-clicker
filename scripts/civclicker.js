@@ -3704,6 +3704,7 @@ setup.initPlugins = function(plugins) {
       throw 'No such plugin: ' + plugin;
     }
   });
+  CivClicker.Events.publish('global.pluginInitDone');
 };
 
 var ruinFun = null;

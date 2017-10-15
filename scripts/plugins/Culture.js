@@ -83,7 +83,7 @@ CivClicker.plugins.Culture = (function() {
         name:         this.name,
         points:       this.points,
         requires:     this.requires.toString()
-      }
+      };
     }
 
     /**
