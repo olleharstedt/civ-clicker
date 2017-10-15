@@ -298,7 +298,7 @@ function getNetColor(val) {
   let color = null;
   if      (val < 0) { color='#f00'; }
   else if (val > 0) { color='#0b0'; }
-  else              { color='#000'; }
+  else              { color='#bbb'; }
   return color;
 }
 
