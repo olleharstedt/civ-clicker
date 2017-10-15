@@ -109,7 +109,8 @@ CivClicker.plugins.Culture = (function() {
       // True if data was loaded from save file.
       this._loaded = false;
 
-      this.cultureConditions = [];
+      this.cultureConditions   = [];
+      this.fulfilledConditions = [];
     }
 
     /**
@@ -156,27 +157,31 @@ CivClicker.plugins.Culture = (function() {
      */
     save() {
       return {
-        cultureConditions: this.cultureConditions.map(([key, value]) => ({key, value.save()}));
-        fulfilledConditions: this.fulfilledConditions.map(([key, value]) => ({key, value.save()}));
+        cultureConditions: this.cultureConditions.map((cond) => cond.save()),
+        fulfilledConditions: this.fulfilledConditions.map((cond) => {
+          return cond.save();
+        })
       };
     }
 
     /**
      * Load what conditions we've fulfilled.
-     * Problem: Can't save function in JSON.
      */
     load(data) {
-      console.log(data.cultureConditions);
-      console.log(data.fulfilledConditions);
       if (data.cultureConditions) {
         data.cultureConditions.forEach(cond => {
-          //console.log(cond.requires);throw 'end';
-          this.cultureConditions.push(new CultureCondition(cond.name, cond.points, cond.requires));
+          this.cultureConditions.push(CultureCondition.load(cond));
         });
       }
-      //this.cultureConditions = data.cultureConditions;
-      console.log(this.cultureConditions);
-      this.fulfilledConditions = data.fulfilledConditions;
+      if (data.fulfilledConditions) {
+        data.fulfilledConditions.forEach(cond => {
+          if (cond) {
+            this.fulfilledConditions.push(CultureCondition.load(cond));
+          } else {
+            console.error('Condition is null or undefined');
+          }
+        });
+      }
       this._loaded = true;
     }
 
@@ -216,7 +221,7 @@ CivClicker.plugins.Culture = (function() {
       // Move all fulfilled conditions to fulfilled array.
       remove.forEach((pos) => {
         let removed = this.cultureConditions.splice(pos, 1);
-        this.fulfilledConditions.push(removed);
+        this.fulfilledConditions.push(removed[0]);
       });
     }
   });

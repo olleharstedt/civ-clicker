@@ -2316,6 +2316,10 @@ function load(loadType) {
       }
       const loadedPluginData = loadVar.extraData.pluginData;
       for (let plugin in loadedPluginData) {
+        if (CivClicker.plugins[plugin] == undefined) {
+          console.error('Could not find plugin ' + plugin);
+          continue;
+        }
         if (typeof CivClicker.plugins[plugin].save == 'function') {
           CivClicker.plugins[plugin].load(loadedPluginData[plugin]);
         }
