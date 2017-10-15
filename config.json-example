@@ -6,11 +6,20 @@
   "gameplay": {
     "useProgressBars": true
   },
+  "weather": {
+    "lengthOfDay": 60
+  },
   "plugins": [
     "SidemenuTooltips",
     "AutosaveIcon",
     "MenuProgressSpinner",
     "StatusBar",
-    "CountClicks"
+    "CountClicks",
+    "Tools",
+    "Workers",
+    "Culture",
+    "DayNight",
+    "Weather",
+    "Health"
   ]
 }
