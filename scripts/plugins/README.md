@@ -5,6 +5,7 @@ List of available events:
 ## Global
 
 | Name | Value | Description
+|---|---|---
 | global.autosave | - | Run when autosave is successful.
 | global.doPurchase.success | - | Run when a purchase is successful.
 | global.doPurchase.finished | - | Run when a purchase is finished, that is, when complete progress is done..
@@ -16,6 +17,7 @@ List of available events:
 ## DayNight
 
 | Name | Value | Description
+|---|---|---
 | daynight.day.begin | - |  Run when day begin (after night).
 | daynight.night.begin | - |  Run when night begin.
 
