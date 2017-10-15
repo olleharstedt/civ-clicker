@@ -238,11 +238,21 @@ CivClicker.plugins.Weather = (() => {
       $('#weather-ul').on('hide.bs.tooltip', () => { toggle = false; });
 
       if (this.dayOrNight == DAY) {
-        icon = 'wi-day-sunny';
-        msg = 'Sunny day';
+        if (this.precipitation > 0) {
+          icon = 'wi-day-rain';
+          msg = 'Rainy day';
+        } else {
+          icon = 'wi-day-sunny';
+          msg = 'Sunny day';
+        }
       } else if (this.dayOrNight == NIGHT) {
-        icon = 'wi-night-clear';
-        msg = 'Clear night';
+        if (this.precipitation > 0) {
+          icon = 'wi-night-rain';
+          msg = 'Rainy night';
+        } else {
+          icon = 'wi-night-clear';
+          msg = 'Clear night';
+        }
       }
 
       $('#weather-icon').attr('class', 'wi ' + icon);
@@ -252,12 +262,14 @@ CivClicker.plugins.Weather = (() => {
         $('.tooltip-inner').html(msg);
       }
 
+      /*
       if (this._decideTick > 9) {
         this._decideTick = 0;
         this.decideWetOrDry();
       } else {
         this._decideTick++;
       }
+      */
 
       // If temperature happens to be not set, set it now.
       if (this.temperature === null) {
@@ -289,12 +301,17 @@ CivClicker.plugins.Weather = (() => {
       // Listen to the DayNight plugin.
       this.daySub = CivClicker.Events.subscribe('daynight.day.begin', () => {
         this.dayOrNight = DAY;
+        this.decideWetOrDry();
         this.increaseDay();
         this.temperature = parseInt(getDryTemperature(this.dayOfYear));
+        this.precipitation = this.getPrecipitation();
       });
 
       this.nightSub = CivClicker.Events.subscribe('daynight.night.begin', () => {
         this.dayOrNight = NIGHT;
+        this.decideWetOrDry();
+        this.temperature = parseInt(getDryTemperature(this.dayOfYear));
+        this.precipitation = this.getPrecipitation();
       });
 
       this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
