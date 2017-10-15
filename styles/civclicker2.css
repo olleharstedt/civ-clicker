@@ -283,3 +283,23 @@ html {
 .row-margin {
   margin-bottom: 20px;
 }
+
+.navbar {
+  background-color: #303031;
+}
+
+.navbar .navbar-text {
+  color: #bbb;
+}
+
+.navbar a:hover {
+  color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #bbb;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: white;
+}
