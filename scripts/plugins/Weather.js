@@ -247,7 +247,7 @@ CivClicker.plugins.Weather = (() => {
         }
       } else if (this.dayOrNight == NIGHT) {
         if (this.precipitation > 0) {
-          icon = 'wi-night-rain';
+          icon = 'wi-night-alt-rain';
           msg = 'Rainy night';
         } else {
           icon = 'wi-night-clear';
