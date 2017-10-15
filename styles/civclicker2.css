@@ -255,6 +255,12 @@ html {
 #stripInner {
   position: fixed;
   z-index: 900;
+
+  /*
+  right: 0;
+  width: 90%;
+  */
+
   /*
   left: 230px;
   top: 0;
@@ -262,6 +268,12 @@ html {
   height: 50px;
   */
 }
+
+/*
+#stripInner .container-fluid {
+  margin-left: 10%;
+}
+*/
 
 #pages {
   margin-top: 70px;
