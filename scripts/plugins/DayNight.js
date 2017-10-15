@@ -26,25 +26,38 @@ CivClicker.plugins.DayNight = (() => {
     }
 
     /**
+     * Switch between day or night.
+     */
+    switch() {
+      this.dayOrNight = 1 - this.dayOrNight;
+
+      if (this.dayOrNight == DAY) {
+        CivClicker.Events.publish('daynight.day.begin');
+      } else if (this.dayOrNight == NIGHT) {
+        CivClicker.Events.publish('daynight.night.begin');
+      } else {
+        // Not possible.
+        throw 'Internal error - neither day or night.';
+      }
+    }
+
+    /**
+     * To test weather simulation etc.
+     */
+    multipleSwitch(n) {
+      for (let i = 0; i < n; i++) {
+        this.switch();
+      }
+    }
+
+    /**
      * The DayNight system ticks each game loop tick.
      */
     tick() {
       this.time++;
       if (this.time > this.lengthOfDay) {
         this.time = 0;
-
-        // Switch between day or night.
-        this.dayOrNight = 1 - this.dayOrNight;
-
-        if (this.dayOrNight == DAY) {
-          CivClicker.Events.publish('daynight.day.begin');
-        } else if (this.dayOrNight == NIGHT) {
-          CivClicker.Events.publish('daynight.night.begin');
-        } else {
-          // Not possible.
-          throw 'Internal error - neither day or night.';
-        }
-
+        this.switch();
       }
     }
 
