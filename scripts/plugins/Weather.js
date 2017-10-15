@@ -261,7 +261,7 @@ CivClicker.plugins.Weather = (() => {
 
       // If temperature happens to be not set, set it now.
       if (this.temperature === null) {
-        this.temperature = getDryTemperature(this.dayOfYear);
+        this.temperature = parseInt(getDryTemperature(this.dayOfYear));
       }
       // Set temperature to GUI.
       $('#temperature').html(this.temperature);
@@ -287,7 +287,7 @@ CivClicker.plugins.Weather = (() => {
       this.daySub = CivClicker.Events.subscribe('daynight.day.begin', () => {
         this.dayOrNight = DAY;
         this.increaseDay();
-        this.temperature = getDryTemperature(this.dayOfYear);
+        this.temperature = parseInt(getDryTemperature(this.dayOfYear));
       });
 
       this.nightSub = CivClicker.Events.subscribe('daynight.night.begin', () => {
