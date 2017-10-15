@@ -16,3 +16,10 @@ List of available events:
 
 * daynight.day.begin - Run when day begin (after night).
 * daynight.night.begin - Run when night begin.
+
+## Weather
+
+| Name | Value | Description
+|---|---|---
+| weather.wetOrDry | 'wet', 'dry' | If this day/night is wet or dry
+| weather.temperature | integer | Current temperature

@@ -263,9 +263,12 @@ CivClicker.plugins.Weather = (() => {
       if (this.temperature === null) {
         this.temperature = parseInt(getDryTemperature(this.dayOfYear));
       }
+
       // Set temperature to GUI.
       $('#temperature').html(this.temperature);
-      //console.log('Setting temp to ' + this.temperature);
+
+      // Publish temperature to anyone who wants to know
+      CivClicker.Events.publish('weather.temperature', this.temperature);
     }
 
     /**
