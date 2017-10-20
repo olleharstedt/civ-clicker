@@ -2,10 +2,7 @@
   <td class='text-center'>
     <img class='icon icon-lg' src='images/{{tool.icon}}' />
   </td>
-  <td
-    data-toggle="tooltip"
-    title="{{tool.description}}"
-  >
+  <td>
     {{#ucfirst}}{{tool.name}}{{/ucfirst}}
   </td>
   <td>
@@ -36,12 +33,7 @@
     </button>
   </td>
   <td class="text-center" data-toggle="tooltip" title="Cost to produce x tool(s)">{{{cost}}}</td>
-  <td>Tool makers:</td>
   <td>
-    <button id='tool-{{tool.name}}-decrease' data-toggle='tooltip' title='Remove tool maker' class='btn btn-default btn-sm x1'>-1</button>
-  </td>
-  <td>0</td>
-  <td>
-    <button id='tool-{{tool.name}}-increase' data-toggle='tooltip' title='Assign tool maker' class='btn btn-default btn-sm x1'>+1</button>
+    <span class='text-muted'>{{tool.description}}</span>
   </td>
 </tr>
