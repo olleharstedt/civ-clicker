@@ -61,7 +61,7 @@ function getCivData() {
     new Resource({ id:'culture', name:'culture', vulnerable:false }), // Can't be stolen
 
     // Buildings
-    new Building({ id:'freeLand', name:'free land', plural:'free land', 
+    new Building({ id:'freeLand', name:'free land', singular: 'free land', plural:'free land', 
       subType: "land",
       prereqs: undefined,  // Cannot be purchased.
       require: undefined,  // Cannot be purchased.

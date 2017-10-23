@@ -13,5 +13,6 @@ class Hearth extends Building {
    * @return {string} HTML to put in <td>.
    */
   getUpdateCell() {
+    return '<b>Hello!</b>';
   }
 }

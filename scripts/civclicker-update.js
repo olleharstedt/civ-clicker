@@ -122,7 +122,7 @@ function updateRequirements(buildingObj){
  * @param {object} purchaseObj
  * @return
  */
-function updatePurchaseRow (purchaseObj) {
+function updatePurchaseRow(purchaseObj) {
   if (!purchaseObj) {
     return;
   }
@@ -183,8 +183,15 @@ function updateResourceRows() {
  * Can't do altars; they're not in the proper format.
  */
 function updateBuildingButtons() { 
-  homeBuildings.forEach(function(elem) {
-    updatePurchaseRow(elem);
+  homeBuildings.forEach(function(building) {
+    const html = building.updatePurchaseRow();
+    const row = $('#' + building.id + 'Row');
+    if (row.length > 0 && building.showPurchaseRow()) {
+      row.show();
+      row.html(html);
+    } else {
+      row.hide();
+    }
   }); 
 }
 

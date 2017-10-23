@@ -220,7 +220,11 @@ function indexArrayByAttr(inArray, attr) {
  * @return string
  */
 function ucfirst(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  if (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  } else {
+    return 'undefined';
+  }
 }
 
 /**
