@@ -28,7 +28,7 @@ function getCivData() {
       specialMaterial: 'herbs',
       verb:            'cut',
       activity:        'woodcutting', //I18N
-      progressFactor:  10,
+      progressFactor:  2,
       prereqs:         new Requirement('stoneaxe', 1),
       get limit() {
         return 200 + (civData.woodstock.owned  * 200);
@@ -43,19 +43,19 @@ function getCivData() {
       specialMaterial: 'ore',
       verb:            'mine',
       activity:        'mining', //I18N
-      progressFactor:  20,
+      progressFactor:  4,
       prereqs:         false,  // TODO: Require mining building.
       get limit() {
         return 200 + (civData.stonestock.owned  * 200);
       }
     }),
-    new Resource({ id:'skins', singular:'skin', plural:'skins', progressFactor: 10}),
-    new Resource({ id:'herbs', singular:'herb', plural:'herbs', progressFactor: 10}),
-    new Resource({ id:'ore', name:'ore', progressFactor: 30}),
-    new Resource({ id:'leather', name:'leather', progressFactor: 15}),
-    new Resource({ id:'metal', name:'metal', progressFactor: 40}),
-    new Resource({ id:'piety', name:'piety', vulnerable:false, progressFactor: 50}), // Can't be stolen
-    new Resource({ id:'gold', name:'gold', vulnerable:false, progressFactor: 100}), // Can't be stolen
+    new Resource({ id:'skins', singular:'skin', plural:'skins', progressFactor: 3}),
+    new Resource({ id:'herbs', singular:'herb', plural:'herbs', progressFactor: 3}),
+    new Resource({ id:'ore', name:'ore', progressFactor: 4}),
+    new Resource({ id:'leather', name:'leather', progressFactor: 4}),
+    new Resource({ id:'metal', name:'metal', progressFactor: 4}),
+    new Resource({ id:'piety', name:'piety', vulnerable:false, progressFactor: 5}), // Can't be stolen
+    new Resource({ id:'gold', name:'gold', vulnerable:false, progressFactor: 6}), // Can't be stolen
     new Resource({ id:'corpses', singular:'corpse', plural:'corpses', vulnerable:false }), // Can't be stolen
     new Resource({ id:'devotion', name:'devotion', vulnerable:false }), // Can't be stolen
     new Resource({ id:'culture', name:'culture', vulnerable:false }), // Can't be stolen
