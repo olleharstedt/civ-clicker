@@ -4,12 +4,15 @@
  */
 function Building(props)
 {
-	if (!(this instanceof Building)) { return new Building(props); } // Prevent accidental namespace pollution
-	CivObj.call(this,props);
-	copyProps(this,props,null,true);
-	// Occasional Properties: subType, efficiency, devotion
-	// plural should get moved during I18N.
-	return this;
+  if (!(this instanceof Building)) {
+    // Prevent accidental namespace pollution
+    return new Building(props);
+  }
+  CivObj.call(this,props);
+  copyProps(this,props,null,true);
+  // Occasional Properties: subType, efficiency, devotion
+  // plural should get moved during I18N.
+  return this;
 }
 
 /**
@@ -23,13 +26,13 @@ function Building(props)
  * @property {number} progressTimeLeft Milliseconds of left building time. 0 means not building.
  */
 Building.prototype = new CivObj({
-	constructor: Building,
-	type: "building",
-	alignment:"player",
-	place: "home",
-	get vulnerable() { return this.subType != "altar"; }, // Altars can't be sacked.
-	set vulnerable(value) { return this.vulnerable; }, // Only here for JSLint.
-	customQtyId: "buildingCustomQty",
+  constructor: Building,
+  type: 'building',
+  alignment:'player',
+  place: 'home',
+  get vulnerable() { return this.subType != 'altar'; }, // Altars can't be sacked.
+  set vulnerable(value) { return this.vulnerable; }, // Only here for JSLint.
+  customQtyId: 'buildingCustomQty',
   useProgressBar: true,
   progressTimeLeft: 0,
 
@@ -53,4 +56,3 @@ Building.prototype = new CivObj({
   },
 
 },true);
-
