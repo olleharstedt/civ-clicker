@@ -2801,6 +2801,19 @@ function doCorpses() {
 	}
 }
 
+/**
+ * Tick all building logic.
+ */
+function doBuildings() {
+  const length = buildingData.length;
+  for (let i = 0; i < length; i++) {
+    const b = buildingData[i];
+    if (typeof b.tick == 'function') {
+      b.tick();
+    }
+  }
+}
+
 // Returns all of the combatants present for a given place and alignment that.
 function getCombatants(place, alignment)
 {
@@ -3457,6 +3470,7 @@ function gameLoop () {
   doPlague(); 
   doCorpses();
   doThrone();
+  doBuildings();
   tickGrace();
   tickWalk();
   doLabourers();

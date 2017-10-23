@@ -48,6 +48,7 @@
       "CivObj" : true,
       "Upgrade" : true,
       "Resource" : true,
+      "Building" : true,
       "Tool" : true,
       "Requirement" : true,
       "OrRequirement" : true,

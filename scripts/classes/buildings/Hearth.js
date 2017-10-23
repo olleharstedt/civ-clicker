@@ -7,7 +7,6 @@ class Hearth extends Building {
    * Run on each tick.
    */
   tick() {
-    console.log(this.owned);
   }
 
   /**

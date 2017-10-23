@@ -68,12 +68,12 @@ function getCivData() {
       vulnerable:false, // Cannot be stolen
       initOwned:1000,  
       effectText:"Conquer more from your neighbors." }),
-    new Building({
+    new Hearth({
       id: 'hearth',
       singular: 'hearth',
       plural: 'hearths',
-      require: {stone: 5},
-      effectText: 'Protective fire during night; cook your food'
+      require: {stone: 4},
+      effectText: 'Protective fire during night; cook your food.'
     }),
     new Building({ 
       id:"tent", singular:"tent", plural:"tents",
