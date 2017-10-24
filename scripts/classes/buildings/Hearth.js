@@ -8,7 +8,7 @@ class Hearth extends Building {
    */
   tick() {
     let hearthsOwned = curCiv.hearths.owned;
-    civData.wood -= hearthsOwned;
+    civData.wood.owned -= hearthsOwned;
   }
 
   /**
