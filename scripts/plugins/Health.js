@@ -29,6 +29,7 @@ CivClicker.plugins.Health = (() => {
       this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
         this.tick();
       });
+      this.temperatureSub = CivClicker.Events.subscribe('weather.temperature', this.temperature);
     }
 
   });
