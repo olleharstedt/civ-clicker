@@ -3,6 +3,7 @@
 
 /**
  * Deals with population health.
+ * @property {number} temperature - Fetched from the weather plugin.
  */
 CivClicker.plugins.Health = (() => {
   return new (class HealthPlugin {
@@ -11,6 +12,7 @@ CivClicker.plugins.Health = (() => {
      *
      */
     constructor() {
+      this.temperature = 0;
     }
 
     /**
@@ -23,13 +25,15 @@ CivClicker.plugins.Health = (() => {
     }
 
     /**
-     *
+     * Init plugin.
      */
     init() {
       this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
         this.tick();
       });
-      this.temperatureSub = CivClicker.Events.subscribe('weather.temperature', this.temperature);
+      this.temperatureSub = CivClicker.Events.subscribe('weather.temperature', (temp) => {
+        this.temperature = temp;
+      });
     }
 
   });
