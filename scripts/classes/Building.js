@@ -1,21 +1,4 @@
 /**
- * @constructor
- * @param {object} props - Properties
- */
-function Building(props)
-{
-  if (!(this instanceof Building)) {
-    // Prevent accidental namespace pollution
-    return new Building(props);
-  }
-  CivObj.call(this,props);
-  copyProps(this,props,null,true);
-  // Occasional Properties: subType, efficiency, devotion
-  // plural should get moved during I18N.
-  return this;
-}
-
-/**
  * Common Properties: type="building",customQtyId
  * @property {string} type      Always "building"
  * @property {string} alignment Always "player"
@@ -25,64 +8,125 @@ function Building(props)
  * @property {boolean} useProgressBar If true, will display progress during building
  * @property {number} progressTimeLeft Milliseconds of left building time. 0 means not building.
  */
-Building.prototype = new CivObj(
-  {
-    constructor: Building,
-    type: 'building',
-    alignment:'player',
-    place: 'home',
-    get vulnerable() { return this.subType != 'altar'; }, // Altars can't be sacked.
-    set vulnerable(value) { return this.vulnerable; }, // Only here for JSLint.
-    customQtyId: 'buildingCustomQty',
-    useProgressBar: true,
-    progressTimeLeft: 0,
+class Building extends CivObj {
 
-    /**
-     * Get the td cell where progress bar will be put.
-     * @return {object}
-     */
-    getProgressBarCell: function(id) {
-      var cell = $('#' + id + 'Row .number');
-      if (cell.length > 0) {
-        return cell[0];
+  /**
+   * @param {object} props
+   */
+  constructor(props) {
+    super(props);
+
+    /*
+    if (!(this instanceof Building)) {
+      return new Building(props);
+    }
+    CivObj.call(this,props);
+    copyProps(this,props,null,true);
+    return this;
+    */
+
+    this.type             = 'building';
+    this.alignment        = 'player';
+    this.place            = 'home';
+    this.customQtyId      = 'buildingCustomQty';
+    this.useProgressBar   = true;
+    this.progressTimeLeft = 0;
+
+    CivObj.call(this,props);
+    copyProps(this,props,null,true);
+  }
+
+  /**
+   * Build up UI for buildings.
+   */
+  static addUITable(buildings) {
+    const buildingsTable = $('#buildings');
+    if (buildingsTable == null) {
+      throw 'Found no buildings table';
+    }
+    buildings.forEach((building) => {
+      if (building.showPurchaseRow()) {
+        buildingsTable.append(building.getPurchaseRowHtml());
       }
+    });
+  }
 
-      // If this is an altar
-      cell = $('#' + id + 'Row .buildingtrue');
-      if (cell.length > 0) {
-        return cell[0];
-      }
+  //this.get vulnerable() { return this.subType != 'altar'; }, // Altars can't be sacked.
+  //this.set vulnerable(value) { return this.vulnerable; }, // Only here for JSLint.
 
-      throw 'Found no cell to put building progress bar in';
-    },
+  /**
+   * Get the td cell where progress bar will be put.
+   * @return {object}
+   */
+  getProgressBarCell(id) {
+    let fullId = '#' + id + 'Row .number';
+    let cell = $(fullId);
+    if (cell.length > 0) {
+      return cell[0];
+    }
 
-    /**
-     * @return {boolean} True if purchase row should be shown.
-     */
-    showPurchaseRow: function() {
-      return this.owned > 0 || meetsPrereqs(this.prereqs);
-    },
+    // If this is an altar
+    fullId = '#' + id + 'Row .buildingtrue';
+    cell = $(fullId);
+    if (cell.length > 0) {
+      return cell[0];
+    }
 
-    /**
-     * @return {string} HTML
-     */
-    updatePurchaseRow: function() {
+    fullId = '#' + this.getProgressBarCellId();
+    cell = $(fullId);
+    if (cell.length > 0) {
+      return cell[0];
+    }
 
-      // If the item's cost is variable, update its requirements.
-      if (this.hasVariableCost()) {
-        updateRequirements(this);
-      }
+    throw 'Found no cell to put building progress bar in: ' + fullId;
+  }
 
-      const name = ucfirst(this.singular);
-      const reqText = getReqText(this.require);
-      return `
+  /**
+   * @return {boolean} True if purchase row should be shown.
+   */
+  showPurchaseRow() {
+    return this.owned > 0 || meetsPrereqs(this.prereqs);
+  }
+
+  getProgressBarCellId() {
+    return this.singular + '-progress-bar-cell';
+  }
+
+  /**
+   * Build up purchase row building HTML.
+   * @return {string} HTML
+   */
+  getPurchaseRowHtml() {
+    const name = ucfirst(this.singular);
+    const reqText = getReqText(this.require);
+    const progressBarId = this.getProgressBarCellId();
+    return `
+      <tr>
         <td>${name}</td>
+        <td id='${progressBarId}' style='width: 100px;'></td>
         <td>${this.owned}</td>
-        <td><button class='btn btn-default btn-sm x1' data-quantity='1'>1</button></td>
+        <td><button class='btn btn-default btn-sm x1' data-quantity='1' data-action='purchase'>+1</button></td>
         <td><span class='text-muted'>${reqText}</span></td>
         <td><span class='text-muted'>${this.effectText}</span></td>
-      `;
+      </tr>
+    `;
+  }
+
+  /**
+   * Update numbers on purchase row.
+   */
+  updatePurchaseRow() {
+    // If the item's cost is variable, update its requirements.
+    if (this.hasVariableCost()) {
+      updateRequirements(this);
     }
-  },
-  true
-);
+  }
+
+  /**
+   * Update effect text.
+   */
+  update() {
+    // TODO: need better way to do this
+    $(this.id+'Note').html(': ' + this.effectText);
+  }
+}

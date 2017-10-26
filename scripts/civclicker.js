@@ -3551,7 +3551,7 @@ setup.game = function () {
   //document.title = "CivClicker ("+versionData+")"; //xxx Not in XML DOM.
 
   addUITable(basicResources, 'basicResources'); // Dynamically create the basic resource table.
-  addUITable(homeBuildings, 'buildings'); // Dynamically create the building controls table.
+  Building.addUITable(homeBuildings);
   addUITable(homeUnits, 'jobs'); // Dynamically create the job controls table.
   addUITable(armyUnits, 'party'); // Dynamically create the party controls table.
   addUpgradeRows(); // This sets up the framework for the upgrade items.

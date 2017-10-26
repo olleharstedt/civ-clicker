@@ -85,6 +85,7 @@
       "PNotify": true,
       "serverSettings": true,
       "setup": true,
-      "achData" : true
+      "achData": true,
+      "getReqText": true
     }
 }

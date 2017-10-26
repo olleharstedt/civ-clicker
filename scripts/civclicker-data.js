@@ -98,11 +98,7 @@ function getCivData() {
         var maxPop = 10 + 2*(civData.slums.owned + civData.tenements.owned); 
         return "+" + maxPop + " max pop."; 
       },
-      set effectText(value) { return this.require; }, // Only here for JSLint.
-      update: function() { 
-        // TODO: need better way to do this
-        $(this.id+"Note").html(": " + this.effectText);
-      } 
+      set effectText(value) { return this.require; } // Only here for JSLint.
     }),
     new Building({ 
       id: "mansion", singular:"mansion", plural:"mansions",
@@ -117,11 +113,7 @@ function getCivData() {
         var barnBonus = ((civData.granaries.owned ? 2 : 1) * 200);
         return "+" + barnBonus + " food storage"; 
       },
-      set effectText(value) { return this.effectText; },
-      update: function() { 
-        // TODO: need better way to do this
-        $(this.id+"Note").html(": " + this.effectText);
-      } 
+      set effectText(value) { return this.effectText; }
     }),
     new Building({ 
       id: "woodstock", singular:"wood stockpile", plural:"wood stockpiles",
