@@ -1092,6 +1092,7 @@ function doPurchase(objId, num) {
  * @return {number}
  */
 function onPurchase(control) { 
+  console.log(control);
   // We need a valid target and a quantity to complete this action.
   var targetId = dataset(control,'target');
   if (targetId === null) {

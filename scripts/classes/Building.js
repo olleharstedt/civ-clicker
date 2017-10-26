@@ -51,8 +51,13 @@ class Building extends CivObj {
     });
   }
 
-  //this.get vulnerable() { return this.subType != 'altar'; }, // Altars can't be sacked.
-  //this.set vulnerable(value) { return this.vulnerable; }, // Only here for JSLint.
+  /**
+   * @return {boolean}
+   */
+  get vulnerable() {
+    // Altars can't be sacked.
+    return this.subType != 'altar';
+  }
 
   /**
    * Get the td cell where progress bar will be put.
@@ -101,11 +106,11 @@ class Building extends CivObj {
     const reqText = getReqText(this.require);
     const progressBarId = this.getProgressBarCellId();
     return `
-      <tr>
+      <tr data-target='${this.id}'>
         <td>${name}</td>
         <td id='${progressBarId}' style='width: 100px;'></td>
-        <td>${this.owned}</td>
-        <td><button class='btn btn-default btn-sm x1' data-quantity='1' data-action='purchase'>+1</button></td>
+        <td class='building-owned-cell'>${this.owned}</td>
+        <td class='building-purchase-cell'><button class='btn btn-default btn-sm x1' data-quantity='1' data-action='purchase' onclick='onPurchase(this)'>+1</button></td>
         <td><span class='text-muted'>${reqText}</span></td>
         <td><span class='text-muted'>${this.effectText}</span></td>
       </tr>
