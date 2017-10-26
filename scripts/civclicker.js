@@ -1089,19 +1089,22 @@ function doPurchase(objId, num) {
 
 /**
  * @param control
- * @return {integer}
+ * @return {number}
  */
 function onPurchase(control) { 
-	// We need a valid target and a quantity to complete this action.
-	var targetId = dataset(control,"target");
-	if (targetId === null) { return false; }
+  // We need a valid target and a quantity to complete this action.
+  var targetId = dataset(control,'target');
+  if (targetId === null) {
+    return false;
+  }
 
-	var qty = dataset(control,"quantity");
-	if (qty === null) { return false; }
+  var qty = dataset(control,'quantity');
+  if (qty === null) {
+    return false;
+  }
 
-	return doPurchase(targetId, qty);
+  return doPurchase(targetId, qty);
 }
-
 
 function getCustomNumber(civObj){
 	if (!civObj||!civObj.customQtyId) { return undefined; }
