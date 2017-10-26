@@ -7,8 +7,10 @@ class Hearth extends Building {
    * Run on each tick.
    */
   tick() {
-    let hearthsOwned = curCiv.hearths.owned;
-    civData.wood.owned -= hearthsOwned;
+    if (this.active) {
+      let hearthsOwned = curCiv.hearths.owned;
+      civData.wood.owned -= hearthsOwned;
+    }
   }
 
   /**
