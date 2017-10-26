@@ -1,3 +1,15 @@
+# 2017-10-26
+
+* Make bigger dev blog entry for /r/incremental_games
+* Still very much alpha/under development.
+* ES6.
+* Plugin system.
+* Weather CLIMAK model.
+* Tools..
+* Screenshots.
+* SkyHawkB.
+* Help wanted: Animal sim, crop sim, icons.
+
 # 2017-09-14
 
 * Gamma distribution is skewed wrong - less rain is more common than more rain
