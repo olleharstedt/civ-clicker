@@ -100,6 +100,10 @@ ol.happinessRanks li {
   padding: 4px;  /* Half of Bootstrap */
 }
 
+#buildings td {
+  padding: 4px;  /* Half of Bootstrap */
+}
+
 .raid-buttons .row {
   margin-bottom: 4px;
 }
