@@ -2,8 +2,7 @@
 'use strict';
 
 /**
- * Deals with population health.
- * @property {number} temperature - Fetched from the weather plugin.
+ * Deals with enemies.
  */
 CivClicker.plugins.Enemies = (() => {
   return new (class EnemiesPlugin {
