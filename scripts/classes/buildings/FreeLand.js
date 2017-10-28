@@ -13,6 +13,7 @@ class FreeLand extends Building {
       <tr data-target='${this.id}'>
         <td>${name}</td>
         <td></td>
+        <td></td>
         <td id='${this.singular}-owned-cell'>${this.owned}</td>
         <td></td>
         <td></td>
