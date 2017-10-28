@@ -13,6 +13,7 @@ List of available events:
 | global.pluginInitDone | - | Run after all plugins are initialised.
 | global.onIncrement | - | Run when user clicks on any primary resource button.
 | global.tick | - | Run on every tick (once each second).
+| global.update.buildings | - | Fired when all owned buildings should update their number.
 
 ## DayNight
 

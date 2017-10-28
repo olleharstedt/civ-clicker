@@ -99,7 +99,7 @@ class Building extends CivObj {
 
   /**
    * Build up purchase row building HTML.
-   * @return {string} HTML
+   * @return {string} HTML <tr>
    */
   getPurchaseRowHtml() {
     const name = ucfirst(this.singular);
@@ -109,7 +109,7 @@ class Building extends CivObj {
       <tr data-target='${this.id}'>
         <td>${name}</td>
         <td id='${progressBarId}' style='width: 100px;'></td>
-        <td class='building-owned-cell'>${this.owned}</td>
+        <td id='${this.singular}-owned-cell'>${this.owned}</td>
         <td class='building-purchase-cell'><button class='btn btn-default btn-sm x1' data-quantity='1' data-action='purchase' onclick='onPurchase(this)'>+1</button></td>
         <td><span class='text-muted'>${reqText}</span></td>
         <td><span class='text-muted'>${this.effectText}</span></td>
@@ -125,6 +125,7 @@ class Building extends CivObj {
     if (this.hasVariableCost()) {
       updateRequirements(this);
     }
+    $('#' + this.singular + '-owned-cell').html(this.owned);
   }
 
   /**

@@ -995,6 +995,7 @@ function doPurchase(objId, num) {
         gameLog("You are suffering from overcrowding.");  // I18N
         adjustMorale(Math.max(num,-civData.freeLand.owned) * -0.0025 * (civData.codeoflaws.owned ? 0.5 : 1.0));
       }
+      CivClicker.Events.publish('global.update.buildings');
     }
 
     updateRequirements(purchaseObj); //Increases buildings' costs
@@ -1009,6 +1010,7 @@ function doPurchase(objId, num) {
     updateTargets(); // might enable/disable raiding
     setUITable(basicResources, 'basicResources');
 
+    // Fire event purchase finished.
     CivClicker.Events.publish(
       'global.doPurchase.finished',
       {
@@ -3572,6 +3574,13 @@ setup.game = function () {
   }
 
   setDefaultSettings();
+
+  // Update buildings when this event is fired.
+  CivClicker.Events.subscribe('global.update.buildings', () => {
+    homeBuildings.forEach((builing) => {
+      building.updatePurchaseRow();
+    });
+  });
 
   // Fire game init event.
   CivClicker.Events.publish('global.init');
