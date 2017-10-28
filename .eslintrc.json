@@ -49,6 +49,8 @@
       "Upgrade" : true,
       "Resource" : true,
       "Building" : true,
+      "Hearth" : true,
+      "FreeLand" : true,
       "Tool" : true,
       "Requirement" : true,
       "OrRequirement" : true,
@@ -86,6 +88,6 @@
       "serverSettings": true,
       "setup": true,
       "achData": true,
-      "getReqText": true
+      "getReqText": true,
     }
 }

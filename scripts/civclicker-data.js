@@ -61,13 +61,18 @@ function getCivData() {
     new Resource({ id:'culture', name:'culture', vulnerable:false }), // Can't be stolen
 
     // Buildings
-    new Building({ id:'freeLand', name:'free land', singular: 'free land', plural:'free land', 
-      subType: "land",
-      prereqs: undefined,  // Cannot be purchased.
-      require: undefined,  // Cannot be purchased.
-      vulnerable:false, // Cannot be stolen
-      initOwned:1000,  
-      effectText:"Conquer more from your neighbors." }),
+    new FreeLand({
+      id:         'freeLand',
+      name:       'free land',
+      singular:   'free land',
+      plural:     'free land',
+      subType:    'land',
+      prereqs:    undefined,  // Cannot be purchased.
+      require:    undefined,  // Cannot be purchased.
+      vulnerable: false, // Cannot be stolen
+      initOwned:  1000,
+      effectText: 'Conquer more from your neighbors.'
+    }),
     new Hearth({
       id: 'hearth',
       singular: 'hearth',
