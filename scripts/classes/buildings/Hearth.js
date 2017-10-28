@@ -16,6 +16,7 @@ class Hearth extends Building {
       } else {
         // No more wood, fire burns down.
         this.active = false;
+        $('#' + this.singular + '-activate').prop('checked', false);
       }
     }
   }
