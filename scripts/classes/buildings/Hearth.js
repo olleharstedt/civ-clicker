@@ -12,7 +12,7 @@ class Hearth extends Building {
       if (civData.wood.owned >= hearthsOwned) {
         civData.wood.owned -= hearthsOwned;
         civData.wood.net -= hearthsOwned;
-        CivClicker.Events.publish('registry.increase.heat', hearthsOwned);
+        CivClicker.Registry.increaseHeat(hearthsOwned);
       } else {
         // No more wood, fire burns down.
         this.active = false;
