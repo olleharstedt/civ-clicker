@@ -7,6 +7,7 @@
  * @property {customQtyId} string "buildingCustomQty" ?
  * @property {boolean} useProgressBar If true, will display progress during building
  * @property {number} progressTimeLeft Milliseconds of left building time. 0 means not building.
+ * @property {boolean} active If true, this building is active and possibly consuming resources.
  */
 class Building extends CivObj {
 
@@ -31,6 +32,7 @@ class Building extends CivObj {
     this.customQtyId      = 'buildingCustomQty';
     this.useProgressBar   = true;
     this.progressTimeLeft = 0;
+    this.active           = false;
 
     CivObj.call(this,props);
     copyProps(this,props,null,true);
@@ -57,6 +59,13 @@ class Building extends CivObj {
   get vulnerable() {
     // Altars can't be sacked.
     return this.subType != 'altar';
+  }
+
+  /**
+   * Run when user toggles activate checkbox.
+   */
+  onActivate() {
+    this.active = !this.active;
   }
 
   /**
