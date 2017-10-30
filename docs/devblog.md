@@ -1,3 +1,11 @@
+# 2017-10-30
+
+* Animal population simulation
+* https://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equations
+* https://en.wikipedia.org/wiki/Competitive_Lotka%E2%80%93Volterra_equations
+* https://en.wikipedia.org/wiki/Agent-based_model_in_biology
+* https://en.wikipedia.org/wiki/Monte_Carlo_method#Computational_biology
+
 # 2017-10-26
 
 * Make bigger dev blog entry for /r/incremental_games
