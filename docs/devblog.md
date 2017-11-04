@@ -5,6 +5,10 @@
 * https://en.wikipedia.org/wiki/Competitive_Lotka%E2%80%93Volterra_equations
 * https://en.wikipedia.org/wiki/Agent-based_model_in_biology
 * https://en.wikipedia.org/wiki/Monte_Carlo_method#Computational_biology
+* https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant
+* Theoretical ecology.
+* Use this for mammoths? https://www.researchgate.net/publication/11621228_Demography_of_endangered_North_Atlantic_right_whale
+* Leslie matrix: https://en.wikipedia.org/wiki/Leslie_matrix
 
 # 2017-10-26
 
