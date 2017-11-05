@@ -9,6 +9,7 @@
 * Theoretical ecology.
 * Use this for mammoths? https://www.researchgate.net/publication/11621228_Demography_of_endangered_North_Atlantic_right_whale
 * Leslie matrix: https://en.wikipedia.org/wiki/Leslie_matrix
+* Some species grow exponentially, others geometrically (generations overlap or not).
 
 # 2017-10-26
 
