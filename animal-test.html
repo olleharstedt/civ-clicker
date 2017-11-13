@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb">
+  <head>
+    <title>Animal population test</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>CivClicker</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="description" content="CivClicker: Build a Civilisation In Your Browser" />
+
+    <!-- Third-party libs -->
+    <script type="application/javascript" src="scripts/lib/jquery-3.2.1.js"></script>
+    <script type="application/javascript" src="scripts/lib/jquery.cookie.js"></script>
+    <script type="application/javascript" src="scripts/lib/logger.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css" />
+    <!--<link rel="stylesheet" type="text/css" href="styles/bootstrap-theme.css" />-->
+    <script type="application/javascript" src="scripts/lib/bootstrap.js"></script>
+    <script type="application/javascript" src="scripts/lib/mustache.js"></script>
+    <script type="application/javascript" src="scripts/lib/jquery.bootstrapThemeSwitcher.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="styles/weather-icons.css" />
+    <link rel="stylesheet" type="text/css" href="styles/civclicker2.css" />
+
+    <!-- pnotify -->
+    <script type="application/javascript" src="scripts/lib/pnotify.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/pnotify.css" />
+    <script type="application/javascript" src="scripts/lib/pnotify.buttons.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/pnotify.buttons.css" />
+
+    <!-- JS utilities -->
+    <script type="application/javascript" src="scripts/lz-string.js"></script>
+    <script type="application/javascript" src="scripts/jsutils.js"></script>
+    <!-- Polyfill from https://developer.mozilla.org/en-US/docs/Web/API/Element.classList -->
+    <script type="application/javascript" src="scripts/classList.js"></script>
+    <script type="application/javascript" src="scripts/ui.js"></script>
+    <script type="application/javascript" src="scripts/modules/Events.js"></script>
+
+    <!-- Plugins -->
+    <script type="application/javascript" src="scripts/plugins/bootstrap.js"></script>
+    <script type="application/javascript" src="scripts/plugins/MenuProgressSpinner.js"></script>
+    <script type="application/javascript" src="scripts/plugins/StatusBar.js"></script>
+    <script type="application/javascript" src="scripts/plugins/SidemenuTooltips.js"></script>
+    <script type="application/javascript" src="scripts/plugins/AutosaveIcon.js"></script>
+    <script type="application/javascript" src="scripts/plugins/CountClicks.js"></script>
+    <script type="application/javascript" src="scripts/plugins/Tools.js"></script>
+    <script type="application/javascript" src="scripts/plugins/Culture.js"></script>
+    <script type="application/javascript" src="scripts/plugins/Workers.js"></script>
+    <script type="application/javascript" src="scripts/plugins/DayNight.js"></script>
+    <script type="application/javascript" src="scripts/plugins/Weather.js"></script>
+
+    <!-- Classes -->
+    <script type="application/javascript" src="scripts/classes/Requirement.js"></script>
+    <script type="application/javascript" src="scripts/classes/ProgressSpinner.js"></script>
+    <script type="application/javascript" src="scripts/classes/VersionData.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/CivObj.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/Tool.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/Upgrade.js" defer="defer"></script>
+
+    <!-- Buildings -->
+    <script type="application/javascript" src="scripts/classes/buildings/Building.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/buildings/FreeLand.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/buildings/Hearth.js" defer="defer"></script>
+
+    <!-- Resources -->
+    <script type="application/javascript" src="scripts/classes/resources/Resource.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/resources/GatherResource.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/resources/ScavengeResource.js" defer="defer"></script>
+
+    <!-- Units -->
+    <script type="application/javascript" src="scripts/classes/units/Unit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/WorkUnit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/GathererUnit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/FarmerUnit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/WoodcutterUnit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/MinerUnit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/TannerUnit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/BlacksmithUnit.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/classes/units/ClericUnit.js" defer="defer"></script>
+
+    <script type="application/javascript" src="scripts/classes/Achievement.js" defer="defer"></script>
+
+    <!-- Main program -->
+    <script type="application/javascript" src="scripts/civclicker-data.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/civclicker-update.js" defer="defer"></script>
+    <script type="application/javascript" src="scripts/civclicker.js" defer="defer"></script>
+
+    <!-- Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+    <script src="scripts/lib/math.min.js"></script>
+
+    <script src="animal-test.js"></script>
+  </head>
+  <body>
+      <div style="width: 800px;">
+        <canvas id="canvas1"></canvas>
+      </div>
+  </body>
+</html>
