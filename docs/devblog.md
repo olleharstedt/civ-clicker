@@ -6,7 +6,7 @@
 * [Agent-based Model in Biology](https://en.wikipedia.org/wiki/Agent-based_model_in_biology)
 * [Monte Carlo Method: Computational Biology](https://en.wikipedia.org/wiki/Monte_Carlo_method#Computational_biology)
 * https://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant
-* Theoretical ecology.
+* Theoretical ecology, mathematical biology.
 * Use this for mammoths? https://www.researchgate.net/publication/11621228_Demography_of_endangered_North_Atlantic_right_whale
 * Leslie matrix: https://en.wikipedia.org/wiki/Leslie_matrix
 * Some species grow exponentially, others geometrically (generations overlap or not).
