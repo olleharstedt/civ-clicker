@@ -134,21 +134,28 @@ $(function () {
   // Test 1
 
 	const sim2 = math.parser();
-	sim2.eval("alpha = 0.3");
+	sim2.eval("alpha = 0.5");
 	sim2.eval("beta = 0.01");
-	sim2.eval("delta = 0.01");
+	sim2.eval("delta = 0.003");
 	sim2.eval("gamma = 1");
-	sim2.eval("dxdt(x, y) = alpha * x - beta * x * y");
-	sim2.eval("dydt(x, y) = delta * x * y - gamma * y");
+	//sim2.eval("dxdt(x, y) = alpha * x - beta * x * y");
+	//sim2.eval("dydt(x, y) = delta * x * y - gamma * y");
+
+	sim2.eval("dxdt(x, y) = x - 1.2 * x * y");
+	sim2.eval("dydt(x, y) = -y + 0.8 * x * y");
+
+	//sim2.eval("dxdt(x, y) = 2 * x - 0.1 * (x * x) - 1.1 * x * y");
+	//sim2.eval("dydt(x, y) = -y - 0.1 * y * y + 0.9 * x * y");
+
 	sim2.eval("dt = 0.1");                // Simulation timestep
-	sim2.eval("x0 = 100");
-	sim2.eval("y0 = 10");
-	sim2.eval("tfinal = 100");          // Simulation duration
+	sim2.eval("x0 = 1");
+	sim2.eval("y0 = 0.5");
+	sim2.eval("tfinal = 40");          // Simulation duration
 
 	// Again, remember to maintain the same variable order in the call to ndsolve.
 	sim2.eval("result_stage1 = ndsolve([dxdt, dydt], [x0, y0], dt, tfinal)");
 	var data_stage1 =     sim2.eval("result_stage1").toArray().map(function(e) { return {x: e[0], y: e[1]}; });
-  console.log(data_stage1);
+  //console.log(data_stage1);
   first = [];
   for (let i = 0; i < data_stage1.length; i++) {
     //data_stage1[i].x = i;
@@ -164,7 +171,7 @@ $(function () {
       y: data_stage1[i].x
     });
   }
-  console.log(other);
+  //console.log(other);
 
 	var chart = new Chart(document.getElementById('canvas1'), {
 		type: 'line',
