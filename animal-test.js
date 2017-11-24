@@ -133,29 +133,55 @@ $(function () {
 
   // Test 1
 
-	const sim2 = math.parser();
-	sim2.eval("alpha = 0.5");
-	sim2.eval("beta = 0.01");
-	sim2.eval("delta = 0.003");
-	sim2.eval("gamma = 1");
-	//sim2.eval("dxdt(x, y) = alpha * x - beta * x * y");
-	//sim2.eval("dydt(x, y) = delta * x * y - gamma * y");
+  math.config({
+    number: 'number' // Default type of number: 
+    // 'number' (default), 'BigNumber', or 'Fraction'
+  });
+  const sim2 = math.parser();
+  sim2.eval("alpha = 0.5");
+  sim2.eval("beta = 0.01");
+  sim2.eval("delta = 0.003");
+  sim2.eval("gamma = 1");
+  //sim2.eval("dxdt(x, y) = alpha * x - beta * x * y");
+  //sim2.eval("dydt(x, y) = delta * x * y - gamma * y");
 
-	sim2.eval("dxdt(x, y) = x - 1.2 * x * y");
-	sim2.eval("dydt(x, y) = -y + 0.8 * x * y");
+	//sim2.eval("dxdt(x, y) = (2 * x) - (x * y)");
+	//sim2.eval("dydt(x, y) = (-0.25 * y) + (x * y)");
 
 	//sim2.eval("dxdt(x, y) = 2 * x - 0.1 * (x * x) - 1.1 * x * y");
 	//sim2.eval("dydt(x, y) = -y - 0.1 * y * y + 0.9 * x * y");
 
-	sim2.eval("dt = 0.1");                // Simulation timestep
-	sim2.eval("x0 = 1");
-	sim2.eval("y0 = 0.5");
-	sim2.eval("tfinal = 40");          // Simulation duration
+  // Pan-Ping Liu, 2a, 2b
+  sim2.eval("alpha = 6.8");
+  sim2.eval("beta = 1.25");
+  sim2.eval("delta = 0.8");
+  sim2.eval("gamma = 0.5");
+	sim2.eval("dxdt(x, y) = x * (alpha - x) - ((beta * x * x * y) / (1 + x * x))");
+	sim2.eval("dydt(x, y) = ((delta * x * x * y) / (1 + x * x)) - gamma * y");
 
-	// Again, remember to maintain the same variable order in the call to ndsolve.
-	sim2.eval("result_stage1 = ndsolve([dxdt, dydt], [x0, y0], dt, tfinal)");
-	var data_stage1 =     sim2.eval("result_stage1").toArray().map(function(e) { return {x: e[0], y: e[1]}; });
+  let x = 2;
+  let y = 1;
+  let datax = [];
+  let datay = [];
+  for (let j = 0; j < 4000; j++) {
+    if (j % 250 == 0 && y > 1) {
+      y -= 1; //Math.random();
+      //y = 0;
+    }
+    sim2.eval("dt = 0.01");
+    sim2.eval("x0 = " + x);
+    sim2.eval("y0 = " + y);
+    sim2.eval("tfinal = 0.02");
+    sim2.eval("result_stage1 = ndsolve([dxdt, dydt], [x0, y0], dt, tfinal)");
+    let data_stage1 =     sim2.eval("result_stage1").toArray().map(function(e) { return {x: e[0], y: e[1]}; });
+    y = data_stage1[0].y;
+    x = data_stage1[0].x;
+    datax.push({x: j, y: y});
+    datay.push({x: j, y: x});
+  }
+
   //console.log(data_stage1);
+  /*
   first = [];
   for (let i = 0; i < data_stage1.length; i++) {
     //data_stage1[i].x = i;
@@ -172,20 +198,21 @@ $(function () {
     });
   }
   //console.log(other);
+  */
 
 	var chart = new Chart(document.getElementById('canvas1'), {
 		type: 'line',
 		data: {
 			datasets: [{
 				label: "Stage 1",
-				data: first,
+				data: datax,
 				fill: false,
 				borderColor: "red",
 				pointRadius: 0
 			},
       {
 				label: "Stage 2",
-				data: other,
+				data: datay,
 				fill: false,
 				borderColor: "blue",
 				pointRadius: 0
