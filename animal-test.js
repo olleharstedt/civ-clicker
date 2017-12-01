@@ -159,6 +159,7 @@ $(function () {
 	sim2.eval("dxdt(x, y) = x * (alpha - x) - ((beta * x * x * y) / (1 + x * x))");
 	sim2.eval("dydt(x, y) = ((delta * x * x * y) / (1 + x * x)) - gamma * y");
 
+  /*
   let x = 2;
   let y = 1;
   let datax = [];
@@ -179,6 +180,7 @@ $(function () {
     datax.push({x: j, y: y});
     datay.push({x: j, y: x});
   }
+  */
 
   //console.log(data_stage1);
   /*
@@ -200,19 +202,104 @@ $(function () {
   //console.log(other);
   */
 
+  /*
+  let r = 0.25;
+  let k = 10;
+  let p =1;
+  let datax = [];
+  datax.push({x: 0, y: p});
+  for (let t = 1; t < 116; t++) {
+    p = (1 + r * (1 - p / k)) * p;
+    datax.push({x: t, y: p});
+    if (t == 30) {
+      k += 5;
+    }
+    if (t > 35 && t < 100 && p >= 1) {
+      p -= 1;
+    }
+  }
+
+  p = 15;
+  let datax2 = [];
+  k = 10;
+  datax2.push({x: 0, y: p});
+  for (let t = 1; t < 50; t++) {
+    p = (1 + r * (1 - p / k)) * p;
+    datax2.push({x: t, y: p});
+  }
+  */
+
+  let K = 1.0;  // K, carrying capacity, is not stable to increase
+  let r = 1.3;
+  let s = 0.5;
+  let u = 0.7;
+  let v = 1.6;
+  let h = 0.01;
+  let P = 1;
+  let Q = 1;
+  let dP = null;
+  let dQ = null;
+  let data1 = [];
+  let data2 = [];
+  data1.push({x: 0, y: P});
+  data2.push({x: 0, y: Q});
+  for (let t = 1; t < 9000; t++) {
+    dP = (r * (1 - P/K) - s * Q) * P * h;
+    dQ = (-u + v * P) * Q * h;
+    P = P + dP;  // Wolfs
+    Q = Q + dQ;  // Bunnies
+    data1.push({x: t, y: P});
+    data2.push({x: t, y: Q});
+    if (t == 1500) {
+      K = 2;  // Bigger terratory
+    }
+    if (t == 3000) {
+      Q -= 0.5;  // Chock hunting
+    }
+  }
+
+  /*
+  // No way to increase "carrying capacity" easy?
+  let r = 1.3;
+  let s = 0.5;
+  let u = 0.7;
+  let v = 1.6;
+  let h = 0.001;
+  let P = 1;
+  let Q = 3;
+  let dP = null;
+  let dQ = null;
+  let data1 = [];
+  let data2 = [];
+  data1.push({x: 0, y: P});
+  data2.push({x: 0, y: Q});
+  for (let t = 1; t < 30000; t++) {
+    dP = (r - s * Q) * P * h;
+    dQ = (-u + v * P) * Q * h;
+    P += dP;
+    Q += dQ;
+    data1.push({x: t, y: P});
+    data2.push({x: t, y: Q});
+    if (t == 10000) {
+      //Q += 2;
+      //P += 2;
+    }
+  }
+  */
+
 	var chart = new Chart(document.getElementById('canvas1'), {
 		type: 'line',
 		data: {
 			datasets: [{
-				label: "Stage 1",
-				data: datax,
+				label: "Wolfs",
+				data: data1,
 				fill: false,
 				borderColor: "red",
 				pointRadius: 0
 			},
       {
-				label: "Stage 2",
-				data: datay,
+				label: "Bunnies",
+				data: data2,
 				fill: false,
 				borderColor: "blue",
 				pointRadius: 0
