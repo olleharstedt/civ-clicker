@@ -229,6 +229,7 @@ $(function () {
   }
   */
 
+  /*
   let K = 1.0;  // K, carrying capacity, is not stable to increase
   let r = 1.3;
   let s = 0.5;
@@ -257,6 +258,7 @@ $(function () {
       Q -= 0.5;  // Chock hunting
     }
   }
+  */
 
   /*
   // No way to increase "carrying capacity" easy?
@@ -286,6 +288,37 @@ $(function () {
     }
   }
   */
+
+  let r = 1.3;
+  let s = 0.5;
+  let u = 0.7;
+  let v = 1.6;
+  let a = 2;
+  let K = 3;
+  let h = 0.01;
+  let P = 0.7;
+  let Q = 0.3;
+  let dP = null;
+  let dQ = null;
+  let data1 = [];
+  let data2 = [];
+  data1.push({x: 0, y: P});
+  data2.push({x: 0, y: Q});
+  for (let t = 1; t < 10000; t++) {
+    dP = (r * (1 - P / K) - (s * Q) / (a + P)) * P * h;
+    dQ = (-u + (v * P) / (a + P)) * Q * h;
+    P += dP;
+    Q += dQ;
+    data1.push({x: t, y: P});
+    data2.push({x: t, y: Q});
+    if (t > 5000 && Q >= 0.01) {
+      Q -= 0.005;
+    }
+    if (t == 7000) {
+      //K += 1;
+    }
+  }
+
 
 	var chart = new Chart(document.getElementById('canvas1'), {
 		type: 'line',
