@@ -290,7 +290,7 @@ $(function () {
   */
 
   let r = 1.3;
-  let s = 0.5;
+  let s = 4;
   let u = 0.7;
   let v = 1.6;
   let a = 2;
@@ -304,18 +304,19 @@ $(function () {
   let data2 = [];
   data1.push({x: 0, y: P});
   data2.push({x: 0, y: Q});
-  for (let t = 1; t < 10000; t++) {
+  for (let t = 1; t < 16000; t++) {
     dP = (r * (1 - P / K) - (s * Q) / (a + P)) * P * h;
     dQ = (-u + (v * P) / (a + P)) * Q * h;
     P += dP;
     Q += dQ;
     data1.push({x: t, y: P});
     data2.push({x: t, y: Q});
-    if (t > 5000 && Q >= 0.01) {
-      Q -= 0.005;
+    if (t > 5000 && t < 10000 && Q >= 0.01) {
+      Q -= 0.0006;
     }
     if (t == 7000) {
-      //K += 1;
+      K += 2;
+      a += 1;
     }
   }
 
@@ -324,14 +325,14 @@ $(function () {
 		type: 'line',
 		data: {
 			datasets: [{
-				label: "Wolfs",
+				label: "Bunnies",
 				data: data1,
 				fill: false,
 				borderColor: "red",
 				pointRadius: 0
 			},
       {
-				label: "Bunnies",
+				label: "Wolfs",
 				data: data2,
 				fill: false,
 				borderColor: "blue",
