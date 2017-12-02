@@ -289,6 +289,7 @@ $(function () {
   }
   */
 
+  /*
   let r = 1.3;
   let s = 4;
   let u = 0.7;
@@ -320,7 +321,6 @@ $(function () {
     }
   }
 
-
 	var chart = new Chart(document.getElementById('canvas1'), {
 		type: 'line',
 		data: {
@@ -349,7 +349,82 @@ $(function () {
 			}
 		}
   });
+  */
 
+  let r = [1, 0.72, 1.53, 1.27];
+  let h = 0.005;
+  let x = [1, 1, 1, 1];
+  let a = [
+    [1, 1.09, 1.52, 0],
+    [0, 1, 0.44, 1.36],
+    [2.33, 0, 1, 0.47],
+    [1.21, 0.51, 0.35, 1]
+  ];
+  //let s = [0.499, 0.499, 0.5];
+  let dX = [0, 0, 0, 0];
+  let K = [1, 1, 1, 1];
+  let data = [
+    [],
+    [],
+    [],
+    []
+  ];
+  for (let t = 0; t < 20000; t++) {
+    for (let i = 0; i < 4; i++) {
+      let sum = 0;
+      for (let j = 0; j < 4; j++) {
+        sum += a[i][j] * x[j];
+      }
+      dX[i] = r[i] * (1 - sum / K[i]) * x[i] * h;
+      //console.log(dX[i]);
+      x[i] += dX[i];
+      //console.log(x[i]);
+      data[i].push({x: t, y: x[i]});
+    }
+  }
+
+	var chart = new Chart(document.getElementById('canvas1'), {
+		type: 'line',
+		data: {
+			datasets: [{
+				label: "Bunnies",
+				data: data[0],
+				fill: false,
+				borderColor: "red",
+				pointRadius: 0
+			},
+			{
+				label: "Bunnies",
+				data: data[1],
+				fill: false,
+				borderColor: "blue",
+				pointRadius: 0
+			},
+			{
+				label: "Bunnies",
+				data: data[2],
+				fill: false,
+				borderColor: "green",
+				pointRadius: 0
+			},
+			{
+				label: "Bunnies",
+				data: data[3],
+				fill: false,
+				borderColor: "black",
+				pointRadius: 0
+			}
+      ]
+    },
+		options: {
+			scales: {
+				xAxes: [{
+					type: 'linear',
+					position: 'bottom'
+				}]
+			}
+		}
+  });
 
   /*
 	const sim3 = math.parser();
