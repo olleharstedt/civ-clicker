@@ -289,36 +289,38 @@ $(function () {
   }
   */
 
-  /*
   let r = 1.3;
   let s = 4;
   let u = 0.7;
   let v = 1.6;
   let a = 2;
   let K = 3;
-  let h = 0.01;
+  let h = 0.1;
   let P = 0.7;
   let Q = 0.3;
   let dP = null;
   let dQ = null;
+  let huntingBunnies = 0;
   let data1 = [];
   let data2 = [];
   data1.push({x: 0, y: P});
   data2.push({x: 0, y: Q});
-  for (let t = 1; t < 16000; t++) {
-    dP = (r * (1 - P / K) - (s * Q) / (a + P)) * P * h;
+  for (let t = 1; t < 1000; t++) {
+    dP = (r * (1 - P / K) - (s * Q) / (a + P) - huntingBunnies / (a + P)) * P * h;
     dQ = (-u + (v * P) / (a + P)) * Q * h;
     P += dP;
     Q += dQ;
     data1.push({x: t, y: P});
     data2.push({x: t, y: Q});
-    if (t > 5000 && t < 10000 && Q >= 0.01) {
-      Q -= 0.0006;
+    if (t > 500 && P >= 0.1) {
+      huntingBunnies = 2.64;
+      //P -= 0.09;
+      //Q -= 0.0006;
     }
-    if (t == 7000) {
-      K += 2;
-      a += 1;
-    }
+    //if (t == 7000) {
+      //K += 2;
+      //a += 1;
+    //}
   }
 
 	var chart = new Chart(document.getElementById('canvas1'), {
@@ -328,14 +330,14 @@ $(function () {
 				label: "Bunnies",
 				data: data1,
 				fill: false,
-				borderColor: "red",
+				borderColor: "blue",
 				pointRadius: 0
 			},
       {
 				label: "Wolfs",
 				data: data2,
 				fill: false,
-				borderColor: "blue",
+				borderColor: "red",
 				pointRadius: 0
 			}
       ]
@@ -349,8 +351,8 @@ $(function () {
 			}
 		}
   });
-  */
 
+  /*
   let r = [1, 0.72, 1.53, 1.27];
   let h = 0.005;
   let x = [1, 1, 1, 1];
@@ -425,6 +427,7 @@ $(function () {
 			}
 		}
   });
+  */
 
   /*
 	const sim3 = math.parser();
