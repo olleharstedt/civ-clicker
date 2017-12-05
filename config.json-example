@@ -9,6 +9,9 @@
   "weather": {
     "lengthOfDay": 60
   },
+  "health": {
+    "workerSickTemperature": 15
+  },
   "plugins": [
     "SidemenuTooltips",
     "AutosaveIcon",
