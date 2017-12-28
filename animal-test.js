@@ -1,5 +1,7 @@
 $(function () {
 
+  // NB: This method has problems with oscillating solutions.
+  // It's easy to modify an ODE so it can be plotted.
 	function ndsolve(f, x0, dt, tmax) {
 		var n = f.size()[0];  // Number of variables
 		var x = x0.clone();   // Current values of variables
