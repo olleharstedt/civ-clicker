@@ -6,7 +6,7 @@
  */
 CivClicker.plugins.Animals = (() => {
 
-  let wolfes = 0;
+  let wolves = 0;
   let bunnies = 0;
   
   return new (class AnimalsPlugin {
