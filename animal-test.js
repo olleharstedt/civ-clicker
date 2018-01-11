@@ -291,6 +291,7 @@ $(function () {
   }
   */
 
+  // *** ANIMAL TEST 1 ***
   let r = 1.3;
   let s = 4;
   let u = 0.7;
