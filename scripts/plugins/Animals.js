@@ -31,6 +31,7 @@ CivClicker.plugins.Animals = (() => {
   let huntingBunnies = 0;
   let data1 = [];
   let data2 = [];
+  let t = 0;
   data1.push({x: 0, y: P});
   data2.push({x: 0, y: Q});
   
@@ -48,6 +49,7 @@ CivClicker.plugins.Animals = (() => {
       Q += dQ;
       bunnies = P;
       wolves = Q;
+      t++;
       data1.push({x: t, y: P});
       data2.push({x: t, y: Q});
     }
