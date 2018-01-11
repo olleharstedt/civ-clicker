@@ -325,6 +325,7 @@ CivClicker.plugins.Weather = (() => {
     unload() {
       this.daySub.remove();
       this.nightSub.remove();
+      this.tickSub.remove();
     }
 
   });
