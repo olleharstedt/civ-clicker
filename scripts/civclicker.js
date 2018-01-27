@@ -3723,15 +3723,16 @@ setup.pages = function() {
  */
 setup.initPlugins = function(plugins) {
   console.log('Init plugins');
-  plugins.forEach((plugin) => {
-    if (CivClicker.plugins[plugin]) {
-      console.log('Init plugin ' + plugin);
-      CivClicker.plugins[plugin].init();
+  var pluginName;
+	for (pluginName in plugins) {
+    if (CivClicker.plugins[pluginName]) {
+      console.log('Init pluginName ' + pluginName);
+      CivClicker.plugins[pluginName].init(plugins[pluginName]);
     } else {
-      alert('Error in server configuration: No such plugin: ' + plugin);
-      throw 'No such plugin: ' + plugin;
+      alert('Error in server configuration: No such plugin: ' + pluginName);
+      throw 'No such plugin: ' + pluginName;
     }
-  });
+  }
   CivClicker.Events.publish('global.pluginInitDone');
 };
 

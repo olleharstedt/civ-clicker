@@ -1,6 +1,6 @@
 {
   "system": {
-    "version": "2.0.0-alpha",
+    "version": "2.0-alpha",
     "debug": true
   },
   "gameplay": {
@@ -9,18 +9,21 @@
   "weather": {
     "lengthOfDay": 60
   },
-  "plugins": [
-    "SidemenuTooltips",
-    "AutosaveIcon",
-    "MenuProgressSpinner",
-    "StatusBar",
-    "CountClicks",
-    "Tools",
-    "Workers",
-    "Culture",
-    "DayNight",
-    "Weather",
-    "Health",
-    "Animals"
-  ]
+  "plugins": {
+    "SidemenuTooltips":    {},
+    "AutosaveIcon":        {},
+    "MenuProgressSpinner": {},
+    "StatusBar":           {},
+    "CountClicks":         {},
+    "Tools":               {},
+    "Workers":             {},
+    "Culture":             {},
+    "DayNight":            {},
+    "Weather":             {},
+    "Health":              {},
+    "Animals":             {
+      "wolves":  0.7,
+      "bunnies": 0.3
+    }
+  }
 }
