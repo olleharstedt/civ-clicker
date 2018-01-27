@@ -291,7 +291,7 @@ function calculatePopulation () {
 function getCivType () {
   var civType = civSizes.getCivSize(population.living).name;
   if (population.living === 0 && population.limit >= 1000){
-    civType = 'Ghost Town';
+    civType = 'Empty land';
   }
   if (population.zombie >= 1000 && population.zombie >= 2 * population.living){ //easter egg
     civType = 'Necropolis';
