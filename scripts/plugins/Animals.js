@@ -7,14 +7,14 @@
 CivClicker.plugins.Animals = (() => {
 
   /**
-   * @var {number} Amount of wolves alive.
+   * @var {number} Amount of wolves alive. Defined in config.json.
    */
-  let wolves = 0;
+  let wolves = null;
 
   /**
-   * @var {number} Amount of bunnies alive.
+   * @var {number} Amount of bunnies alive. Defined in config.json.
    */
-  let bunnies = 0;
+  let bunnies = null;
 
   // Math. See animal test 1 in animal_test.js.
   let r = 1.3;
@@ -54,7 +54,14 @@ CivClicker.plugins.Animals = (() => {
       data2.push({x: t, y: Q});
     }
 
-    init() {
+    /**
+     * @param {object} options
+     */
+    init(options) {
+
+      wolves  = options.wolves;
+      bunnies = options.bunnies;
+
       this.daySub = CivClicker.Events.subscribe('daynight.day.begin', () => {
         this.tick();
       });
@@ -78,9 +85,24 @@ CivClicker.plugins.Animals = (() => {
     }
 
     /**
+     * @return {number}
+     */
+    getWolves() {
+      return wolves;
+    }
+
+    /**
      * @param {number} amount
      */
     killBunny(amount) {
     }
+
+    /**
+     * @return {number}
+     */
+    getBunnies() {
+      return bunnies;
+    }
+
   });
 })();
