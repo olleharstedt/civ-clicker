@@ -1,3 +1,14 @@
+# 2018-01-27
+
+Finished reading Origins of the state and civilization, by Elman R Service.
+
+Anything to learn from the book while making a civilization game?
+
+* Common ladder of development - egalitarian society/tribe, chiefdom, state and bureacracy and possibly urbanization.
+* A civilization game is a simulation of a theory of universal history. A theory of universal history is a theory about what all civilizations have in common in their origin and evolution. Marx and Engels made one such theory, but there are many other. Which such theory is the game Civilization based on? Nationalism, that each people have a nation? Possible to play as German or Polish from start, even though those nations do not necessarily correspond to one historic group. That barbarians are unorganized and appear randomly. That each civilization follows the same technological path, there's only one path of technological evolution. What do we want to keep of that in CivClicker, and what do we want to change?
+* Even if we find something that all early civilizations have in common, like writing and agriculture, does it mean that writing is necessary for a civilization?
+* What's the role of law in CivClicker? Criminality when population grows? Murder? Law in tribes is informal, in cheifdoms decided by chief, in a state completely formal.
+
 # 2017-10-30
 
 * Animal population simulation
