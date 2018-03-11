@@ -52,6 +52,16 @@ CivClicker.plugins.Animals = (() => {
       t++;
       data1.push({x: t, y: P});
       data2.push({x: t, y: Q});
+      //console.log('bunnies', P);
+      //console.log('wolves', Q);
+
+      // Remove data when too big.
+      if (data1.length > 10000) {
+        data1.shift();
+      }
+      if (data2.length > 10000) {
+        data2.shift();
+      }
     }
 
     /**
@@ -62,11 +72,18 @@ CivClicker.plugins.Animals = (() => {
       wolves  = options.wolves;
       bunnies = options.bunnies;
 
-      this.daySub = CivClicker.Events.subscribe('daynight.day.begin', () => {
+      //this.daySub = CivClicker.Events.subscribe('daynight.day.begin', () => {
+        //this.tick();
+      //});
+      //this.nightSub = CivClicker.Events.subscribe('daynight.night.begin', () => {
+        //this.tick();
+      //});
+      this.tickSub = CivClicker.Events.subscribe('global.tick', () => {
         this.tick();
       });
-      this.nightSub = CivClicker.Events.subscribe('daynight.night.begin', () => {
-        this.tick();
+
+      this.dataSub = CivClicker.Events.subscribe('sidemenu.data', () => {
+        console.log('clicked data');
       });
     }
 
